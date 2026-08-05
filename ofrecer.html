@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ofrece tu propiedad o vehículo — CINQ</title>
+<meta name="description" content="¿Tienes una propiedad o vehículo que crees que merece estar en el portafolio de CINQ? Cuéntanos.">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  :root{ --error:#a4482f; }
+  .container-narrow{max-width:760px;margin:0 auto;padding-left:32px;padding-right:32px;}
+  @media (max-width:600px){ .container-narrow{padding-left:20px;padding-right:20px;} }
+
+  .masthead{padding:80px 32px 10px;text-align:center;}
+  .masthead h1{
+    font-family:var(--font-display);font-weight:400;font-size:clamp(28px,4.4vw,44px);
+    margin:0 0 26px;color:var(--ink);text-wrap:balance;max-width:20ch;margin-left:auto;margin-right:auto;
+  }
+  .intro-block{
+    max-width:640px;margin:34px auto 0;font-size:14px;line-height:1.75;color:var(--muted);
+    padding:20px 24px;border-left:2px solid var(--olive);background:var(--paper-alt);text-align:left;
+  }
+
+  form{padding:56px 0 130px;}
+  .setup-note{
+    max-width:640px;margin:0 auto 40px;font-size:11.5px;color:var(--olive-deep);
+    background:rgba(114,143,87,0.1);border-left:2px solid var(--olive);padding:10px 16px;
+  }
+
+  .step-label{display:flex;align-items:baseline;gap:12px;margin:0 0 22px;}
+  .step-label .n{font-family:var(--font-mono);font-size:12px;color:var(--olive);}
+  .step-label .t{font-family:var(--font-display);font-size:19px;color:var(--ink);}
+  .step-block{margin-bottom:58px;}
+
+  .choice-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .choice-row input[type="radio"]{position:absolute;opacity:0;width:1px;height:1px;}
+  .choice{
+    position:relative;display:block;border:1px solid var(--line);padding:26px;text-align:center;cursor:pointer;
+    transition:border-color .2s ease,background .2s ease;
+  }
+  .choice .t{font-family:var(--font-display);font-size:16px;color:var(--ink);margin-bottom:4px;}
+  .choice .d{font-size:11.5px;color:var(--muted);}
+  .choice.sel{border-color:var(--olive-deep);background:var(--paper-alt);}
+  .choice.sel .t{color:var(--olive-deep);}
+  .choice:has(input[type="radio"]:focus-visible){outline:2px solid var(--olive);outline-offset:2px;}
+
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;}
+  .field label .req{color:var(--olive);}
+  .field input[type="text"],
+  .field input[type="number"],
+  .field input[type="tel"],
+  .field select,
+  .field textarea{
+    width:100%;font-family:var(--font-body);font-size:14px;color:var(--ink);
+    border:none;border-bottom:1px solid var(--line);background:transparent;
+    padding:10px 2px;
+  }
+  .field textarea{border:1px solid var(--line);padding:12px;resize:vertical;min-height:80px;}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--olive-deep);}
+  .field select{appearance:none;-webkit-appearance:none;background-image:none;cursor:pointer;}
+
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;}
+  @media (max-width:600px){ .field-grid{grid-template-columns:1fr;} }
+  .field-grid .field.full{grid-column:1/-1;}
+
+  .upload{
+    border:1px dashed var(--line);padding:26px;text-align:center;font-size:12px;color:var(--muted);
+    margin-bottom:24px;cursor:pointer;
+  }
+  .upload:hover{border-color:var(--olive);}
+  .upload label{display:block;cursor:pointer;}
+  .upload input[type="file"]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;}
+  .upload .file-list{margin-top:10px;font-size:11px;color:var(--olive-deep);}
+
+  .consent-row{display:flex;align-items:flex-start;gap:12px;margin:30px 0 34px;}
+  .consent-row input{margin-top:3px;}
+  .consent-row label{font-size:11.5px;color:var(--muted);line-height:1.6;}
+
+  .submit-btn{
+    width:100%;font-family:var(--font-body);font-size:13px;letter-spacing:0.03em;color:var(--on-accent);
+    background:var(--olive-deep);border:1px solid var(--olive-deep);padding:16px;cursor:pointer;
+  }
+  .submit-btn:hover{background:var(--ink);border-color:var(--ink);}
+  .submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
+
+  .hint{font-size:11px;color:var(--muted);margin-top:10px;text-align:center;}
+  .error-msg{font-size:12px;color:var(--error);margin-top:14px;text-align:center;}
+
+  .confirm{padding:120px 32px 160px;text-align:center;}
+  .confirm .inner{max-width:520px;margin:0 auto;}
+  .confirm .mark-box{border:1.5px solid var(--olive-deep);padding:10px 26px;display:inline-block;margin-bottom:30px;}
+  .confirm .mark-box span{font-family:var(--font-display);font-size:20px;letter-spacing:0.14em;color:var(--olive-deep);}
+  .confirm h2{font-family:var(--font-display);font-weight:400;font-size:24px;color:var(--ink);margin:0 0 16px;}
+  .confirm p{font-size:14px;color:var(--muted);line-height:1.75;}
+</style>
+</head>
+<body>
+
+<header class="chrome-nav" id="nav">
+  <a class="mark" href="index.html">CINQ</a>
+  <nav>
+    <a href="portafolio.html">Portafolio</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="ofrecer.html" class="current">Ofrecer</a>
+  </nav>
+</header>
+
+<section class="masthead">
+  <div class="container-narrow">
+    <p class="eyebrow">Ofrece tu propiedad o vehículo</p>
+    <h1>¿Tienes algo que crees que merece ser visto?</h1>
+    <div class="intro-block">
+      CINQ conecta oportunidades, no publica anuncios. Este formulario es el primer paso para que tu propiedad o vehículo sea evaluado por nuestro equipo. No todas las solicitudes son aceptadas — trabajamos con un estándar de calidad, documentación y presentación que protege tanto a ti como a quienes confían en CINQ.
+    </div>
+  </div>
+</section>
+
+<form id="cinq-form" novalidate action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <div class="container-narrow">
+
+    <p class="setup-note">
+      Nota de configuración (quitar este aviso cuando esté listo): este formulario envía a Formspree. Crea una cuenta gratuita en
+      <a href="https://formspree.io" target="_blank" rel="noopener" style="color:inherit;">formspree.io</a>,
+      conecta hellocinqgroup@gmail.com, y reemplaza <code>YOUR_FORM_ID</code> arriba (atributo <code>action</code> del <code>&lt;form&gt;</code>) por el ID real que te asignen.
+    </p>
+
+    <div class="step-block">
+      <div class="step-label"><span class="n">01</span><span class="t">¿Qué deseas ofrecer?</span></div>
+      <div class="choice-row">
+        <label class="choice sel" id="choice-propiedad">
+          <input type="radio" name="kind" value="propiedad" checked>
+          <div class="t">Propiedad</div>
+          <div class="d">Venta o arriendo</div>
+        </label>
+        <label class="choice" id="choice-vehiculo">
+          <input type="radio" name="kind" value="vehiculo">
+          <div class="t">Vehículo</div>
+          <div class="d">Venta</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="step-block" id="section-propiedad">
+      <div class="step-label"><span class="n">02</span><span class="t">Detalles de la propiedad</span></div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="p-operacion">Tipo de operación <span class="req">*</span></label>
+          <select id="p-operacion" name="tipo_operacion" required>
+            <option value="">Selecciona una opción</option>
+            <option>Venta</option><option>Arriendo</option><option>Venta y arriendo</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="p-tipo">Tipo de inmueble <span class="req">*</span></label>
+          <input id="p-tipo" name="tipo_inmueble" type="text" required placeholder="Apartamento, casa, lote, local...">
+        </div>
+        <div class="field">
+          <label for="p-ubicacion">Ubicación / barrio <span class="req">*</span></label>
+          <input id="p-ubicacion" name="ubicacion" type="text" required placeholder="Ej. Envigado, El Poblado">
+        </div>
+        <div class="field">
+          <label for="p-area">Área aproximada (m²)</label>
+          <input id="p-area" name="area_m2" type="number" placeholder="Ej. 85">
+        </div>
+        <div class="field full">
+          <label for="p-precio">Precio de venta o canon esperado <span class="req">*</span></label>
+          <input id="p-precio" name="precio_propiedad" type="text" required placeholder="Ej. $350.000.000 COP">
+        </div>
+        <div class="field">
+          <label for="p-documentos">¿Documentos al día? <span class="req">*</span></label>
+          <select id="p-documentos" name="documentos_al_dia" required>
+            <option value="">Selecciona una opción</option>
+            <option>Sí</option><option>No</option><option>No estoy seguro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="p-propietario">¿Eres el propietario directo? <span class="req">*</span></label>
+          <select id="p-propietario" name="propietario_inmueble" required>
+            <option value="">Selecciona una opción</option>
+            <option>Soy el propietario</option><option>Tengo autorización</option><option>Ninguna de las anteriores</option>
+          </select>
+        </div>
+      </div>
+      <div class="upload">
+        <label for="p-fotos">
+          Fotos del inmueble — mínimo 6, con luz natural
+          <input id="p-fotos" name="fotos_inmueble" type="file" multiple accept="image/*">
+        </label>
+      </div>
+      <div class="field">
+        <label for="p-comentario">¿Algo adicional que quieras contarnos?</label>
+        <textarea id="p-comentario" name="comentario_inmueble" placeholder="Opcional"></textarea>
+      </div>
+    </div>
+
+    <div class="step-block" id="section-vehiculo" hidden>
+      <div class="step-label"><span class="n">02</span><span class="t">Detalles del vehículo</span></div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="v-marca">Marca y modelo <span class="req">*</span></label>
+          <input id="v-marca" name="marca_modelo" type="text" required placeholder="Ej. Mazda 3 2022">
+        </div>
+        <div class="field">
+          <label for="v-anio">Año <span class="req">*</span></label>
+          <input id="v-anio" name="anio" type="number" required placeholder="Ej. 2022">
+        </div>
+        <div class="field">
+          <label for="v-km">Kilometraje <span class="req">*</span></label>
+          <input id="v-km" name="kilometraje" type="text" required placeholder="Ej. 32.000 km">
+        </div>
+        <div class="field">
+          <label for="v-precio">Precio esperado <span class="req">*</span></label>
+          <input id="v-precio" name="precio_vehiculo" type="text" required placeholder="Ej. $85.000.000 COP">
+        </div>
+        <div class="field">
+          <label for="v-soat">¿SOAT y tecnomecánica vigentes? <span class="req">*</span></label>
+          <select id="v-soat" name="soat_tecnomecanica" required>
+            <option value="">Selecciona una opción</option>
+            <option>Sí</option><option>No</option><option>No estoy seguro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="v-gravamenes">¿Gravámenes, prendas o embargos? <span class="req">*</span></label>
+          <select id="v-gravamenes" name="gravamenes" required>
+            <option value="">Selecciona una opción</option>
+            <option>No</option><option>Sí</option><option>No estoy seguro</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="v-propietario">¿Eres el propietario directo? <span class="req">*</span></label>
+          <select id="v-propietario" name="propietario_vehiculo" required>
+            <option value="">Selecciona una opción</option>
+            <option>Soy el propietario</option><option>Tengo autorización</option><option>Ninguna de las anteriores</option>
+          </select>
+        </div>
+      </div>
+      <div class="upload">
+        <label for="v-fotos">
+          Fotos del vehículo — mínimo 6, con luz natural
+          <input id="v-fotos" name="fotos_vehiculo" type="file" multiple accept="image/*">
+        </label>
+      </div>
+      <div class="field">
+        <label for="v-comentario">¿Algo adicional que quieras contarnos?</label>
+        <textarea id="v-comentario" name="comentario_vehiculo" placeholder="Opcional"></textarea>
+      </div>
+    </div>
+
+    <div class="step-block">
+      <div class="step-label"><span class="n">03</span><span class="t">Datos de contacto</span></div>
+      <div class="field-grid">
+        <div class="field">
+          <label for="c-nombre">Nombre completo <span class="req">*</span></label>
+          <input id="c-nombre" name="nombre" type="text" required>
+        </div>
+        <div class="field">
+          <label for="c-cedula">Cédula <span class="req">*</span></label>
+          <input id="c-cedula" name="cedula" type="text" required>
+        </div>
+        <div class="field">
+          <label for="c-whatsapp">WhatsApp <span class="req">*</span></label>
+          <input id="c-whatsapp" name="whatsapp" type="tel" required placeholder="+57">
+        </div>
+        <div class="field">
+          <label for="c-conociste">¿Cómo conociste a CINQ?</label>
+          <select id="c-conociste" name="como_conocio">
+            <option value="">Selecciona una opción</option>
+            <option>Instagram</option><option>TikTok</option><option>Referido</option><option>Otro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="consent-row">
+        <input type="checkbox" id="consent" name="consentimiento_datos" required>
+        <label for="consent">Autorizo a CINQ a tratar mis datos personales con la única finalidad de evaluar y dar seguimiento a esta solicitud, conforme a la Ley 1581 de 2012. <span class="req">*</span></label>
+      </div>
+
+      <button type="submit" class="submit-btn">Enviar solicitud</button>
+      <p class="hint">No publica nada automáticamente — alimenta la base de prospección de CINQ.</p>
+      <p class="error-msg" id="error-msg" hidden>No pudimos enviar tu solicitud. Escríbenos directo por WhatsApp mientras lo resolvemos.</p>
+    </div>
+
+  </div>
+</form>
+
+<section class="confirm" id="confirm" hidden>
+  <div class="inner">
+    <div class="mark-box"><span>CINQ</span></div>
+    <h2>Solicitud recibida</h2>
+    <p>Gracias por confiarnos tu propiedad o vehículo. Nuestro equipo revisará tu información y te contactará si cumple con los criterios de CINQ.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-bottom" style="max-width:1240px;margin:0 auto;padding:0 32px;">
+    <span>© CINQ, 2026. Todos los derechos reservados.</span>
+    <span>Diseñado con criterio, no con plantillas.</span>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script>
+  var radios = document.querySelectorAll('input[name="kind"]');
+  var choiceProp = document.getElementById('choice-propiedad');
+  var choiceVeh = document.getElementById('choice-vehiculo');
+  var sectionProp = document.getElementById('section-propiedad');
+  var sectionVeh = document.getElementById('section-vehiculo');
+
+  function syncFields(section, shouldRequire){
+    var fields = section.querySelectorAll('input[type="text"], input[type="number"], select');
+    fields.forEach(function(f){
+      if(f.dataset.origRequired === undefined){
+        f.dataset.origRequired = f.hasAttribute('required') ? '1' : '0';
+      }
+      if(shouldRequire){
+        if(f.dataset.origRequired === '1'){ f.setAttribute('required', ''); }
+      } else {
+        f.removeAttribute('required');
+      }
+    });
+  }
+
+  function update(){
+    var val = document.querySelector('input[name="kind"]:checked').value;
+    var isProp = val === 'propiedad';
+
+    choiceProp.classList.toggle('sel', isProp);
+    choiceVeh.classList.toggle('sel', !isProp);
+
+    sectionProp.hidden = !isProp;
+    sectionVeh.hidden = isProp;
+
+    syncFields(sectionProp, isProp);
+    syncFields(sectionVeh, !isProp);
+  }
+
+  radios.forEach(function(r){ r.addEventListener('change', update); });
+
+  sectionProp.querySelectorAll('input[type="text"], input[type="number"], select').forEach(function(f){
+    f.dataset.origRequired = f.hasAttribute('required') ? '1' : '0';
+  });
+  sectionVeh.querySelectorAll('input[type="text"], input[type="number"], select').forEach(function(f){
+    f.dataset.origRequired = f.hasAttribute('required') ? '1' : '0';
+    f.removeAttribute('required');
+  });
+
+  var form = document.getElementById('cinq-form');
+  var confirmSection = document.getElementById('confirm');
+  var errorMsg = document.getElementById('error-msg');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    errorMsg.hidden = true;
+    if(!form.checkValidity()){
+      form.reportValidity();
+      return;
+    }
+
+    var submitBtn = form.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response){
+      if(response.ok){
+        form.hidden = true;
+        document.querySelector('.masthead').hidden = true;
+        confirmSection.hidden = false;
+        confirmSection.scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        submitBtn.disabled = false;
+        errorMsg.hidden = false;
+      }
+    }).catch(function(){
+      submitBtn.disabled = false;
+      errorMsg.hidden = false;
+    });
+  });
+
+  document.querySelectorAll('.upload').forEach(function(box){
+    var input = box.querySelector('input[type="file"]');
+    input.addEventListener('change', function(){
+      var existing = box.querySelector('.file-list');
+      if(existing) existing.remove();
+      if(input.files.length){
+        var p = document.createElement('div');
+        p.className = 'file-list';
+        p.textContent = input.files.length + ' archivo(s) seleccionado(s)';
+        box.appendChild(p);
+      }
+    });
+  });
+</script>
+</body>
+</html>

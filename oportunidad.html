@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apartamento con vista, Envigado — CINQ</title>
+<meta name="description" content="Ficha de oportunidad evaluada y aceptada por CINQ.">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  .breadcrumb{font-size:11.5px;color:var(--muted);padding:30px 32px 0;}
+  .breadcrumb .sep{margin:0 8px;opacity:.5;}
+  .breadcrumb .current{color:var(--olive-deep);}
+
+  .detail-section{padding:24px 32px 90px;}
+  .detail-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start;}
+  @media (max-width:900px){ .detail-grid{grid-template-columns:1fr;} }
+
+  .gallery-main{height:460px;margin-bottom:10px;}
+  @media (max-width:600px){ .gallery-main{height:300px;} }
+  .thumb-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+  .thumb-row .frame{
+    height:64px;width:100%;cursor:pointer;border:1.5px solid transparent;
+    padding:0;margin:0;font:inherit;border-radius:0;
+  }
+  .thumb-row .frame.active{border-color:var(--olive);}
+  .thumb-row .frame:focus-visible{outline:2px solid var(--olive);outline-offset:2px;}
+
+  .info-panel{position:sticky;top:96px;border:1px solid var(--line-soft);padding:30px;}
+  .info-panel .kicker{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .info-panel .price{font-family:var(--font-display);font-size:28px;color:var(--olive-deep);margin-bottom:4px;}
+  .info-panel .loc{font-size:13px;color:var(--muted);margin-bottom:26px;}
+  .spec-list{list-style:none;margin:0 0 26px;padding:0;font-size:13px;}
+  .spec-list li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-soft);}
+  .spec-list li span:first-child{color:var(--muted);}
+  .spec-list li span:last-child{font-variant-numeric:tabular-nums;}
+  .wa-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--olive-deep);background:var(--olive-deep);color:var(--on-accent);
+    padding:14px;font-size:13px;text-decoration:none;
+  }
+  .wa-btn:hover{background:var(--ink);border-color:var(--ink);}
+  .info-note{margin-top:16px;font-size:11.5px;color:var(--muted);line-height:1.6;}
+
+  .description{max-width:74ch;margin-top:70px;}
+  .description h2{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--ink);margin:0 0 18px;}
+  .description p{font-size:14.5px;line-height:1.8;color:var(--ink);margin:0 0 16px;}
+  .description p.muted{color:var(--muted);font-style:italic;}
+
+  .ficha{margin-top:56px;max-width:74ch;}
+  .ficha h2{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--ink);margin:0 0 18px;}
+  .ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;border-top:1px solid var(--line-soft);}
+  @media (max-width:560px){ .ficha-grid{grid-template-columns:1fr;} }
+  .ficha-grid .row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px;}
+  .ficha-grid .row span:first-child{color:var(--muted);}
+
+  .related{background:var(--paper-alt);padding:90px 32px;border-top:1px solid var(--line-soft);}
+  .related .head{margin-bottom:40px;}
+  .related h2{font-family:var(--font-display);font-weight:400;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:0;}
+  .r-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  @media (max-width:820px){ .r-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .r-grid{grid-template-columns:1fr;} }
+  .r-card{display:block;text-decoration:none;color:inherit;}
+  .r-card .frame{height:210px;}
+  .r-meta{padding:14px 2px 0;display:flex;justify-content:space-between;gap:10px;}
+  .r-meta .place{font-family:var(--font-display);font-size:15px;}
+  .r-meta .price{font-size:12.5px;color:var(--olive-deep);white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<p style="max-width:1240px;margin:0 auto;padding:10px 32px;font-size:11.5px;color:var(--muted);background:var(--paper-alt);border-bottom:1px solid var(--line-soft);">
+  Página de ejemplo — plantilla de ficha. Cada oportunidad real del portafolio se publica duplicando este archivo con su propio contenido y nombre (por ejemplo <code>apartamento-envigado-01.html</code>).
+</p>
+
+<header class="chrome-nav" id="nav">
+  <a class="mark" href="index.html">CINQ</a>
+  <nav>
+    <a href="portafolio.html" class="current">Portafolio</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="ofrecer.html" class="cta" title="Ofrece tu propiedad o vehículo">Ofrecer</a>
+  </nav>
+</header>
+
+<div class="breadcrumb">
+  <a href="portafolio.html">Portafolio</a><span class="sep">›</span><a href="portafolio.html">Propiedades</a><span class="sep">›</span><span class="current">Apartamento con vista, Envigado</span>
+</div>
+
+<section class="detail-section">
+  <div class="container">
+    <div class="detail-grid">
+      <div>
+        <div class="frame gallery-main"><canvas id="gallery-main-canvas" data-tex="t0"></canvas></div>
+        <div class="thumb-row">
+          <button type="button" class="frame active" data-tex="t0" aria-label="Ver foto 1"><canvas data-tex="t0"></canvas></button>
+          <button type="button" class="frame" data-tex="t1" aria-label="Ver foto 2"><canvas data-tex="t1"></canvas></button>
+          <button type="button" class="frame" data-tex="t2" aria-label="Ver foto 3"><canvas data-tex="t2"></canvas></button>
+          <button type="button" class="frame" data-tex="t3" aria-label="Ver foto 4"><canvas data-tex="t3"></canvas></button>
+          <button type="button" class="frame" data-tex="t4" aria-label="Ver foto 5"><canvas data-tex="t4"></canvas></button>
+          <button type="button" class="frame" data-tex="t5" aria-label="Ver foto 6"><canvas data-tex="t5"></canvas></button>
+        </div>
+
+        <div class="description">
+          <h2>Descripción</h2>
+          <p>Un apartamento ubicado en una de las zonas de mayor plusvalía de Envigado, con vista abierta hacia el valle y acabados que priorizan la luz natural y los espacios amplios — los mismos criterios con los que evaluamos cada oportunidad antes de aceptarla.</p>
+          <p class="muted">[Plantilla editorial fija — contexto de la zona, características relevantes, por qué esta oportunidad fue aceptada al portafolio. Se completa por propiedad, sin variar la estructura.]</p>
+        </div>
+
+        <div class="ficha">
+          <h2>Ficha técnica</h2>
+          <div class="ficha-grid">
+            <div class="row"><span>Tipo</span><span>Apartamento</span></div>
+            <div class="row"><span>Operación</span><span>Venta</span></div>
+            <div class="row"><span>Área</span><span>XX m²</span></div>
+            <div class="row"><span>Estrato</span><span>X</span></div>
+            <div class="row"><span>Zona</span><span>Envigado</span></div>
+            <div class="row"><span>Documentos</span><span>Al día</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <div class="kicker">Propiedad · Venta</div>
+        <div class="price">$ XXX.XXX.XXX</div>
+        <div class="loc">Envigado, Antioquia</div>
+        <ul class="spec-list">
+          <li><span>Tipo</span><span>Apartamento</span></li>
+          <li><span>Área</span><span>XX m²</span></li>
+          <li><span>Estrato</span><span>X</span></li>
+          <li><span>Documentos</span><span>Al día</span></li>
+        </ul>
+        <a class="wa-btn" href="https://wa.me/573022758992?text=Hola%2C%20me%20interesa%20esta%20oportunidad%20de%20CINQ" target="_blank" rel="noopener">Conversemos sobre esta oportunidad →</a>
+        <p class="info-note">Un miembro de CINQ responde directamente — sin formularios de contacto genéricos ni intermediarios adicionales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="related">
+  <div class="container">
+    <div class="head"><p class="eyebrow">También en el portafolio</p><h2>Otras oportunidades seleccionadas</h2></div>
+    <div class="r-grid">
+      <a class="r-card" href="oportunidad.html">
+        <div class="frame"><canvas data-tex="r0"></canvas></div>
+        <div class="r-meta"><span class="place">Casa campestre, Sabaneta</span><span class="price">$ XX.XXX.XXX</span></div>
+      </a>
+      <a class="r-card" href="oportunidad.html">
+        <div class="frame"><canvas data-tex="r1"></canvas></div>
+        <div class="r-meta"><span class="place">Apartamento, El Poblado</span><span class="price">$ XXX.XXX.XXX</span></div>
+      </a>
+      <a class="r-card" href="oportunidad.html">
+        <div class="frame"><img src="assets/img/vehiculo-interior.jpg" alt="Interior del vehículo CINQ" loading="lazy"></div>
+        <div class="r-meta"><span class="place">Sedán ejecutivo 2022</span><span class="price">$ XX.XXX.XXX</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-mark">CINQ</div>
+      <div class="foot-tag">Conectando oportunidades.<br>Medellín — Envigado, Colombia.</div>
+    </div>
+    <div class="foot-col">
+      <h4>Explorar</h4>
+      <ul><li><a href="portafolio.html">Portafolio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="ofrecer.html">Ofrecer</a></li></ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contacto</h4>
+      <ul><li><a href="https://wa.me/573022758992" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:hellocinqgroup@gmail.com">hellocinqgroup@gmail.com</a></li><li><a href="https://www.instagram.com/cinqgroup.co" target="_blank" rel="noopener">Instagram</a> · TikTok</li></ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul><li><a href="privacidad.html">Política de privacidad</a></li><li><a href="terminos.html">Términos de uso</a></li></ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© CINQ, 2026. Todos los derechos reservados.</span>
+    <span>Diseñado con criterio, no con plantillas.</span>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+<script>
+  window.CINQ_TEX_STOPS = {
+    t0:{a:[221,216,199],b:[176,187,145],c:[128,150,98]},
+    t1:{a:[210,208,192],b:[178,183,150],c:[124,138,92]},
+    t2:{a:[198,201,190],b:[152,159,132],c:[98,110,80]},
+    t3:{a:[219,213,192],b:[187,190,152],c:[134,150,100]},
+    t4:{a:[206,203,182],b:[168,175,138],c:[112,128,84]},
+    t5:{a:[201,198,178],b:[160,166,124],c:[104,118,76]},
+    r0:{a:[219,213,192],b:[187,190,152],c:[134,150,100]},
+    r1:{a:[224,219,202],b:[184,192,152],c:[136,154,104]}
+  };
+  CINQ.paintAll();
+
+  var mainCanvas = document.getElementById('gallery-main-canvas');
+  document.querySelectorAll('.thumb-row .frame').forEach(function(thumb){
+    thumb.addEventListener('click', function(){
+      document.querySelectorAll('.thumb-row .frame').forEach(function(t){ t.classList.remove('active'); });
+      thumb.classList.add('active');
+      CINQ.paint(mainCanvas, window.CINQ_TEX_STOPS[thumb.getAttribute('data-tex')]);
+    });
+  });
+</script>
+</body>
+</html>
