@@ -2,6 +2,8 @@
 
 Sitio estático (HTML + CSS + JS, sin build ni Node.js) con las 5 páginas del sitio de CINQ. No necesita ningún proceso de instalación — abrir cualquier `.html` directamente en el navegador ya funciona.
 
+**Despliegue:** conectado a Vercel vía GitHub (`cinqgroup-co/cinq-web`, rama `main`). Cada push a `main` dispara un despliegue nuevo automáticamente.
+
 ## Estructura
 
 ```
