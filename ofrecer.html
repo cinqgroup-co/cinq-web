@@ -33,6 +33,7 @@
   .step-block{margin-bottom:58px;}
 
   .choice-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:420px){ .choice-row{grid-template-columns:1fr;} }
   .choice-row input[type="radio"]{position:absolute;opacity:0;width:1px;height:1px;}
   .choice{
     position:relative;display:block;border:1px solid var(--line);padding:26px;text-align:center;cursor:pointer;
@@ -59,6 +60,11 @@
   .field textarea{border:1px solid var(--line);padding:12px;resize:vertical;min-height:80px;}
   .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--olive-deep);}
   .field select{appearance:none;-webkit-appearance:none;background-image:none;cursor:pointer;}
+  .field:has(select){position:relative;}
+  .field:has(select)::after{
+    content:"⌄";position:absolute;right:4px;bottom:8px;
+    color:var(--muted);font-size:12px;pointer-events:none;
+  }
 
   .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 24px;}
   @media (max-width:600px){ .field-grid{grid-template-columns:1fr;} }
@@ -69,7 +75,7 @@
     margin-bottom:24px;cursor:pointer;
   }
   .upload:hover{border-color:var(--olive);}
-  .upload label{display:block;cursor:pointer;}
+  .upload label{position:relative;display:block;cursor:pointer;}
   .upload input[type="file"]{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;}
   .upload .file-list{margin-top:10px;font-size:11px;color:var(--olive-deep);}
 
