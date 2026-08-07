@@ -20,9 +20,10 @@
   }
 
   .hero-photo{height:66vh;min-height:420px;}
-  .hero-photo .tex-wrap.kb canvas{animation:kb 30s ease-in-out infinite alternate;}
+  .hero-photo .tex-wrap{position:absolute;inset:0;overflow:hidden;}
+  .hero-photo .tex-wrap.kb canvas,.hero-photo .tex-wrap.kb img{animation:kb 30s ease-in-out infinite alternate;}
   @keyframes kb{ from{transform:scale(1);} to{transform:scale(1.06);} }
-  @media (prefers-reduced-motion: reduce){ .hero-photo .tex-wrap.kb canvas{animation:none;} }
+  @media (prefers-reduced-motion: reduce){ .hero-photo .tex-wrap.kb canvas,.hero-photo .tex-wrap.kb img{animation:none;} }
 
   /* ---------------- philosophy ---------------- */
   .philosophy{padding:130px 32px;text-align:center;background:var(--paper-alt);}
@@ -105,10 +106,10 @@
 </section>
 
 <section class="hero-photo frame">
-  <div class="tex-wrap kb"><canvas data-tex="hero"></canvas></div>
+  <div class="tex-wrap kb"><img src="assets/img/cinq-sticker-vehiculo.jpg" alt="Sticker CINQ en la puerta de un vehículo, con la ciudad de Envigado de fondo"></div>
 </section>
 <div class="photo-caption">
-  <span>Fotografía CINQ — pendiente banco propio</span>
+  <span>Fotografía CINQ</span>
   <span>N.º 01</span>
 </div>
 
@@ -230,7 +231,6 @@
 <script src="assets/js/site.js"></script>
 <script>
   window.CINQ_TEX_STOPS = {
-    hero:     {a:[216,210,192],b:[190,195,161],c:[148,161,116],vignette:0.10,dir:1},
     feature:  {a:[221,216,199],b:[176,187,145],c:[128,150,98], vignette:0.12,dir:1},
     support2: {a:[219,213,192],b:[187,190,152],c:[134,150,100],vignette:0.12,dir:0},
     spread:   {a:[210,205,184],b:[177,183,142],c:[122,138,88], vignette:0.14,dir:1}
