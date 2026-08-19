@@ -1,5 +1,5 @@
 /* CINQ — hoja de estilos compartida
-   Tokens y componentes comunes a las 5 páginas (nav, footer, frame/canvas, tipografía).
+   Tokens y componentes comunes a las páginas del sitio (nav, footer, frame, tipografía).
    Fondo blanco fijo, sin importar el modo claro/oscuro del sistema — es una regla
    del manual de marca de CINQ, no una preferencia de estilo condicional. */
 
@@ -18,7 +18,7 @@
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);}
-img,canvas{display:block;max-width:100%;}
+img{display:block;max-width:100%;}
 a{color:inherit;}
 [hidden]{display:none !important;}
 
@@ -45,9 +45,9 @@ a{color:inherit;}
 }
 .chrome-nav .cta:hover{background:var(--olive-deep);border-color:var(--olive-deep);color:var(--on-accent);}
 
-/* ---------------- media placeholders (swap for <img> as real photos arrive) ---------------- */
+/* ---------------- media (solo fotografía real de CINQ) ---------------- */
 .frame{position:relative;overflow:hidden;background:var(--paper-alt);}
-.frame canvas,.frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.frame img{width:100%;height:100%;object-fit:cover;display:block;}
 .photo-caption{
   display:flex;justify-content:space-between;padding:14px 32px;max-width:1240px;margin:0 auto;
   font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.04em;color:var(--muted);
@@ -70,7 +70,7 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
 .section-head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(25px,3.2vw,36px);margin:8px 0 0;color:var(--ink);}
 .section-head .view-all{font-size:12.5px;color:var(--olive-deep);text-decoration:none;border-bottom:1px solid var(--olive);padding-bottom:3px;white-space:nowrap;}
 
-/* ---------------- portfolio card (Home + Portafolio + Detalle related) ---------------- */
+/* ---------------- portfolio card — reservado para cuando haya oportunidades reales ---------------- */
 .p-card{display:block;text-decoration:none;color:inherit;}
 .p-tag{
   position:absolute;top:14px;left:14px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
@@ -80,8 +80,8 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
   position:absolute;top:14px;right:14px;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;
   color:var(--olive-deep);border:1px solid var(--olive);background:rgba(255,255,255,0.9);padding:5px 9px;
 }
-.p-card .frame canvas,.p-card .frame img{transition:transform .6s ease;}
-.p-card:hover .frame canvas,.p-card:hover .frame img{transform:scale(1.045);}
+.p-card .frame img{transition:transform .6s ease;}
+.p-card:hover .frame img{transform:scale(1.045);}
 .p-meta{padding:14px 2px 0;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
 .p-meta .place{font-family:var(--font-display);font-size:16px;color:var(--ink);}
 .p-meta .op{font-size:10.5px;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-top:4px;}

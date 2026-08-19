@@ -7,7 +7,7 @@
 <meta name="description" content="Por qué existe CINQ, y el criterio con el que evaluamos cada oportunidad.">
 <link rel="stylesheet" href="assets/css/styles.css">
 <style>
-  .masthead{padding:100px 32px 56px;text-align:center;}
+  .masthead{padding:100px 32px 0;text-align:center;}
   .masthead .inner{max-width:760px;margin:0 auto;}
   .masthead h1{
     font-family:var(--font-display);font-weight:400;font-style:italic;
@@ -15,20 +15,24 @@
   }
   .masthead .attribution{margin-top:26px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
 
-  .founder-photo{height:60vh;min-height:400px;}
-
-  .prose{padding:110px 32px;}
+  .prose{padding:96px 32px 120px;}
   .prose .inner{max-width:640px;margin:0 auto;}
   .prose-block{margin-bottom:64px;}
   .prose-block:last-child{margin-bottom:0;}
   .prose-block h2{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--olive-deep);margin:0 0 14px;}
   .prose-block p{font-size:15px;line-height:1.85;color:var(--ink);margin:0;}
 
-  .strip{padding:0 32px 130px;}
-  .strip .head{text-align:center;margin-bottom:44px;}
-  .s-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
-  @media (max-width:820px){ .s-grid{grid-template-columns:1fr 1fr;} }
-  .s-grid .frame{height:220px;}
+  /* ---------------- cta band ---------------- */
+  .cta-band{background:var(--olive-deep);color:var(--on-accent);padding:110px 32px;text-align:center;}
+  .cta-band .inner{max-width:640px;margin:0 auto;}
+  .cta-band .eyebrow{color:var(--on-accent-muted);}
+  .cta-band h2{font-family:var(--font-display);font-weight:400;font-size:clamp(25px,3.4vw,38px);margin:0 0 18px;text-wrap:balance;}
+  .cta-band p{color:var(--on-accent-muted);font-size:15px;max-width:52ch;margin:0 auto 34px;}
+  .cta-band .btn{
+    display:inline-block;border:1px solid rgba(244,243,234,0.6);color:var(--on-accent);
+    text-decoration:none;padding:13px 30px;font-size:12.5px;letter-spacing:0.05em;transition:background .25s ease;
+  }
+  .cta-band .btn:hover{background:rgba(244,243,234,0.14);}
 </style>
 </head>
 <body>
@@ -36,7 +40,6 @@
 <header class="chrome-nav" id="nav">
   <a class="mark" href="index.html">CINQ</a>
   <nav>
-    <a href="portafolio.html">Portafolio</a>
     <a href="nosotros.html" class="current">Nosotros</a>
     <a href="ofrecer.html" class="cta" title="Ofrece tu propiedad o vehículo">Ofrecer</a>
   </nav>
@@ -49,12 +52,6 @@
     <p class="attribution">Samuel Sánchez, Fundador de CINQ</p>
   </div>
 </section>
-
-<section class="founder-photo frame"><canvas data-tex="founder"></canvas></section>
-<div class="photo-caption">
-  <span>Video fundador, mismo guion publicado en Instagram</span>
-  <span>N.º 01</span>
-</div>
 
 <section class="prose">
   <div class="inner">
@@ -73,15 +70,12 @@
   </div>
 </section>
 
-<section class="strip">
-  <div class="container">
-    <div class="head"><p class="eyebrow">Fotografía de marca</p></div>
-    <div class="s-grid">
-      <div class="frame"><canvas data-tex="s0"></canvas></div>
-      <div class="frame"><canvas data-tex="s1"></canvas></div>
-      <div class="frame"><canvas data-tex="s2"></canvas></div>
-      <div class="frame"><canvas data-tex="s3"></canvas></div>
-    </div>
+<section class="cta-band">
+  <div class="inner">
+    <p class="eyebrow">Ofrece tu propiedad o vehículo</p>
+    <h2>¿Tienes algo que crees que merece ser visto?</h2>
+    <p>Evaluamos cada solicitud con el mismo criterio que describimos aquí arriba. No todas son aceptadas.</p>
+    <a class="btn" href="ofrecer.html">Cuéntanos</a>
   </div>
 </section>
 
@@ -93,11 +87,11 @@
     </div>
     <div class="foot-col">
       <h4>Explorar</h4>
-      <ul><li><a href="portafolio.html">Portafolio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="ofrecer.html">Ofrecer</a></li></ul>
+      <ul><li><a href="nosotros.html">Nosotros</a></li><li><a href="ofrecer.html">Ofrecer</a></li></ul>
     </div>
     <div class="foot-col">
       <h4>Contacto</h4>
-      <ul><li><a href="https://wa.me/573022758992" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:hellocinqgroup@gmail.com">hellocinqgroup@gmail.com</a></li><li><a href="https://www.instagram.com/cinqgroup.co" target="_blank" rel="noopener">Instagram</a> · TikTok</li></ul>
+      <ul><li><a href="https://wa.me/573022758992" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:hellocinqgroup@gmail.com">hellocinqgroup@gmail.com</a></li><li><a href="https://www.instagram.com/cinqgroup.co" target="_blank" rel="noopener">Instagram</a></li></ul>
     </div>
     <div class="foot-col">
       <h4>Legal</h4>
@@ -106,20 +100,9 @@
   </div>
   <div class="foot-bottom">
     <span>© CINQ, 2026. Todos los derechos reservados.</span>
-    <span>Diseñado con criterio, no con plantillas.</span>
   </div>
 </footer>
 
 <script src="assets/js/site.js"></script>
-<script>
-  window.CINQ_TEX_STOPS = {
-    founder:{a:[213,206,178],b:[176,187,145],c:[114,143,87]},
-    s0:{a:[221,216,199],b:[176,187,145],c:[128,150,98]},
-    s1:{a:[198,201,190],b:[152,159,132],c:[98,110,80]},
-    s2:{a:[219,213,192],b:[187,190,152],c:[134,150,100]},
-    s3:{a:[206,203,182],b:[168,175,138],c:[112,128,84]}
-  };
-  CINQ.paintAll();
-</script>
 </body>
 </html>

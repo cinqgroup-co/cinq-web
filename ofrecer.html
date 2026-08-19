@@ -98,7 +98,6 @@
 <header class="chrome-nav" id="nav">
   <a class="mark" href="index.html">CINQ</a>
   <nav>
-    <a href="portafolio.html">Portafolio</a>
     <a href="nosotros.html">Nosotros</a>
     <a href="ofrecer.html" class="current">Ofrecer</a>
   </nav>
@@ -281,7 +280,6 @@
 <footer>
   <div class="foot-bottom" style="max-width:1240px;margin:0 auto;padding:0 32px;">
     <span>© CINQ, 2026. Todos los derechos reservados.</span>
-    <span>Diseñado con criterio, no con plantillas.</span>
   </div>
 </footer>
 
@@ -323,13 +321,11 @@
 
   radios.forEach(function(r){ r.addEventListener('change', update); });
 
-  sectionProp.querySelectorAll('input[type="text"], input[type="number"], select').forEach(function(f){
-    f.dataset.origRequired = f.hasAttribute('required') ? '1' : '0';
-  });
-  sectionVeh.querySelectorAll('input[type="text"], input[type="number"], select').forEach(function(f){
-    f.dataset.origRequired = f.hasAttribute('required') ? '1' : '0';
-    f.removeAttribute('required');
-  });
+  /* Arrancar desde la opción que esté realmente marcada, no desde una fija.
+     Los navegadores restauran el radio elegido al recargar (F5) o al volver
+     con el botón atrás; si no sincronizamos aquí, quedaría marcado "Vehículo"
+     pero visibles los campos de "Propiedad". */
+  update();
 
   var form = document.getElementById('cinq-form');
   var confirmSection = document.getElementById('confirm');
