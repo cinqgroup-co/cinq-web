@@ -43,7 +43,7 @@ Nota: el generador de texturas que dibujaba las fotos falsas se eliminó de `sit
 
 ## Pendiente antes de operar con clientes reales
 
-1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Quedan marcadas como borrador de trabajo.
+1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
 3. **Ampliar el banco fotográfico propio.** Hoy el sitio se sostiene con una sola fotografía (la del sticker en el vehículo). `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
 
