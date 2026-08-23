@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oportunidad | CINQ</title>
+<meta name="description" content="Ficha de oportunidad evaluada y aceptada por CINQ.">
+<link rel="stylesheet" href="assets/css/styles.css">
+<style>
+  .breadcrumb{font-size:11.5px;color:var(--muted);padding:30px 32px 0;}
+  .breadcrumb .sep{margin:0 8px;opacity:.5;}
+  .breadcrumb .current{color:var(--olive-deep);}
+
+  .detail-section{padding:24px 32px 90px;}
+  .detail-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start;}
+  @media (max-width:900px){ .detail-grid{grid-template-columns:1fr;} }
+
+  .gallery-main{height:460px;margin-bottom:10px;}
+  @media (max-width:600px){ .gallery-main{height:300px;} }
+  .thumb-row{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+  @media (max-width:420px){ .thumb-row{grid-template-columns:repeat(3,1fr);} }
+  .thumb-row .frame{
+    height:64px;width:100%;cursor:pointer;border:1.5px solid transparent;
+    padding:0;margin:0;font:inherit;border-radius:0;
+  }
+  .thumb-row .frame.active{border-color:var(--olive);}
+  .thumb-row .frame:focus-visible{outline:2px solid var(--olive);outline-offset:2px;}
+
+  .info-panel{position:sticky;top:96px;border:1px solid var(--line-soft);padding:30px;}
+  .info-panel .kicker{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .info-panel .price{font-family:var(--font-display);font-size:28px;color:var(--olive-deep);margin-bottom:4px;}
+  .info-panel .loc{font-size:13px;color:var(--muted);margin-bottom:26px;}
+  .spec-list{list-style:none;margin:0 0 26px;padding:0;font-size:13px;}
+  .spec-list li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-soft);}
+  .spec-list li span:first-child{color:var(--muted);}
+  .spec-list li span:last-child{font-variant-numeric:tabular-nums;}
+  .wa-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    border:1px solid var(--olive-deep);background:var(--olive-deep);color:var(--on-accent);
+    padding:14px;font-size:13px;text-decoration:none;
+  }
+  .wa-btn:hover{background:var(--ink);border-color:var(--ink);}
+  .info-note{margin-top:16px;font-size:11.5px;color:var(--muted);line-height:1.6;}
+
+  .description{max-width:74ch;margin-top:70px;}
+  .description h2{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--ink);margin:0 0 18px;}
+  .description p{font-size:14.5px;line-height:1.8;color:var(--ink);margin:0 0 16px;}
+
+  .ficha{margin-top:56px;max-width:74ch;}
+  .ficha h2{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--ink);margin:0 0 18px;}
+  .ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;border-top:1px solid var(--line-soft);}
+  @media (max-width:560px){ .ficha-grid{grid-template-columns:1fr;} }
+  .ficha-grid .row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line-soft);font-size:13.5px;}
+  .ficha-grid .row span:first-child{color:var(--muted);}
+
+  .related{background:var(--paper-alt);padding:90px 32px;border-top:1px solid var(--line-soft);}
+  .related .head{margin-bottom:40px;}
+  .related h2{font-family:var(--font-display);font-weight:400;font-size:clamp(22px,3vw,28px);color:var(--ink);margin:0;}
+  .r-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px;}
+  .r-card{display:block;text-decoration:none;color:inherit;}
+  .r-card .frame{height:210px;}
+  .r-meta{padding:14px 2px 0;display:flex;justify-content:space-between;gap:10px;}
+  .r-meta .place{font-family:var(--font-display);font-size:15px;}
+  .r-meta .price{font-size:12.5px;color:var(--olive-deep);white-space:nowrap;}
+</style>
+</head>
+<body>
+
+<header class="chrome-nav" id="nav">
+  <a class="mark" href="index.html">CINQ</a>
+  <nav>
+    <a href="portafolio.html" class="current">Portafolio</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="ofrecer.html" class="cta" title="Ofrece tu propiedad o vehículo">Ofrecer</a>
+  </nav>
+</header>
+
+<div class="breadcrumb">
+  <a href="portafolio.html">Portafolio</a><span class="sep">›</span><span id="breadcrumb-tipo">Propiedades</span><span class="sep">›</span><span class="current" id="breadcrumb-actual"></span>
+</div>
+
+<section class="detail-section" id="detalle"></section>
+
+<section class="related" id="related">
+  <div class="container">
+    <div class="head"><p class="eyebrow">También en el portafolio</p><h2>Otras oportunidades seleccionadas</h2></div>
+    <div class="r-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="foot-mark">CINQ</div>
+      <div class="foot-tag">Conectando oportunidades.<br>Medellín y Envigado, Colombia.</div>
+    </div>
+    <div class="foot-col">
+      <h4>Explorar</h4>
+      <ul><li><a href="portafolio.html">Portafolio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="ofrecer.html">Ofrecer</a></li></ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contacto</h4>
+      <ul><li><a href="https://wa.me/573022758992" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:hellocinqgroup@gmail.com">hellocinqgroup@gmail.com</a></li><li><a href="https://www.instagram.com/cinqgroup.co" target="_blank" rel="noopener">Instagram</a></li></ul>
+    </div>
+    <div class="foot-col">
+      <h4>Legal</h4>
+      <ul><li><a href="privacidad.html">Política de privacidad</a></li><li><a href="terminos.html">Términos de uso</a></li></ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© CINQ, 2026. Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+<script src="assets/js/oportunidades.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

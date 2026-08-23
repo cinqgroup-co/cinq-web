@@ -16,30 +16,53 @@ El sitio publica **únicamente contenido real**. No hay fotos de relleno, precio
 sitio/
 ├── index.html          Home
 ├── nosotros.html       Nosotros
+├── portafolio.html     Grilla del portafolio (se dibuja desde oportunidades.js)
+├── oportunidad.html    Ficha de detalle (una sola, recibe ?id=<slug>)
 ├── ofrecer.html        Formulario de captación (conectado a Formspree)
 ├── privacidad.html     Política de privacidad
 ├── terminos.html       Términos de uso
 └── assets/
     ├── css/styles.css  Estilos compartidos (tokens de marca, nav, footer)
-    ├── js/site.js      JS compartido (nav al hacer scroll)
+    ├── js/site.js      JS compartido (nav + render del portafolio)
+    ├── js/oportunidades.js   Catálogo: el único archivo que se toca para sumar inventario
     └── img/            Fotografía real de CINQ
+        └── portafolio/<slug>/   Fotos de cada oportunidad
 ```
 
-El objetivo de esta versión es **captar inventario**: todos los caminos del sitio terminan en el formulario de Ofrecer, que es lo que alimenta el catálogo y el portafolio.
+El objetivo sigue siendo **captar inventario**: todos los caminos del sitio terminan en el formulario de Ofrecer, que es lo que alimenta el catálogo y el portafolio.
 
-## Portafolio: en pausa hasta tener oportunidades reales
+## Portafolio: cómo sumar una oportunidad
 
-`portafolio.html` y `oportunidad.html` se sacaron del sitio publicado porque su contenido era de ejemplo (precios `$ XXX.XXX.XXX`, fotos simuladas). Están guardados en `Web/_pendiente-portafolio/` y **no se despliegan**.
+El portafolio se dibuja solo a partir de **un único archivo de datos**: `assets/js/oportunidades.js`.
+No hay que editar HTML para publicar, editar o retirar una oportunidad.
 
-Para reactivar el portafolio cuando haya al menos 3 o 4 oportunidades reales:
+Para sumar una:
 
-1. Devolver ambos archivos a `sitio/`.
-2. Reemplazar cada tarjeta de ejemplo por una oportunidad real, con su foto y su precio verdadero.
-3. Duplicar `oportunidad.html` por cada oportunidad (por ejemplo `apartamento-envigado-01.html`) y quitar el aviso de "página de ejemplo" del inicio del archivo.
-4. Sustituir los `<canvas data-tex="...">` por `<img>` reales. El contenedor `.frame` ya acepta imágenes sin tocar el CSS; los estilos de tarjeta (`.p-card`, `.p-tag`, `.p-meta`) siguen en `styles.css` esperando.
-5. Volver a poner el enlace `Portafolio` en el menú y en el footer de todas las páginas.
+1. Crea la carpeta `assets/img/portafolio/<slug>/` y mete ahí las fotos (mínimo 8 para propiedad,
+   6 para vehículo, luz natural — el estándar de admisión del Brief Maestro).
+2. Copia el bloque `PLANTILLA` que está comentado al inicio de `assets/js/oportunidades.js`,
+   llénalo y añádelo al array `CINQ_OPORTUNIDADES`.
+3. `git push` — Vercel despliega solo.
 
-Nota: el generador de texturas que dibujaba las fotos falsas se eliminó de `site.js`, así que esos `<canvas>` quedarán en blanco hasta que se reemplacen por fotos reales.
+La primera foto del array es la portada de la tarjeta. El `slug` es la URL:
+`oportunidad.html?id=<slug>`.
+
+Para retirar una oportunidad vendida, basta con borrar su bloque del array: desaparece de la
+grilla, y su ficha muestra "esa oportunidad ya no está en el portafolio" sin romper enlaces
+compartidos por WhatsApp.
+
+**Por qué así y no un HTML por propiedad:** el plan es sumar inventario rápido. Con un archivo de
+datos, agregar la oportunidad número 8 cuesta lo mismo que la número 2. La contrapartida es que
+las fichas no tienen URL estática propia (van con `?id=`), lo cual es aceptable porque el canal
+de conversión real es WhatsApp, no la búsqueda orgánica.
+
+**Grilla sin filtros:** la barra de filtros (Tipo / Operación / Ubicación / Precio) se quitó
+mientras el portafolio sea pequeño — filtrar dos oportunidades no aporta nada. Cuando haya 5 o
+más, vale la pena devolverla. La grilla es `auto-fill`, así que se acomoda sola a cualquier
+cantidad de tarjetas.
+
+**Regla del sitio, que sigue en pie:** nada simulado. Si no hay foto propia y precio real,
+la oportunidad no se agrega al array.
 
 ## Pendiente antes de operar con clientes reales
 
