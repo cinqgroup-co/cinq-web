@@ -39,13 +39,26 @@ No hay que editar HTML para publicar, editar o retirar una oportunidad.
 Para sumar una:
 
 1. Crea la carpeta `assets/img/portafolio/<slug>/` y mete ahí las fotos (mínimo 8 para propiedad,
-   6 para vehículo, luz natural — el estándar de admisión del Brief Maestro).
+   6 para vehículo, luz natural: el estándar de admisión del Brief Maestro). Cada foto va dos veces,
+   `.jpg` y `.webp` con el mismo nombre; el sitio sirve el WebP y deja el JPG de respaldo.
 2. Copia el bloque `PLANTILLA` que está comentado al inicio de `assets/js/oportunidades.js`,
    llénalo y añádelo al array `CINQ_OPORTUNIDADES`.
 3. `git push` — Vercel despliega solo.
 
 La primera foto del array es la portada de la tarjeta. El `slug` es la URL:
 `oportunidad.html?id=<slug>`.
+
+Cada foto se escribe como `{ archivo: "nombre.jpg", alt: "qué se ve" }`. El `alt` no es opcional:
+es lo que lee un lector de pantalla, lo que se ve si la imagen no carga, y lo que Google indexa.
+
+**Optimizar las fotos.** No hay build ni dependencias de Node. El script
+`herramientas/optimizar-fotos.py` (Python + Pillow, lo único que hay que tener instalado) toma una
+carpeta de fotos, las ordena por fecha de descarga, las renombra con la lista que se le pase y
+genera el par JPG + WebP a máximo 1920 px de lado largo y calidad 82:
+
+```
+python herramientas/optimizar-fotos.py ORIGEN SLUG nombres.txt --patron "*.jpeg"
+```
 
 Para retirar una oportunidad vendida, basta con borrar su bloque del array: desaparece de la
 grilla, y su ficha muestra "esa oportunidad ya no está en el portafolio" sin romper enlaces
@@ -68,7 +81,7 @@ la oportunidad no se agrega al array.
 
 1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
-3. **Ampliar el banco fotográfico propio.** Hoy el sitio se sostiene con una sola fotografía (la del sticker en el vehículo). `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
+3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo, el sitio ya tiene las 14 fotos del apartamento 1405 de Aluna. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
 
 ## Formulario de Ofrecer
 

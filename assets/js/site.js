@@ -32,9 +32,30 @@ var CINQ = (function(){
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  function rutaFoto(op, indice){
-    if(!op.fotos || !op.fotos.length) return '';
-    return RUTA_FOTOS + op.slug + '/' + op.fotos[indice || 0];
+  /* Cada foto es {archivo, alt}. Se acepta tambien el formato viejo (solo el
+     nombre del archivo) para no romper bloques del catalogo escritos antes. */
+  function foto(op, indice){
+    var dato = op.fotos && op.fotos[indice || 0];
+    if(!dato) return null;
+    var archivo = typeof dato === 'string' ? dato : dato.archivo;
+    if(!archivo) return null;
+    var jpg = RUTA_FOTOS + op.slug + '/' + archivo;
+    return {
+      jpg: jpg,
+      webp: jpg.replace(/\.jpe?g$/i, '.webp'),
+      alt: (typeof dato === 'string' ? '' : dato.alt) || ''
+    };
+  }
+
+  /* WebP con el JPG de respaldo. El alt de la foto manda; si el bloque del
+     catalogo no lo trae, cae al titulo de la oportunidad. */
+  function imagen(f, altRespaldo, lazy, atributos){
+    if(!f) return '';
+    return '<picture>' +
+      '<source srcset="' + esc(f.webp) + '" type="image/webp">' +
+      '<img src="' + esc(f.jpg) + '" alt="' + esc(f.alt || altRespaldo || '') + '"' +
+      (lazy ? ' loading="lazy"' : '') + (atributos || '') + '>' +
+    '</picture>';
   }
 
   function enlaceWhatsapp(op){
@@ -46,9 +67,7 @@ var CINQ = (function(){
 
   function tarjeta(op){
     var badge = op.premium ? '<span class="p-badge">Curaduría premium</span>' : '';
-    var img = op.fotos && op.fotos.length
-      ? '<img src="' + esc(rutaFoto(op,0)) + '" alt="' + esc(op.titulo) + '" loading="lazy">'
-      : '';
+    var img = imagen(foto(op, 0), op.titulo, true);
     return '' +
       '<a class="p-card" href="oportunidad.html?id=' + encodeURIComponent(op.slug) + '">' +
         '<div class="frame"><span class="p-tag">' + esc(op.tipo) + '</span>' + badge + img + '</div>' +
@@ -89,14 +108,22 @@ var CINQ = (function(){
     if(!op.fotos || !op.fotos.length){
       return '<div class="frame gallery-main"></div>';
     }
-    var principal = '<div class="frame gallery-main"><img id="gallery-main-img" src="' +
-      esc(rutaFoto(op,0)) + '" alt="' + esc(op.titulo) + '"></div>';
+    var portada = foto(op, 0);
+    var principal = '<div class="frame gallery-main"><picture>' +
+      '<source id="gallery-main-src" srcset="' + esc(portada.webp) + '" type="image/webp">' +
+      '<img id="gallery-main-img" src="' + esc(portada.jpg) + '" alt="' +
+      esc(portada.alt || op.titulo) + '"></picture></div>';
     if(op.fotos.length < 2) return principal;
-    var thumbs = op.fotos.map(function(nombre, i){
-      var src = RUTA_FOTOS + op.slug + '/' + nombre;
-      return '<button type="button" class="frame' + (i === 0 ? ' active' : '') + '" data-src="' +
-        esc(src) + '" aria-label="Ver foto ' + (i+1) + '">' +
-        '<img src="' + esc(src) + '" alt="" loading="lazy"></button>';
+    /* La miniatura es un boton: su aria-label describe la foto, asi que la
+       imagen de adentro va con alt vacio para no repetirla dos veces. */
+    var thumbs = op.fotos.map(function(_, i){
+      var f = foto(op, i);
+      var etiqueta = 'Ver foto ' + (i+1) + (f.alt ? ': ' + f.alt : '');
+      return '<button type="button" class="frame' + (i === 0 ? ' active' : '') +
+        '" data-jpg="' + esc(f.jpg) + '" data-webp="' + esc(f.webp) + '" data-alt="' +
+        esc(f.alt || op.titulo) + '" aria-label="' + esc(etiqueta) + '">' +
+        '<picture><source srcset="' + esc(f.webp) + '" type="image/webp">' +
+        '<img src="' + esc(f.jpg) + '" alt="" loading="lazy"></picture></button>';
     }).join('');
     return principal + '<div class="thumb-row">' + thumbs + '</div>';
   }
@@ -148,11 +175,18 @@ var CINQ = (function(){
       '</div></div></div>';
 
     var principal = document.getElementById('gallery-main-img');
+    var fuentePrincipal = document.getElementById('gallery-main-src');
     raiz.querySelectorAll('.thumb-row .frame').forEach(function(thumb){
       thumb.addEventListener('click', function(){
         raiz.querySelectorAll('.thumb-row .frame').forEach(function(t){ t.classList.remove('active'); });
         thumb.classList.add('active');
-        if(principal) principal.src = thumb.getAttribute('data-src');
+        /* El <source> hay que moverlo tambien: dentro de un <picture> le gana
+           al src del <img>, y sin esto la foto grande no cambiaria. */
+        if(fuentePrincipal) fuentePrincipal.srcset = thumb.getAttribute('data-webp');
+        if(principal){
+          principal.src = thumb.getAttribute('data-jpg');
+          principal.alt = thumb.getAttribute('data-alt');
+        }
       });
     });
 
@@ -161,8 +195,7 @@ var CINQ = (function(){
     if(!seccion) return;
     if(!otras.length){ seccion.remove(); return; }
     seccion.querySelector('.r-grid').innerHTML = otras.slice(0,3).map(function(o){
-      var img = o.fotos && o.fotos.length
-        ? '<img src="' + esc(rutaFoto(o,0)) + '" alt="' + esc(o.titulo) + '" loading="lazy">' : '';
+      var img = imagen(foto(o, 0), o.titulo, true);
       return '<a class="r-card" href="oportunidad.html?id=' + encodeURIComponent(o.slug) + '">' +
         '<div class="frame">' + img + '</div>' +
         '<div class="r-meta"><span class="place">' + esc(o.titulo) + '</span>' +
