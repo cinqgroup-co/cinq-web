@@ -50,11 +50,11 @@
 var CINQ_OPORTUNIDADES = [
 
   {
-    slug: "aluna-1405",
+    slug: "aluna-las-antillas",
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Apartamento 1405, Aluna",
+    titulo: "Apartamento, Aluna",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     precio: 475000000,
@@ -70,27 +70,27 @@ var CINQ_OPORTUNIDADES = [
       ["Administración", "$ 545.000 / mes"],
       ["Antigüedad", "1 a 8 años"],
       ["Permuta", "Se acepta"],
-      ["Zonas comunes", "Piscina, gimnasio, sala de cine, terraza BBQ, parque infantil, guardería, salón de juegos y terraza mirador"]
+      ["Zonas comunes", "Piscina, gimnasio, sala de cine, pista de bolos, terraza BBQ, parque infantil, guardería, salón de juegos y terraza mirador"]
     ],
     descripcion: [
-      "Las Antillas resume bien lo que busca quien se muda a Envigado: cerca de la Avenida El Poblado y de la zona de servicios, pero con la montaña al frente y el ruido lejos. Aluna Apartamentos está en la parte alta del sector, y ahí está buena parte del valor de este inmueble. El 1405 ocupa el último piso de la torre: vista panorámica sobre el valle, ventanales de piso a techo y luz natural durante todo el día.",
+      "Las Antillas resume bien lo que busca quien se muda a Envigado: cerca de la Avenida El Poblado y de la zona de servicios, pero con la montaña al frente y el ruido lejos. Aluna Apartamentos está en la parte alta del sector, y ahí está buena parte del valor de este inmueble. El apartamento ocupa el último piso de la torre: vista panorámica sobre el valle, ventanales de piso a techo y luz natural durante todo el día.",
       "Son 67,5 m² construidos y 62,5 m² privados, con dos alcobas, dos baños, vestier, zona de ropas independiente y una cocina con isla abierta a la sala comedor. Viene con un parqueadero, y el edificio suma piscina, gimnasio, sala de cine, terraza BBQ y terraza mirador. Lo aceptamos porque lo declarado por el propietario coincide con lo que muestran las fotos de la visita, hechas con el apartamento desocupado, y porque un último piso con esta vista y esta iluminación no abunda en el sector. El propietario acepta permuta."
     ],
     fotos: [
-      { archivo: "aluna-1405-01-sala-comedor.jpg",      alt: "Sala comedor amplia con ventanales y vista, apartamento 1405 Aluna, Las Antillas Envigado" },
-      { archivo: "aluna-1405-02-sala-balcon.jpg",       alt: "Sala con ventanal de piso a techo y salida al balcón" },
-      { archivo: "aluna-1405-03-balcon-vista.jpg",      alt: "Balcón con vista panorámica a Envigado desde el piso 14" },
-      { archivo: "aluna-1405-04-sala-cocina.jpg",       alt: "Cocina abierta integrada a la sala comedor" },
-      { archivo: "aluna-1405-05-cocina-isla.jpg",       alt: "Cocina con isla central y mesón en cuarzo blanco" },
-      { archivo: "aluna-1405-06-cocina-frontal.jpg",    alt: "Cocina integral con estufa a gas, horno y campana extractora" },
-      { archivo: "aluna-1405-07-alcoba-principal.jpg",  alt: "Alcoba principal con ventana panorámica y piso laminado" },
-      { archivo: "aluna-1405-08-closet.jpg",            alt: "Closet de puertas corredizas con entrepaños en madera" },
-      { archivo: "aluna-1405-09-vestier.jpg",           alt: "Vestier con entrepaños, cajones y barra para colgar" },
-      { archivo: "aluna-1405-10-bano-principal.jpg",    alt: "Baño principal con ducha en vidrio templado y mueble de lavamanos" },
-      { archivo: "aluna-1405-11-alcoba-2.jpg",          alt: "Segunda alcoba con ventanal y vista a la montaña" },
-      { archivo: "aluna-1405-12-alcoba-2-vestier.jpg",  alt: "Segunda alcoba con acceso a vestier" },
-      { archivo: "aluna-1405-13-bano-social.jpg",       alt: "Baño social con lavamanos, espejo y acabados en cerámica" },
-      { archivo: "aluna-1405-14-zona-ropas.jpg",        alt: "Zona de ropas independiente con lavadero y calentador a gas" }
+      { archivo: "aluna-01-sala-comedor.jpg",     alt: "Sala comedor amplia con ventanales y vista, apartamento en Aluna, Las Antillas Envigado" },
+      { archivo: "aluna-02-sala-balcon.jpg",      alt: "Sala con ventanal de piso a techo y salida al balcón" },
+      { archivo: "aluna-03-balcon-vista.jpg",     alt: "Balcón con vista panorámica a Envigado desde el piso 14" },
+      { archivo: "aluna-04-sala-cocina.jpg",      alt: "Cocina abierta integrada a la sala comedor" },
+      { archivo: "aluna-05-cocina-isla.jpg",      alt: "Cocina con isla central y mesón en cuarzo blanco" },
+      { archivo: "aluna-06-cocina-frontal.jpg",   alt: "Cocina integral con estufa a gas, horno y campana extractora" },
+      { archivo: "aluna-07-alcoba-principal.jpg", alt: "Alcoba principal con ventana panorámica y piso laminado" },
+      { archivo: "aluna-08-closet.jpg",           alt: "Closet de puertas corredizas con entrepaños en madera" },
+      { archivo: "aluna-09-vestier.jpg",          alt: "Vestier con entrepaños, cajones y barra para colgar" },
+      { archivo: "aluna-10-bano-principal.jpg",   alt: "Baño principal con ducha en vidrio templado y mueble de lavamanos" },
+      { archivo: "aluna-11-alcoba-2.jpg",         alt: "Segunda alcoba con ventanal y vista a la montaña" },
+      { archivo: "aluna-12-alcoba-2-vestier.jpg", alt: "Segunda alcoba con acceso a vestier" },
+      { archivo: "aluna-13-bano-social.jpg",      alt: "Baño social con lavamanos, espejo y acabados en cerámica" },
+      { archivo: "aluna-14-zona-ropas.jpg",       alt: "Zona de ropas independiente con lavadero y calentador a gas" }
     ]
   }
 
