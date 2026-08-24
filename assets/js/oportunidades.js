@@ -81,7 +81,7 @@ var CINQ_OPORTUNIDADES = [
       ["Administración", "$ 545.000 / mes"],
       ["Antigüedad", "1 a 8 años"],
       ["Permuta", "Se acepta"],
-      ["Zonas comunes", "Piscina de niños y de adultos, gimnasio, sala de cine, pista de bolos, terraza BBQ, parque infantil, guardería, salón de juegos y terraza mirador"]
+      ["Zonas comunes", "Piscina de niños y de adultos, gimnasio, turco, sala de cine, pista de bolos, terraza BBQ, parque infantil, guardería, salón de juegos y terraza mirador"]
     ],
     descripcion: [
       "Las Antillas resume bien lo que busca quien se muda a Envigado: cerca de la Avenida El Poblado y de la zona de servicios, pero con la montaña al frente y el ruido lejos. Aluna Apartamentos está en la parte alta del sector, y ahí está buena parte del valor de este inmueble. El 1405 ocupa el último piso de la torre: vista panorámica sobre el valle, ventanales de piso a techo y luz natural durante todo el día.",
@@ -144,7 +144,7 @@ var CINQ_OPORTUNIDADES = [
       ["Estrato", "4"],
       ["Administración", "$ 555.000 / mes"],
       ["Antigüedad", "1 a 8 años"],
-      ["Zonas comunes", "Piscina de niños y de adultos, gimnasio, sala de cine, pista de bolos, terraza BBQ, parque infantil, guardería, salón de juegos y terraza mirador"]
+      ["Zonas comunes", "Piscina de niños y de adultos, gimnasio, turco, sala de cine, pista de bolos, terraza BBQ, parque infantil, guardería, salón de juegos y terraza mirador"]
     ],
     descripcion: [
       "Aluna Apartamentos ocupa la parte alta de Las Antillas, el costado de Envigado que tiene los colegios, los supermercados y la Avenida El Poblado a pocos minutos, pero sin la congestión de la zona plana. El 1404 está en el piso 14, el último de la torre, con el balcón mirando a la ladera y sin nada que le corte la luz de la mañana.",
