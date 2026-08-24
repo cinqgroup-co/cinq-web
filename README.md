@@ -48,6 +48,18 @@ Para sumar una:
 La primera foto del array es la portada de la tarjeta. El `slug` es la URL:
 `oportunidad.html?id=<slug>`.
 
+**Fotos compartidas entre dos fichas.** Cuando hay más de un apartamento en venta en el mismo
+edificio, las zonas comunes son las mismas y no tiene sentido guardarlas dos veces. Si el
+`archivo` trae una barra, se busca en esa ruta colgando de `assets/img/portafolio/` en lugar de en
+la carpeta de la oportunidad:
+
+```
+{ archivo: "aluna-zonas-comunes/aluna-zc-01-piscina-adultos.jpg", alt: "Piscina de adultos..." }
+```
+
+Así lo hacen hoy las fichas del 1405 y el 1404 de Aluna: 11 fotos de zonas comunes, un solo
+archivo de cada una, citadas desde las dos fichas. El `alt` sí se escribe en cada ficha.
+
 Cada foto se escribe como `{ archivo: "nombre.jpg", alt: "qué se ve" }`. El `alt` no es opcional:
 es lo que lee un lector de pantalla, lo que se ve si la imagen no carga, y lo que Google indexa.
 
@@ -81,7 +93,7 @@ la oportunidad no se agrega al array.
 
 1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
-3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo, el sitio ya tiene las 14 fotos del apartamento 1405 de Aluna. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
+3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo, el sitio ya tiene 16 fotos del apartamento 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes del edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
 
 ## Formulario de Ofrecer
 

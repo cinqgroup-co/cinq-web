@@ -33,13 +33,18 @@ var CINQ = (function(){
   }
 
   /* Cada foto es {archivo, alt}. Se acepta tambien el formato viejo (solo el
-     nombre del archivo) para no romper bloques del catalogo escritos antes. */
+     nombre del archivo) para no romper bloques del catalogo escritos antes.
+
+     Un archivo con "/" adentro no se busca en la carpeta de la oportunidad
+     sino en la ruta que diga, colgando de portafolio/. Es lo que permite que
+     dos fichas del mismo edificio compartan las fotos de zonas comunes sin
+     tener el mismo archivo guardado dos veces. */
   function foto(op, indice){
     var dato = op.fotos && op.fotos[indice || 0];
     if(!dato) return null;
     var archivo = typeof dato === 'string' ? dato : dato.archivo;
     if(!archivo) return null;
-    var jpg = RUTA_FOTOS + op.slug + '/' + archivo;
+    var jpg = RUTA_FOTOS + (archivo.indexOf('/') > -1 ? archivo : op.slug + '/' + archivo);
     return {
       jpg: jpg,
       webp: jpg.replace(/\.jpe?g$/i, '.webp'),
