@@ -81,9 +81,14 @@ datos, agregar la oportunidad número 8 cuesta lo mismo que la número 2. La con
 las fichas no tienen URL estática propia (van con `?id=`), lo cual es aceptable porque el canal
 de conversión real es WhatsApp, no la búsqueda orgánica.
 
-**Grilla sin filtros:** la barra de filtros (Tipo / Operación / Ubicación / Precio) se quitó
-mientras el portafolio sea pequeño — filtrar dos oportunidades no aporta nada. Cuando haya 5 o
-más, vale la pena devolverla. La grilla es `auto-fill`, así que se acomoda sola a cualquier
+**Filtro por ubicación:** la grilla tiene una barra de botones con los municipios del catálogo.
+Los botones se dibujan solos a partir del campo `zona` de cada oportunidad, con el conteo al lado,
+así que al publicar en un municipio nuevo su botón aparece sin tocar código. La barra se esconde
+sola si todo el portafolio está en la misma zona, porque ahí filtrar no filtra nada.
+
+`portafolio.html?zona=Sabaneta` abre la grilla ya filtrada, que sirve para mandarle a alguien solo
+lo de un municipio. Los demás filtros que hubo alguna vez (Tipo / Operación / Precio) siguen
+fuera: con este volumen no aportan. La grilla es `auto-fill`, así que se acomoda sola a cualquier
 cantidad de tarjetas.
 
 **Regla del sitio, que sigue en pie:** nada simulado. Si no hay foto propia y precio real,

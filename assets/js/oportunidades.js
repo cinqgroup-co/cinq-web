@@ -191,9 +191,9 @@ var CINQ_OPORTUNIDADES = [
     precio: 350000000,
     premium: false,
     /* Datos del anuncio de Finca Raíz, código 193795108, confirmados con la
-       propietaria. Tres cosas quedaron por fuera a propósito porque no están
-       confirmadas: si hay gimnasio, si está remodelado y si acepta permuta.
-       No se agregan filas sin dato. */
+       propietaria. El gimnasio lo confirmo ella despues. Siguen por fuera, sin
+       confirmar, si esta remodelado y si acepta permuta: no se agregan filas
+       sin dato. */
     ficha: [
       ["Área construida", "57 m²"],
       ["Alcobas", "3"],
@@ -204,11 +204,11 @@ var CINQ_OPORTUNIDADES = [
       ["Estrato", "2"],
       ["Administración", "$ 313.000 / mes"],
       ["Antigüedad", "1 a 8 años"],
-      ["Zonas comunes", "Piscina, placa deportiva, canchas deportivas, salón social, salón de juegos, juegos infantiles, zonas verdes, portería y circuito cerrado de televisión"]
+      ["Zonas comunes", "Piscina, gimnasio, placa deportiva, salón social, salón de juegos, juegos infantiles, zonas verdes y portería"]
     ],
     descripcion: [
-      "La Loma de San José es de las zonas de Sabaneta donde todavía se tiene la ladera al frente y el centro a pocos minutos. La unidad está sobre la loma, en conjunto cerrado con portería y circuito cerrado de televisión, y el alimentador del Metro sube hasta la portería, que es lo que le cambia el día a día a quien no quiere depender del carro. Piscina, placa deportiva, canchas, salón social, salón de juegos, juegos infantiles y zonas verdes completan el conjunto.",
-      "Son 57 m² construidos y 53 m² privados en el piso 7, con tres habitaciones, dos baños enchapados de piso a techo, zona de ropas independiente y balcón con vista a la piscina y a la montaña. La sala comedor abre a la cocina integral por una barra estilo americano, con estufa y calentador a gas. Piso en baldosa en todo el apartamento, ascensor y un parqueadero privado. La tercera habitación funciona bien como estudio. Lo aceptamos porque lo declarado por la propietaria coincide con lo que muestran las fotos, tomadas con el apartamento desocupado, y porque tres habitaciones con parqueadero propio a este precio no es lo corriente en el sector."
+      "La Loma de San José es de las zonas de Sabaneta donde todavía se vive con la ladera al frente sin quedar lejos de nada: el centro y la Avenida El Poblado están a pocos minutos. Lo que cambia el día a día aquí es el alimentador del Metro, que sube hasta la portería, así que se llega al sistema sin sacar el carro. El conjunto es cerrado y suma piscina, gimnasio, placa deportiva, salón social, salón de juegos, juegos infantiles y zonas verdes.",
+      "Son 57 m² construidos y 53 m² privados en el piso 7. La sala comedor abre a la cocina integral por una barra estilo americano y termina en el balcón, que mira a la piscina y a la montaña. Tres habitaciones, dos baños enchapados de piso a techo, zona de ropas independiente, estufa y calentador a gas, piso en baldosa y un parqueadero privado. La tercera habitación sirve bien como estudio. Lo aceptamos porque lo declarado por la propietaria coincide con lo que muestran las fotos, tomadas con el apartamento desocupado, y porque tres habitaciones con parqueadero propio a este precio no es lo corriente en el sector."
     ],
     fotos: [
       { archivo: "loma-san-jose-01-sala-comedor-balcon.jpg", alt: "Sala comedor con barra estilo americano abierta a la cocina y salida al balcón, apartamento en Loma de San José, Sabaneta" },

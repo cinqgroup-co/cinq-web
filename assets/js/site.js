@@ -98,7 +98,63 @@ var CINQ = (function(){
       return;
     }
     if(vacio) vacio.hidden = true;
-    grid.innerHTML = ops.map(tarjeta).join('');
+
+    /* Las zonas salen del catalogo, no de una lista fija: al sumar una
+       oportunidad en un municipio nuevo, su boton aparece solo. */
+    var zonas = [];
+    ops.forEach(function(op){
+      if(op.zona && zonas.indexOf(op.zona) < 0) zonas.push(op.zona);
+    });
+    zonas.sort();
+
+    function cuantas(zona){
+      return ops.filter(function(op){ return op.zona === zona; }).length;
+    }
+
+    var caja = document.getElementById('filtros');
+    var actual = 'todas';
+
+    /* ?zona=Sabaneta abre el portafolio ya filtrado, para poder compartir el
+       enlace de un municipio. Si la zona no existe, se ignora. */
+    var pedida = new URLSearchParams(window.location.search).get('zona');
+    if(pedida){
+      zonas.forEach(function(z){
+        if(z.toLowerCase() === pedida.toLowerCase()) actual = z;
+      });
+    }
+
+    function pinta(){
+      var visibles = actual === 'todas' ? ops : ops.filter(function(op){ return op.zona === actual; });
+      grid.innerHTML = visibles.map(tarjeta).join('');
+      if(caja){
+        [].forEach.call(caja.querySelectorAll('button'), function(b){
+          b.setAttribute('aria-pressed', b.getAttribute('data-zona') === actual ? 'true' : 'false');
+        });
+      }
+    }
+
+    /* Filtrar cuando todo esta en el mismo municipio no filtra nada, asi que
+       la barra solo se dibuja si hay al menos dos zonas. */
+    if(caja && zonas.length > 1){
+      var botones = [['todas', 'Todas', ops.length]];
+      zonas.forEach(function(z){ botones.push([z, z, cuantas(z)]); });
+      caja.innerHTML = botones.map(function(b){
+        return '<button type="button" data-zona="' + esc(b[0]) + '" aria-pressed="false">' +
+          esc(b[1]) + '<span class="cuenta">' + b[2] + '</span></button>';
+      }).join('');
+      caja.hidden = false;
+      caja.addEventListener('click', function(e){
+        var boton = e.target.closest('button');
+        if(!boton) return;
+        actual = boton.getAttribute('data-zona');
+        window.history.replaceState(null, '', actual === 'todas'
+          ? window.location.pathname
+          : window.location.pathname + '?zona=' + encodeURIComponent(actual));
+        pinta();
+      });
+    }
+
+    pinta();
   }
 
   function filas(pares){
