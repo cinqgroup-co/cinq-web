@@ -181,7 +181,7 @@ var CINQ_OPORTUNIDADES = [
   },
 
   {
-    slug: "aires-del-bosque-0707",
+    slug: "sabaneta-loma-san-jose",
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
@@ -211,22 +211,22 @@ var CINQ_OPORTUNIDADES = [
       "Son 57 m² construidos y 53 m² privados en el piso 7, con tres habitaciones, dos baños enchapados de piso a techo, zona de ropas independiente y balcón con vista a la piscina y a la montaña. La sala comedor abre a la cocina integral por una barra estilo americano, con estufa y calentador a gas. Piso en baldosa en todo el apartamento, ascensor y un parqueadero privado. La tercera habitación funciona bien como estudio. Lo aceptamos porque lo declarado por la propietaria coincide con lo que muestran las fotos, tomadas con el apartamento desocupado, y porque tres habitaciones con parqueadero propio a este precio no es lo corriente en el sector."
     ],
     fotos: [
-      { archivo: "aires-del-bosque-0707-01-sala-comedor.jpg",     alt: "Sala comedor con piso en baldosa y paso a la cocina, apartamento en Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-02-cocina.jpg",           alt: "Cocina integral con estufa a gas, campana extractora y mueble aéreo, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-03-cocina-meson.jpg",     alt: "Mesón de la cocina con lavaplatos y estufa a gas de cuatro puestos, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-04-alcoba.jpg",           alt: "Alcoba con clóset de puertas corredizas y piso en baldosa, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-05-alcoba-2.jpg",         alt: "Segunda alcoba con clóset empotrado y salida al pasillo, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-06-bano-principal.jpg",   alt: "Baño principal con ducha en vidrio, enchape oscuro de piso a techo y lavamanos de sobreponer, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-07-bano-auxiliar.jpg",    alt: "Baño auxiliar con ducha enchapada de piso a techo y mueble bajo el lavamanos, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-08-vista-montana.jpg",    alt: "Vista desde el balcón hacia las torres de la unidad y la montaña, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-09-vista-piscina.jpg",    alt: "Vista desde el balcón hacia la piscina de la unidad, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-10-zona-ropas.jpg",       alt: "Zona de ropas independiente con lavadero y calentador a gas, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-11-piscina.jpg",          alt: "Piscina de la unidad entre las torres, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-12-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética junto a la ladera, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-13-placa-deportiva.jpg",  alt: "Placa deportiva con arco y tableros de baloncesto, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-14-salon-social.jpg",     alt: "Salón social diáfano con ventanal hacia las zonas verdes, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-15-parqueadero.jpg",      alt: "Parqueadero privado P0101 en el sótano cubierto, Loma de San José, Sabaneta" },
-      { archivo: "aires-del-bosque-0707-16-pasillo.jpg",          alt: "Pasillo de circulación que reparte a las alcobas y a la cocina, Loma de San José, Sabaneta" }
+      { archivo: "loma-san-jose-01-sala-comedor.jpg",     alt: "Sala comedor con piso en baldosa y paso a la cocina, apartamento en Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-02-cocina.jpg",           alt: "Cocina integral con estufa a gas, campana extractora y mueble aéreo, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-03-cocina-meson.jpg",     alt: "Mesón de la cocina con lavaplatos y estufa a gas de cuatro puestos, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-04-alcoba.jpg",           alt: "Alcoba con clóset de puertas corredizas y piso en baldosa, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-05-alcoba-2.jpg",         alt: "Segunda alcoba con clóset empotrado y salida al pasillo, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-06-bano-principal.jpg",   alt: "Baño principal con ducha en vidrio, enchape oscuro de piso a techo y lavamanos de sobreponer, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-07-bano-auxiliar.jpg",    alt: "Baño auxiliar con ducha enchapada de piso a techo y mueble bajo el lavamanos, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-08-vista-montana.jpg",    alt: "Vista desde el balcón hacia las torres de la unidad y la montaña, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-09-vista-piscina.jpg",    alt: "Vista desde el balcón hacia la piscina de la unidad, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-10-zona-ropas.jpg",       alt: "Zona de ropas independiente con lavadero y calentador a gas, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-11-piscina.jpg",          alt: "Piscina de la unidad entre las torres, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-12-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética junto a la ladera, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-13-placa-deportiva.jpg",  alt: "Placa deportiva con arco y tableros de baloncesto, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-14-salon-social.jpg",     alt: "Salón social diáfano con ventanal hacia las zonas verdes, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-15-parqueadero.jpg",      alt: "Parqueadero privado P0101 en el sótano cubierto, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-16-pasillo.jpg",          alt: "Pasillo de circulación que reparte a las alcobas y a la cocina, Loma de San José, Sabaneta" }
     ]
   }
 
