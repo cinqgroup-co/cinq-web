@@ -178,6 +178,56 @@ var CINQ_OPORTUNIDADES = [
       { archivo: "aluna-zonas-comunes/aluna-zc-10-sala-cine.jpg",       alt: "Sala de cine con sillas reclinables en Aluna, Las Antillas, Envigado" },
       { archivo: "aluna-zonas-comunes/aluna-zc-11-gimnasio.jpg",        alt: "Gimnasio con máquinas y peso libre en Aluna, Las Antillas, Envigado" }
     ]
+  },
+
+  {
+    slug: "aires-del-bosque-0707",
+    tipo: "Propiedad",
+    subtipo: "Apartamento",
+    operacion: "Venta",
+    titulo: "Sabaneta, Loma de San José",
+    zona: "Sabaneta",
+    zonaDetalle: "Loma de San José, Sabaneta, Antioquia",
+    precio: 350000000,
+    premium: false,
+    /* Datos del anuncio de Finca Raíz, código 193795108, confirmados con la
+       propietaria. Tres cosas quedaron por fuera a propósito porque no están
+       confirmadas: si hay gimnasio, si está remodelado y si acepta permuta.
+       No se agregan filas sin dato. */
+    ficha: [
+      ["Área construida", "57 m²"],
+      ["Alcobas", "3"],
+      ["Baños", "2"],
+      ["Parqueadero", "1 privado (P0101)"],
+      ["Área privada", "53 m²"],
+      ["Piso", "7"],
+      ["Estrato", "2"],
+      ["Administración", "$ 313.000 / mes"],
+      ["Antigüedad", "1 a 8 años"],
+      ["Zonas comunes", "Piscina, placa deportiva, canchas deportivas, salón social, salón de juegos, juegos infantiles, zonas verdes, portería y circuito cerrado de televisión"]
+    ],
+    descripcion: [
+      "La Loma de San José es de las zonas de Sabaneta donde todavía se tiene la ladera al frente y el centro a pocos minutos. La unidad está sobre la loma, en conjunto cerrado con portería y circuito cerrado de televisión, y el alimentador del Metro sube hasta la portería, que es lo que le cambia el día a día a quien no quiere depender del carro. Piscina, placa deportiva, canchas, salón social, salón de juegos, juegos infantiles y zonas verdes completan el conjunto.",
+      "Son 57 m² construidos y 53 m² privados en el piso 7, con tres habitaciones, dos baños enchapados de piso a techo, zona de ropas independiente y balcón con vista a la piscina y a la montaña. La sala comedor abre a la cocina integral por una barra estilo americano, con estufa y calentador a gas. Piso en baldosa en todo el apartamento, ascensor y un parqueadero privado. La tercera habitación funciona bien como estudio. Lo aceptamos porque lo declarado por la propietaria coincide con lo que muestran las fotos, tomadas con el apartamento desocupado, y porque tres habitaciones con parqueadero propio a este precio no es lo corriente en el sector."
+    ],
+    fotos: [
+      { archivo: "aires-del-bosque-0707-01-sala-comedor.jpg",     alt: "Sala comedor con piso en baldosa y paso a la cocina, apartamento en Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-02-cocina.jpg",           alt: "Cocina integral con estufa a gas, campana extractora y mueble aéreo, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-03-cocina-meson.jpg",     alt: "Mesón de la cocina con lavaplatos y estufa a gas de cuatro puestos, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-04-alcoba.jpg",           alt: "Alcoba con clóset de puertas corredizas y piso en baldosa, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-05-alcoba-2.jpg",         alt: "Segunda alcoba con clóset empotrado y salida al pasillo, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-06-bano-principal.jpg",   alt: "Baño principal con ducha en vidrio, enchape oscuro de piso a techo y lavamanos de sobreponer, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-07-bano-auxiliar.jpg",    alt: "Baño auxiliar con ducha enchapada de piso a techo y mueble bajo el lavamanos, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-08-vista-montana.jpg",    alt: "Vista desde el balcón hacia las torres de la unidad y la montaña, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-09-vista-piscina.jpg",    alt: "Vista desde el balcón hacia la piscina de la unidad, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-10-zona-ropas.jpg",       alt: "Zona de ropas independiente con lavadero y calentador a gas, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-11-piscina.jpg",          alt: "Piscina de la unidad entre las torres, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-12-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética junto a la ladera, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-13-placa-deportiva.jpg",  alt: "Placa deportiva con arco y tableros de baloncesto, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-14-salon-social.jpg",     alt: "Salón social diáfano con ventanal hacia las zonas verdes, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-15-parqueadero.jpg",      alt: "Parqueadero privado P0101 en el sótano cubierto, Loma de San José, Sabaneta" },
+      { archivo: "aires-del-bosque-0707-16-pasillo.jpg",          alt: "Pasillo de circulación que reparte a las alcobas y a la cocina, Loma de San José, Sabaneta" }
+    ]
   }
 
 ];

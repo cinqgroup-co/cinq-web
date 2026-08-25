@@ -63,9 +63,13 @@ var CINQ = (function(){
     '</picture>';
   }
 
+  /* El mensaje prellenado no usa el titulo: ahora los titulos son solo la zona
+     y repetirlos junto a zonaDetalle decia dos veces lo mismo sin identificar
+     el inmueble. Con subtipo y precio, quien escribe deja claro cual es. */
   function enlaceWhatsapp(op){
     var texto = op
-      ? 'Hola CINQ, me interesa esta oportunidad: ' + op.titulo + ' (' + op.zonaDetalle + ').'
+      ? 'Hola CINQ, me interesa esta oportunidad: ' + op.subtipo + ' en ' +
+        op.zonaDetalle + ', ' + precio(op.precio) + '.'
       : 'Hola CINQ, quiero saber mas sobre el portafolio.';
     return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto);
   }
