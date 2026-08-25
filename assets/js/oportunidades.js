@@ -198,7 +198,7 @@ var CINQ_OPORTUNIDADES = [
       ["Área construida", "57 m²"],
       ["Alcobas", "3"],
       ["Baños", "2"],
-      ["Parqueadero", "1 privado (P0101)"],
+      ["Parqueadero", "1 privado"],
       ["Área privada", "53 m²"],
       ["Piso", "7"],
       ["Estrato", "2"],
@@ -217,16 +217,15 @@ var CINQ_OPORTUNIDADES = [
       { archivo: "loma-san-jose-04-alcoba-2.jpg",         alt: "Segunda alcoba con clóset empotrado y salida al pasillo, Loma de San José, Sabaneta" },
       { archivo: "loma-san-jose-05-bano-principal.jpg",   alt: "Baño principal con ducha en vidrio, enchape oscuro de piso a techo y lavamanos de sobreponer, Loma de San José, Sabaneta" },
       { archivo: "loma-san-jose-06-bano-auxiliar.jpg",    alt: "Baño auxiliar con ducha enchapada de piso a techo y mueble bajo el lavamanos, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-07-balcon.jpg",           alt: "Balcón con puerta corrediza, baranda y vista a la piscina y a las torres de la unidad, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-08-vista-montana.jpg",    alt: "Vista desde el balcón hacia las torres de la unidad y la montaña, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-09-vista-piscina.jpg",    alt: "Vista desde el balcón hacia la piscina de la unidad, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-10-zona-ropas.jpg",       alt: "Zona de ropas independiente con lavadero y calentador a gas, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-11-piscina.jpg",          alt: "Piscina de la unidad entre las torres, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-12-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética junto a la ladera, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-13-placa-deportiva.jpg",  alt: "Placa deportiva con arco y tableros de baloncesto, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-14-salon-social.jpg",     alt: "Salón social diáfano con ventanal hacia las zonas verdes, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-15-parqueadero.jpg",      alt: "Parqueadero privado P0101 en el sótano cubierto, Loma de San José, Sabaneta" },
-      { archivo: "loma-san-jose-16-pasillo.jpg",          alt: "Pasillo de circulación que reparte a las alcobas y a la cocina, Loma de San José, Sabaneta" }
+      { archivo: "loma-san-jose-07-vista-montana.jpg",    alt: "Vista desde el balcón hacia las torres de la unidad y la montaña, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-08-vista-piscina.jpg",    alt: "Vista desde el balcón hacia la piscina de la unidad, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-09-zona-ropas.jpg",       alt: "Zona de ropas independiente con lavadero y calentador a gas, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-10-piscina.jpg",          alt: "Piscina de la unidad entre las torres, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-11-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética junto a la ladera, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-12-placa-deportiva.jpg",  alt: "Placa deportiva con arco y tableros de baloncesto, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-13-salon-social.jpg",     alt: "Salón social diáfano con ventanal hacia las zonas verdes, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-14-parqueadero.jpg",      alt: "Parqueadero privado cubierto en el sótano, Loma de San José, Sabaneta" },
+      { archivo: "loma-san-jose-15-pasillo.jpg",          alt: "Pasillo de circulación que reparte a las alcobas y a la cocina, Loma de San José, Sabaneta" }
     ]
   }
 
