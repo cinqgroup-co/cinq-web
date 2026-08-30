@@ -46,9 +46,9 @@ La sección `.market` del home publica cuatro cifras de **La Lonja de Propiedad 
 Antioquia** (estudio de valorización del suelo y balance del sector inmobiliario, 2025). Están
 escritas a mano en `index.html`, no vienen de ninguna API.
 
-**Al actualizarlas hay que cambiar también el año en cada `.detail` y en la línea `.source`.** Una
-cifra de mercado sin el periodo y sin la fuente a la vista deja de ser información y pasa a ser
-una promesa comercial, que es justo lo que el manual de marca prohíbe.
+**Al actualizarlas hay que cambiar también el año en cada `.detail`.** La atribución detallada al
+pie se retiró por decisión de Samuel; la única referencia a la fuente que queda es la línea de
+entrada de la sección, que dice que son cifras del gremio inmobiliario de la región.
 
 ## Portafolio: cómo sumar una oportunidad
 

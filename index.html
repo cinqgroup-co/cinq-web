@@ -103,10 +103,10 @@
   .featured{padding:120px 0 10px;background:var(--paper);}
 
   /* ---------------- contexto de mercado ---------------- */
-  /* Cifras publicadas por La Lonja, con la fuente y el periodo a la vista.
-     Si alguna se actualiza se cambia aquí y también la línea de fuente:
-     un dato sin año deja de ser información y pasa a ser una promesa. */
-  .market{padding:120px 32px;background:var(--paper);border-top:1px solid var(--line-soft);}
+  /* Cifras publicadas por La Lonja de Propiedad Raíz de Medellín y Antioquia
+     (valorización del suelo y balance del sector, 2025). Van escritas a mano:
+     si alguna se actualiza, hay que cambiar el año en su .detail. */
+  .market{padding:120px 32px 130px;background:var(--paper);border-top:1px solid var(--line-soft);}
   .market .inner{max-width:1240px;margin:0 auto;}
   .market .head{text-align:center;margin-bottom:66px;}
   .market .head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.2vw,34px);margin:8px 0 0;color:var(--ink);text-wrap:balance;}
@@ -130,10 +130,6 @@
   }
   .m-cell .label{margin:16px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink);max-width:26ch;}
   .m-cell .detail{margin:10px 0 0;font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);line-height:1.6;}
-  .market .source{
-    margin:64px auto 0;max-width:70ch;text-align:center;
-    font-size:11.5px;line-height:1.75;color:var(--muted);
-  }
 </style>
 </head>
 <body>
@@ -240,7 +236,6 @@
         <p class="detail">Con los cánones al alza: +6,5&nbsp;%</p>
       </div>
     </div>
-    <p class="source">Fuente: La Lonja de Propiedad Raíz de Medellín y Antioquia, estudio de valorización del suelo y balance del sector inmobiliario 2025. Cifras de referencia del mercado, sujetas a sus propias condiciones.</p>
   </div>
 </section>
 
