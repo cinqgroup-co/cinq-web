@@ -31,6 +31,25 @@ sitio/
 
 El objetivo sigue siendo **captar inventario**: todos los caminos del sitio terminan en el formulario de Ofrecer, que es lo que alimenta el catálogo y el portafolio.
 
+## Home: portafolio destacado
+
+El home muestra las **tres primeras oportunidades** del mismo `assets/js/oportunidades.js`, con la
+tarjeta del portafolio completo. No hay una lista aparte de destacadas: para cambiar cuáles
+aparecen, se cambia el orden del array.
+
+Si el catálogo queda vacío, `site.js` **retira la sección entera** del home en lugar de dejar un
+título sin nada debajo. Es la misma regla de nada simulado aplicada al layout.
+
+## Home: bloque de mercado
+
+La sección `.market` del home publica cuatro cifras de **La Lonja de Propiedad Raíz de Medellín y
+Antioquia** (estudio de valorización del suelo y balance del sector inmobiliario, 2025). Están
+escritas a mano en `index.html`, no vienen de ninguna API.
+
+**Al actualizarlas hay que cambiar también el año en cada `.detail` y en la línea `.source`.** Una
+cifra de mercado sin el periodo y sin la fuente a la vista deja de ser información y pasa a ser
+una promesa comercial, que es justo lo que el manual de marca prohíbe.
+
 ## Portafolio: cómo sumar una oportunidad
 
 El portafolio se dibuja solo a partir de **un único archivo de datos**: `assets/js/oportunidades.js`.

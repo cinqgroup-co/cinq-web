@@ -36,7 +36,7 @@
   .philosophy .subline{margin:24px auto 0;max-width:52ch;color:var(--muted);font-size:15px;}
 
   /* ---------------- process (spec strip) ---------------- */
-  .process{padding:120px 32px;background:var(--paper);}
+  .process{padding:120px 32px;background:var(--paper);border-top:1px solid var(--line-soft);}
   .process .inner{max-width:1240px;margin:0 auto;}
   .process .head{text-align:center;margin-bottom:60px;}
   .process-grid{display:grid;grid-template-columns:repeat(3,1fr);}
@@ -75,6 +75,65 @@
     text-decoration:none;padding:13px 30px;font-size:12.5px;letter-spacing:0.05em;transition:background .25s ease;
   }
   .cta-band .btn:hover{background:rgba(244,243,234,0.14);}
+
+  /* ---------------- senal de scroll ---------------- */
+  /* La foto del hero es clara en la zona baja, asi que el texto crema no se
+     leeria solo. El degradado le da piso sin oscurecer la fotografía. */
+  .hero-photo::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:1;
+    background:linear-gradient(to top,rgba(32,36,26,0.52),rgba(32,36,26,0));
+    pointer-events:none;
+  }
+  .scroll-cue{
+    position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:12px;pointer-events:none;
+    font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;
+    color:rgba(244,243,234,0.9);text-shadow:0 1px 14px rgba(32,36,26,0.6);
+  }
+  .scroll-cue i{
+    display:block;width:1px;height:36px;background:rgba(244,243,234,0.7);
+    transform-origin:top;animation:cue 2.6s ease-in-out infinite;
+  }
+  @keyframes cue{ 0%{transform:scaleY(0);opacity:1;} 45%{transform:scaleY(1);opacity:1;} 100%{transform:scaleY(1);opacity:0;} }
+  @media (prefers-reduced-motion: reduce){ .scroll-cue i{animation:none;} }
+
+  /* ---------------- portafolio destacado ---------------- */
+  /* La retícula y la tarjeta viven en styles.css: aquí solo va el aire de la
+     sección. Si el catálogo está vacío, site.js retira la sección entera. */
+  .featured{padding:120px 0 10px;background:var(--paper);}
+
+  /* ---------------- contexto de mercado ---------------- */
+  /* Cifras publicadas por La Lonja, con la fuente y el periodo a la vista.
+     Si alguna se actualiza se cambia aquí y también la línea de fuente:
+     un dato sin año deja de ser información y pasa a ser una promesa. */
+  .market{padding:120px 32px;background:var(--paper);border-top:1px solid var(--line-soft);}
+  .market .inner{max-width:1240px;margin:0 auto;}
+  .market .head{text-align:center;margin-bottom:66px;}
+  .market .head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.2vw,34px);margin:8px 0 0;color:var(--ink);text-wrap:balance;}
+  .market .head p{font-size:14.5px;color:var(--muted);line-height:1.7;max-width:52ch;margin:20px auto 0;}
+  .market-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+  .m-cell{padding:0 30px;}
+  .m-cell + .m-cell{border-left:1px solid var(--line);}
+  @media (max-width:980px){
+    .market-grid{grid-template-columns:repeat(2,1fr);gap:44px 0;}
+    .m-cell:nth-child(odd){padding-left:0;}
+    .m-cell:nth-child(3){border-left:none;}
+  }
+  @media (max-width:560px){
+    .market-grid{grid-template-columns:1fr;gap:40px;}
+    .m-cell{padding:0;border-left:none;}
+    .m-cell + .m-cell{border-left:none;border-top:1px solid var(--line);padding-top:40px;}
+  }
+  .m-cell .figure{
+    font-family:var(--font-display);font-weight:400;font-size:clamp(38px,5vw,54px);
+    line-height:1;color:var(--olive-deep);font-variant-numeric:tabular-nums;
+  }
+  .m-cell .label{margin:16px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink);max-width:26ch;}
+  .m-cell .detail{margin:10px 0 0;font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);line-height:1.6;}
+  .market .source{
+    margin:64px auto 0;max-width:70ch;text-align:center;
+    font-size:11.5px;line-height:1.75;color:var(--muted);
+  }
 </style>
 </head>
 <body>
@@ -98,6 +157,7 @@
 
 <section class="hero-photo frame">
   <div class="tex-wrap kb"><img src="assets/img/cinq-sticker-vehiculo.jpg" alt="Sticker CINQ en la puerta de un vehículo, con la ciudad de Envigado de fondo"></div>
+  <span class="scroll-cue">Desliza<i></i></span>
 </section>
 <div class="photo-caption">
   <span>Fotografía CINQ</span>
@@ -109,6 +169,19 @@
     <p class="eyebrow" style="text-align:center;">Filosofía</p>
     <blockquote>No vemos únicamente activos, vemos oportunidades. Cada propiedad, cada vehículo y cada inversión tienen un contexto diferente.</blockquote>
     <p class="subline">Por eso creemos que toda buena decisión comienza con información.</p>
+  </div>
+</section>
+
+<section class="featured">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Portafolio</p>
+        <h2>Lo que hoy representamos</h2>
+      </div>
+      <a class="view-all" href="portafolio.html">Ver el portafolio completo &rarr;</a>
+    </div>
+    <div class="p-grid" id="home-grid"></div>
   </div>
 </section>
 
@@ -135,6 +208,39 @@
         <p>Presentamos la oportunidad a quienes buscan exactamente eso, sin intermediarios de más, sin ruido.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="market">
+  <div class="inner">
+    <div class="head">
+      <p class="eyebrow">El mercado</p>
+      <h2>Comprender el contexto cambia la decisión</h2>
+      <p>Así se comportó el mercado donde trabajamos durante 2025. No son proyecciones ni estimaciones propias: son las cifras que publica el gremio inmobiliario de la región.</p>
+    </div>
+    <div class="market-grid">
+      <div class="m-cell">
+        <div class="figure">4,6&nbsp;%</div>
+        <p class="label">Valorización real anual del suelo urbanizado</p>
+        <p class="detail">Medellín y Área Metropolitana, 2025</p>
+      </div>
+      <div class="m-cell">
+        <div class="figure">6,0&nbsp;%</div>
+        <p class="label">Valorización real anual del suelo residencial en Medellín</p>
+        <p class="detail">Estrato medio, el más dinámico: 10,1&nbsp;%</p>
+      </div>
+      <div class="m-cell">
+        <div class="figure">+33&nbsp;%</div>
+        <p class="label">Colocaciones de arriendo de vivienda usada, estratos 4 a 6</p>
+        <p class="detail">Valle de Aburrá, 2025</p>
+      </div>
+      <div class="m-cell">
+        <div class="figure">6&nbsp;%</div>
+        <p class="label">Menos oferta de arriendo disponible en el mercado</p>
+        <p class="detail">Con los cánones al alza: +6,5&nbsp;%</p>
+      </div>
+    </div>
+    <p class="source">Fuente: La Lonja de Propiedad Raíz de Medellín y Antioquia, estudio de valorización del suelo y balance del sector inmobiliario 2025. Cifras de referencia del mercado, sujetas a sus propias condiciones.</p>
   </div>
 </section>
 
@@ -179,6 +285,7 @@
   </div>
 </footer>
 
+<script src="assets/js/oportunidades.js"></script>
 <script src="assets/js/site.js"></script>
 </body>
 </html>

@@ -157,6 +157,22 @@ var CINQ = (function(){
     pinta();
   }
 
+  /* Portafolio destacado del home: las tres primeras del catalogo, con la
+     misma tarjeta del portafolio completo. Si el catalogo esta vacio se
+     retira la seccion entera, para no dejar un titulo sin nada debajo:
+     la regla del sitio es no mostrar espacios de relleno. */
+  function initDestacadas(){
+    var grid = document.getElementById('home-grid');
+    if(!grid) return;
+    var seccion = grid.closest('.featured');
+    var ops = catalogo();
+    if(!ops.length){
+      if(seccion) seccion.remove();
+      return;
+    }
+    grid.innerHTML = ops.slice(0, 3).map(tarjeta).join('');
+  }
+
   function filas(pares){
     return pares.map(function(par){
       return '<div class="row"><span>' + esc(par[0]) + '</span><span>' + esc(par[1]) + '</span></div>';
@@ -270,6 +286,7 @@ var CINQ = (function(){
 
   document.addEventListener('DOMContentLoaded', function(){
     initSolidNav();
+    initDestacadas();
     initPortafolio();
     initOportunidad();
   });

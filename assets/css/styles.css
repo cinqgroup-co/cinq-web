@@ -87,3 +87,8 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
 .p-meta .place{font-family:var(--font-display);font-size:16px;color:var(--ink);}
 .p-meta .op{font-size:10.5px;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-top:4px;}
 .p-meta .price{font-size:13px;color:var(--olive-deep);white-space:nowrap;font-variant-numeric:tabular-nums;}
+
+/* Reticula de tarjetas. Vive aqui y no en la pagina porque la usan tanto el
+   portafolio completo como el bloque de destacadas del home. */
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:34px 26px;}
+.p-card .frame{height:300px;}
