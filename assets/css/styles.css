@@ -56,14 +56,17 @@ a{color:inherit;}
    El texto "CINQ" sigue en el html y solo se corre fuera de la caja: los
    lectores de pantalla lo siguen anunciando. */
 .chrome-nav .mark{
-  display:inline-block;width:68px;height:36px;
+  display:inline-block;flex:0 0 auto;width:68px;height:36px;
   background-color:var(--olive-deep);
   -webkit-mask:var(--logo) no-repeat center/contain;
           mask:var(--logo) no-repeat center/contain;
   text-indent:-999em;overflow:hidden;white-space:nowrap;text-decoration:none;
 }
-.chrome-nav nav{display:flex;align-items:center;gap:34px;}
-.chrome-nav nav a{font-size:12.5px;letter-spacing:0.03em;color:var(--muted);text-decoration:none;transition:color .2s ease;}
+.chrome-nav nav{display:flex;align-items:center;gap:34px;flex:0 0 auto;}
+/* El padding vertical no es estetico: sin el, estos enlaces median 16 px de
+   alto y el minimo para tocarlos comodamente son 24. No cambia la altura de
+   la barra porque el logo, con 36, sigue mandando. */
+.chrome-nav nav a{font-size:12.5px;letter-spacing:0.03em;color:var(--muted);text-decoration:none;transition:color .2s ease;display:inline-block;padding:6px 0;}
 .chrome-nav nav a.current{color:var(--olive-deep);}
 .chrome-nav nav a:hover{color:var(--ink);}
 .chrome-nav .cta{
@@ -71,6 +74,25 @@ a{color:inherit;}
   padding:9px 16px;text-decoration:none;transition:background .2s ease,color .2s ease;
 }
 .chrome-nav .cta:hover{background:var(--olive-deep);border-color:var(--olive-deep);color:var(--on-accent);}
+
+/* En pantalla de telefono la barra no cabia: el logo quedaba pegado a
+   "Portafolio" sin un solo pixel de por medio, y flex ademas encogia el logo
+   de 68 a 58 px. El flex:0 0 auto de arriba impide que se comprima, y aqui se
+   aprieta todo lo demas para que sobre aire entre las dos mitades. */
+@media (max-width:720px){
+  .chrome-nav{padding:14px 20px;}
+  .chrome-nav .mark{width:57px;height:30px;}
+  .chrome-nav nav{gap:18px;}
+  .chrome-nav nav a{font-size:12px;}
+  .chrome-nav .cta{font-size:11px;padding:8px 12px;}
+}
+@media (max-width:360px){
+  .chrome-nav{padding:14px 16px;}
+  .chrome-nav .mark{width:50px;height:26px;}
+  .chrome-nav nav{gap:13px;}
+  .chrome-nav nav a{font-size:11.5px;}
+  .chrome-nav .cta{font-size:10.5px;padding:7px 10px;}
+}
 
 /* Donde no existan las mascaras CSS, el logo volveria a ser un rectangulo
    solido con el texto escondido dentro. Ahi se rehace el wordmark encasillado
@@ -106,16 +128,18 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
   text-indent:-999em;overflow:hidden;white-space:nowrap;
 }
 .foot-tag{font-size:12.5px;color:var(--muted);}
-.foot-col h4{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--olive);margin:0 0 16px;font-weight:400;}
-.foot-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px;}
-.foot-col a{font-size:13px;color:var(--ink);text-decoration:none;}
+.foot-col h2{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--olive);margin:0 0 16px;font-weight:400;}
+/* El hueco baja de 11 a 3 y cada enlace gana 4 px arriba y abajo: se ve
+   igual de separado, pero el area tocable pasa de 17 a 25 px. */
+.foot-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;}
+.foot-col a{font-size:13px;color:var(--ink);text-decoration:none;display:inline-block;padding:4px 0;}
 .foot-col a:hover{color:var(--olive-deep);}
 .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:11.5px;color:var(--muted);}
 
 /* ---------------- section head (Home + Portafolio) ---------------- */
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:48px;flex-wrap:wrap;}
 .section-head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(25px,3.2vw,36px);margin:8px 0 0;color:var(--ink);}
-.section-head .view-all{font-size:12.5px;color:var(--olive-deep);text-decoration:none;border-bottom:1px solid var(--olive);padding-bottom:3px;white-space:nowrap;}
+.section-head .view-all{font-size:12.5px;color:var(--olive-deep);text-decoration:none;border-bottom:1px solid var(--olive);padding:6px 0 3px;white-space:nowrap;display:inline-block;}
 
 /* ---------------- portfolio card — reservado para cuando haya oportunidades reales ---------------- */
 .p-card{display:block;text-decoration:none;color:inherit;}

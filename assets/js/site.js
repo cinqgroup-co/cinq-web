@@ -382,8 +382,22 @@ var CINQ = (function(){
     }
 
     document.title = op.titulo + ' | CINQ';
+    var descripcion = op.titulo + ' en ' + op.zonaDetalle + '. Oportunidad evaluada y aceptada por CINQ.';
     var meta = document.querySelector('meta[name="description"]');
-    if(meta) meta.setAttribute('content', op.titulo + ' en ' + op.zonaDetalle + '. Oportunidad evaluada y aceptada por CINQ.');
+    if(meta) meta.setAttribute('content', descripcion);
+
+    /* El html trae la canonical de la plantilla, sin el id. Dejarla asi le
+       dice a Google que todas las fichas son la misma pagina, que es peor
+       que no tener canonical. Aqui se le pone la de esta oportunidad. */
+    var propia = 'https://cinq-web.vercel.app/oportunidad.html?id=' + encodeURIComponent(op.slug);
+    var can = document.querySelector('link[rel="canonical"]');
+    if(can) can.setAttribute('href', propia);
+    var pares = [['og:url', propia], ['og:title', op.titulo],
+                 ['og:description', descripcion]];
+    pares.forEach(function(par){
+      var m = document.querySelector('meta[property="' + par[0] + '"]');
+      if(m) m.setAttribute('content', par[1]);
+    });
 
     if(migaActual) migaActual.textContent = op.titulo;
     var migaTipo = document.getElementById('breadcrumb-tipo');
@@ -393,19 +407,23 @@ var CINQ = (function(){
     var fichaCompleta = [['Tipo', op.subtipo || op.tipo], ['Operación', op.operacion], ['Zona', op.zona]].concat(ficha);
     var parrafos = (op.descripcion || []).map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('');
 
+    /* El panel va primero en el html aunque se vea a la derecha: dentro
+       lleva el h1, y si fuera despues la pagina abriria con dos h2 por
+       delante del titulo. El CSS lo devuelve a su columna. */
     raiz.innerHTML = '' +
-      '<div class="container"><div class="detail-grid"><div>' +
-        galeria(op) +
-        (parrafos ? '<div class="description"><h2>Descripción</h2>' + parrafos + '</div>' : '') +
-        '<div class="ficha"><h2>Ficha técnica</h2><div class="ficha-grid">' + filas(fichaCompleta) + '</div></div>' +
-      '</div>' +
+      '<div class="container"><div class="detail-grid">' +
       '<div class="info-panel">' +
         '<div class="kicker">' + esc(op.tipo) + ' · ' + esc(op.operacion) + '</div>' +
         '<div class="price">' + esc(precio(op.precio)) + '</div>' +
-        '<div class="loc">' + esc(op.zonaDetalle) + '</div>' +
+        '<h1 class="loc">' + esc(op.zonaDetalle) + '</h1>' +
         '<ul class="spec-list">' + specs(ficha) + '</ul>' +
         '<a class="wa-btn" href="' + esc(enlaceWhatsapp(op)) + '" target="_blank" rel="noopener">Conversemos sobre esta oportunidad →</a>' +
         '<p class="info-note">Un miembro de CINQ responde directamente, sin formularios de contacto genéricos ni intermediarios adicionales.</p>' +
+      '</div>' +
+      '<div class="columna-principal">' +
+        galeria(op) +
+        (parrafos ? '<div class="description"><h2>Descripción</h2>' + parrafos + '</div>' : '') +
+        '<div class="ficha"><h2>Ficha técnica</h2><div class="ficha-grid">' + filas(fichaCompleta) + '</div></div>' +
       '</div></div></div>';
 
     var principal = document.getElementById('gallery-main-img');

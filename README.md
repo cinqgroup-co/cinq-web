@@ -88,6 +88,33 @@ HTML por oportunidad.
 (`/assets/...`, `/index.html`) porque la pagina responde tambien en rutas profundas, donde una
 ruta relativa no encontraria ni el CSS.
 
+## Cosas que se arreglaron revisando en telefono
+
+Quedan anotadas porque son las que se rompen sin que nadie las mire:
+
+- **La barra no cabia en telefono.** El logo quedaba pegado a "Portafolio" con **0 px** de por
+  medio, y flex ademas lo encogia de 68 a 58 px, deformando la proporcion. Se arreglo con
+  `flex:0 0 auto` en el logo (que impide que se comprima) y dos cortes responsive, a 720 y a 360.
+- **La ficha de oportunidad no tenia ningun `h1`.** Es la pagina que algun dia deberia posicionar
+  por un inmueble, y no tenia titulo para un buscador. Ahora la ubicacion del panel es el `h1`.
+- **El panel de la ficha va primero en el html** aunque se vea a la derecha: dentro lleva el `h1`,
+  y si fuera despues la pagina abriria con dos `h2` por delante del titulo. El CSS lo devuelve a su
+  columna en escritorio, y en telefono el orden del html es el que se quiere igualmente: primero
+  precio y titulo, despues las fotos.
+- **Todas las fichas compartian la misma `canonical`**, la de la plantilla sin `?id=`. Eso le dice
+  a Google que todas son la misma pagina, que es peor que no tener canonical. Ahora `site.js` la
+  reescribe con el slug, junto con `og:url`, `og:title` y `og:description`.
+- **Los titulos del pie eran `h4` detras de un `h1` o un `h2`**, saltandose niveles. Pasaron a `h2`.
+- **Areas de toque.** Los enlaces del nav y del pie median 16 y 17 px de alto, la miga de pan 15, y
+  la casilla que autoriza el tratamiento de datos 13x13. El minimo comodo son 24. Se corrigieron
+  con padding, sin mover nada de sitio: en el pie el hueco entre filas bajo de 11 a 3 px y cada
+  enlace gano 4 arriba y abajo, asi que la separacion visual quedo igual (28 px) y el area tocable
+  paso de 17 a 25.
+
+Los enlaces de correo y telefono dentro de los parrafos de las paginas legales se dejaron como
+estan: son enlaces en medio de una frase, y la norma los exime justamente porque el alto lo manda
+la linea de texto.
+
 ## El logo va encasillado
 
 El logo de CINQ **no es el wordmark suelto: es el wordmark dentro de un recuadro de borde fino**
