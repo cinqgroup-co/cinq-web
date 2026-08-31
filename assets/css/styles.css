@@ -93,6 +93,35 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
 .p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:34px 26px;}
 .p-card .frame{height:300px;}
 
+/* ---------------- revelado al entrar en pantalla ---------------- */
+/* El atributo data-reveal lo pone site.js, no el html. Asi, si el JS falla o
+   esta desactivado, nada lleva opacity 0 y el contenido se ve completo: la
+   animacion es un anadido, nunca un requisito para leer la pagina.
+   El retraso de cada elemento viaja en el propio atributo, en milisegundos. */
+[data-reveal]{
+  opacity:0;transform:translateY(18px);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),transform .7s cubic-bezier(.22,.61,.36,1);
+}
+[data-reveal].visible{opacity:1;transform:none;}
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none;}
+}
+
+/* ---------------- transicion entre paginas ---------------- */
+/* Navegar dentro del sitio funde una pagina con la siguiente en vez de dar el
+   parpadeo blanco de siempre. La foto de la tarjeta y la foto grande de la
+   ficha comparten view-transition-name (lo pone site.js con el slug), asi que
+   la imagen crece de una a otra sin corte. Donde no este soportado, la
+   navegacion se comporta como siempre. */
+@view-transition{ navigation:auto; }
+::view-transition-old(root),
+::view-transition-new(root){ animation-duration:.45s; }
+@media (prefers-reduced-motion: reduce){
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*){ animation:none !important; }
+}
+
 /* ---------------- boton flotante de WhatsApp ---------------- */
 /* Lo inyecta site.js en todas las paginas. Va en oliva y no en el verde de
    WhatsApp: el glifo ya lo hace reconocible y el verde de marca seria el

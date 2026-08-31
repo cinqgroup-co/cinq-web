@@ -76,7 +76,10 @@ var CINQ = (function(){
 
   function tarjeta(op){
     var badge = op.premium ? '<span class="p-badge">Curaduría premium</span>' : '';
-    var img = imagen(foto(op, 0), op.titulo, true);
+    /* El mismo nombre que usa la foto grande de la ficha: es lo que hace
+       que la imagen crezca de la tarjeta al detalle al navegar. */
+    var img = imagen(foto(op, 0), op.titulo, true,
+      ' style="view-transition-name:foto-' + op.slug + '"');
     return '' +
       '<a class="p-card" href="oportunidad.html?id=' + encodeURIComponent(op.slug) + '">' +
         '<div class="frame"><span class="p-tag">' + esc(op.tipo) + '</span>' + badge + img + '</div>' +
@@ -195,6 +198,87 @@ var CINQ = (function(){
     document.body.appendChild(a);
   }
 
+  /* Que se revela al entrar en pantalla, y cada cuantos ms va uno detras de
+     otro dentro del mismo grupo. Vive aqui y no repartido por el html para
+     no tener que tocar siete archivos cada vez que se ajusta el ritmo.
+     Nada de la primera pantalla entra aqui: el titular y la foto del hero se
+     ven de una, sin esperar a ningun efecto. */
+  var REVELADO = [
+    ['.philosophy .inner', 0],
+    ['.featured .section-head', 0],
+    ['.featured .p-card', 90],
+    ['.process .head', 0],
+    ['.process .p-step', 90],
+    ['.market .head', 0],
+    ['.market .m-cell', 80],
+    ['.territorio .head', 0],
+    ['.territorio .t-zona', 90],
+    ['.spread-quote .inner', 0],
+    ['.cta-band .inner', 0],
+    ['.page-head .inner', 0],
+    ['.p-grid-section .p-card', 70],
+    ['.prose-block', 80]
+  ];
+
+  function initRevelado(){
+    var pendientes = [];
+    REVELADO.forEach(function(par){
+      [].forEach.call(document.querySelectorAll(par[0]), function(el, i){
+        el.setAttribute('data-reveal', i * par[1]);
+        pendientes.push(el);
+      });
+    });
+    if(!pendientes.length) return;
+
+    function mostrarTodo(){
+      pendientes.forEach(function(el){ el.classList.add('visible'); });
+      pendientes = [];
+    }
+
+    /* Si el sistema pide menos movimiento, se muestra todo de una vez en vez
+       de dejarlo invisible esperando un efecto que no va a ocurrir. */
+    if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      mostrarTodo();
+      return;
+    }
+
+    /* Se revisa por posicion y no con IntersectionObserver a proposito. El
+       observador solo avisa de lo que esta cruzando la pantalla, asi que un
+       salto largo (la tecla Fin, un scroll de golpe) deja detras bloques que
+       nunca llegaron a cruzarla y se quedan invisibles para siempre. Este
+       barrido muestra todo lo que ya quedo por encima del borde inferior,
+       se haya visto pasar o no. */
+    function barrer(){
+      var limite = window.innerHeight * 0.92;
+      var quedan = [];
+      pendientes.forEach(function(el){
+        if(el.getBoundingClientRect().top < limite){
+          var espera = parseInt(el.getAttribute('data-reveal'), 10) || 0;
+          setTimeout(function(){ el.classList.add('visible'); }, espera);
+        } else {
+          quedan.push(el);
+        }
+      });
+      pendientes = quedan;
+      if(!pendientes.length){
+        window.removeEventListener('scroll', pedirBarrido);
+        window.removeEventListener('resize', pedirBarrido);
+      }
+    }
+
+    /* Un barrido por fotograma como mucho, aunque lleguen cien eventos. */
+    var pedido = false;
+    function pedirBarrido(){
+      if(pedido) return;
+      pedido = true;
+      window.requestAnimationFrame(function(){ pedido = false; barrer(); });
+    }
+
+    window.addEventListener('scroll', pedirBarrido, { passive: true });
+    window.addEventListener('resize', pedirBarrido);
+    barrer();
+  }
+
   function filas(pares){
     return pares.map(function(par){
       return '<div class="row"><span>' + esc(par[0]) + '</span><span>' + esc(par[1]) + '</span></div>';
@@ -214,8 +298,8 @@ var CINQ = (function(){
     var portada = foto(op, 0);
     var principal = '<div class="frame gallery-main"><picture>' +
       '<source id="gallery-main-src" srcset="' + esc(portada.webp) + '" type="image/webp">' +
-      '<img id="gallery-main-img" src="' + esc(portada.jpg) + '" alt="' +
-      esc(portada.alt || op.titulo) + '"></picture></div>';
+      '<img id="gallery-main-img" style="view-transition-name:foto-' + esc(op.slug) + '" src="' +
+      esc(portada.jpg) + '" alt="' + esc(portada.alt || op.titulo) + '"></picture></div>';
     if(op.fotos.length < 2) return principal;
     /* La miniatura es un boton: su aria-label describe la foto, asi que la
        imagen de adentro va con alt vacio para no repetirla dos veces. */
@@ -312,6 +396,7 @@ var CINQ = (function(){
     initDestacadas();
     initPortafolio();
     initOportunidad();
+    initRevelado();
   });
 
   return { precio: precio, enlaceWhatsapp: enlaceWhatsapp };

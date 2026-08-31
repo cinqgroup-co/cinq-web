@@ -88,6 +88,37 @@ HTML por oportunidad.
 (`/assets/...`, `/index.html`) porque la pagina responde tambien en rutas profundas, donde una
 ruta relativa no encontraria ni el CSS.
 
+## Movimiento: revelado y transicion entre paginas
+
+**Revelado al entrar en pantalla.** Los bloques aparecen con un desvanecido corto y escalonado.
+Que se revela y con cuanto retraso vive en la constante `REVELADO` de `assets/js/site.js`, no
+repartido por el html: se ajusta el ritmo en un solo sitio.
+
+Dos decisiones que conviene no deshacer sin querer:
+
+- El atributo `data-reveal` lo pone el JS, **no el html**. Asi, si el JS falla o esta desactivado,
+  nada lleva `opacity:0` y la pagina se lee completa. La animacion es un anadido, nunca un
+  requisito para ver el contenido.
+- **No usa `IntersectionObserver`, y es a proposito.** El observador solo avisa de lo que cruza la
+  pantalla, asi que un salto largo (la tecla Fin, un scroll de golpe) deja detras bloques que nunca
+  llegaron a cruzarla y se quedan invisibles para siempre. Se probo y pasaba: 4 de 20 bloques
+  quedaban ocultos. En su lugar hay un barrido por posicion, limitado a uno por fotograma, que
+  muestra todo lo que ya quedo por encima del borde inferior, se haya visto pasar o no.
+
+Nada de la primera pantalla se revela: el titular y la foto del hero salen de una.
+
+**Transicion entre paginas.** `@view-transition { navigation:auto; }` en `styles.css` funde una
+pagina con la siguiente en vez del parpadeo blanco. Ademas, la foto de la tarjeta del portafolio y
+la foto grande de la ficha comparten `view-transition-name` (`foto-<slug>`, lo pone `site.js`), asi
+que al hacer clic la imagen crece de una a otra sin corte. Donde no este soportado, la navegacion
+se comporta como siempre.
+
+Ese nombre **tiene que ser unico dentro de cada pagina**. Hoy lo es porque no se repite un mismo
+slug en la misma vista; si algun dia una pagina muestra dos veces la misma oportunidad, la
+transicion se cae y hay que darle un nombre distinto a una de las dos.
+
+Todo respeta `prefers-reduced-motion`.
+
 ## Boton flotante de WhatsApp
 
 `site.js` inyecta un boton fijo abajo a la derecha en **todas** las paginas: ninguna lo escribe en
