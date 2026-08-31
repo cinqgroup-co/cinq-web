@@ -31,6 +31,20 @@ sitio/
 
 El objetivo sigue siendo **captar inventario**: todos los caminos del sitio terminan en el formulario de Ofrecer, que es lo que alimenta el catálogo y el portafolio.
 
+## Boton flotante de WhatsApp
+
+`site.js` inyecta un boton fijo abajo a la derecha en **todas** las paginas: ninguna lo escribe en
+su HTML. El numero vive una sola vez, en la constante `WHATSAPP` de `assets/js/site.js`.
+
+Va en oliva y no en el verde de WhatsApp: el glifo ya lo hace reconocible y el verde de marca
+seria el elemento mas ruidoso del sitio. Su mensaje es generico a proposito, porque el boton
+tambien aparece en Ofrecer y en las paginas legales; el mensaje con los datos del inmueble es el
+de las fichas, que arma `enlaceWhatsapp()`.
+
+Como todo elemento flotante, se monta encima del contenido al hacer scroll. En movil eso se nota
+sobre todo en `ofrecer.html`, donde tapa la esquina de las tarjetas de opcion. Si molesta, la
+solucion es una linea en `initWhatsappFlotante()` para no dibujarlo en esa pagina.
+
 ## Home: portafolio destacado
 
 El home muestra las **tres primeras oportunidades** del mismo `assets/js/oportunidades.js`, con la

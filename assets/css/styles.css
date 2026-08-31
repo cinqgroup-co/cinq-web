@@ -92,3 +92,21 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
    portafolio completo como el bloque de destacadas del home. */
 .p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:34px 26px;}
 .p-card .frame{height:300px;}
+
+/* ---------------- boton flotante de WhatsApp ---------------- */
+/* Lo inyecta site.js en todas las paginas. Va en oliva y no en el verde de
+   WhatsApp: el glifo ya lo hace reconocible y el verde de marca seria el
+   elemento mas ruidoso del sitio. El numero vive en site.js, en un solo sitio. */
+.wa-float{
+  position:fixed;right:24px;bottom:24px;z-index:60;
+  width:54px;height:54px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--olive-deep);color:var(--on-accent);
+  box-shadow:0 6px 22px rgba(32,36,26,0.28);
+  transition:transform .25s ease,background .25s ease;
+}
+.wa-float svg{width:26px;height:26px;fill:currentColor;display:block;}
+.wa-float:hover{background:var(--olive);transform:translateY(-2px);}
+.wa-float:focus-visible{outline:2px solid var(--olive);outline-offset:3px;}
+@media (max-width:720px){ .wa-float{right:18px;bottom:18px;width:50px;height:50px;} }
+@media (prefers-reduced-motion: reduce){ .wa-float{transition:none;} }
