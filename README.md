@@ -31,6 +31,28 @@ sitio/
 
 El objetivo sigue siendo **captar inventario**: todos los caminos del sitio terminan en el formulario de Ofrecer, que es lo que alimenta el catálogo y el portafolio.
 
+## Identidad en el navegador y al compartir
+
+- `favicon.ico` (16/32/48) y `apple-touch-icon.png` (180): la Q del wordmark en crema sobre oliva.
+- `assets/img/og-cinq.jpg` (1200x630): la imagen que sale cuando alguien pega el enlace en
+  WhatsApp, Instagram o Facebook. Reproduce el logo, wordmark dentro del rectangulo de borde fino.
+- Cada pagina lleva su `canonical`, sus etiquetas `og:` y `twitter:card`.
+
+**Las URL absolutas apuntan a `https://cinq-web.vercel.app`.** Si algun dia entra un dominio
+propio, hay que cambiarlas en los siete html: una `og:url` o una `canonical` apuntando al dominio
+viejo es peor que no tenerlas.
+
+`oportunidad.html` comparte la imagen y el texto genericos del portafolio. Su titulo y su
+descripcion los pone JavaScript despues de cargar, y los robots que arman la vista previa no
+ejecutan JavaScript, asi que no hay forma de darle una vista previa por inmueble sin generar un
+HTML por oportunidad.
+
+## Pagina 404
+
+`404.html` la sirve Vercel sola en cualquier ruta que no exista. **Sus rutas son absolutas**
+(`/assets/...`, `/index.html`) porque la pagina responde tambien en rutas profundas, donde una
+ruta relativa no encontraria ni el CSS.
+
 ## Boton flotante de WhatsApp
 
 `site.js` inyecta un boton fijo abajo a la derecha en **todas** las paginas: ninguna lo escribe en
