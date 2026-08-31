@@ -88,6 +88,23 @@ HTML por oportunidad.
 (`/assets/...`, `/index.html`) porque la pagina responde tambien en rutas profundas, donde una
 ruta relativa no encontraria ni el CSS.
 
+## El logo va encasillado
+
+El logo de CINQ **no es el wordmark suelto: es el wordmark dentro de un recuadro de borde fino**
+(ver `Marca/Logo/CINQ_logo_HD.png`). El sitio lo estaba usando suelto en la barra y en el pie.
+
+Ahora `.chrome-nav .mark` y `.foot-mark` llevan su recuadro, y como viven en `styles.css` cambian
+en las ocho paginas de una vez. Las proporciones salen del original: caja de algo mas de 2:1, con
+mas aire arriba y abajo que a los lados.
+
+**El padding izquierdo es dos pixeles mayor que el derecho, y no es un descuido.** El
+`letter-spacing` anade su hueco tambien despues de la Q, asi que con padding simetrico las letras
+quedan corridas a la izquierda dentro de la caja; esos dos pixeles las devuelven al centro optico.
+
+Sigue siendo el wordmark compuesto en Georgia, no el archivo del logo. La Q del original lleva un
+remate con cola que Georgia no tiene, asi que es una aproximacion muy cercana pero no identica. La
+version fiel pediria convertir `Marca/Logo/cinq-logo.pdf` a SVG e incrustarlo.
+
 ## Textura y el recuadro de la marca
 
 **Grano de papel.** Las franjas crema (`.philosophy` y el cierre del home, y las relacionadas de
