@@ -125,6 +125,34 @@
   .market .head{text-align:center;margin-bottom:66px;}
   .market .head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.2vw,34px);margin:8px 0 0;color:var(--ink);text-wrap:balance;}
   .market .head p{font-size:14.5px;color:var(--muted);line-height:1.7;max-width:52ch;margin:20px auto 0;}
+
+  /* ---------------- el territorio ---------------- */
+  /* Envigado y El Poblado llevan cifra de La Lonja. Sabaneta no: el gremio no
+     la desagrega y la cifra que circula en blogs no se confirma en la fuente,
+     asi que su tercera linea es el inmueble que si tenemos alli. */
+  .territorio{padding:120px 32px;background:var(--paper);border-top:1px solid var(--line-soft);}
+  .territorio .inner{max-width:1240px;margin:0 auto;}
+  .territorio .head{text-align:center;margin-bottom:66px;}
+  .territorio .head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.2vw,34px);margin:8px 0 0;color:var(--ink);text-wrap:balance;}
+  .territorio .head p{font-size:14.5px;color:var(--muted);line-height:1.7;max-width:52ch;margin:20px auto 0;}
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+  .t-zona{padding:0 40px;display:flex;flex-direction:column;}
+  .t-zona + .t-zona{border-left:1px solid var(--line);}
+  @media (max-width:900px){
+    .t-grid{grid-template-columns:1fr;gap:48px;}
+    .t-zona{padding:0;}
+    .t-zona + .t-zona{border-left:none;border-top:1px solid var(--line);padding-top:48px;}
+  }
+  .t-zona .idx{font-family:var(--font-mono);font-size:12px;color:var(--olive);letter-spacing:0.06em;}
+  .t-zona h3{font-family:var(--font-display);font-weight:400;font-size:23px;margin:14px 0 6px;color:var(--ink);}
+  .t-zona .rol{font-family:var(--font-display);font-style:italic;font-size:15px;color:var(--muted);margin:0 0 16px;}
+  .t-zona p.cuerpo{font-size:14px;color:var(--muted);line-height:1.75;margin:0 0 26px;}
+  .t-zona .dato{
+    margin-top:auto;padding-top:16px;border-top:1px solid var(--line-soft);
+    font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;
+    color:var(--olive-deep);line-height:1.7;
+  }
+  .territorio .nota{margin:60px auto 0;text-align:center;font-size:11.5px;color:var(--muted);}
   .market-grid{display:grid;grid-template-columns:repeat(4,1fr);}
   .m-cell{padding:0 30px;}
   .m-cell + .m-cell{border-left:1px solid var(--line);}
@@ -250,6 +278,40 @@
         <p class="detail">Con los cánones al alza: +6,5&nbsp;%</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="territorio">
+  <div class="inner">
+    <div class="head">
+      <p class="eyebrow">El territorio</p>
+      <h2>Dónde trabajamos, y contra qué se compara</h2>
+      <p>El mismo precio no dice lo mismo en cada ladera. Estos son los tres corredores del sur del Valle de Aburrá que hay que entender para leer una oportunidad aquí.</p>
+    </div>
+    <div class="t-grid">
+      <div class="t-zona">
+        <div class="idx">01</div>
+        <h3>Envigado</h3>
+        <p class="rol">Donde está el portafolio</p>
+        <p class="cuerpo">Las Antillas y su entorno concentran hoy la mayor parte de lo que representamos. Edificio reciente, zonas comunes completas y una demanda que no depende de la moda del momento.</p>
+        <p class="dato">7,5 % de valorización del suelo en 2025<br>Segundo municipio de Antioquia</p>
+      </div>
+      <div class="t-zona">
+        <div class="idx">02</div>
+        <h3>Sabaneta</h3>
+        <p class="rol">Donde está creciendo</p>
+        <p class="cuerpo">Uno de los municipios que más rápido se ha construido en altura. Recibe a quien busca estrenar sin pagar lo que ya cuesta Envigado, y esa presión se siente en el suelo antes que en los avisos.</p>
+        <p class="dato">En el portafolio<br>Loma de San José</p>
+      </div>
+      <div class="t-zona">
+        <div class="idx">03</div>
+        <h3>El Poblado</h3>
+        <p class="rol">La referencia</p>
+        <p class="cuerpo">Todavía no representamos nada aquí, y aun así es la vara con la que se mide el sur del valle: el punto de comparación obligado cuando alguien evalúa un precio en Envigado o en Sabaneta.</p>
+        <p class="dato">1.915 viviendas nuevas vendidas en 2025<br>Más que cualquier otro sector de Medellín</p>
+      </div>
+    </div>
+    <p class="nota">Cifras de La Lonja de Propiedad Raíz de Medellín y Antioquia, 2025.</p>
   </div>
 </section>
 

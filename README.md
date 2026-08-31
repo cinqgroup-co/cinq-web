@@ -91,6 +91,23 @@ aparecen, se cambia el orden del array.
 Si el catálogo queda vacío, `site.js` **retira la sección entera** del home en lugar de dejar un
 título sin nada debajo. Es la misma regla de nada simulado aplicada al layout.
 
+## Home: bloque de territorio
+
+Tres zonas, escritas a mano en `index.html`. Cada una cierra con una linea `.dato`, y esa linea
+**no es del mismo tipo en las tres**:
+
+- **Envigado** y **El Poblado** llevan cifra de La Lonja (2025), atribuida en la nota al pie.
+- **Sabaneta** no: el gremio no desagrega ese municipio en su informe, y la cifra que circula en
+  blogs inmobiliarios no se confirma en la fuente primaria. Su linea es el inmueble que si
+  tenemos alli, que es un hecho del catalogo y no una afirmacion de mercado.
+
+Si algun dia aparece una cifra de Sabaneta publicada por el gremio, ese es el lugar donde entra.
+Mientras tanto **no se inventa**: es la misma regla de nada simulado aplicada a los datos.
+
+El Poblado esta ahi como referencia declarada, no como zona donde CINQ opere, y el texto lo dice
+en voz alta ("todavia no representamos nada aqui"). Si algun dia entra inventario en El Poblado,
+hay que reescribir ese parrafo.
+
 ## Home: bloque de mercado
 
 La sección `.market` del home publica cuatro cifras de **La Lonja de Propiedad Raíz de Medellín y
