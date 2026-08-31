@@ -88,6 +88,29 @@ HTML por oportunidad.
 (`/assets/...`, `/index.html`) porque la pagina responde tambien en rutas profundas, donde una
 ruta relativa no encontraria ni el CSS.
 
+## Textura y el recuadro de la marca
+
+**Grano de papel.** Las franjas crema (`.philosophy` y el cierre del home, y las relacionadas de
+la ficha) llevan la clase `.textura`, que aplica `--grano`: un ruido generado dentro de un SVG e
+incrustado como data URI, sin ningun archivo que pedir al servidor.
+
+**El numero a mover es la `opacity` del `rect` dentro de ese SVG, en `styles.css`.** Hoy esta en
+`0.25`. Por debajo de `0.15` deja de notarse; por encima de `0.35` el crema empieza a verse sucio
+en vez de texturado.
+
+Ojo con una trampa: la seccion que lleve `.textura` **tiene que declarar su fondo con
+`background-color` y no con el atajo `background`**, porque el atajo borra la imagen del grano.
+Por eso `.philosophy`, `.spread-quote` y `.related` se cambiaron a `background-color`.
+
+**El recuadro del logo sobre las tarjetas.** Al pasar el cursor por una tarjeta del portafolio,
+aparece un rectangulo de borde fino encuadrando la foto y su etiqueta: el mismo recuadro que
+encierra el wordmark en el logo. Ademas de repetir la marca, avisa de que la tarjeta se abre, que
+antes solo lo insinuaba el zoom.
+
+Va acompanado de un velo oscuro muy leve. **No es decoracion: sin el, el borde crema es invisible
+sobre la foto de una sala blanca**, y casi todo el portafolio son interiores claros. Se probo sin
+velo y el motivo no se leia justo donde mas se usa.
+
 ## Movimiento: revelado y transicion entre paginas
 
 **Revelado al entrar en pantalla.** Los bloques aparecen con un desvanecido corto y escalonado.

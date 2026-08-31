@@ -220,8 +220,55 @@ var CINQ = (function(){
     ['.prose-block', 80]
   ];
 
+  /* Las cifras del bloque de mercado suben desde cero cuando su celda entra
+     en pantalla. El valor final ya esta escrito en el html, asi que si el JS
+     no corre se lee igual: esto solo lo anima.
+
+     Se conserva lo que rodea al numero (el signo + y el % con su espacio
+     duro) y los decimales que traiga, para no reformatear a mano algo que ya
+     estaba bien escrito. Al terminar se restituye el texto original tal cual,
+     para que no quede una version redondeada por el camino. */
+  function contar(el){
+    if(el.getAttribute('data-contado')) return;
+    el.setAttribute('data-contado', '1');
+
+    var original = el.textContent;
+    var partes = /^(\D*)(\d+(?:,\d+)?)([\s\S]*)$/.exec(original);
+    if(!partes) return;
+
+    var antes = partes[1], crudo = partes[2], despues = partes[3];
+    var decimales = (crudo.split(',')[1] || '').length;
+    var destino = parseFloat(crudo.replace(',', '.'));
+    if(!isFinite(destino)) return;
+
+    var DURACION = 1100;
+    var inicio = null;
+
+    function paso(ahora){
+      if(inicio === null) inicio = ahora;
+      var t = Math.min((ahora - inicio) / DURACION, 1);
+      var suave = 1 - Math.pow(1 - t, 3);
+      if(t < 1){
+        el.textContent = antes + (destino * suave).toFixed(decimales).replace('.', ',') + despues;
+        window.requestAnimationFrame(paso);
+      } else {
+        el.textContent = original;
+      }
+    }
+    window.requestAnimationFrame(paso);
+  }
+
   function initRevelado(){
     var pendientes = [];
+
+    /* Aparecer y empezar a contar son el mismo instante: asi la cifra sube
+       justo cuando el ojo llega a ella, no antes de tiempo ni despues. */
+    function revelar(el){
+      el.classList.add('visible');
+      var cifra = el.querySelector && el.querySelector('.figure');
+      if(cifra) contar(cifra);
+    }
+
     REVELADO.forEach(function(par){
       [].forEach.call(document.querySelectorAll(par[0]), function(el, i){
         el.setAttribute('data-reveal', i * par[1]);
@@ -231,7 +278,7 @@ var CINQ = (function(){
     if(!pendientes.length) return;
 
     function mostrarTodo(){
-      pendientes.forEach(function(el){ el.classList.add('visible'); });
+      pendientes.forEach(revelar);
       pendientes = [];
     }
 
@@ -254,7 +301,7 @@ var CINQ = (function(){
       pendientes.forEach(function(el){
         if(el.getBoundingClientRect().top < limite){
           var espera = parseInt(el.getAttribute('data-reveal'), 10) || 0;
-          setTimeout(function(){ el.classList.add('visible'); }, espera);
+          setTimeout(function(){ revelar(el); }, espera);
         } else {
           quedan.push(el);
         }
