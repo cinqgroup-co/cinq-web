@@ -101,9 +101,19 @@ mas aire arriba y abajo que a los lados.
 `letter-spacing` anade su hueco tambien despues de la Q, asi que con padding simetrico las letras
 quedan corridas a la izquierda dentro de la caja; esos dos pixeles las devuelven al centro optico.
 
-Sigue siendo el wordmark compuesto en Georgia, no el archivo del logo. La Q del original lleva un
-remate con cola que Georgia no tiene, asi que es una aproximacion muy cercana pero no identica. La
-version fiel pediria convertir `Marca/Logo/cinq-logo.pdf` a SVG e incrustarlo.
+**Ya no es el wordmark compuesto en Georgia: es el trazado real del logo.** `cinq-logo.pdf` era
+vector puro (curvas y un rectangulo trazado, sin ninguna imagen dentro), asi que se convirtio a
+`assets/img/cinq-logo.svg`: 6,5 KB, nitido a cualquier tamano y con la cola de la Q, que Georgia no
+tiene. El PDF traia seis variantes; la que se uso es la **pagina 4**, la encasillada en oliva.
+
+Se pinta como **mascara CSS**, no como `<img>`. Asi el color sale de `--olive-deep` y basta cambiar
+ese token para recolorearlo, en vez de tener que reexportar el archivo.
+
+El texto `CINQ` sigue escrito en el html y solo se corre fuera de la caja con `text-indent`: los
+lectores de pantalla lo siguen anunciando, cosa que no pasaria con una imagen de fondo a secas.
+
+Hay una red de seguridad en `@supports`: donde no existan las mascaras CSS, el logo volveria a ser
+un rectangulo solido, asi que ahi se rehace el wordmark encasillado en Georgia que habia antes.
 
 ## Textura y el recuadro de la marca
 

@@ -10,6 +10,9 @@
   --line:rgba(32,36,26,0.13); --line-soft:rgba(32,36,26,0.08);
   --on-accent:#f4f3ea; --on-accent-muted:rgba(244,243,234,0.72);
   --shadow-nav:0 1px 0 rgba(32,36,26,0.06);
+  /* El logo de verdad, convertido a vector desde Marca/Logo/cinq-logo.pdf.
+     La ruta es relativa a este archivo, no a la pagina. */
+  --logo:url("../img/cinq-logo.svg");
   /* Grano de papel: ruido generado en el propio SVG, incrustado como data URI.
      No pide ningun archivo al servidor y se repite en mosaico. Va muy bajo de
      opacidad a proposito: se tiene que sentir, no ver. */
@@ -46,11 +49,18 @@ a{color:inherit;}
    anade su hueco tambien despues de la Q, asi que con padding simetrico las
    letras quedan visualmente corridas a la izquierda dentro de la caja; los dos
    pixeles de diferencia las devuelven al centro optico. */
+/* El logo ya no se compone con tipografia: es el trazado real del original,
+   pintado como mascara. Asi hereda el color de la marca desde el CSS, se ve
+   nitido a cualquier tamano y trae la cola de la Q, que Georgia no tiene.
+
+   El texto "CINQ" sigue en el html y solo se corre fuera de la caja: los
+   lectores de pantalla lo siguen anunciando. */
 .chrome-nav .mark{
-  font-family:var(--font-display);font-size:16px;letter-spacing:0.13em;
-  color:var(--olive-deep);text-decoration:none;
-  display:inline-block;line-height:1.25;
-  border:1px solid var(--olive-deep);padding:8px 13px 8px 15px;
+  display:inline-block;width:68px;height:36px;
+  background-color:var(--olive-deep);
+  -webkit-mask:var(--logo) no-repeat center/contain;
+          mask:var(--logo) no-repeat center/contain;
+  text-indent:-999em;overflow:hidden;white-space:nowrap;text-decoration:none;
 }
 .chrome-nav nav{display:flex;align-items:center;gap:34px;}
 .chrome-nav nav a{font-size:12.5px;letter-spacing:0.03em;color:var(--muted);text-decoration:none;transition:color .2s ease;}
@@ -61,6 +71,19 @@ a{color:inherit;}
   padding:9px 16px;text-decoration:none;transition:background .2s ease,color .2s ease;
 }
 .chrome-nav .cta:hover{background:var(--olive-deep);border-color:var(--olive-deep);color:var(--on-accent);}
+
+/* Donde no existan las mascaras CSS, el logo volveria a ser un rectangulo
+   solido con el texto escondido dentro. Ahi se rehace el wordmark encasillado
+   que habia antes, que es una aproximacion pero se lee. */
+@supports not ((mask-image:url("")) or (-webkit-mask-image:url(""))){
+  .chrome-nav .mark,.foot-mark{
+    width:auto;height:auto;background:none;text-indent:0;
+    font-family:var(--font-display);letter-spacing:0.13em;line-height:1.25;
+    color:var(--olive-deep);border:1px solid var(--olive-deep);
+  }
+  .chrome-nav .mark{font-size:16px;padding:8px 13px 8px 15px;}
+  .foot-mark{font-size:17px;padding:8px 14px 8px 16px;}
+}
 
 /* ---------------- media (solo fotografía real de CINQ) ---------------- */
 .frame{position:relative;overflow:hidden;background:var(--paper-alt);}
@@ -76,10 +99,11 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
 .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid var(--line-soft);}
 @media (max-width:760px){ .foot-grid{grid-template-columns:1fr 1fr;row-gap:34px;} }
 .foot-mark{
-  font-family:var(--font-display);font-size:17px;letter-spacing:0.13em;
-  color:var(--olive-deep);margin-bottom:16px;
-  display:inline-block;line-height:1.25;
-  border:1px solid var(--olive-deep);padding:8px 14px 8px 16px;
+  display:inline-block;width:76px;height:40px;margin-bottom:16px;
+  background-color:var(--olive-deep);
+  -webkit-mask:var(--logo) no-repeat center/contain;
+          mask:var(--logo) no-repeat center/contain;
+  text-indent:-999em;overflow:hidden;white-space:nowrap;
 }
 .foot-tag{font-size:12.5px;color:var(--muted);}
 .foot-col h4{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--olive);margin:0 0 16px;font-weight:400;}
