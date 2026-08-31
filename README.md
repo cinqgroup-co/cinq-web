@@ -6,6 +6,26 @@ Sitio estático (HTML + CSS + JS, sin build ni Node.js). No necesita ningún pro
 
 **URL pública:** https://cinq-web.vercel.app
 
+## El dominio bueno es cinq-web.vercel.app
+
+En Vercel hay **dos proyectos conectados al mismo repositorio**, `cinq-web` y `cinqgroup`, y los
+dos publican este sitio identico en `cinq-web.vercel.app` y `cinqgroup.vercel.app`.
+
+**El canonico es `cinq-web.vercel.app`**, por decision de Samuel (31 de agosto de 2026). Todas las
+`canonical`, las `og:url`, el `sitemap.xml` y el `robots.txt` apuntan alli, asi que para Google el
+otro es una copia y no compite. La analitica tambien esta activada solo en ese proyecto: las
+visitas que lleguen a `cinqgroup.vercel.app` no se miden.
+
+Se deja asi por ahora. **Si algun dia el bueno pasa a ser `cinqgroup` o un dominio propio**, hay
+que cambiar el dominio en tres sitios antes de tocar nada mas:
+
+1. La `canonical` y la `og:url` de los siete html.
+2. Las seis `<loc>` del `sitemap.xml`.
+3. La linea `Sitemap:` del `robots.txt`.
+
+Una `canonical` apuntando al dominio viejo es peor que no tener ninguna: le dice a Google que el
+sitio bueno es el otro.
+
 ## Regla del sitio: nada simulado
 
 El sitio publica **únicamente contenido real**. No hay fotos de relleno, precios de ejemplo ni oportunidades inventadas. Una sección solo entra al sitio cuando existe el contenido que la sustenta. Si algo no está listo, no se publica a medias: se deja fuera hasta que lo esté.
