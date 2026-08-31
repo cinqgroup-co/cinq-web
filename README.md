@@ -68,9 +68,17 @@ en Vercel**. Mientras no se active, la peticion falla sin romper nada.
 
 ## Identidad en el navegador y al compartir
 
-- `favicon.ico` (16/32/48) y `apple-touch-icon.png` (180): la Q del wordmark en crema sobre oliva.
-- `assets/img/og-cinq.jpg` (1200x630): la imagen que sale cuando alguien pega el enlace en
-  WhatsApp, Instagram o Facebook. Reproduce el logo, wordmark dentro del rectangulo de borde fino.
+- `favicon.svg`: la Q del wordmark en crema sobre oliva. Es el trazado real del logo, con su cola,
+  recortado de `assets/img/cinq-logo.svg`, asi que se ve nitido a cualquier tamano y en cualquier
+  pantalla. `favicon.ico` (16/32/48) queda de respaldo para los navegadores que no leen iconos
+  vectoriales, y `apple-touch-icon.png` (180) es el de la pantalla de inicio del iPhone. Los tres
+  salen del mismo trazado, asi que no se pueden desincronizar por accidente.
+- `assets/img/og-cinq-2.jpg` (1200x630): la imagen que sale cuando alguien pega el enlace en
+  WhatsApp, Instagram o Facebook. Es el logo solo, sin la frase ni los municipios: WhatsApp encoge
+  la vista previa a un cuadrado de unos 90 px y ahi cualquier linea de texto pequena se vuelve un
+  borron. Lo que decia la frase ya va en el titulo y la descripcion de la vista previa, al lado.
+  El archivo lleva el 2 en el nombre porque los robots cachean la imagen por URL: si se redibuja
+  hay que estrenar nombre, o siguen sirviendo la anterior durante semanas.
 - Cada pagina lleva su `canonical`, sus etiquetas `og:` y `twitter:card`.
 
 **Las URL absolutas apuntan a `https://cinq-web.vercel.app`.** Si algun dia entra un dominio
