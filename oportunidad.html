@@ -38,6 +38,12 @@
     /* En una sola columna manda el orden del html: primero el titulo y el
        precio, y despues las fotos. */
     .detail-grid .columna-principal,.detail-grid .info-panel{grid-column:1;grid-row:auto;}
+    /* Y el panel deja de ir pegado. Con una sola columna su area de rejilla
+       es todo el alto del contenido, asi que sticky lo dejaba viajando con la
+       pantalla: al bajar se montaba encima de las miniaturas y de la
+       descripcion. Va con mas especificidad que la regla de abajo para no
+       depender del orden. */
+    .detail-grid .info-panel{position:static;}
   }
 
   .gallery-main{height:460px;margin-bottom:10px;}
