@@ -116,7 +116,8 @@ título sin nada debajo. Es la misma regla de nada simulado aplicada al layout.
 Tres zonas, escritas a mano en `index.html`. Cada una cierra con una linea `.dato`, y esa linea
 **no es del mismo tipo en las tres**:
 
-- **Envigado** y **El Poblado** llevan cifra de La Lonja (2025), atribuida en la nota al pie.
+- **Envigado** y **El Poblado** llevan cifra de La Lonja (2025). La atribucion al pie se
+  retiro por decision de Samuel; el ano queda visible en cada linea.
 - **Sabaneta** no: el gremio no desagrega ese municipio en su informe, y la cifra que circula en
   blogs inmobiliarios no se confirma en la fuente primaria. Su linea es el inmueble que si
   tenemos alli, que es un hecho del catalogo y no una afirmacion de mercado.
