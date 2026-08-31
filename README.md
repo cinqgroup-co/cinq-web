@@ -31,6 +31,21 @@ sitio/
 
 El objetivo sigue siendo **captar inventario**: todos los caminos del sitio terminan en el formulario de Ofrecer, que es lo que alimenta el catálogo y el portafolio.
 
+## Buscadores y analitica
+
+`robots.txt` y `sitemap.xml` estan en la raiz. El sitemap lista las seis paginas reales;
+**`oportunidad.html` no esta a proposito**: es una plantilla que sin `?id=<slug>` no muestra nada,
+y las fichas se dibujan con JavaScript. Para que las oportunidades se indexen habria que generar
+un HTML por oportunidad desde `oportunidades.js`, que es un cambio de otra escala.
+
+El `lastmod` del sitemap se escribio a mano. Vale actualizarlo cuando cambie el contenido de una
+pagina, no cada vez que se suma una oportunidad.
+
+La analitica es **Vercel Web Analytics**: sin cookies y sin datos personales, asi que no obliga a
+poner banner de consentimiento ni contradice la politica de privacidad. El script ya esta en las
+ocho paginas, pero **solo empieza a medir cuando Web Analytics se activa en el panel del proyecto
+en Vercel**. Mientras no se active, la peticion falla sin romper nada.
+
 ## Identidad en el navegador y al compartir
 
 - `favicon.ico` (16/32/48) y `apple-touch-icon.png` (180): la Q del wordmark en crema sobre oliva.
