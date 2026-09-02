@@ -228,6 +228,69 @@ var CINQ_OPORTUNIDADES = [
       { archivo: "loma-san-jose-15-salon-social.jpg",     alt: "Salón social diáfano con ventanal hacia las zonas verdes, Loma de San José, Sabaneta" },
       { archivo: "loma-san-jose-16-parqueadero.jpg",      alt: "Parqueadero privado cubierto en el sótano, Loma de San José, Sabaneta" }
     ]
+  },
+
+  {
+    slug: "ecoh-710-loma-san-jose",
+    tipo: "Propiedad",
+    subtipo: "Apartamento",
+    operacion: "Venta",
+    titulo: "Sabaneta, Ecoh Loma de San José",
+    zona: "Sabaneta",
+    zonaDetalle: "Loma de San José, Sabaneta, Antioquia",
+    precio: 540000000,
+    premium: false,
+    /* Apto 710 del proyecto Ecoh. Datos del anuncio de Finca Raíz, código
+       193978538, y de las 57 fotos del propietario del 2 de septiembre de 2026.
+       El parqueadero y el cuarto útil están marcados 99050, no 99060.
+       Siguen por fuera, sin confirmar: dirección exacta, si acepta permuta y si
+       ya está listo para escriturar. No se agregan filas sin dato. */
+    ficha: [
+      ["Área construida", "66,93 m²"],
+      ["Área privada", "59,98 m²"],
+      ["Alcobas", "3"],
+      ["Baños", "2"],
+      ["Parqueadero", "1"],
+      ["Cuarto útil", "Sí"],
+      ["Piso", "7"],
+      ["Estrato", "4"],
+      ["Administración", "$ 491.000 / mes"],
+      ["Antigüedad", "Menos de 1 año"],
+      ["Zonas comunes", "Piscina en terraza, salón social con coworking y salón de eventos"]
+    ],
+    descripcion: [
+      "La Loma de San José concentra hoy buena parte de la obra nueva de Sabaneta, y este proyecto está en la parte alta del sector: la montaña al frente, y el centro del municipio y la Avenida El Poblado a pocos minutos. Las zonas comunes ya están entregadas: piscina en terraza con vista a la montaña, salón social con coworking y salón de eventos de doble altura sobre el guadual.",
+      "Son 66,93 m² construidos y 59,98 m² privados en el piso 7. La cocina, con isla en cuarzo, abre a la sala comedor, que termina en un balcón amplio con vista a la montaña. Tres alcobas, la principal con vestier y baño propio, dos baños con espejo circular retroiluminado, zona de ropas independiente, cuarto útil y un parqueadero, estos dos últimos en obra gris. Es un apartamento nuevo, con acabados listos y desocupado en las fotos. Lo aceptamos porque lo que muestran las fotos coincide con lo declarado y porque un piso alto con tres alcobas y estos acabados no es lo corriente a este precio en el sector."
+    ],
+    fotos: [
+      { archivo: "ecoh-710-01-sala-comedor.jpg",             alt: "Sala comedor con ventanal en esquina y piso laminado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-02-sala-comedor-ventanal.jpg",    alt: "Sala comedor hacia el ventanal, con la montaña al fondo, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-03-cocina-isla.jpg",              alt: "Cocina abierta con isla en cuarzo integrada a la sala comedor, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-04-cocina-frontal.jpg",           alt: "Cocina integral con estufa a gas, horno, microondas y luz bajo los muebles aéreos, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-05-cocina-meson.jpg",             alt: "Mesón de la cocina en cuarzo con lavaplatos, estufa a gas y horno empotrado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-06-balcon.jpg",                   alt: "Balcón con baranda en vidrio y vista a la montaña, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-07-vista-piscina.jpg",            alt: "Vista desde el balcón hacia la piscina en terraza y la montaña, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-08-vista-canchas.jpg",            alt: "Vista desde el balcón hacia la cancha sintética y los juegos infantiles del proyecto, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-09-vista-entorno.jpg",            alt: "Vista desde el balcón hacia las torres vecinas y la arborización de la loma, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-10-alcoba-principal.jpg",         alt: "Alcoba principal con acceso al vestier y al baño propio, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-11-alcoba-principal-ventana.jpg", alt: "Alcoba principal vista desde la puerta, con la ventana al fondo, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-12-vestier.jpg",                  alt: "Vestier con entrepaños en madera, cajones y barras para colgar, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-13-bano-principal.jpg",           alt: "Baño principal con espejo circular retroiluminado, mesón en cuarzo y lamas en madera, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-14-bano-principal-ducha.jpg",     alt: "Ducha del baño principal enchapada de piso a techo, con nicho, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-15-alcoba-2.jpg",                 alt: "Segunda alcoba con ventana corrediza y piso laminado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-16-alcoba-3.jpg",                 alt: "Tercera alcoba vista desde la puerta, con ventana corrediza, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-17-alcoba-3-ventana.jpg",         alt: "Ventana de la tercera alcoba con vista a las torres vecinas, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-18-bano-social.jpg",              alt: "Baño social con espejo circular retroiluminado y lamas en madera, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-19-zona-ropas.jpg",               alt: "Zona de ropas independiente con lavadero, calentador a gas y tablero eléctrico, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-20-cuarto-util.jpg",              alt: "Cuarto útil en obra gris, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-21-parqueadero.jpg",              alt: "Parqueadero cubierto en obra gris, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-01-piscina.jpg",             alt: "Piscina en terraza con vista a la montaña en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-02-piscina-terraza.jpg",     alt: "Terraza de la piscina con asoleadoras y vista a la montaña en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-03-coworking.jpg",           alt: "Salón social con mesas de coworking y sillas colgantes en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-04-salon-eventos.jpg",       alt: "Salón de eventos con ventanales de doble altura sobre el guadual en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-05-salon-eventos-barra.jpg", alt: "Barra y cocina del salón de eventos en Ecoh, Loma San José, Sabaneta" }
+    ]
   }
 
 ];
