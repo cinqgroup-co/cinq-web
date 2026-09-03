@@ -242,14 +242,20 @@ var CINQ_OPORTUNIDADES = [
     premium: false,
     /* Apto 710 del proyecto Ecoh. Datos del anuncio de Finca Raíz, código
        193978538, y de las 57 fotos del propietario del 2 de septiembre de 2026.
+       La dirección sale de la ficha del proyecto en Google Maps, que lo lista
+       como "Ecoh | Apartamentos | Loma San José | Sabaneta".
        El parqueadero y el cuarto útil están marcados 99050, no 99060.
-       Siguen por fuera, sin confirmar: dirección exacta, si acepta permuta y si
-       ya está listo para escriturar. No se agregan filas sin dato. */
+       Siguen por fuera, sin confirmar: si acepta permuta y si ya está listo
+       para escriturar. No se agregan filas sin dato.
+
+       Las primeras cuatro filas de esta lista son las que salen en el panel
+       del precio, así que la dirección va después de Baños a propósito. */
     ficha: [
       ["Área construida", "66,93 m²"],
       ["Área privada", "59,98 m²"],
       ["Alcobas", "3"],
       ["Baños", "2"],
+      ["Dirección", "Calle 77 Sur # 34-82"],
       ["Parqueadero", "1"],
       ["Cuarto útil", "Sí"],
       ["Piso", "7"],
