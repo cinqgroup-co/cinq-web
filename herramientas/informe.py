@@ -6,8 +6,13 @@ aceptarlo o discutirlo a ojo, recibe un documento con lo que pide el mercado
 por metro cuadrado en su zona, de donde salio cada cifra y donde queda su
 inmueble en ese rango.
 
-    python herramientas/informe.py plantilla
+    python herramientas/informe.py plantilla propiedad
+    python herramientas/informe.py plantilla vehiculo
     python herramientas/informe.py generar informe.json
+
+En una propiedad el comparador es el precio por metro cuadrado. En un vehiculo
+no existe esa unidad, asi que se compara el precio contra vehiculos del mismo
+modelo, año y kilometraje parecido, y el informe cambia sus columnas solo.
 
 Sale un HTML listo para mandar por WhatsApp o imprimir a PDF desde el
 navegador.
@@ -98,11 +103,11 @@ def hoy_largo():
 # Comparables propios: lo que CINQ ya tiene publicado
 # --------------------------------------------------------------------------
 
-def comparables_del_portafolio(zona):
-    """Las oportunidades de CINQ en la misma zona, como comparables propios.
+def comparables_del_portafolio(zona, tipo="propiedad"):
+    """Las oportunidades de CINQ que sirven de comparable, del mismo catalogo.
 
-    Es el activo que va creciendo solo: cada inmueble que entra deja un dato
-    verificado por CINQ, con foto y visita, no un anuncio de internet.
+    Es el activo que va creciendo solo: cada inmueble o vehiculo que entra deja
+    un dato verificado por CINQ, con foto y visita, no un anuncio de internet.
     """
     try:
         sys.path.insert(0, os.path.join(RAIZ, "api"))
@@ -114,22 +119,32 @@ def comparables_del_portafolio(zona):
         return []
     salida = []
     for o in ops:
-        if (o.get("zona") or "").lower() != (zona or "").lower():
+        es_vehiculo = o.get("tipo") == "Vehículo"
+        if es_vehiculo != (tipo == "vehiculo"):
             continue
-        area = numero(bot.dato(o, "Área construida"))
-        if not area:
-            continue
-        salida.append({
+        base = {
             "descripcion": o.get("titulo", ""),
-            "area": area,
             "precio": o.get("precio"),
-            "alcobas": bot.dato(o, "Alcobas"),
             "fuente": "Portafolio CINQ",
             "url": "https://cinq-web.vercel.app/oportunidad.html?id=%s"
                    % o.get("slug"),
             "fecha": "publicado",
             "propio": True,
-        })
+        }
+        if tipo == "vehiculo":
+            # Un vehiculo no depende de la zona: el mercado es la ciudad
+            # entera y se mueve solo.
+            base["anio"] = bot.dato(o, "Año")
+            base["kilometraje"] = bot.dato(o, "Kilometraje")
+        else:
+            if (o.get("zona") or "").lower() != (zona or "").lower():
+                continue
+            area = numero(bot.dato(o, "Área construida"))
+            if not area:
+                continue
+            base["area"] = area
+            base["alcobas"] = bot.dato(o, "Alcobas")
+        salida.append(base)
     return salida
 
 
@@ -138,20 +153,29 @@ def comparables_del_portafolio(zona):
 # --------------------------------------------------------------------------
 
 def validar(datos):
+    tipo = datos.get("tipo", "propiedad")
     problemas = []
     for campo in ("propietario", "inmueble", "zona", "precio_pedido"):
         if not datos.get(campo):
             problemas.append("falta '%s'" % campo)
-    if datos.get("tipo", "propiedad") == "propiedad" and not datos.get("area"):
+    if tipo == "propiedad" and not datos.get("area"):
         problemas.append("falta 'area', sin ella no hay precio por m2")
+    if tipo == "vehiculo":
+        for campo in ("anio", "kilometraje"):
+            if not datos.get(campo):
+                problemas.append(
+                    "falta '%s'. En un vehiculo el año y el kilometraje son lo "
+                    "que hace comparable un precio con otro" % campo)
     for i, c in enumerate(datos.get("comparables", []), 1):
         for campo in ("fuente", "url", "fecha", "precio"):
             if not c.get(campo):
                 problemas.append(
                     "comparable %d: falta '%s'. Sin fuente, enlace y fecha no "
                     "se publica: es la regla del sitio" % (i, campo))
-        if datos.get("tipo", "propiedad") == "propiedad" and not c.get("area"):
+        if tipo == "propiedad" and not c.get("area"):
             problemas.append("comparable %d: falta 'area'" % i)
+        if tipo == "vehiculo" and not c.get("anio"):
+            problemas.append("comparable %d: falta 'anio'" % i)
     return problemas
 
 
@@ -159,7 +183,7 @@ def analizar(datos):
     tipo = datos.get("tipo", "propiedad")
     comparables = list(datos.get("comparables", []))
     if datos.get("incluir_portafolio", True):
-        comparables += comparables_del_portafolio(datos.get("zona"))
+        comparables += comparables_del_portafolio(datos.get("zona"), tipo)
 
     for c in comparables:
         c["area"] = numero(c.get("area"))
@@ -233,60 +257,93 @@ def lectura(res):
 
 def html_informe(datos, res):
     tipo = res["tipo"]
+    es_vehiculo = tipo == "vehiculo"
+
+    if es_vehiculo:
+        encabezados = ("<th>Vehículo</th><th class='n'>Año</th>"
+                       "<th class='n'>Kilometraje</th><th class='n'>Precio</th>"
+                       "<th>Fuente y fecha</th>")
+    else:
+        encabezados = ("<th>Inmueble</th><th>Alc.</th><th class='n'>Área</th>"
+                       "<th class='n'>Precio</th><th class='n'>Por m²</th>"
+                       "<th>Fuente y fecha</th>")
+
     filas = []
     for c in res["comparables"]:
         etiqueta = c["fuente"]
         if c.get("propio"):
             etiqueta = "<b>%s</b>" % etiqueta
-        filas.append(
-            "<tr%s><td>%s</td><td>%s</td><td class='n'>%s</td>"
-            "<td class='n'>%s</td><td class='n'>%s</td>"
-            "<td><a href='%s'>%s</a><br><span class='fecha'>%s</span></td></tr>"
-            % (" class='propio'" if c.get("propio") else "",
-               c.get("descripcion", ""),
-               c.get("alcobas") or "",
-               ("%.0f m²" % c["area"]) if c.get("area") else "",
-               pesos(c["precio"]),
-               pesos(c["por_m2"]) if c.get("por_m2") else "",
-               c["url"], etiqueta, c["fecha"]))
+        fuente = ("<td><a href='%s'>%s</a><br><span class='fecha'>%s</span>"
+                  "</td>" % (c["url"], etiqueta, c["fecha"]))
+        if es_vehiculo:
+            km = c.get("kilometraje")
+            celdas = ("<td>%s</td><td class='n'>%s</td><td class='n'>%s</td>"
+                      "<td class='n'>%s</td>"
+                      % (c.get("descripcion", ""), c.get("anio") or "",
+                         km if km else "", pesos(c["precio"])))
+        else:
+            celdas = ("<td>%s</td><td>%s</td><td class='n'>%s</td>"
+                      "<td class='n'>%s</td><td class='n'>%s</td>"
+                      % (c.get("descripcion", ""), c.get("alcobas") or "",
+                         ("%.0f m²" % c["area"]) if c.get("area") else "",
+                         pesos(c["precio"]),
+                         pesos(c["por_m2"]) if c.get("por_m2") else ""))
+        filas.append("<tr%s>%s%s</tr>"
+                     % (" class='propio'" if c.get("propio") else "",
+                        celdas, fuente))
 
-    if tipo == "propiedad":
-        cabecera_unidad = "Por m²"
+    if es_vehiculo:
+        resumen = [
+            ("Lo que usted pide", pesos(res["pedido"])),
+            ("Año", str(datos.get("anio", ""))),
+            ("Kilometraje", str(datos.get("kilometraje", ""))),
+            ("Mediana del mercado", pesos(res["mediana"])),
+            ("Rango habitual", "%s a %s" % (pesos(res["p25"]),
+                                            pesos(res["p75"]))),
+        ]
+    else:
         resumen = [
             ("Lo que usted pide", pesos(res["pedido"])),
             ("Área construida", "%.2f m²" % res["area"] if res["area"] else ""),
             ("Su precio por m²", pesos(res["propio_m2"])),
-            ("Mediana de la zona", pesos(res["mediana"])),
-            ("Rango habitual (%d de cada 2)" % 1,
-             "%s a %s" % (pesos(res["p25"]), pesos(res["p75"]))),
-        ]
-    else:
-        cabecera_unidad = ""
-        resumen = [
-            ("Lo que usted pide", pesos(res["pedido"])),
             ("Mediana de la zona", pesos(res["mediana"])),
             ("Rango habitual", "%s a %s" % (pesos(res["p25"]),
                                             pesos(res["p75"]))),
         ]
 
     equivalente = ""
-    if res.get("equivalente") and tipo == "propiedad":
+    if res.get("equivalente") and not es_vehiculo:
         equivalente = (
             "<p class='equiv'>A la mediana de la zona, un inmueble de %.2f m² "
-            "se estaria pidiendo en <b>%s</b>. Usted pide %s.</p>"
+            "se estaría pidiendo en <b>%s</b>. Usted pide %s.</p>"
             % (res["area"], millones(res["equivalente"]),
                millones(res["pedido"])))
+    elif es_vehiculo and res.get("mediana"):
+        equivalente = (
+            "<p class='equiv'>La mediana de lo que se está pidiendo por "
+            "vehículos comparables es <b>%s</b>. Usted pide %s.</p>"
+            % (millones(res["mediana"]), millones(res["pedido"])))
+
+    if es_vehiculo:
+        glosa = ("vehículos comparables, es decir de modelo, año y kilometraje "
+                 "parecidos")
+        cosa = "vehículo"
+    else:
+        glosa = "inmuebles comparables"
+        cosa = "inmueble"
 
     html = PLANTILLA
+    html = html.replace("@@ENCABEZADOS@@", encabezados)
+    html = html.replace("@@GLOSA@@", glosa)
+    html = html.replace("@@COSA@@", cosa)
     html = html.replace("@@INMUEBLE@@", datos["inmueble"])
     html = html.replace("@@PROPIETARIO@@", datos["propietario"])
     html = html.replace("@@ZONA@@", datos["zona"])
     html = html.replace("@@FECHA@@", hoy_largo())
     html = html.replace("@@RESUMEN@@", "\n".join(
         "<div class='dato'><span>%s</span><b>%s</b></div>" % (k, v)
-        for k, v in resumen))
+        for k, v in resumen if v))
     html = html.replace("@@EQUIVALENTE@@", equivalente)
-    html = html.replace("@@UNIDAD@@", cabecera_unidad)
     html = html.replace("@@FILAS@@", "\n".join(filas))
     html = html.replace("@@N@@", str(res["n"]))
     html = html.replace("@@LECTURA@@", lectura(res))
@@ -344,8 +401,7 @@ Preparado para @@PROPIETARIO@@ &middot; @@FECHA@@</p>
 
 <h2>Los @@N@@ comparables</h2>
 <table>
-<tr><th>Inmueble</th><th>Alc.</th><th class="n">Área</th><th class="n">Precio</th>
-<th class="n">@@UNIDAD@@</th><th>Fuente y fecha</th></tr>
+<tr>@@ENCABEZADOS@@</tr>
 @@FILAS@@
 </table>
 
@@ -355,11 +411,11 @@ Preparado para @@PROPIETARIO@@ &middot; @@FECHA@@</p>
 
 <h2>Cómo leer estas cifras</h2>
 <p>Son <b>precios de oferta</b>, es decir lo que hoy se está pidiendo por
-inmuebles comparables, no lo que efectivamente se pagó por ellos. El precio de
-cierre suele quedar por debajo del de oferta. Sirven para ubicar un rango, no
-para fijar un valor exacto.</p>
+@@GLOSA@@, no lo que efectivamente se pagó por ellos. El precio de cierre
+suele quedar por debajo del de oferta. Sirven para ubicar un rango, no para
+fijar un valor exacto.</p>
 <p>Cada comparable trae su enlace y su fecha para que usted pueda verificarlo.
-Si alguno le parece que no compara bien con su inmueble, dígamelo y lo
+Si alguno le parece que no compara bien con su @@COSA@@, dígamelo y lo
 sacamos: la muestra es discutible y esa conversación es justamente el punto de
 este documento.</p>
 
@@ -368,8 +424,8 @@ este documento.</p>
 CINQ con información pública. La Ley 1673 de 2013 reserva los avalúos y los
 dictámenes de valuación a los avaluadores inscritos en el Registro Abierto de
 Avaluadores, y CINQ no lo es. Si usted necesita un avalúo con validez legal,
-para una hipoteca, una sucesión o un proceso judicial, con gusto lo remitimos
-a un avaluador inscrito.
+para una hipoteca, una sucesión, una aseguradora o un proceso judicial, con
+gusto lo remitimos a un avaluador inscrito.
 </div>
 
 <p class="firma">Samuel, CINQ<br>
@@ -379,31 +435,71 @@ a un avaluador inscrito.
 
 # --------------------------------------------------------------------------
 
-EJEMPLO = {
+EJEMPLO_PROPIEDAD = {
     "tipo": "propiedad",
-    "propietario": "",
-    "inmueble": "",
-    "zona": "",
-    "area": "",
-    "precio_pedido": 0,
+    "propietario": "Nombre del dueño, como lo va a leer él",
+    "inmueble": "Apartamento de 72 m², 3 alcobas",
+    "zona": "Sabaneta",
+    "area": "72 m²",
+    "precio_pedido": 620000000,
     "incluir_portafolio": True,
     "notas": "",
     "comparables": [
+        {"descripcion": "Apartamento, Alto de Las Flores", "alcobas": "3",
+         "area": "74 m²", "precio": 544000000,
+         "fuente": "Finca Raíz 193925322",
+         "url": "https://www.fincaraiz.com.co/apartamento-en-venta-en-sabaneta/193925322",
+         "fecha": "8 sep 2026"},
         {"descripcion": "", "alcobas": "", "area": "", "precio": 0,
-         "fuente": "Finca Raíz", "url": "", "fecha": ""}
+         "fuente": "", "url": "", "fecha": ""}
+    ],
+}
+
+EJEMPLO_VEHICULO = {
+    "tipo": "vehiculo",
+    "propietario": "Nombre del dueño, como lo va a leer él",
+    "inmueble": "Mazda CX-30 Grand Touring 2023",
+    "zona": "Medellín",
+    "anio": 2023,
+    "kilometraje": "38.000 km",
+    "precio_pedido": 118000000,
+    "incluir_portafolio": True,
+    "notas": "",
+    "comparables": [
+        {"descripcion": "Mazda CX-30 Grand Touring", "anio": 2023,
+         "kilometraje": "42.000 km", "precio": 0,
+         "fuente": "TuCarro / Mercado Libre", "url": "", "fecha": "8 sep 2026"},
+        {"descripcion": "", "anio": "", "kilometraje": "", "precio": 0,
+         "fuente": "", "url": "", "fecha": ""}
     ],
 }
 
 
 def cmd_plantilla(args):
-    destino = os.path.abspath(args.salida or "informe.json")
+    tipo = (args.tipo or "propiedad").lower()
+    if tipo not in ("propiedad", "vehiculo"):
+        sys.exit("El tipo es 'propiedad' o 'vehiculo'.")
+    ejemplo = EJEMPLO_PROPIEDAD if tipo == "propiedad" else EJEMPLO_VEHICULO
+    destino = os.path.abspath(args.salida or "informe-%s.json" % tipo)
     with open(destino, "w", encoding="utf-8") as fh:
-        json.dump(EJEMPLO, fh, ensure_ascii=False, indent=2)
+        json.dump(ejemplo, fh, ensure_ascii=False, indent=2)
+
     print("Escrito: %s\n" % destino)
-    print("Cada comparable necesita fuente, url, fecha, precio y area. Sin eso")
-    print("el informe no se genera: no publicamos cifras sin de donde salieron.")
-    print("\nLas oportunidades que CINQ ya tiene en esa zona entran solas como")
-    print("comparables propios. Se apaga con incluir_portafolio en false.")
+    print("Viene con un comparable de ejemplo lleno y otro en blanco, para")
+    print("copiar el formato. Borre los que no use.\n")
+    if tipo == "propiedad":
+        print("Cada comparable necesita fuente, url, fecha, precio y area.")
+        print("El area es lo que permite comparar: sin ella no hay precio por")
+        print("metro cuadrado y el informe no se genera.")
+    else:
+        print("Cada comparable necesita fuente, url, fecha, precio y año.")
+        print("El kilometraje no es obligatorio pero cambia mucho el precio:")
+        print("un comparable sin kilometraje compara a medias, y conviene")
+        print("anotarlo aunque sea aproximado.")
+    print("\nSin fuente, enlace y fecha el informe no se genera. No mandamos")
+    print("cifras sin decir de donde salieron.")
+    print("\nLo que CINQ ya tenga publicado del mismo tipo entra solo como")
+    print("comparable propio. Se apaga con incluir_portafolio en false.")
 
 
 def cmd_generar(args):
@@ -444,6 +540,8 @@ def main():
                                              "propietario")
     sub = ap.add_subparsers(dest="comando", required=True)
     a = sub.add_parser("plantilla")
+    a.add_argument("tipo", nargs="?", default="propiedad",
+                   choices=["propiedad", "vehiculo"])
     a.add_argument("--salida")
     a.set_defaults(func=cmd_plantilla)
     b = sub.add_parser("generar")
