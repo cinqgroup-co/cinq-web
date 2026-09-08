@@ -255,6 +255,28 @@ def lectura(res):
 # HTML
 # --------------------------------------------------------------------------
 
+def logo():
+    """El logo real, incrustado en el documento.
+
+    El SVG ya viene con fill y stroke en currentColor, asi que el color sale
+    del CSS y no del archivo, igual que en el sitio. Se incrusta porque el
+    informe se manda por WhatsApp o se imprime a PDF: si el logo fuera un
+    enlace al sitio, se veria roto sin conexion o dentro del PDF.
+
+    Si algun dia falta el archivo, se cae al wordmark encasillado en Georgia,
+    que es la misma red de seguridad que tiene styles.css.
+    """
+    ruta = os.path.join(RAIZ, "assets", "img", "cinq-logo.svg")
+    try:
+        with open(ruta, encoding="utf-8") as fh:
+            svg = fh.read().strip()
+        return svg.replace(
+            "<svg ", '<svg class="logo" role="img" aria-label="CINQ" ', 1)
+    except Exception as e:
+        print("  aviso: no encontre el logo (%s), va el de respaldo" % e)
+        return '<div class="marca-respaldo">CINQ</div>'
+
+
 def html_informe(datos, res):
     tipo = res["tipo"]
     es_vehiculo = tipo == "vehiculo"
@@ -333,6 +355,7 @@ def html_informe(datos, res):
         cosa = "inmueble"
 
     html = PLANTILLA
+    html = html.replace("@@LOGO@@", logo())
     html = html.replace("@@ENCABEZADOS@@", encabezados)
     html = html.replace("@@GLOSA@@", glosa)
     html = html.replace("@@COSA@@", cosa)
@@ -356,40 +379,59 @@ PLANTILLA = """<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Referencia de mercado - @@INMUEBLE@@</title>
 <style>
- :root{--tinta:#1c1c1a;--suave:#6d6d66;--linea:#e2e0da;--verde:#3d4a2a;--papel:#fbfaf7}
+ /* Los mismos tokens de assets/css/styles.css. Si algun dia cambia el verde
+    de la marca, cambia alla y se copia aqui: este documento viaja solo, por
+    WhatsApp o en PDF, y no puede pedirle la hoja de estilos al sitio. */
+ :root{
+   --paper:#ffffff; --paper-alt:#f7f6f1;
+   --ink:#20241a; --muted:#6b7263;
+   --olive:#728f57; --olive-deep:#3c461b;
+   --line:rgba(32,36,26,0.13); --line-soft:rgba(32,36,26,0.08);
+   --font-display:Georgia,'Iowan Old Style','Palatino Linotype','Book Antiqua',serif;
+   --font-body:Aptos,'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+   --font-mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+ }
  *{box-sizing:border-box}
- body{margin:0;padding:44px 26px;background:var(--papel);color:var(--tinta);
-      font:15px/1.65 Georgia,'Times New Roman',serif}
+ body{margin:0;padding:46px 26px;background:var(--paper-alt);color:var(--ink);
+      font-family:var(--font-body);font-size:14.5px;line-height:1.65;
+      -webkit-print-color-adjust:exact;print-color-adjust:exact}
  .hoja{max-width:760px;margin:0 auto}
- .marca{font:600 15px/1 Georgia,serif;letter-spacing:.22em;border:1px solid var(--tinta);
-        display:inline-block;padding:9px 13px;margin-bottom:30px}
- h1{font-size:27px;font-weight:400;margin:0 0 6px;line-height:1.25}
- .sub{color:var(--suave);margin:0 0 34px;font-size:14px}
- h2{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--suave);
-    font-weight:400;margin:38px 0 14px;border-bottom:1px solid var(--linea);padding-bottom:7px}
- .resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px 22px}
+ /* El logo real, el trazado con la cola de la Q y su recuadro, no el wordmark
+    rehecho en Georgia. Va incrustado para que el PDF no dependa de la red. */
+ .logo{height:46px;width:auto;color:var(--olive-deep);margin-bottom:32px}
+ .marca-respaldo{font-family:var(--font-display);font-size:15px;font-weight:600;
+   letter-spacing:.22em;border:1px solid var(--olive-deep);color:var(--olive-deep);
+   display:inline-block;padding:9px 11px 9px 13px;margin-bottom:32px}
+ h1{font-family:var(--font-display);font-size:29px;font-weight:400;margin:0 0 8px;
+    line-height:1.22;color:var(--ink)}
+ .sub{color:var(--muted);margin:0 0 36px;font-size:14px}
+ h2{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--muted);font-weight:400;
+    margin:40px 0 14px;border-bottom:1px solid var(--line);padding-bottom:8px}
+ .resumen{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 26px}
  .dato{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-       padding:9px 0;border-bottom:1px solid var(--linea)}
- .dato span{color:var(--suave);font-size:14px}
- .dato b{font-weight:600;white-space:nowrap}
- .equiv{background:#fff;border-left:3px solid var(--verde);padding:13px 16px;margin:22px 0 0}
+       padding:10px 0;border-bottom:1px solid var(--line-soft)}
+ .dato span{color:var(--muted);font-size:13.5px}
+ .dato b{font-family:var(--font-display);font-weight:400;font-size:16px;white-space:nowrap}
+ .equiv{background:var(--paper);border-left:2px solid var(--olive);
+        padding:15px 18px;margin:24px 0 0;font-family:var(--font-display);font-size:16px}
  table{width:100%;border-collapse:collapse;font-size:13.5px}
- th{text-align:left;font-weight:400;color:var(--suave);font-size:12px;
-    text-transform:uppercase;letter-spacing:.08em;padding:0 8px 8px 0;
-    border-bottom:1px solid var(--linea)}
- td{padding:10px 8px 10px 0;border-bottom:1px solid var(--linea);vertical-align:top}
+ th{text-align:left;font-family:var(--font-mono);font-weight:400;color:var(--muted);
+    font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;
+    padding:0 8px 9px 0;border-bottom:1px solid var(--line)}
+ td{padding:11px 8px 11px 0;border-bottom:1px solid var(--line-soft);vertical-align:top}
  td.n,th.n{text-align:right;white-space:nowrap}
- tr.propio{background:#fff}
- a{color:var(--verde)}
- .fecha{color:var(--suave);font-size:11.5px}
- .lectura{font-size:16px}
- .aviso{margin-top:40px;padding-top:18px;border-top:1px solid var(--linea);
-        color:var(--suave);font-size:12.5px;line-height:1.6}
- .firma{margin-top:34px;font-size:14px}
- @media print{body{padding:0;background:#fff}.hoja{max-width:none}}
+ tr.propio{background:var(--paper)}
+ a{color:var(--olive-deep)}
+ .fecha{color:var(--muted);font-size:11.5px}
+ .lectura{font-family:var(--font-display);font-size:16.5px;line-height:1.6}
+ .aviso{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);
+        color:var(--muted);font-size:12.5px;line-height:1.62}
+ .firma{margin-top:36px;font-family:var(--font-display);font-size:15px}
+ @media print{body{padding:0;background:var(--paper)}.hoja{max-width:none}}
 </style></head><body>
 <div class="hoja">
-<div class="marca">CINQ</div>
+@@LOGO@@
 
 <h1>Referencia de mercado</h1>
 <p class="sub">@@INMUEBLE@@ &middot; @@ZONA@@<br>
