@@ -287,14 +287,34 @@ archivo de cada una, citadas desde las dos fichas. El `alt` sí se escribe en ca
 Cada foto se escribe como `{ archivo: "nombre.jpg", alt: "qué se ve" }`. El `alt` no es opcional:
 es lo que lee un lector de pantalla, lo que se ve si la imagen no carga, y lo que Google indexa.
 
-**Optimizar las fotos.** No hay build ni dependencias de Node. El script
-`herramientas/optimizar-fotos.py` (Python + Pillow, lo único que hay que tener instalado) toma una
-carpeta de fotos, las ordena por fecha de descarga, las renombra con la lista que se le pase y
-genera el par JPG + WebP a máximo 1920 px de lado largo y calidad 82:
+**Publicar una oportunidad con una sola herramienta.** `herramientas/oportunidad.py` hace todo el
+recorrido, de las fotos originales al bloque en el catálogo. Python + Pillow, nada más:
 
 ```
-python herramientas/optimizar-fotos.py ORIGEN SLUG nombres.txt --patron "*.jpeg"
+python herramientas/oportunidad.py contactos CARPETA
+python herramientas/oportunidad.py plantilla SLUG
+python herramientas/oportunidad.py publicar CARPETA datos.json
+python herramientas/oportunidad.py verificar
 ```
+
+1. `contactos` recorre la carpeta, arma una hoja HTML con todas las miniaturas numeradas y marca
+   las parejas casi idénticas por huella perceptual. Se abre en el navegador y se decide.
+2. `plantilla` escribe un `datos.json` con los campos de la ficha, para llenarlo con lo verificado.
+3. Se escribe un `orden.txt` con una línea por foto, en el orden de la galería:
+   `IMG_2201.jpg  sala-comedor  | Sala comedor con ventanal en esquina`. El texto tras la barra es
+   el alt; si no se escribe, se compone uno correcto con el nombre del espacio y el `alt_sufijo`.
+4. `publicar` optimiza a 1920 px y calidad 82, deja el par JPG + WebP con el nombre correcto y
+   agrega el bloque al catálogo. Las filas de ficha vacías no se publican: **nada de campos en
+   blanco**.
+5. `verificar` revisa **todo** el portafolio: que cada foto exista en jpg y webp, que ninguna quede
+   sin alt, que no se haya colado un guion medio y que no haya slugs repetidos. Sale con código 1
+   si algo falla, así que sirve antes de cada push.
+
+**Correr `verificar` antes de publicar es la red de seguridad barata.** Detecta el error que no se
+ve mirando la página: una foto referenciada que no se subió, o un alt que quedó vacío.
+
+`herramientas/optimizar-fotos.py` sigue ahí para retocar una carpeta suelta, pero para una
+oportunidad nueva la ruta es `oportunidad.py`.
 
 Para retirar una oportunidad vendida, basta con borrar su bloque del array: desaparece de la
 grilla, y su ficha muestra "esa oportunidad ya no está en el portafolio" sin romper enlaces

@@ -1,0 +1,8 @@
+# Bytecode de Python. Se genera al correr las herramientas o al importar la
+# funcion del bot, y no tiene por que viajar al repo ni desplegarse.
+__pycache__/
+*.pyc
+
+# Datos de trabajo de una publicacion, que viven fuera del sitio.
+datos.json
+orden.txt
