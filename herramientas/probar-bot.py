@@ -27,6 +27,16 @@ def falso_post(carga):
 
 bot._post = falso_post
 
+CORREOS = []
+
+
+def falso_correo(asunto, cuerpo):
+    CORREOS.append({"asunto": asunto, "cuerpo": cuerpo})
+    return True
+
+
+bot._enviar_correo = falso_correo
+
 fallos = []
 
 
@@ -153,19 +163,56 @@ revisar(accion == "ofrecer", "explica el filtro de CINQ")
 accion, _ = correr("Toca 'Hablar con Samuel'", boton="menu:asesor")
 revisar(accion == "asesor", "deriva a Samuel")
 
-print("4. LO QUE NO ENTIENDE\n")
+print("4. LO QUE NO ENTIENDE Y LAS ALERTAS\n")
 ENVIADO.clear()
-hora_habil = 1757345400  # martes 8 de septiembre de 2026, 10:10 en Colombia
+CORREOS.clear()
 bot.en_horario = lambda ahora=None: True
-accion = bot.responder("573001112233", texto="el area privada incluye balcon?")
+accion = bot.responder("573001112233", texto="el area privada incluye balcon?",
+                       nombre="Claudia Lopez")
 revisar(accion == "silencio" and not ENVIADO,
-        "en horario se queda callado para que conteste Samuel", accion)
+        "en horario no le contesta nada al cliente", accion)
+revisar(len(CORREOS) == 1, "pero si le avisa a Samuel por correo", len(CORREOS))
+if CORREOS:
+    correo = CORREOS[0]
+    print("      asunto: " + correo["asunto"])
+    print("      cuerpo: " + correo["cuerpo"].replace("\n", " | ")[:130])
+    revisar("Claudia Lopez" in correo["asunto"],
+            "la alerta trae el nombre del perfil, no solo el numero")
+    revisar("incluye balcon" in correo["cuerpo"],
+            "la alerta trae lo que escribio el cliente")
+    revisar("https://wa.me/573001112233" in correo["cuerpo"],
+            "trae el enlace para contestarle desde el celular")
 
 ENVIADO.clear()
+CORREOS.clear()
 bot.en_horario = lambda ahora=None: False
 accion = bot.responder("573001112233", texto="el area privada incluye balcon?")
 revisar(accion == "ausencia" and len(ENVIADO) == 1,
-        "fuera de horario manda el mensaje de ausencia", accion)
+        "fuera de horario si manda el mensaje de ausencia", accion)
+revisar(len(CORREOS) == 1, "y tambien avisa por correo")
+
+ENVIADO.clear()
+CORREOS.clear()
+bot.responder("573001112233", boton="menu:asesor", nombre="Claudia Lopez")
+revisar(len(CORREOS) == 1 and "hablar con usted" in CORREOS[0]["asunto"],
+        "pedir hablar con Samuel dispara alerta",
+        CORREOS[0]["asunto"] if CORREOS else "ninguna")
+
+ENVIADO.clear()
+CORREOS.clear()
+bot.responder("573001112233", boton="menu:portafolio")
+revisar(not CORREOS, "mirar el portafolio no molesta a Samuel")
+
+print()
+print("   Sin GMAIL_USUARIO configurado el correo no se envia y el bot sigue:")
+CORREOS.clear()
+correo_real = bot._enviar_correo
+bot._enviar_correo = lambda a, c: False  # simula que no hay credenciales
+ENVIADO.clear()
+accion = bot.responder("573001112233", boton="menu:asesor")
+revisar(accion == "asesor" and len(ENVIADO) == 1,
+        "el cliente recibe su respuesta igual", accion)
+bot._enviar_correo = correo_real
 
 print("\n5. HORARIO (hora de Colombia, sin tzdata)\n")
 import calendar  # noqa: E402

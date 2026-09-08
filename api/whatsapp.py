@@ -13,6 +13,11 @@ Variables de entorno (Vercel: Settings -> Environment Variables):
     WHATSAPP_PHONE_ID      id del numero, no el numero
     WHATSAPP_VERIFY_TOKEN  cadena inventada, la misma que se pega en Meta
     WHATSAPP_APP_SECRET    clave secreta de la app, para validar la firma
+
+    GMAIL_USUARIO          correo desde el que salen las alertas
+    GMAIL_APP_PASSWORD     contraseña de aplicacion de Google, no la del correo
+    ALERTA_EMAIL           opcional, a donde llegan; por defecto GMAIL_USUARIO
+    NOTIFICAR_A            opcional, celular de Samuel para avisar por WhatsApp
     CINQ_CATALOGO_URL      opcional, por si el sitio cambia de dominio
 
 REGLA DE ORO: el bot solo habla cuando entiende. Si llega un mensaje que no
@@ -409,7 +414,7 @@ def enviar_ficha(a, op):
                     {"id": "menu:portafolio", "titulo": "Ver otras"}])
 
 
-def responder(a, texto=None, boton=None, id_mensaje=None):
+def responder(a, texto=None, boton=None, id_mensaje=None, nombre=None):
     """Decide que hacer con un mensaje. Devuelve la accion, para las pruebas."""
     if id_mensaje:
         marcar_leido(id_mensaje)
@@ -420,10 +425,11 @@ def responder(a, texto=None, boton=None, id_mensaje=None):
             return "zonas"
         if boton == "menu:ofrecer":
             enviar_texto(a, OFRECER)
+            alertar("ofrecer", a, nombre)
             return "ofrecer"
         if boton == "menu:asesor":
             enviar_texto(a, ASESOR)
-            avisar_a_samuel(a)
+            alertar("asesor", a, nombre)
             return "asesor"
         if boton.startswith("zona:"):
             mostrar_oportunidades(a, boton.split(":", 1)[1])
@@ -444,33 +450,89 @@ def responder(a, texto=None, boton=None, id_mensaje=None):
         return "zonas"
     if quiere == "ofrecer":
         enviar_texto(a, OFRECER)
+        alertar("ofrecer", a, nombre, texto)
         return "ofrecer"
     if quiere == "asesor":
         enviar_texto(a, ASESOR)
-        avisar_a_samuel(a)
+        alertar("asesor", a, nombre, texto)
         return "asesor"
     if quiere == "saludo":
         mostrar_menu(a)
         return "menu"
 
-    # No se entendio. En horario se calla para que conteste Samuel.
+    # No se entendio. El bot no le contesta al cliente para no estorbar una
+    # conversacion real, pero si le avisa a Samuel por correo: callarse con el
+    # cliente no puede significar que nadie se entere. Fuera de horario ademas
+    # se manda el mensaje de ausencia, para que el cliente sepa que hay alguien.
+    alertar("no_entendido", a, nombre, texto)
     if not en_horario():
         enviar_texto(a, AUSENCIA)
         return "ausencia"
     return "silencio"
 
 
-def avisar_a_samuel(de_quien):
-    """Le pasa el numero a Samuel, si hay un destino configurado.
+MOTIVOS = {
+    "asesor": "pidio hablar con usted",
+    "material": "envio fotos o documentos",
+    "no_entendido": "escribio algo que el bot no entiende",
+    "ofrecer": "quiere ofrecer un inmueble",
+}
 
-    Requiere que ese numero le haya escrito al bot en las ultimas 24 horas, o
-    una plantilla aprobada. Sin NOTIFICAR_A configurado no hace nada.
+
+def alertar(motivo, de, nombre=None, texto=None):
+    """Avisa a Samuel que una conversacion necesita a un humano.
+
+    Va por correo, no por WhatsApp, y la razon es practica: un correo llega
+    siempre y suena en el celular. Un WhatsApp del bot solo se puede enviar si
+    Samuel le escribio en las ultimas 24 horas, y si no, exige plantilla
+    aprobada. El correo no tiene ventana.
+
+    Sin variables configuradas no hace nada y el bot sigue funcionando igual.
     """
+    quien = "%s (+%s)" % (nombre, de) if nombre else "+%s" % de
+    asunto = "CINQ WhatsApp: %s %s" % (quien, MOTIVOS.get(motivo, motivo))
+    cuerpo = [asunto, ""]
+    if texto:
+        cuerpo += ["Lo que escribio:", "", texto.strip(), ""]
+    cuerpo += ["Responderle desde su celular:", "https://wa.me/%s" % de, "",
+               "Este aviso lo manda el bot de cinq-web.vercel.app"]
+    cuerpo = "\n".join(cuerpo)
+
+    log("alerta: %s" % asunto)
+    _enviar_correo(asunto, cuerpo)
+
     destino = os.environ.get("NOTIFICAR_A")
-    if not destino:
-        return
-    enviar_texto(destino, "Lead nuevo en el WhatsApp de CINQ: +%s pidio "
-                          "hablar con usted." % de_quien, vista_previa=False)
+    if destino:
+        enviar_texto(destino, cuerpo, vista_previa=False)
+
+
+def _enviar_correo(asunto, cuerpo):
+    """Correo por SMTP de Gmail con contraseña de aplicacion.
+
+    Se usa smtplib de la libreria estandar para no sumar dependencias. Si el
+    envio falla queda en el log y no tumba la respuesta al cliente: el aviso
+    es para Samuel, el cliente no se puede quedar sin contestar por esto.
+    """
+    usuario = os.environ.get("GMAIL_USUARIO")
+    clave = os.environ.get("GMAIL_APP_PASSWORD")
+    destino = os.environ.get("ALERTA_EMAIL") or usuario
+    if not usuario or not clave or not destino:
+        return False
+    try:
+        import smtplib
+        from email.message import EmailMessage
+        msg = EmailMessage()
+        msg["Subject"] = asunto
+        msg["From"] = "CINQ Bot <%s>" % usuario
+        msg["To"] = destino
+        msg.set_content(cuerpo)
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as s:
+            s.login(usuario, clave)
+            s.send_message(msg)
+        return True
+    except Exception as e:
+        log("no se pudo enviar el correo de alerta: %s" % e)
+        return False
 
 
 # --------------------------------------------------------------------------
@@ -495,27 +557,34 @@ def procesar(carga):
     for entrada in carga.get("entry", []):
         for cambio in entrada.get("changes", []):
             valor = cambio.get("value", {})
+            # El nombre del perfil viene aparte de los mensajes. Sirve para que
+            # la alerta diga "Claudia Lopez" y no solo un numero.
+            nombres = {}
+            for contacto in valor.get("contacts", []):
+                nombres[contacto.get("wa_id")] = (
+                    contacto.get("profile") or {}).get("name")
             for mensaje in valor.get("messages", []):
                 de = mensaje.get("from")
                 tipo = mensaje.get("type")
                 id_msg = mensaje.get("id")
+                nombre = nombres.get(de)
                 if tipo == "text":
                     hechos.append(responder(
                         de, texto=(mensaje.get("text") or {}).get("body"),
-                        id_mensaje=id_msg))
+                        id_mensaje=id_msg, nombre=nombre))
                 elif tipo == "interactive":
                     inter = mensaje.get("interactive") or {}
                     respuesta = (inter.get("button_reply")
                                  or inter.get("list_reply") or {})
                     hechos.append(responder(de, boton=respuesta.get("id"),
-                                            id_mensaje=id_msg))
+                                            id_mensaje=id_msg, nombre=nombre))
                 elif tipo in ("image", "document", "video", "audio"):
                     # Casi siempre es un propietario mandando fotos. Se agradece
                     # y se deja la conversacion en manos de Samuel.
                     enviar_texto(de, "Recibimos el material, gracias. Lo "
                                      "revisamos y le damos respuesta dentro de "
                                      "24 a 48 horas habiles.")
-                    avisar_a_samuel(de)
+                    alertar("material", de, nombre)
                     hechos.append("material")
                 else:
                     hechos.append("ignorado:%s" % tipo)
