@@ -103,7 +103,7 @@ def hoy_largo():
 # Comparables propios: lo que CINQ ya tiene publicado
 # --------------------------------------------------------------------------
 
-def comparables_del_portafolio(zona, tipo="propiedad"):
+def comparables_del_portafolio(zona, tipo="propiedad", excluir_slug=None):
     """Las oportunidades de CINQ que sirven de comparable, del mismo catalogo.
 
     Es el activo que va creciendo solo: cada inmueble o vehiculo que entra deja
@@ -119,6 +119,11 @@ def comparables_del_portafolio(zona, tipo="propiedad"):
         return []
     salida = []
     for o in ops:
+        # Un inmueble no puede ser comparable de si mismo. Pasa cuando se le
+        # hace el informe a un dueño cuyo inmueble YA esta publicado: sin esto,
+        # su propio precio entraria en la mediana contra la que se le compara.
+        if excluir_slug and o.get("slug") == excluir_slug:
+            continue
         es_vehiculo = o.get("tipo") == "Vehículo"
         if es_vehiculo != (tipo == "vehiculo"):
             continue
@@ -183,7 +188,8 @@ def analizar(datos):
     tipo = datos.get("tipo", "propiedad")
     comparables = list(datos.get("comparables", []))
     if datos.get("incluir_portafolio", True):
-        comparables += comparables_del_portafolio(datos.get("zona"), tipo)
+        comparables += comparables_del_portafolio(
+            datos.get("zona"), tipo, datos.get("excluir_slug"))
 
     for c in comparables:
         c["area"] = numero(c.get("area"))
