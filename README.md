@@ -344,6 +344,32 @@ Cada envío llega por correo a `hellocinqgroup@gmail.com` y también queda guard
 
 Ambas opciones son gratuitas para este volumen de tráfico y no requieren Node.js instalado localmente: el sitio ya es HTML/CSS/JS puro.
 
+## Bot de WhatsApp (`api/whatsapp.py`)
+
+El webhook de la API de WhatsApp Cloud de Meta vive en `api/whatsapp.py`, como función
+serverless de Vercel. Python, solo librería estándar: no hay `requirements.txt` ni build, igual
+que el resto del sitio.
+
+**Lee el catálogo de este mismo repo, en vivo.** Descarga `assets/js/oportunidades.js` del sitio
+publicado y lo convierte a JSON en memoria, con caché de 5 minutos. No hay una segunda lista de
+inmuebles que se pueda desincronizar: al publicar una oportunidad nueva, el bot la ofrece sin que
+haya que tocarlo.
+
+Probar los cambios sin tocar la red ni la API de Meta:
+
+```
+python herramientas/probar-bot.py
+```
+
+Simula mensajes entrantes, intercepta el envío y comprueba los límites de WhatsApp (20 caracteres
+por botón, 24 por fila de lista), la validación de la firma y el parseo del catálogo real.
+
+Las credenciales van en variables de entorno de Vercel, nunca en el repo. Los pasos de conexión
+en Meta están en `Admin/Cuentas_y_accesos/Configurar_WhatsApp_Cloud_API.md`, fuera de este
+repositorio.
+
+Sin las variables configuradas la función queda inerte: responde 403 y no envía nada.
+
 ## Por qué no se usó un framework (Next.js, etc.)
 
 Este equipo no tiene Node.js instalado, y un framework moderno lo necesita para desarrollarse y probarse localmente. Un sitio estático hecho a mano evita esa barrera por completo: se edita, se abre en el navegador, y se despliega, sin instalar nada. Si más adelante el sitio crece (inventario grande, cuentas de usuario, panel de administración), ahí sí vale la pena migrar a un framework con backend real.
