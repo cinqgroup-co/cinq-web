@@ -315,11 +315,15 @@ var CINQ_OPORTUNIDADES = [
        comparables de Ancón Sur y Monteazul. El área privada no está declarada,
        así que no se publica esa fila.
 
-       De las 39 fotos que envió el propietario se publicaron 17. Quedan fuera,
-       y hay que rehacerlas: comedor, sala completa y balcón. En todas ellas se
-       ve el pendón de "SE VENDE" con un celular en la baranda, que le daría al
-       comprador una vía directa por fuera de CINQ. La foto de la sala que sí
-       está publicada va recortada por el mismo motivo. */
+       De las 39 fotos que envió el propietario se publicaron 19. Las 5 que
+       quedaron fuera por no ser de este apartamento están apartadas en la
+       carpeta del inmueble, en Inventario Activo.
+
+       OJO: en el comedor y el balcón se ve el pendón de "SE VENDE" con un
+       celular colgado en la baranda, y en la sala se alcanza a leer de lejos.
+       Eso le da al comprador una vía directa por fuera de CINQ. Se publicaron
+       así por decisión de Samuel el 9 de septiembre de 2026, sabiéndolo. Si el
+       propietario quita el pendón, vale la pena rehacer esas tres. */
     ficha: [
       ["Área construida", "85 m²"],
       ["Alcobas", "3"],
@@ -340,21 +344,23 @@ var CINQ_OPORTUNIDADES = [
     fotos: [
       { archivo: "rio-secreto-01-cocina-barra.jpg",      alt: "Cocina integral ampliada con barra circular en cuarzo, muro texturizado y carpintería a la medida, Río Secreto, Monteazul, Sabaneta" },
       { archivo: "rio-secreto-02-sala.jpg",              alt: "Sala con ventanal corredizo al balcón y piso en porcelanato blanco, apartamento en Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-03-estudio.jpg",           alt: "Estudio independiente con biblioteca y escritorio a la medida, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-04-alcoba-principal.jpg",  alt: "Alcoba principal con clóset en madera de piso a techo, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-05-alcoba-2.jpg",          alt: "Segunda alcoba con piso laminado, cómoda a la medida y ventana con persiana, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-06-alcoba-3.jpg",          alt: "Tercera alcoba con camarote, escritorio y cajonera a la medida, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-07-bano.jpg",              alt: "Baño con ducha en vidrio templado, enchape de piso a techo y espejo de cuerpo entero, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-08-zona-ropas.jpg",        alt: "Zona de ropas independiente con lavadero, calentador a gas y mueble alto, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-09-parqueadero.jpg",       alt: "Parqueadero privado cubierto en el sótano, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-10-piscina.jpg",           alt: "Piscina de la unidad con vista a la montaña, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-11-piscina-terraza.jpg",   alt: "Terraza de la piscina y piscina de niños, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-12-gimnasio.jpg",          alt: "Gimnasio con caminadoras, bicicletas de spinning y máquina multifuerza, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-13-cancha.jpg",            alt: "Cancha sintética de fútbol entre las torres, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-14-minigolf.jpg",          alt: "Minigolf en la terraza con vista a la montaña, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-15-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-16-zona-bbq.jpg",          alt: "Zona de asados con mesón en obra y parrilla a gas, junto al parque infantil, Río Secreto, Monteazul, Sabaneta" },
-      { archivo: "rio-secreto-17-plazoleta.jpg",         alt: "Plazoleta central con gazebo y zonas verdes, Río Secreto, Monteazul, Sabaneta" }
+      { archivo: "rio-secreto-03-comedor-barra.jpg",     alt: "Comedor con barra circular en cuarzo, lámpara colgante y muro texturizado, abierto al balcón, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-04-balcon.jpg",            alt: "Balcón con mesa, vista a las zonas verdes de la unidad y a la montaña, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-05-estudio.jpg",           alt: "Estudio independiente con biblioteca y escritorio a la medida, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-06-alcoba-principal.jpg",  alt: "Alcoba principal con clóset en madera de piso a techo, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-07-alcoba-2.jpg",          alt: "Segunda alcoba con piso laminado, cómoda a la medida y ventana con persiana, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-08-alcoba-3.jpg",          alt: "Tercera alcoba con camarote, escritorio y cajonera a la medida, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-09-bano.jpg",              alt: "Baño con ducha en vidrio templado, enchape de piso a techo y espejo de cuerpo entero, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-10-zona-ropas.jpg",        alt: "Zona de ropas independiente con lavadero, calentador a gas y mueble alto, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-11-parqueadero.jpg",       alt: "Parqueadero privado cubierto en el sótano, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-12-piscina.jpg",           alt: "Piscina de la unidad con vista a la montaña, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-13-piscina-terraza.jpg",   alt: "Terraza de la piscina y piscina de niños, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-14-gimnasio.jpg",          alt: "Gimnasio con caminadoras, bicicletas de spinning y máquina multifuerza, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-15-cancha.jpg",            alt: "Cancha sintética de fútbol entre las torres, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-16-minigolf.jpg",          alt: "Minigolf en la terraza con vista a la montaña, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-17-juegos-infantiles.jpg", alt: "Juegos infantiles sobre grama sintética, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-18-zona-bbq.jpg",          alt: "Zona de asados con mesón en obra y parrilla a gas, junto al parque infantil, Río Secreto, Monteazul, Sabaneta" },
+      { archivo: "rio-secreto-19-plazoleta.jpg",         alt: "Plazoleta central con gazebo y zonas verdes, Río Secreto, Monteazul, Sabaneta" }
     ]
   }
 
