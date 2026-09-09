@@ -67,7 +67,9 @@ var CINQ_OPORTUNIDADES = [
     titulo: "Envigado, Las Antillas",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
-    precio: 475000000,
+    /* Bajado de 475 a 455 millones el 9 de septiembre de 2026, por decisión
+       del propietario. El 1404 se mantiene en 465. */
+    precio: 455000000,
     premium: false,
     ficha: [
       ["Área construida", "67,5 m²"],
