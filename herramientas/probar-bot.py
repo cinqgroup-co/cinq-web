@@ -73,7 +73,8 @@ with open(ruta, encoding="utf-8") as fh:
 bot._cache["datos"] = ops
 bot._cache["cuando"] = 9e18  # no vencer nunca durante la prueba
 
-revisar(len(ops) == 4, "salen 4 oportunidades", len(ops))
+# El numero no se escribe a mano: crece cada vez que se publica algo.
+revisar(len(ops) >= 4, "el catalogo trae %d oportunidades" % len(ops), len(ops))
 for o in ops:
     print("     %-32s %-14s %s  %2d fotos" % (
         o["slug"], o["zona"], bot.precio_legible(o["precio"]), len(o["fotos"])))
@@ -135,15 +136,22 @@ for b in msgs[0]["interactive"]["action"]["buttons"]:
 accion, msgs = correr("Toca 'Ver oportunidades'", boton="menu:portafolio")
 revisar(accion == "zonas", "muestra las zonas")
 filas = msgs[0]["interactive"]["action"]["sections"][0]["rows"]
-revisar([f["id"] for f in filas] == ["zona:Envigado", "zona:Sabaneta",
-                                     "zona:*"],
+zonas_reales = []
+for o in ops:
+    if o["zona"] not in zonas_reales:
+        zonas_reales.append(o["zona"])
+revisar([f["id"] for f in filas] == ["zona:" + z for z in zonas_reales] +
+        ["zona:*"],
         "las zonas salen del catalogo, no de una lista fija",
         [f["id"] for f in filas])
 
 accion, msgs = correr("Elige Sabaneta", boton="zona:Sabaneta")
 revisar(accion == "oportunidades", "lista las de Sabaneta")
 filas = msgs[0]["interactive"]["action"]["sections"][0]["rows"]
-revisar(len(filas) == 2, "son dos en Sabaneta", len(filas))
+en_sabaneta = len([o for o in ops if o["zona"] == "Sabaneta"])
+revisar(len(filas) == en_sabaneta,
+        "lista las %d de Sabaneta que hay en el catalogo" % en_sabaneta,
+        len(filas))
 for f in filas:
     revisar(len(f["title"]) <= 24, "titulo '%s' cabe en 24" % f["title"])
     revisar(len(f["description"]) <= 72, "descripcion cabe en 72")
