@@ -86,9 +86,12 @@ revisar(bot.dato(ecoh, "Dirección") == "Calle 77 Sur # 34-82",
         "la direccion se lee de la ficha", bot.dato(ecoh, "Dirección"))
 revisar("guadual" in ecoh["descripcion"][0],
         "la descripcion no se corrompio al parsear")
-revisar(bot.foto_portada(ecoh).endswith(
-    "/ecoh-710-loma-san-jose/ecoh-710-01-sala-comedor.jpg"),
-    "url de portada bien armada", bot.foto_portada(ecoh))
+# Se comprueba como se arma la url, no que sea un archivo concreto: la
+# portada cambia cada vez que se reordena una galeria.
+portada = bot.foto_portada(ecoh)
+revisar(portada == "%s/assets/img/portafolio/%s/%s" % (
+    bot.SITIO, ecoh["slug"], ecoh["fotos"][0]["archivo"]),
+    "la url de portada se arma con el slug y la primera foto", portada)
 comunes = [f for f in ecoh["fotos"] if "/" in f["archivo"]][0]
 url_comun = "%s/assets/img/portafolio/%s" % (bot.SITIO, comunes["archivo"])
 revisar("/ecoh-zonas-comunes/" in url_comun,

@@ -271,11 +271,11 @@ var CINQ_OPORTUNIDADES = [
       "Son 66,93 m² construidos y 59,98 m² privados en el piso 7. La cocina, con isla en cuarzo, abre a la sala comedor, que termina en un balcón amplio con vista a la montaña. Tres alcobas, la principal con vestier y baño propio, dos baños con espejo circular retroiluminado, zona de ropas independiente, cuarto útil y un parqueadero, estos dos últimos en obra gris. Es un apartamento nuevo, con acabados listos y desocupado en las fotos. Lo aceptamos porque lo que muestran las fotos coincide con lo declarado y porque tres alcobas con estos acabados y esta vista no es lo corriente a este precio en el sector."
     ],
     fotos: [
-      { archivo: "ecoh-710-01-sala-comedor.jpg",             alt: "Sala comedor con ventanal en esquina y piso laminado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-02-sala-comedor-ventanal.jpg",    alt: "Sala comedor hacia el ventanal, con la montaña al fondo, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-03-cocina-isla.jpg",              alt: "Cocina abierta con isla en cuarzo integrada a la sala comedor, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-04-cocina-frontal.jpg",           alt: "Cocina integral con estufa a gas, horno, microondas y luz bajo los muebles aéreos, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-05-cocina-meson.jpg",             alt: "Mesón de la cocina en cuarzo con lavaplatos, estufa a gas y horno empotrado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-01-cocina-isla.jpg",              alt: "Cocina abierta con isla en cuarzo integrada a la sala comedor, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-02-cocina-frontal.jpg",           alt: "Cocina integral con estufa a gas, horno, microondas y luz bajo los muebles aéreos, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-03-cocina-meson.jpg",             alt: "Mesón de la cocina en cuarzo con lavaplatos, estufa a gas y horno empotrado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-04-sala-comedor.jpg",             alt: "Sala comedor con ventanal en esquina y piso laminado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-05-sala-comedor-ventanal.jpg",    alt: "Sala comedor hacia el ventanal, con la montaña al fondo, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
       { archivo: "ecoh-710-06-balcon.jpg",                   alt: "Balcón con baranda en vidrio y vista a la montaña, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
       { archivo: "ecoh-710-07-vista-piscina.jpg",            alt: "Vista desde el balcón hacia la piscina en terraza y la montaña, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
       { archivo: "ecoh-710-08-vista-canchas.jpg",            alt: "Vista desde el balcón hacia la cancha sintética y los juegos infantiles del proyecto, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
