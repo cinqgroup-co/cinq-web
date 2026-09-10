@@ -63,13 +63,19 @@ var CINQ = (function(){
     '</picture>';
   }
 
-  /* El mensaje prellenado no usa el titulo: ahora los titulos son solo la zona
-     y repetirlos junto a zonaDetalle decia dos veces lo mismo sin identificar
-     el inmueble. Con subtipo y precio, quien escribe deja claro cual es. */
+  /* El mensaje prellenado usa el TITULO, no la zona. Antes usaba zonaDetalle
+     porque los titulos eran solo el municipio y el sector, y repetirlos no
+     identificaba nada. Eso dejo de ser cierto: los titulos ahora llevan el
+     nombre del proyecto o del apartamento, asi que son lo unico que distingue
+     dos inmuebles del mismo edificio.
+
+     Con la zona pasaba esto, y es un problema real de atribucion: los dos
+     apartamentos de Aluna generaban el MISMO mensaje salvo por el precio, o
+     sea que si un precio cambia, un enlace viejo ya no dice por cual escriben. */
   function enlaceWhatsapp(op){
     var texto = op
-      ? 'Hola CINQ, me interesa esta oportunidad: ' + op.subtipo + ' en ' +
-        op.zonaDetalle + ', ' + precio(op.precio) + '.'
+      ? 'Hola CINQ, me interesa esta oportunidad: ' + op.titulo + ', ' +
+        precio(op.precio) + '.'
       : 'Hola CINQ, quiero saber mas sobre el portafolio.';
     return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto);
   }

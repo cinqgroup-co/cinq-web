@@ -64,7 +64,11 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Envigado, Las Antillas",
+    /* El titulo lleva el numero del apartamento porque en Aluna hay dos en
+       venta, en el mismo piso 14. Con "Envigado, Las Antillas" a secas las dos
+       tarjetas del portafolio eran identicas salvo por el precio.
+       El slug NO se cambia: es la URL y ya se ha compartido por WhatsApp. */
+    titulo: "Envigado, Aluna 1405",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     /* Bajado de 475 a 455 millones el 9 de septiembre de 2026, por decisión
@@ -125,7 +129,7 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Envigado, Las Antillas",
+    titulo: "Envigado, Aluna 1404",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     precio: 465000000,
@@ -134,7 +138,12 @@ var CINQ_OPORTUNIDADES = [
        cliente. Depende del área, así que hay que confirmarla con la propietaria
        antes de desplegar. Piso y estrato se deducen del edificio (mismo que el
        1405). La fila de Permuta no está porque todavía no hay dato: no se
-       inventa ninguna. */
+       inventa ninguna.
+
+       PENDIENTE: esta es la única ficha con la etiqueta "Área" a secas. No se
+       sabe si los 69,5 m² son construidos o privados, y por eso no se puede
+       comparar por metro cuadrado contra el 1405, que está al lado y hoy pide
+       menos en total. Preguntárselo a la propietaria y renombrar la fila. */
     ficha: [
       ["Área", "69,5 m²"],
       ["Alcobas", "2"],
