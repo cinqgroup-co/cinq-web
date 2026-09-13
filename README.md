@@ -338,14 +338,15 @@ La primera foto del array es la portada de la tarjeta. El `slug` es la URL:
 
 **El título va siempre igual:** tipo de inmueble, municipio y sector, en ese orden y sin comas.
 `Apartamento Sabaneta Monteazul`. No lleva el número del apartamento ni nada que lo identifique por
-dentro: el título nombra el lugar, no la unidad.
+dentro: el título nombra el lugar, no la unidad. Tampoco lleva el nombre del proyecto o del
+edificio: el 710 es `Apartamento Sabaneta Loma de San José`, sin `Ecoh`.
 
 Eso hace que dos inmuebles del mismo sector compartan título, y hoy pasa con los dos de Las
-Antillas. Es deliberado, con lo que cuesta: en la tarjeta lo que los separa pasa a ser el precio y
-la foto de portada, y el mensaje de WhatsApp que arma la ficha queda igual salvo por el precio, así
-que un enlace viejo deja de decir por cuál de los dos escriben si un precio cambia. Si eso llega a
-estorbar, la salida es sumarle atrás al título lo mínimo que los distinga, como hace hoy
-`Loma de San José Ecoh` con el nombre del proyecto.
+Antillas y con los dos de Loma de San José. Es deliberado, con lo que cuesta: en la tarjeta lo que
+los separa pasa a ser el precio y la foto de portada, y el mensaje de WhatsApp que arma la ficha
+queda igual salvo por el precio, así que un enlace viejo deja de decir por cuál de los dos escriben
+si un precio cambia. Si eso llega a estorbar, hay que buscar otra forma de distinguirlos: el número
+del apartamento y el nombre del proyecto ya se descartaron.
 
 `verificar` lo avisa sin frenar la publicación. Lo que sí frena es que además coincida el precio:
 ahí ya no queda nada que las separe, ni en la tarjeta ni en el mensaje de WhatsApp.
@@ -468,11 +469,9 @@ python herramientas/probar-bot.py
 Simula mensajes entrantes, intercepta el envío y comprueba los límites de WhatsApp (20 caracteres
 por botón, 24 por fila de lista), la validación de la firma y el parseo del catálogo real.
 
-**Las filas de la lista no llevan el título completo.** `Apartamento Sabaneta Loma de San José Ecoh`
-no cabe en 24 caracteres, y recortado de frente daba exactamente el mismo texto que el otro
-apartamento de Loma de San José: dos filas iguales, imposibles de distinguir. `titulo_corto()` le
-quita por delante el tipo de inmueble y el municipio, que la fila ya dice en su línea de abajo, y
-deja el sector con lo que lo distinga: `Loma de San José Ecoh`.
+**Las filas de la lista no llevan el título completo.** `Apartamento Sabaneta Loma de San José`
+no cabe en 24 caracteres. `titulo_corto()` le quita por delante el tipo de inmueble y el municipio,
+que la fila ya dice en su línea de abajo, y deja el sector: `Loma de San José`.
 
 La prueba comprueba que las filas de una misma lista sigan siendo distintas, y compara la fila
 entera, no solo el título: los dos de Las Antillas comparten nombre a propósito y lo que los separa

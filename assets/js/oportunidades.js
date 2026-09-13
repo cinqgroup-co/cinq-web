@@ -14,14 +14,18 @@
    apartamento ni nada que lo identifique por dentro: el título nombra el
    lugar, no la unidad.
 
+   Tampoco lleva el nombre del proyecto o del edificio: el 710 es "Apartamento
+   Sabaneta Loma de San José", sin "Ecoh".
+
    Por eso dos inmuebles del mismo sector comparten título, y hoy pasa con los
-   dos de Las Antillas. Es una decisión de Samuel del 13 de septiembre de 2026,
-   tomada sabiendo lo que cuesta: lo que los distingue en la tarjeta pasa a ser
-   el precio y la foto de portada, y el mensaje de WhatsApp que arma la ficha
-   también queda igual salvo por el precio, así que un enlace viejo deja de
-   decir por cuál de los dos escriben si un precio cambia. Si eso llega a
-   estorbar, la salida es sumarle atrás al título lo mínimo que los distinga,
-   como hace hoy "Loma de San José Ecoh" con el nombre del proyecto.
+   dos de Las Antillas y con los dos de Loma de San José. Es una decisión de
+   Samuel del 13 de septiembre de 2026, tomada sabiendo lo que cuesta: lo que
+   los distingue en la tarjeta pasa a ser el precio y la foto de portada, y el
+   mensaje de WhatsApp que arma la ficha también queda igual salvo por el
+   precio, así que un enlace viejo deja de decir por cuál de los dos escriben
+   si un precio cambia. Si eso llega a estorbar, hay que buscar otra forma de
+   distinguirlos: el número del apartamento y el nombre del proyecto ya se
+   descartaron.
 
    PLANTILLA (propiedad):
    {
@@ -421,7 +425,7 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Apartamento Sabaneta Loma de San José Ecoh",
+    titulo: "Apartamento Sabaneta Loma de San José",
     zona: "Sabaneta",
     zonaDetalle: "Loma de San José, Sabaneta, Antioquia",
     precio: 540000000,
@@ -457,7 +461,7 @@ var CINQ_OPORTUNIDADES = [
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
        espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
     en: {
-      titulo: "Apartment in Sabaneta, Loma de San José Ecoh",
+      titulo: "Apartment in Sabaneta, Loma de San José",
       ficha: [
         ["Built area", "66.93 m²"],
         ["Private area", "59.98 m²"],
@@ -478,62 +482,62 @@ var CINQ_OPORTUNIDADES = [
       ],
       /* Un alt por foto, en el mismo orden que fotos[]. */
       alts: [
-        "Open kitchen with quartz island integrated into the living and dining room, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Fitted kitchen with gas stove, oven, microwave and lighting under the wall units, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Quartz kitchen countertop with sink, gas stove and built in oven, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Living and dining room with corner window and laminate flooring, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Living and dining room towards the window, with the mountain behind, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Balcony with glass railing and mountain views, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "View from the balcony towards the rooftop pool and the mountain, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "View from the balcony towards the artificial turf pitch and the playground, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "View from the balcony towards the neighbouring towers and the trees on the hillside, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Main bedroom with access to the walk in closet and its own bathroom, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Main bedroom seen from the door, with the window at the back, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Walk in closet with wooden shelving, drawers and hanging rails, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Main bathroom with backlit round mirror, quartz countertop and wooden slats, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Main bathroom shower tiled floor to ceiling, with a recessed niche, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Second bedroom with sliding window and laminate flooring, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Third bedroom seen from the door, with a sliding window, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Third bedroom window overlooking the neighbouring towers, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Guest bathroom with backlit round mirror and wooden slats, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Separate laundry area with wash basin, gas water heater and electrical panel, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Storage room in bare concrete, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Covered parking space in bare concrete, unit 710 at Ecoh, Loma San José, Sabaneta",
-        "Rooftop pool with mountain views at Ecoh, Loma San José, Sabaneta",
-        "Pool terrace with sun loungers and mountain views at Ecoh, Loma San José, Sabaneta",
-        "Social room with coworking tables and hanging chairs at Ecoh, Loma San José, Sabaneta",
-        "Events hall with double height windows over the bamboo grove at Ecoh, Loma San José, Sabaneta",
-        "Bar and kitchen of the events hall at Ecoh, Loma San José, Sabaneta"
+        "Open kitchen with quartz island integrated into the living and dining room, unit 710 in Loma San José, Sabaneta",
+        "Fitted kitchen with gas stove, oven, microwave and lighting under the wall units, unit 710 in Loma San José, Sabaneta",
+        "Quartz kitchen countertop with sink, gas stove and built in oven, unit 710 in Loma San José, Sabaneta",
+        "Living and dining room with corner window and laminate flooring, unit 710 in Loma San José, Sabaneta",
+        "Living and dining room towards the window, with the mountain behind, unit 710 in Loma San José, Sabaneta",
+        "Balcony with glass railing and mountain views, unit 710 in Loma San José, Sabaneta",
+        "View from the balcony towards the rooftop pool and the mountain, unit 710 in Loma San José, Sabaneta",
+        "View from the balcony towards the artificial turf pitch and the playground, unit 710 in Loma San José, Sabaneta",
+        "View from the balcony towards the neighbouring towers and the trees on the hillside, unit 710 in Loma San José, Sabaneta",
+        "Main bedroom with access to the walk in closet and its own bathroom, unit 710 in Loma San José, Sabaneta",
+        "Main bedroom seen from the door, with the window at the back, unit 710 in Loma San José, Sabaneta",
+        "Walk in closet with wooden shelving, drawers and hanging rails, unit 710 in Loma San José, Sabaneta",
+        "Main bathroom with backlit round mirror, quartz countertop and wooden slats, unit 710 in Loma San José, Sabaneta",
+        "Main bathroom shower tiled floor to ceiling, with a recessed niche, unit 710 in Loma San José, Sabaneta",
+        "Second bedroom with sliding window and laminate flooring, unit 710 in Loma San José, Sabaneta",
+        "Third bedroom seen from the door, with a sliding window, unit 710 in Loma San José, Sabaneta",
+        "Third bedroom window overlooking the neighbouring towers, unit 710 in Loma San José, Sabaneta",
+        "Guest bathroom with backlit round mirror and wooden slats, unit 710 in Loma San José, Sabaneta",
+        "Separate laundry area with wash basin, gas water heater and electrical panel, unit 710 in Loma San José, Sabaneta",
+        "Storage room in bare concrete, unit 710 in Loma San José, Sabaneta",
+        "Covered parking space in bare concrete, unit 710 in Loma San José, Sabaneta",
+        "Rooftop pool with mountain views in Loma San José, Sabaneta",
+        "Pool terrace with sun loungers and mountain views in Loma San José, Sabaneta",
+        "Social room with coworking tables and hanging chairs in Loma San José, Sabaneta",
+        "Events hall with double height windows over the bamboo grove in Loma San José, Sabaneta",
+        "Bar and kitchen of the events hall in Loma San José, Sabaneta"
       ]
     },
     fotos: [
-      { archivo: "ecoh-710-01-cocina-isla.jpg",              alt: "Cocina abierta con isla en cuarzo integrada a la sala comedor, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-02-cocina-frontal.jpg",           alt: "Cocina integral con estufa a gas, horno, microondas y luz bajo los muebles aéreos, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-03-cocina-meson.jpg",             alt: "Mesón de la cocina en cuarzo con lavaplatos, estufa a gas y horno empotrado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-04-sala-comedor.jpg",             alt: "Sala comedor con ventanal en esquina y piso laminado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-05-sala-comedor-ventanal.jpg",    alt: "Sala comedor hacia el ventanal, con la montaña al fondo, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-06-balcon.jpg",                   alt: "Balcón con baranda en vidrio y vista a la montaña, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-07-vista-piscina.jpg",            alt: "Vista desde el balcón hacia la piscina en terraza y la montaña, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-08-vista-canchas.jpg",            alt: "Vista desde el balcón hacia la cancha sintética y los juegos infantiles del proyecto, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-09-vista-entorno.jpg",            alt: "Vista desde el balcón hacia las torres vecinas y la arborización de la loma, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-10-alcoba-principal.jpg",         alt: "Alcoba principal con acceso al vestier y al baño propio, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-11-alcoba-principal-ventana.jpg", alt: "Alcoba principal vista desde la puerta, con la ventana al fondo, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-12-vestier.jpg",                  alt: "Vestier con entrepaños en madera, cajones y barras para colgar, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-13-bano-principal.jpg",           alt: "Baño principal con espejo circular retroiluminado, mesón en cuarzo y lamas en madera, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-14-bano-principal-ducha.jpg",     alt: "Ducha del baño principal enchapada de piso a techo, con nicho, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-15-alcoba-2.jpg",                 alt: "Segunda alcoba con ventana corrediza y piso laminado, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-16-alcoba-3.jpg",                 alt: "Tercera alcoba vista desde la puerta, con ventana corrediza, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-17-alcoba-3-ventana.jpg",         alt: "Ventana de la tercera alcoba con vista a las torres vecinas, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-18-bano-social.jpg",              alt: "Baño social con espejo circular retroiluminado y lamas en madera, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-19-zona-ropas.jpg",               alt: "Zona de ropas independiente con lavadero, calentador a gas y tablero eléctrico, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-20-cuarto-util.jpg",              alt: "Cuarto útil en obra gris, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-710-21-parqueadero.jpg",              alt: "Parqueadero cubierto en obra gris, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-01-cocina-isla.jpg",              alt: "Cocina abierta con isla en cuarzo integrada a la sala comedor, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-02-cocina-frontal.jpg",           alt: "Cocina integral con estufa a gas, horno, microondas y luz bajo los muebles aéreos, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-03-cocina-meson.jpg",             alt: "Mesón de la cocina en cuarzo con lavaplatos, estufa a gas y horno empotrado, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-04-sala-comedor.jpg",             alt: "Sala comedor con ventanal en esquina y piso laminado, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-05-sala-comedor-ventanal.jpg",    alt: "Sala comedor hacia el ventanal, con la montaña al fondo, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-06-balcon.jpg",                   alt: "Balcón con baranda en vidrio y vista a la montaña, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-07-vista-piscina.jpg",            alt: "Vista desde el balcón hacia la piscina en terraza y la montaña, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-08-vista-canchas.jpg",            alt: "Vista desde el balcón hacia la cancha sintética y los juegos infantiles del proyecto, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-09-vista-entorno.jpg",            alt: "Vista desde el balcón hacia las torres vecinas y la arborización de la loma, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-10-alcoba-principal.jpg",         alt: "Alcoba principal con acceso al vestier y al baño propio, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-11-alcoba-principal-ventana.jpg", alt: "Alcoba principal vista desde la puerta, con la ventana al fondo, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-12-vestier.jpg",                  alt: "Vestier con entrepaños en madera, cajones y barras para colgar, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-13-bano-principal.jpg",           alt: "Baño principal con espejo circular retroiluminado, mesón en cuarzo y lamas en madera, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-14-bano-principal-ducha.jpg",     alt: "Ducha del baño principal enchapada de piso a techo, con nicho, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-15-alcoba-2.jpg",                 alt: "Segunda alcoba con ventana corrediza y piso laminado, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-16-alcoba-3.jpg",                 alt: "Tercera alcoba vista desde la puerta, con ventana corrediza, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-17-alcoba-3-ventana.jpg",         alt: "Ventana de la tercera alcoba con vista a las torres vecinas, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-18-bano-social.jpg",              alt: "Baño social con espejo circular retroiluminado y lamas en madera, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-19-zona-ropas.jpg",               alt: "Zona de ropas independiente con lavadero, calentador a gas y tablero eléctrico, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-20-cuarto-util.jpg",              alt: "Cuarto útil en obra gris, apartamento 710 en Loma San José, Sabaneta" },
+      { archivo: "ecoh-710-21-parqueadero.jpg",              alt: "Parqueadero cubierto en obra gris, apartamento 710 en Loma San José, Sabaneta" },
 
-      { archivo: "ecoh-zonas-comunes/ecoh-zc-01-piscina.jpg",             alt: "Piscina en terraza con vista a la montaña en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-zonas-comunes/ecoh-zc-02-piscina-terraza.jpg",     alt: "Terraza de la piscina con asoleadoras y vista a la montaña en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-zonas-comunes/ecoh-zc-03-coworking.jpg",           alt: "Salón social con mesas de coworking y sillas colgantes en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-zonas-comunes/ecoh-zc-04-salon-eventos.jpg",       alt: "Salón de eventos con ventanales de doble altura sobre el guadual en Ecoh, Loma San José, Sabaneta" },
-      { archivo: "ecoh-zonas-comunes/ecoh-zc-05-salon-eventos-barra.jpg", alt: "Barra y cocina del salón de eventos en Ecoh, Loma San José, Sabaneta" }
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-01-piscina.jpg",             alt: "Piscina en terraza con vista a la montaña en Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-02-piscina-terraza.jpg",     alt: "Terraza de la piscina con asoleadoras y vista a la montaña en Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-03-coworking.jpg",           alt: "Salón social con mesas de coworking y sillas colgantes en Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-04-salon-eventos.jpg",       alt: "Salón de eventos con ventanales de doble altura sobre el guadual en Loma San José, Sabaneta" },
+      { archivo: "ecoh-zonas-comunes/ecoh-zc-05-salon-eventos-barra.jpg", alt: "Barra y cocina del salón de eventos en Loma San José, Sabaneta" }
     ]
   },
 

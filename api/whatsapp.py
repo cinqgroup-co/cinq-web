@@ -143,8 +143,8 @@ def titulo_corto(op):
     mismo texto, o sea dos filas identicas que no se pueden distinguir.
 
     Aqui se le quitan por delante las dos partes que la fila ya dice en su
-    linea de abajo, el tipo de inmueble y el municipio, y queda el sector con
-    lo que lo distinga: "Las Antillas 1405", "Loma de San Jose Ecoh". Si el
+    linea de abajo, el tipo de inmueble y el municipio, y queda el sector:
+    "Las Antillas", "Loma de San Jose". Si el
     titulo no empieza como se espera no se toca nada y lo corta enviar_lista.
     """
     titulo = " ".join((op.get("titulo") or "").split())

@@ -206,7 +206,7 @@ def cmd_plantilla(args):
     print("Escrito: %s\n" % destino)
     print("Campos que conviene entender:")
     print("  alt_sufijo   se pega al final de cada alt. Por ejemplo:")
-    print("               'apartamento 710 en Ecoh, Loma San José, Sabaneta'")
+    print("               'apartamento 710 en Loma San José, Sabaneta'")
     print("  nota         comentario que queda en el codigo, para dejar")
     print("               escrito de donde salio cada dato y que falta")
     print("  ficha        las primeras CUATRO filas son las que salen en el")
