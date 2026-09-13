@@ -159,6 +159,13 @@ for f in filas:
     revisar(len(f["title"]) <= 24, "titulo '%s' cabe en 24" % f["title"])
     revisar(len(f["description"]) <= 72, "descripcion cabe en 72")
 
+# Los titulos del catalogo son "Apartamento <municipio> <sector>" y no caben en
+# 24 caracteres: recortados de frente, dos inmuebles del mismo sector daban la
+# misma fila. Que sigan siendo distintos es lo que se esta cuidando aqui.
+titulos = [f["title"] for f in filas]
+revisar(len(set(titulos)) == len(titulos),
+        "cada fila de la lista se distingue de las demas", titulos)
+
 accion, msgs = correr("Elige el 710", boton="op:ecoh-710-loma-san-jose")
 revisar(accion == "ficha", "manda la ficha")
 revisar(msgs[0]["type"] == "image", "la ficha entra por la foto de portada")

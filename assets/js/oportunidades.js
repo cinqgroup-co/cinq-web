@@ -9,13 +9,18 @@
 
    REGLA DEL SITIO: nada simulado. Si no hay foto propia y precio real, no se agrega.
 
+   EL TÍTULO. Va siempre igual: tipo de inmueble, municipio y sector, en ese
+   orden y sin comas. "Apartamento Sabaneta Monteazul". Solo si dos fichas
+   quedaran con el mismo nombre se le suma atrás lo mínimo que las distinga:
+   el número del apartamento en Aluna, el del proyecto en Loma de San José.
+
    PLANTILLA (propiedad):
    {
      slug: "apartamento-las-antillas-01",     // sin tildes ni espacios; es la URL
      tipo: "Propiedad",                        // "Propiedad" o "Vehículo"
      subtipo: "Apartamento",
      operacion: "Venta",                       // "Venta" o "Arriendo"
-     titulo: "Apartamento, Las Antillas",
+     titulo: "Apartamento Envigado Las Antillas",
      zona: "Envigado",
      zonaDetalle: "Las Antillas, Envigado, Antioquia",
      precio: 459000000,                        // número, sin puntos ni comillas
@@ -33,11 +38,28 @@
        "Primer párrafo: la zona y por qué importa.",
        "Segundo párrafo: el inmueble y por qué CINQ lo aceptó."
      ],
+     en: { ... },                              // opcional; ver abajo
      fotos: [                                  // la primera es la portada
        { archivo: "p14-01-fachada.jpg", alt: "Fachada del edificio desde la calle" },
        { archivo: "p14-02-sala.jpg",    alt: "Sala comedor con ventanal" }
      ]
    }
+
+   EL BLOQUE en. Es lo que se lee cuando el visitante pone el sitio en inglés
+   con el botón ES/EN de la barra. Todo lo de adentro es opcional: lo que falte
+   cae al español, así que una ficha sin bloque en igual se ve, y una foto nueva
+   sin su alt en inglés no rompe nada.
+
+     en: {
+       titulo: "Apartment in Envigado, Las Antillas",
+       ficha: [["Built area", "67.5 m²"], ["Stratum", "5"]],   // punto decimal
+       descripcion: ["First paragraph.", "Second paragraph."],
+       alts: ["Building facade from the street", "Living room with window"]
+     }
+
+   Los alts van en el MISMO orden que fotos[], uno por foto. Lo que no se
+   traduce nunca: tipo, subtipo, operación y zona, que son palabras de una lista
+   cerrada y las traduce site.js, y zonaDetalle, que son nombres propios.
 
    Cada foto necesita su alt: es lo que lee un lector de pantalla y lo que se
    ve si la imagen no carga. Junto a cada .jpg debe existir su .webp con el
@@ -68,7 +90,7 @@ var CINQ_OPORTUNIDADES = [
        venta, en el mismo piso 14. Con "Envigado, Las Antillas" a secas las dos
        tarjetas del portafolio eran identicas salvo por el precio.
        El slug NO se cambia: es la URL y ya se ha compartido por WhatsApp. */
-    titulo: "Envigado, Aluna 1405",
+    titulo: "Apartamento Envigado Las Antillas 1405",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     /* Bajado de 475 a 455 millones el 9 de septiembre de 2026, por decisión
@@ -93,6 +115,58 @@ var CINQ_OPORTUNIDADES = [
       "Las Antillas resume bien lo que busca quien se muda a Envigado: cerca de la Avenida El Poblado y de la zona de servicios, pero con la montaña al frente y el ruido lejos. El edificio está en la parte alta del sector, y ahí está buena parte del valor de este inmueble. El apartamento ocupa el último piso de la torre: vista panorámica sobre el valle, ventanales de piso a techo y luz natural durante todo el día.",
       "Son 67,5 m² construidos y 62,5 m² privados, con dos alcobas, dos baños, vestier, cuarto útil, zona de ropas independiente y una cocina con isla abierta a la sala comedor. Viene con un parqueadero. Lo aceptamos porque lo declarado por el propietario coincide con lo que muestran las fotos de la visita, tomadas con el apartamento desocupado y sin intervenir, y porque un último piso con esta vista y esta iluminación no abunda en el sector. El propietario acepta permuta."
     ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
+       espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
+    en: {
+      titulo: "Apartment in Envigado, Las Antillas 1405",
+      ficha: [
+        ["Built area", "67.5 m²"],
+        ["Bedrooms", "2"],
+        ["Bathrooms", "2"],
+        ["Parking space", "1"],
+        ["Storage room", "Yes"],
+        ["Private area", "62.5 m²"],
+        ["Floor", "14 of 14"],
+        ["Socioeconomic stratum", "4"],
+        ["HOA fee", "COP 545,000 / month"],
+        ["Age", "1 to 8 years"],
+        ["Property exchange", "Accepted"],
+        ["Amenities", "Children's and adults' pools, gym, steam room, cinema room, bowling alley, BBQ terrace, playground, daycare, games room and rooftop viewpoint"]
+      ],
+      descripcion: [
+        "Las Antillas sums up what people look for when they move to Envigado: close to Avenida El Poblado and to the shops and services, but with the mountain in front and the noise far away. The building sits in the upper part of the sector, and much of the value of this home is right there. The apartment occupies the top floor of the tower: panoramic views over the valley, floor to ceiling windows and natural light all day long.",
+        "It has 67.5 m² built and 62.5 m² private, with two bedrooms, two bathrooms, a walk in closet, a storage room, a separate laundry area and a kitchen with an island open to the living and dining room. It comes with one parking space. We accepted it because what the owner declared matches what the photos from our visit show, taken with the apartment empty and untouched, and because a top floor with this view and this light is not common in the sector. The owner accepts a property exchange."
+      ],
+      /* Un alt por foto, en el mismo orden que fotos[]. */
+      alts: [
+        "Living and dining room with floor to ceiling windows and panoramic views, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Living room with floor to ceiling window opening onto the balcony, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Living and dining room facing the balcony, with the kitchen bar in front, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Open kitchen integrated into the living and dining room, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Kitchen with central island and white quartz countertop, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Kitchen with sink and island seen from the dining room, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Fitted kitchen with gas stove, oven and extractor hood, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Main bedroom with panoramic window and laminate flooring, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Sliding door closet with wooden shelving, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Walk in closet with shelving, drawers and hanging rail, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Main bathroom with tempered glass shower, window and vanity unit, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Second bedroom with large window and mountain views, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Second bedroom with access to the walk in closet, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Guest bathroom with sink, mirror and ceramic finishes, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Separate laundry area with wash basin and gas water heater, unit 1405 at Aluna, Las Antillas, Envigado",
+        "Adults' pool at Aluna, Las Antillas, Envigado",
+        "Children's pool with water features at Aluna, Las Antillas, Envigado",
+        "Water playground next to the children's pool at Aluna, Las Antillas, Envigado",
+        "Rooftop viewpoint terrace with benches and mountain views at Aluna, Las Antillas, Envigado",
+        "Walkway along the viewpoint terrace with open views at Aluna, Las Antillas, Envigado",
+        "BBQ terrace with gas grill at Aluna, Las Antillas, Envigado",
+        "Social room with floor to ceiling windows at Aluna, Las Antillas, Envigado",
+        "Games room with ping pong table at Aluna, Las Antillas, Envigado",
+        "Bowling alley at Aluna, Las Antillas, Envigado",
+        "Cinema room with reclining seats at Aluna, Las Antillas, Envigado",
+        "Gym with machines and free weights at Aluna, Las Antillas, Envigado"
+      ]
+    },
     fotos: [
       { archivo: "aluna-1405-01-sala-comedor.jpg",     alt: "Sala comedor con ventanales y vista panorámica, apartamento 1405 en Aluna, Las Antillas, Envigado" },
       { archivo: "aluna-1405-02-sala-balcon.jpg",      alt: "Sala con ventanal de piso a techo y salida al balcón, apartamento 1405 en Aluna, Las Antillas, Envigado" },
@@ -129,7 +203,7 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Envigado, Aluna 1404",
+    titulo: "Apartamento Envigado Las Antillas 1404",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     precio: 465000000,
@@ -160,6 +234,56 @@ var CINQ_OPORTUNIDADES = [
       "En la parte alta de Las Antillas, el costado de Envigado que tiene los colegios, los supermercados y la Avenida El Poblado a pocos minutos, pero sin la congestión de la zona plana. Este apartamento está en el piso 14, el último de la torre, con el balcón mirando a la ladera y sin nada que le corte la luz de la mañana.",
       "Son 69,5 m² con dos alcobas, dos baños, cuarto útil y zona de ropas independiente. La alcoba principal llega al baño a través de un vestier de paso, con entrepaños a lado y lado, y la cocina, con mesón en granito, isla móvil, horno y estufa a gas, abre al comedor, que sale al balcón. Incluye un parqueadero. Nos llegó por referido de otro propietario del mismo edificio. Lo aceptamos porque está desocupado y sin intervenir, tal como se ve en las fotos, y porque el área y los acabados sostienen el precio que pide."
     ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
+       espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
+    en: {
+      titulo: "Apartment in Envigado, Las Antillas 1404",
+      ficha: [
+        ["Area", "69.5 m²"],
+        ["Bedrooms", "2"],
+        ["Bathrooms", "2"],
+        ["Parking space", "1"],
+        ["Storage room", "Yes"],
+        ["Floor", "14 of 14"],
+        ["Socioeconomic stratum", "4"],
+        ["HOA fee", "COP 555,000 / month"],
+        ["Age", "1 to 8 years"],
+        ["Amenities", "Children's and adults' pools, gym, steam room, cinema room, bowling alley, BBQ terrace, playground, daycare, games room and rooftop viewpoint"]
+      ],
+      descripcion: [
+        "In the upper part of Las Antillas, the side of Envigado that has the schools, the supermarkets and Avenida El Poblado a few minutes away, but without the congestion of the flat part of town. This apartment is on the 14th floor, the top one in the tower, with the balcony facing the hillside and nothing blocking the morning light.",
+        "It has 69.5 m² with two bedrooms, two bathrooms, a storage room and a separate laundry area. The main bedroom reaches the bathroom through a walk through closet with shelving on both sides, and the kitchen, with a granite countertop, a movable island, an oven and a gas stove, opens onto the dining room, which leads out to the balcony. One parking space is included. It came to us through a referral from another owner in the same building. We accepted it because it is empty and untouched, exactly as the photos show, and because the area and the finishes hold up the asking price."
+      ],
+      /* Un alt por foto, en el mismo orden que fotos[]. */
+      alts: [
+        "Living and dining room with large window, kitchen bar and access to the balcony, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Living and dining room towards the kitchen and the balcony window, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Living and dining room seen lengthwise, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Balcony with hillside views from the 14th floor, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Kitchen with movable island, gas stove and oven, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Kitchen with granite countertop and sink under the window, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Main bedroom with laminate flooring and access to the walk in closet, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Main bedroom looking towards the walk in closet and the bathroom, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Walk through closet with shelving on both sides, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Walk in closet with shelving, drawers and hanging rail, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Main bathroom with tempered glass shower, mirror and vanity unit, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Second bedroom with sliding door closet and window, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Second bedroom with large window and mountain views, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Guest bathroom with tempered glass shower and window, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Separate laundry area with wash basin and gas water heater, unit 1404 at Aluna, Las Antillas, Envigado",
+        "Adults' pool at Aluna, Las Antillas, Envigado",
+        "Children's pool with water features at Aluna, Las Antillas, Envigado",
+        "Water playground next to the children's pool at Aluna, Las Antillas, Envigado",
+        "Rooftop viewpoint terrace with benches and mountain views at Aluna, Las Antillas, Envigado",
+        "Walkway along the viewpoint terrace with open views at Aluna, Las Antillas, Envigado",
+        "BBQ terrace with gas grill at Aluna, Las Antillas, Envigado",
+        "Social room with floor to ceiling windows at Aluna, Las Antillas, Envigado",
+        "Games room with ping pong table at Aluna, Las Antillas, Envigado",
+        "Bowling alley at Aluna, Las Antillas, Envigado",
+        "Cinema room with reclining seats at Aluna, Las Antillas, Envigado",
+        "Gym with machines and free weights at Aluna, Las Antillas, Envigado"
+      ]
+    },
     fotos: [
       { archivo: "aluna-1404-01-sala-comedor.jpg",     alt: "Sala comedor con ventanal, barra de cocina y salida al balcón, apartamento 1404 en Aluna, Las Antillas, Envigado" },
       { archivo: "aluna-1404-02-sala-cocina.jpg",      alt: "Sala comedor hacia la cocina y el ventanal del balcón, apartamento 1404 en Aluna, Las Antillas, Envigado" },
@@ -196,7 +320,7 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Sabaneta, Loma de San José",
+    titulo: "Apartamento Sabaneta Loma de San José",
     zona: "Sabaneta",
     zonaDetalle: "Loma de San José, Sabaneta, Antioquia",
     precio: 350000000,
@@ -221,6 +345,46 @@ var CINQ_OPORTUNIDADES = [
       "La Loma de San José es de las zonas de Sabaneta donde todavía se vive con la ladera al frente sin quedar lejos de nada: el centro y la Avenida El Poblado están a pocos minutos. Lo que cambia el día a día aquí es el alimentador del Metro, que sube hasta la portería, así que se llega al sistema sin sacar el carro. El conjunto es cerrado y suma piscina, gimnasio, placa deportiva, salón social, salón de juegos, juegos infantiles y zonas verdes.",
       "Son 57 m² construidos y 53 m² privados en el piso 7. La sala comedor abre a la cocina integral por una barra estilo americano y termina en el balcón, que mira a la piscina y a la montaña. Tres habitaciones, dos baños enchapados de piso a techo, zona de ropas independiente, estufa y calentador a gas, piso en baldosa y un parqueadero privado. La tercera habitación sirve bien como estudio. Lo aceptamos porque lo declarado por la propietaria coincide con lo que muestran las fotos, tomadas con el apartamento desocupado, y porque tres habitaciones con parqueadero propio a este precio no es lo corriente en el sector."
     ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
+       espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
+    en: {
+      titulo: "Apartment in Sabaneta, Loma de San José",
+      ficha: [
+        ["Built area", "57 m²"],
+        ["Bedrooms", "3"],
+        ["Bathrooms", "2"],
+        ["Parking space", "1 private"],
+        ["Private area", "53 m²"],
+        ["Floor", "7"],
+        ["Socioeconomic stratum", "2"],
+        ["HOA fee", "COP 313,000 / month"],
+        ["Age", "1 to 8 years"],
+        ["Amenities", "Pool, gym, sports court, social room, games room, playground, green areas and gated entrance"]
+      ],
+      descripcion: [
+        "Loma de San José is one of those parts of Sabaneta where you still live with the hillside in front of you without being far from anything: the town centre and Avenida El Poblado are a few minutes away. What changes daily life here is the Metro feeder bus, which climbs all the way up to the gate, so you reach the system without taking the car out. The complex is gated and adds a pool, a gym, a sports court, a social room, a games room, a playground and green areas.",
+        "It has 57 m² built and 53 m² private on the 7th floor. The living and dining room opens to the fitted kitchen through a breakfast bar and ends at the balcony, which looks onto the pool and the mountain. Three bedrooms, two bathrooms tiled floor to ceiling, a separate laundry area, a gas stove and water heater, tiled flooring and one private parking space. The third bedroom works well as a study. We accepted it because what the owner declared matches what the photos show, taken with the apartment empty, and because three bedrooms with a private parking space at this price is not the norm in the sector."
+      ],
+      /* Un alt por foto, en el mismo orden que fotos[]. */
+      alts: [
+        "Living and dining room with breakfast bar open to the kitchen and access to the balcony, apartment in Loma de San José, Sabaneta",
+        "Living and dining room with tiled flooring and passage to the kitchen, apartment in Loma de San José, Sabaneta",
+        "Fitted kitchen with gas stove, extractor hood and wall units, Loma de San José, Sabaneta",
+        "Hallway leading to the bedrooms and back to the kitchen, Loma de San José, Sabaneta",
+        "Bedroom with sliding door closet and tiled flooring, Loma de San José, Sabaneta",
+        "Second bedroom with built in closet and access to the hallway, Loma de San José, Sabaneta",
+        "Main bathroom with glass shower, dark floor to ceiling tiling and countertop basin, Loma de San José, Sabaneta",
+        "Second bathroom with floor to ceiling tiled shower and vanity unit, Loma de San José, Sabaneta",
+        "View from the balcony towards the other towers and the mountain, Loma de San José, Sabaneta",
+        "View from the balcony towards the complex pool, Loma de San José, Sabaneta",
+        "Separate laundry area with wash basin and gas water heater, Loma de San José, Sabaneta",
+        "Complex pool between the towers, Loma de San José, Sabaneta",
+        "Playground on artificial turf next to the hillside, Loma de San José, Sabaneta",
+        "Sports court with goal and basketball hoops, Loma de San José, Sabaneta",
+        "Open plan social room with windows onto the green areas, Loma de San José, Sabaneta",
+        "Private covered parking space in the basement, Loma de San José, Sabaneta"
+      ]
+    },
     fotos: [
       { archivo: "loma-san-jose-01-sala-comedor-balcon.jpg", alt: "Sala comedor con barra estilo americano abierta a la cocina y salida al balcón, apartamento en Loma de San José, Sabaneta" },
       { archivo: "loma-san-jose-02-sala-comedor.jpg",     alt: "Sala comedor con piso en baldosa y paso a la cocina, apartamento en Loma de San José, Sabaneta" },
@@ -246,7 +410,7 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Sabaneta, Ecoh Loma de San José",
+    titulo: "Apartamento Sabaneta Loma de San José Ecoh",
     zona: "Sabaneta",
     zonaDetalle: "Loma de San José, Sabaneta, Antioquia",
     precio: 540000000,
@@ -279,6 +443,58 @@ var CINQ_OPORTUNIDADES = [
       "La Loma de San José concentra hoy buena parte de la obra nueva de Sabaneta, y este proyecto está en la parte alta del sector: la montaña al frente, y el centro del municipio y la Avenida El Poblado a pocos minutos. Las zonas comunes ya están entregadas: piscina en terraza con vista a la montaña, salón social con coworking y salón de eventos de doble altura sobre el guadual.",
       "Son 66,93 m² construidos y 59,98 m² privados en el piso 7. La cocina, con isla en cuarzo, abre a la sala comedor, que termina en un balcón amplio con vista a la montaña. Tres alcobas, la principal con vestier y baño propio, dos baños con espejo circular retroiluminado, zona de ropas independiente, cuarto útil y un parqueadero, estos dos últimos en obra gris. Es un apartamento nuevo, con acabados listos y desocupado en las fotos. Lo aceptamos porque lo que muestran las fotos coincide con lo declarado y porque tres alcobas con estos acabados y esta vista no es lo corriente a este precio en el sector."
     ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
+       espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
+    en: {
+      titulo: "Apartment in Sabaneta, Loma de San José Ecoh",
+      ficha: [
+        ["Built area", "66.93 m²"],
+        ["Private area", "59.98 m²"],
+        ["Bedrooms", "3"],
+        ["Bathrooms", "2"],
+        ["Address", "Calle 77 Sur # 34-82"],
+        ["Parking space", "1"],
+        ["Storage room", "Yes"],
+        ["Floor", "7"],
+        ["Socioeconomic stratum", "4"],
+        ["HOA fee", "COP 491,000 / month"],
+        ["Age", "Less than 1 year"],
+        ["Amenities", "Rooftop pool, social room with coworking space and events hall"]
+      ],
+      descripcion: [
+        "Loma de San José concentrates much of Sabaneta's new construction today, and this project sits in the upper part of the sector: the mountain in front, and the town centre and Avenida El Poblado a few minutes away. The shared amenities are already delivered: a rooftop pool with mountain views, a social room with a coworking space, and a double height events hall overlooking the bamboo grove.",
+        "It has 66.93 m² built and 59.98 m² private on the 7th floor. The kitchen, with a quartz island, opens onto the living and dining room, which ends in a wide balcony with mountain views. Three bedrooms, the main one with a walk in closet and its own bathroom, two bathrooms with backlit round mirrors, a separate laundry area, a storage room and one parking space, the last two in bare concrete. It is a new apartment, with the finishes complete and empty in the photos. We accepted it because what the photos show matches what was declared, and because three bedrooms with these finishes and this view is not the norm at this price in the sector."
+      ],
+      /* Un alt por foto, en el mismo orden que fotos[]. */
+      alts: [
+        "Open kitchen with quartz island integrated into the living and dining room, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Fitted kitchen with gas stove, oven, microwave and lighting under the wall units, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Quartz kitchen countertop with sink, gas stove and built in oven, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Living and dining room with corner window and laminate flooring, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Living and dining room towards the window, with the mountain behind, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Balcony with glass railing and mountain views, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "View from the balcony towards the rooftop pool and the mountain, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "View from the balcony towards the artificial turf pitch and the playground, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "View from the balcony towards the neighbouring towers and the trees on the hillside, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Main bedroom with access to the walk in closet and its own bathroom, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Main bedroom seen from the door, with the window at the back, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Walk in closet with wooden shelving, drawers and hanging rails, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Main bathroom with backlit round mirror, quartz countertop and wooden slats, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Main bathroom shower tiled floor to ceiling, with a recessed niche, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Second bedroom with sliding window and laminate flooring, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Third bedroom seen from the door, with a sliding window, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Third bedroom window overlooking the neighbouring towers, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Guest bathroom with backlit round mirror and wooden slats, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Separate laundry area with wash basin, gas water heater and electrical panel, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Storage room in bare concrete, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Covered parking space in bare concrete, unit 710 at Ecoh, Loma San José, Sabaneta",
+        "Rooftop pool with mountain views at Ecoh, Loma San José, Sabaneta",
+        "Pool terrace with sun loungers and mountain views at Ecoh, Loma San José, Sabaneta",
+        "Social room with coworking tables and hanging chairs at Ecoh, Loma San José, Sabaneta",
+        "Events hall with double height windows over the bamboo grove at Ecoh, Loma San José, Sabaneta",
+        "Bar and kitchen of the events hall at Ecoh, Loma San José, Sabaneta"
+      ]
+    },
     fotos: [
       { archivo: "ecoh-710-01-cocina-isla.jpg",              alt: "Cocina abierta con isla en cuarzo integrada a la sala comedor, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
       { archivo: "ecoh-710-02-cocina-frontal.jpg",           alt: "Cocina integral con estufa a gas, horno, microondas y luz bajo los muebles aéreos, apartamento 710 en Ecoh, Loma San José, Sabaneta" },
@@ -315,7 +531,7 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Sabaneta, Río Secreto",
+    titulo: "Apartamento Sabaneta Monteazul",
     zona: "Sabaneta",
     zonaDetalle: "Monteazul, Sabaneta, Antioquia",
     precio: 620000000,
@@ -350,6 +566,50 @@ var CINQ_OPORTUNIDADES = [
       "Monteazul es de los sectores de Sabaneta donde la vida de conjunto pesa tanto como el apartamento: aquí la unidad tiene piscina con vista a la montaña, gimnasio equipado, cancha sintética, minigolf, zona de asados y plazoleta con juegos infantiles. El centro de Sabaneta y la Avenida El Poblado quedan a pocos minutos, y la administración es de $ 366.000, por debajo de lo que cobran la mayoría de las unidades comparables del sector.",
       "Son 85 m² en el piso 5, con tres alcobas, tres baños, estudio independiente con biblioteca, zona de ropas independiente, cuarto útil, balcón y parqueadero privado de 16 m². El apartamento está remodelado con un proyecto de diseño interior: la cocina se amplió y se integró a una barra circular en cuarzo, con muro texturizado y carpintería a la medida. Lo aceptamos porque, comparado metro a metro contra quince avisos del sector, queda por debajo de la mediana, y porque compite con acabados de diseño contra apartamentos entregados en obra gris."
     ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
+       espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
+    en: {
+      titulo: "Apartment in Sabaneta, Monteazul",
+      ficha: [
+        ["Built area", "85 m²"],
+        ["Bedrooms", "3"],
+        ["Bathrooms", "3"],
+        ["Parking space", "1 private, 16 m²"],
+        ["Study", "Separate"],
+        ["Storage room", "4 m²"],
+        ["Floor", "5"],
+        ["Socioeconomic stratum", "4"],
+        ["HOA fee", "COP 366,000 / month"],
+        ["Age", "1 to 8 years"],
+        ["Amenities", "Pool, gym, artificial turf football pitch, mini golf, BBQ area, playground and central plaza"]
+      ],
+      descripcion: [
+        "Monteazul is one of the parts of Sabaneta where life in the complex counts as much as the apartment itself: here the development has a pool with mountain views, an equipped gym, an artificial turf football pitch, mini golf, a barbecue area and a central plaza with a playground. The centre of Sabaneta and Avenida El Poblado are a few minutes away, and the HOA fee is COP 366,000, below what most comparable complexes in the sector charge.",
+        "It has 85 m² on the 5th floor, with three bedrooms, three bathrooms, a separate study with bookshelves, a separate laundry area, a storage room, a balcony and a private 16 m² parking space. The apartment has been renovated under an interior design project: the kitchen was extended and integrated into a circular quartz bar, with a textured wall and custom joinery. We accepted it because, compared square metre by square metre against fifteen listings in the sector, it comes in below the median, and because it competes with designer finishes against apartments delivered in bare concrete."
+      ],
+      /* Un alt por foto, en el mismo orden que fotos[]. */
+      alts: [
+        "Extended fitted kitchen with circular quartz bar, textured wall and custom joinery, Río Secreto, Monteazul, Sabaneta",
+        "Living room with sliding window onto the balcony and white porcelain flooring, apartment at Río Secreto, Monteazul, Sabaneta",
+        "Dining area with circular quartz bar, pendant light and textured wall, open to the balcony, Río Secreto, Monteazul, Sabaneta",
+        "Balcony with table, views over the complex green areas and the mountain, Río Secreto, Monteazul, Sabaneta",
+        "Separate study with bookshelves and custom desk, Río Secreto, Monteazul, Sabaneta",
+        "Main bedroom with floor to ceiling wooden closet, Río Secreto, Monteazul, Sabaneta",
+        "Second bedroom with laminate flooring, custom chest of drawers and window with blind, Río Secreto, Monteazul, Sabaneta",
+        "Third bedroom with bunk bed, desk and custom drawer unit, Río Secreto, Monteazul, Sabaneta",
+        "Bathroom with tempered glass shower, floor to ceiling tiling and full length mirror, Río Secreto, Monteazul, Sabaneta",
+        "Separate laundry area with wash basin, gas water heater and tall cabinet, Río Secreto, Monteazul, Sabaneta",
+        "Private covered parking space in the basement, Río Secreto, Monteazul, Sabaneta",
+        "Complex pool with mountain views, Río Secreto, Monteazul, Sabaneta",
+        "Pool terrace and children's pool, Río Secreto, Monteazul, Sabaneta",
+        "Gym with treadmills, spinning bikes and multi station machine, Río Secreto, Monteazul, Sabaneta",
+        "Artificial turf football pitch between the towers, Río Secreto, Monteazul, Sabaneta",
+        "Mini golf on the terrace with mountain views, Río Secreto, Monteazul, Sabaneta",
+        "Playground on artificial turf, Río Secreto, Monteazul, Sabaneta",
+        "BBQ area with built in counter and gas grill, next to the playground, Río Secreto, Monteazul, Sabaneta",
+        "Central plaza with gazebo and green areas, Río Secreto, Monteazul, Sabaneta"
+      ]
+    },
     fotos: [
       { archivo: "rio-secreto-01-cocina-barra.jpg",      alt: "Cocina integral ampliada con barra circular en cuarzo, muro texturizado y carpintería a la medida, Río Secreto, Monteazul, Sabaneta" },
       { archivo: "rio-secreto-02-sala.jpg",              alt: "Sala con ventanal corredizo al balcón y piso en porcelanato blanco, apartamento en Río Secreto, Monteazul, Sabaneta" },

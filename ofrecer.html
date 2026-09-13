@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ofrece tu propiedad o vehículo | CINQ</title>
-<meta name="description" content="¿Tienes una propiedad o vehículo que crees que merece estar en el portafolio de CINQ? Cuéntanos.">
+<title data-en="Offer your property or vehicle | CINQ">Ofrece tu propiedad o vehículo | CINQ</title>
+<meta name="description" content="¿Tienes una propiedad o vehículo que crees que merece estar en el portafolio de CINQ? Cuéntanos." data-en-content="Do you have a property or vehicle you believe belongs in the CINQ portfolio? Tell us about it.">
 <link rel="canonical" href="https://cinq-web.vercel.app/ofrecer.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -126,18 +126,18 @@
 <header class="chrome-nav" id="nav">
   <a class="mark" href="index.html">CINQ</a>
   <nav>
-    <a href="portafolio.html">Portafolio</a>
-    <a href="nosotros.html">Nosotros</a>
-    <a href="ofrecer.html" class="current">Ofrecer</a>
+    <a href="portafolio.html" data-en="Portfolio">Portafolio</a>
+    <a href="nosotros.html" data-en="About">Nosotros</a>
+    <a href="ofrecer.html" class="current" data-en="Offer">Ofrecer</a>
   </nav>
 </header>
 
 <section class="masthead">
   <div class="container-narrow">
-    <p class="eyebrow">Ofrece tu propiedad o vehículo</p>
-    <h1>¿Tienes algo que crees que merece ser visto?</h1>
+    <p class="eyebrow" data-en="Offer your property or vehicle">Ofrece tu propiedad o vehículo</p>
+    <h1 data-en="Do you have something you believe deserves to be seen?">¿Tienes algo que crees que merece ser visto?</h1>
     <div class="intro-block">
-      CINQ conecta oportunidades, no publica anuncios. Este formulario es el primer paso para que tu propiedad o vehículo sea evaluado por nuestro equipo. No todas las solicitudes son aceptadas: trabajamos con un estándar de calidad, documentación y presentación que protege tanto a ti como a quienes confían en CINQ.
+      <span data-en="CINQ connects opportunities, it does not publish listings. This form is the first step for your property or vehicle to be evaluated by our team. Not all requests are accepted: we work to a standard of quality, paperwork and presentation that protects both you and the people who trust CINQ.">CINQ conecta oportunidades, no publica anuncios. Este formulario es el primer paso para que tu propiedad o vehículo sea evaluado por nuestro equipo. No todas las solicitudes son aceptadas: trabajamos con un estándar de calidad, documentación y presentación que protege tanto a ti como a quienes confían en CINQ.</span>
     </div>
   </div>
 </section>
@@ -146,153 +146,153 @@
   <div class="container-narrow">
 
     <div class="step-block">
-      <div class="step-label"><span class="n">01</span><span class="t">¿Qué deseas ofrecer?</span></div>
+      <div class="step-label"><span class="n">01</span><span class="t" data-en="What would you like to offer?">¿Qué deseas ofrecer?</span></div>
       <div class="choice-row">
         <label class="choice sel" id="choice-propiedad">
           <input type="radio" name="kind" value="propiedad" checked>
-          <div class="t">Propiedad</div>
-          <div class="d">Venta o arriendo</div>
+          <div class="t" data-en="Property">Propiedad</div>
+          <div class="d" data-en="For sale or for rent">Venta o arriendo</div>
         </label>
         <label class="choice" id="choice-vehiculo">
           <input type="radio" name="kind" value="vehiculo">
-          <div class="t">Vehículo</div>
-          <div class="d">Venta</div>
+          <div class="t" data-en="Vehicle">Vehículo</div>
+          <div class="d" data-en="For sale">Venta</div>
         </label>
       </div>
     </div>
 
     <div class="step-block" id="section-propiedad">
-      <div class="step-label"><span class="n">02</span><span class="t">Detalles de la propiedad</span></div>
+      <div class="step-label"><span class="n">02</span><span class="t" data-en="Property details">Detalles de la propiedad</span></div>
       <div class="field-grid">
         <div class="field">
-          <label for="p-operacion">Tipo de operación <span class="req">*</span></label>
+          <label for="p-operacion"><span data-en="Type of transaction">Tipo de operación</span> <span class="req">*</span></label>
           <select id="p-operacion" name="tipo_operacion" required>
-            <option value="">Selecciona una opción</option>
-            <option>Venta</option><option>Arriendo</option><option>Venta y arriendo</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="Venta" data-en="For sale">Venta</option><option value="Arriendo" data-en="For rent">Arriendo</option><option value="Venta y arriendo" data-en="For sale and for rent">Venta y arriendo</option>
           </select>
         </div>
         <div class="field">
-          <label for="p-tipo">Tipo de inmueble <span class="req">*</span></label>
-          <input id="p-tipo" name="tipo_inmueble" type="text" required placeholder="Apartamento, casa, lote, local...">
+          <label for="p-tipo"><span data-en="Type of property">Tipo de inmueble</span> <span class="req">*</span></label>
+          <input id="p-tipo" name="tipo_inmueble" type="text" required placeholder="Apartamento, casa, lote, local..." data-en-placeholder="Apartment, house, land, retail unit...">
         </div>
         <div class="field">
-          <label for="p-ubicacion">Ubicación / barrio <span class="req">*</span></label>
-          <input id="p-ubicacion" name="ubicacion" type="text" required placeholder="Ej. Envigado, El Poblado">
+          <label for="p-ubicacion"><span data-en="Location / neighbourhood">Ubicación / barrio</span> <span class="req">*</span></label>
+          <input id="p-ubicacion" name="ubicacion" type="text" required placeholder="Ej. Envigado, El Poblado" data-en-placeholder="e.g. Envigado, El Poblado">
         </div>
         <div class="field">
-          <label for="p-area">Área aproximada (m²)</label>
-          <input id="p-area" name="area_m2" type="number" placeholder="Ej. 85">
+          <label for="p-area" data-en="Approximate area (m²)">Área aproximada (m²)</label>
+          <input id="p-area" name="area_m2" type="number" placeholder="Ej. 85" data-en-placeholder="e.g. 85">
         </div>
         <div class="field full">
-          <label for="p-precio">Precio de venta o canon esperado <span class="req">*</span></label>
-          <input id="p-precio" name="precio_propiedad" type="text" required placeholder="Ej. $350.000.000 COP">
+          <label for="p-precio"><span data-en="Asking price or expected rent">Precio de venta o canon esperado</span> <span class="req">*</span></label>
+          <input id="p-precio" name="precio_propiedad" type="text" required placeholder="Ej. $350.000.000 COP" data-en-placeholder="e.g. COP 350,000,000">
         </div>
         <div class="field">
-          <label for="p-documentos">¿Documentos al día? <span class="req">*</span></label>
+          <label for="p-documentos"><span data-en="Is the paperwork in order?">¿Documentos al día?</span> <span class="req">*</span></label>
           <select id="p-documentos" name="documentos_al_dia" required>
-            <option value="">Selecciona una opción</option>
-            <option>Sí</option><option>No</option><option>No estoy seguro</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="Sí" data-en="Yes">Sí</option><option value="No" data-en="No">No</option><option value="No estoy seguro" data-en="I am not sure">No estoy seguro</option>
           </select>
         </div>
         <div class="field">
-          <label for="p-propietario">¿Eres el propietario directo? <span class="req">*</span></label>
+          <label for="p-propietario"><span data-en="Are you the direct owner?">¿Eres el propietario directo?</span> <span class="req">*</span></label>
           <select id="p-propietario" name="propietario_inmueble" required>
-            <option value="">Selecciona una opción</option>
-            <option>Soy el propietario</option><option>Tengo autorización</option><option>Ninguna de las anteriores</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="Soy el propietario" data-en="I am the owner">Soy el propietario</option><option value="Tengo autorización" data-en="I have authorisation">Tengo autorización</option><option value="Ninguna de las anteriores" data-en="Neither of the above">Ninguna de las anteriores</option>
           </select>
         </div>
       </div>
       <div class="upload-note">
-        Fotos del inmueble (mínimo 6, con luz natural). Te las pediremos por WhatsApp apenas recibamos esta solicitud.
+        <span data-en="Photos of the property (at least 6, in natural light). We will ask you for them on WhatsApp as soon as we receive this request.">Fotos del inmueble (mínimo 6, con luz natural). Te las pediremos por WhatsApp apenas recibamos esta solicitud.</span>
       </div>
       <div class="field">
-        <label for="p-comentario">¿Algo adicional que quieras contarnos?</label>
-        <textarea id="p-comentario" name="comentario_inmueble" placeholder="Opcional"></textarea>
+        <label for="p-comentario"><span data-en="Anything else you would like to tell us?">¿Algo adicional que quieras contarnos?</span></label>
+        <textarea id="p-comentario" name="comentario_inmueble" placeholder="Opcional" data-en-placeholder="Optional"></textarea>
       </div>
     </div>
 
     <div class="step-block" id="section-vehiculo" hidden>
-      <div class="step-label"><span class="n">02</span><span class="t">Detalles del vehículo</span></div>
+      <div class="step-label"><span class="n">02</span><span class="t" data-en="Vehicle details">Detalles del vehículo</span></div>
       <div class="field-grid">
         <div class="field">
-          <label for="v-marca">Marca y modelo <span class="req">*</span></label>
-          <input id="v-marca" name="marca_modelo" type="text" required placeholder="Ej. Mazda 3 2022">
+          <label for="v-marca"><span data-en="Make and model">Marca y modelo</span> <span class="req">*</span></label>
+          <input id="v-marca" name="marca_modelo" type="text" required placeholder="Ej. Mazda 3 2022" data-en-placeholder="e.g. Mazda 3 2022">
         </div>
         <div class="field">
-          <label for="v-anio">Año <span class="req">*</span></label>
-          <input id="v-anio" name="anio" type="number" required placeholder="Ej. 2022">
+          <label for="v-anio"><span data-en="Year">Año</span> <span class="req">*</span></label>
+          <input id="v-anio" name="anio" type="number" required placeholder="Ej. 2022" data-en-placeholder="e.g. 2022">
         </div>
         <div class="field">
-          <label for="v-km">Kilometraje <span class="req">*</span></label>
-          <input id="v-km" name="kilometraje" type="text" required placeholder="Ej. 32.000 km">
+          <label for="v-km"><span data-en="Mileage">Kilometraje</span> <span class="req">*</span></label>
+          <input id="v-km" name="kilometraje" type="text" required placeholder="Ej. 32.000 km" data-en-placeholder="e.g. 32,000 km">
         </div>
         <div class="field">
-          <label for="v-precio">Precio esperado <span class="req">*</span></label>
-          <input id="v-precio" name="precio_vehiculo" type="text" required placeholder="Ej. $85.000.000 COP">
+          <label for="v-precio"><span data-en="Asking price">Precio esperado</span> <span class="req">*</span></label>
+          <input id="v-precio" name="precio_vehiculo" type="text" required placeholder="Ej. $85.000.000 COP" data-en-placeholder="e.g. COP 85,000,000">
         </div>
         <div class="field">
-          <label for="v-soat">¿SOAT y tecnomecánica vigentes? <span class="req">*</span></label>
+          <label for="v-soat"><span data-en="Insurance and roadworthiness test up to date?">¿SOAT y tecnomecánica vigentes?</span> <span class="req">*</span></label>
           <select id="v-soat" name="soat_tecnomecanica" required>
-            <option value="">Selecciona una opción</option>
-            <option>Sí</option><option>No</option><option>No estoy seguro</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="Sí" data-en="Yes">Sí</option><option value="No" data-en="No">No</option><option value="No estoy seguro" data-en="I am not sure">No estoy seguro</option>
           </select>
         </div>
         <div class="field">
-          <label for="v-gravamenes">¿Gravámenes, prendas o embargos? <span class="req">*</span></label>
+          <label for="v-gravamenes"><span data-en="Any liens, charges or seizures?">¿Gravámenes, prendas o embargos?</span> <span class="req">*</span></label>
           <select id="v-gravamenes" name="gravamenes" required>
-            <option value="">Selecciona una opción</option>
-            <option>No</option><option>Sí</option><option>No estoy seguro</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="No" data-en="No">No</option><option value="Sí" data-en="Yes">Sí</option><option value="No estoy seguro" data-en="I am not sure">No estoy seguro</option>
           </select>
         </div>
         <div class="field full">
-          <label for="v-propietario">¿Eres el propietario directo? <span class="req">*</span></label>
+          <label for="v-propietario"><span data-en="Are you the direct owner?">¿Eres el propietario directo?</span> <span class="req">*</span></label>
           <select id="v-propietario" name="propietario_vehiculo" required>
-            <option value="">Selecciona una opción</option>
-            <option>Soy el propietario</option><option>Tengo autorización</option><option>Ninguna de las anteriores</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="Soy el propietario" data-en="I am the owner">Soy el propietario</option><option value="Tengo autorización" data-en="I have authorisation">Tengo autorización</option><option value="Ninguna de las anteriores" data-en="Neither of the above">Ninguna de las anteriores</option>
           </select>
         </div>
       </div>
       <div class="upload-note">
-        Fotos del vehículo (mínimo 6, con luz natural). Te las pediremos por WhatsApp apenas recibamos esta solicitud.
+        <span data-en="Photos of the vehicle (at least 6, in natural light). We will ask you for them on WhatsApp as soon as we receive this request.">Fotos del vehículo (mínimo 6, con luz natural). Te las pediremos por WhatsApp apenas recibamos esta solicitud.</span>
       </div>
       <div class="field">
-        <label for="v-comentario">¿Algo adicional que quieras contarnos?</label>
-        <textarea id="v-comentario" name="comentario_vehiculo" placeholder="Opcional"></textarea>
+        <label for="v-comentario"><span data-en="Anything else you would like to tell us?">¿Algo adicional que quieras contarnos?</span></label>
+        <textarea id="v-comentario" name="comentario_vehiculo" placeholder="Opcional" data-en-placeholder="Optional"></textarea>
       </div>
     </div>
 
     <div class="step-block">
-      <div class="step-label"><span class="n">03</span><span class="t">Datos de contacto</span></div>
+      <div class="step-label"><span class="n">03</span><span class="t" data-en="Contact details">Datos de contacto</span></div>
       <div class="field-grid">
         <div class="field">
-          <label for="c-nombre">Nombre completo <span class="req">*</span></label>
+          <label for="c-nombre"><span data-en="Full name">Nombre completo</span> <span class="req">*</span></label>
           <input id="c-nombre" name="nombre" type="text" required>
         </div>
         <div class="field">
-          <label for="c-cedula">Cédula <span class="req">*</span></label>
+          <label for="c-cedula"><span data-en="National ID number">Cédula</span> <span class="req">*</span></label>
           <input id="c-cedula" name="cedula" type="text" required>
         </div>
         <div class="field">
-          <label for="c-whatsapp">WhatsApp <span class="req">*</span></label>
+          <label for="c-whatsapp"><span data-en="WhatsApp">WhatsApp</span> <span class="req">*</span></label>
           <input id="c-whatsapp" name="whatsapp" type="tel" required placeholder="+57">
         </div>
         <div class="field">
-          <label for="c-conociste">¿Cómo conociste a CINQ?</label>
+          <label for="c-conociste" data-en="How did you hear about CINQ?">¿Cómo conociste a CINQ?</label>
           <select id="c-conociste" name="como_conocio">
-            <option value="">Selecciona una opción</option>
-            <option>Instagram</option><option>TikTok</option><option>Referido</option><option>Otro</option>
+            <option value="" data-en="Select an option">Selecciona una opción</option>
+            <option value="Instagram">Instagram</option><option value="TikTok">TikTok</option><option value="Referido" data-en="Referral">Referido</option><option value="Otro" data-en="Other">Otro</option>
           </select>
         </div>
       </div>
 
       <div class="consent-row">
         <input type="checkbox" id="consent" name="consentimiento_datos" required>
-        <label for="consent">Autorizo a CINQ a tratar mis datos personales con la única finalidad de evaluar y dar seguimiento a esta solicitud, conforme a la Ley 1581 de 2012. <span class="req">*</span></label>
+        <label for="consent"><span data-en="I authorise CINQ to process my personal data for the sole purpose of assessing and following up on this request, in accordance with Colombian Law 1581 of 2012.">Autorizo a CINQ a tratar mis datos personales con la única finalidad de evaluar y dar seguimiento a esta solicitud, conforme a la Ley 1581 de 2012.</span> <span class="req">*</span></label>
       </div>
 
-      <button type="submit" class="submit-btn">Enviar solicitud</button>
-      <p class="hint">No publica nada automáticamente: alimenta la base de prospección de CINQ.</p>
-      <p class="error-msg" id="error-msg" hidden>No pudimos enviar tu solicitud. Escríbenos directo por WhatsApp mientras lo resolvemos.</p>
+      <button type="submit" class="submit-btn" data-en="Send request">Enviar solicitud</button>
+      <p class="hint" data-en="Nothing is published automatically: this feeds the CINQ prospect list.">No publica nada automáticamente: alimenta la base de prospección de CINQ.</p>
+      <p class="error-msg" id="error-msg" hidden data-en="We could not send your request. Message us directly on WhatsApp while we sort it out.">No pudimos enviar tu solicitud. Escríbenos directo por WhatsApp mientras lo resolvemos.</p>
     </div>
 
   </div>
@@ -301,17 +301,18 @@
 <section class="confirm" id="confirm" hidden>
   <div class="inner">
     <div class="mark-box"><span>CINQ</span></div>
-    <h2>Solicitud recibida</h2>
-    <p>Gracias por confiarnos tu propiedad o vehículo. Nuestro equipo revisará tu información y te contactará si cumple con los criterios de CINQ.</p>
+    <h2 data-en="Request received">Solicitud recibida</h2>
+    <p data-en="Thank you for trusting us with your property or vehicle. Our team will review your information and will contact you if it meets the CINQ criteria.">Gracias por confiarnos tu propiedad o vehículo. Nuestro equipo revisará tu información y te contactará si cumple con los criterios de CINQ.</p>
   </div>
 </section>
 
 <footer>
   <div class="foot-bottom" style="max-width:1240px;margin:0 auto;padding:0 32px;">
-    <span>© CINQ, 2026. Todos los derechos reservados.</span>
+    <span data-en="© CINQ, 2026. All rights reserved.">© CINQ, 2026. Todos los derechos reservados.</span>
   </div>
 </footer>
 
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 <script>
   var radios = document.querySelectorAll('input[name="kind"]');

@@ -75,6 +75,26 @@ a{color:inherit;}
 }
 .chrome-nav .cta:hover{background:var(--olive-deep);border-color:var(--olive-deep);color:var(--on-accent);}
 
+/* ---------------- ES / EN ---------------- */
+/* El selector de idioma lo inyecta i18n.js al final del nav, no viene en el
+   html: sin JavaScript no podria cambiar nada, y un boton que no hace nada es
+   peor que no tenerlo. Los dos idiomas se ven siempre, uno relleno y el otro
+   no, para que se lea de un vistazo en cual esta la pagina.
+
+   Va pegado (gap 0) y con un solo borde alrededor de los dos, como una pastilla
+   partida por la mitad: dos recuadros sueltos se confundirian con el boton de
+   "Ofrecer", que esta justo al lado y tambien es un recuadro. */
+.lang-toggle{display:flex;gap:0;border:1px solid var(--line);flex:0 0 auto;}
+.lang-toggle button{
+  font-family:var(--font-body);font-size:10.5px;letter-spacing:0.08em;
+  color:var(--muted);background:none;border:none;padding:7px 9px;cursor:pointer;
+  line-height:1;transition:background .2s ease,color .2s ease;
+}
+.lang-toggle button + button{border-left:1px solid var(--line);}
+.lang-toggle button:hover{color:var(--olive-deep);}
+.lang-toggle button[aria-pressed="true"]{background:var(--olive-deep);color:var(--on-accent);}
+.lang-toggle button:focus-visible{outline:2px solid var(--olive);outline-offset:2px;}
+
 /* En pantalla de telefono la barra no cabia: el logo quedaba pegado a
    "Portafolio" sin un solo pixel de por medio, y flex ademas encogia el logo
    de 68 a 58 px. El flex:0 0 auto de arriba impide que se comprima, y aqui se
@@ -82,16 +102,18 @@ a{color:inherit;}
 @media (max-width:720px){
   .chrome-nav{padding:14px 20px;}
   .chrome-nav .mark{width:57px;height:30px;}
-  .chrome-nav nav{gap:18px;}
+  .chrome-nav nav{gap:14px;}
   .chrome-nav nav a{font-size:12px;}
   .chrome-nav .cta{font-size:11px;padding:8px 12px;}
+  .lang-toggle button{font-size:10px;padding:6px 7px;}
 }
 @media (max-width:360px){
   .chrome-nav{padding:14px 16px;}
   .chrome-nav .mark{width:50px;height:26px;}
-  .chrome-nav nav{gap:13px;}
+  .chrome-nav nav{gap:9px;}
   .chrome-nav nav a{font-size:11.5px;}
   .chrome-nav .cta{font-size:10.5px;padding:7px 10px;}
+  .lang-toggle button{font-size:9.5px;padding:6px 6px;letter-spacing:0.05em;}
 }
 
 /* Donde no existan las mascaras CSS, el logo volveria a ser un rectangulo

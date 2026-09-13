@@ -20,8 +20,9 @@ bloque en oportunidades.js. Solo Pillow, que ya esta instalado.
 
     python herramientas/oportunidad.py verificar
         Revisa TODO el portafolio publicado: que cada foto exista en jpg y
-        webp, que ninguna quede sin alt, que no se cuelen guiones medios y que
-        no haya slugs repetidos. Correr antes de cada push.
+        webp, que ninguna quede sin alt, que no se cuelen guiones medios, que
+        no haya slugs ni titulos repetidos y que los alts en ingles, si los
+        hay, sean tantos como fotos. Correr antes de cada push.
 
 REGLA DEL SITIO: nada simulado. El script no inventa datos: lo que no este en
 el datos.json no sale publicado.
@@ -187,6 +188,11 @@ EJEMPLO = {
               ["Baños", ""], ["Parqueadero", ""], ["Piso", ""],
               ["Estrato", ""], ["Administración", ""], ["Antigüedad", ""]],
     "descripcion": ["", ""],
+    # Lo que se lee cuando el sitio esta en ingles. Es opcional entero y por
+    # partes: lo que quede vacio no se escribe en el catalogo, y el sitio cae
+    # al espanol. Los alts van en el mismo orden que las fotos, uno por foto;
+    # si se dejan en blanco se usan los alts en espanol.
+    "en": {"titulo": "", "ficha": [], "descripcion": ["", ""], "alts": []},
     "orden": "orden.txt",
 }
 
@@ -290,6 +296,62 @@ def cmd_publicar(args):
     print("Despues corra:  python herramientas/oportunidad.py verificar")
 
 
+def componer_en(en):
+    """El bloque en: {} del catalogo, o nada si no hay que escribirlo.
+
+    Se emite parte por parte: lo que este vacio en datos.json no se escribe, y
+    el sitio cae al espanol para eso. Asi se puede publicar hoy sin la
+    traduccion y sumarla despues sin tocar nada mas.
+    """
+    if not isinstance(en, dict):
+        return []
+
+    titulo = (en.get("titulo") or "").strip()
+    ficha = [f for f in en.get("ficha") or [] if len(f) == 2 and f[1]]
+    parrafos = [p for p in en.get("descripcion") or [] if p.strip()]
+    alts = [a for a in en.get("alts") or [] if a.strip()]
+    if not (titulo or ficha or parrafos or alts):
+        return []
+
+    def texto(cadena):
+        return '"%s"' % cadena.replace('\\', '\\\\').replace('"', '\\"')
+
+    lineas = ["    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui",
+              "       cae al espanol. */",
+              "    en: {"]
+    partes = []
+    if titulo:
+        partes.append(["      titulo: " + texto(titulo)])
+    if ficha:
+        bloque = ["      ficha: ["]
+        for i, (etiqueta, valor) in enumerate(ficha):
+            coma = "" if i == len(ficha) - 1 else ","
+            bloque.append("        [%s, %s]%s" % (texto(etiqueta), texto(valor), coma))
+        bloque.append("      ]")
+        partes.append(bloque)
+    if parrafos:
+        bloque = ["      descripcion: ["]
+        for i, p in enumerate(parrafos):
+            coma = "" if i == len(parrafos) - 1 else ","
+            bloque.append("        %s%s" % (texto(p), coma))
+        bloque.append("      ]")
+        partes.append(bloque)
+    if alts:
+        bloque = ["      alts: ["]
+        for i, a in enumerate(alts):
+            coma = "" if i == len(alts) - 1 else ","
+            bloque.append("        %s%s" % (texto(a), coma))
+        bloque.append("      ]")
+        partes.append(bloque)
+
+    for i, bloque in enumerate(partes):
+        if i < len(partes) - 1:
+            bloque[-1] += ","
+        lineas.extend(bloque)
+    lineas.append("    },")
+    return lineas
+
+
 def componer_bloque(datos, fotos_js):
     ancho = max([len(n) for n, _ in fotos_js] or [0]) + 3
     lineas = ["", "  {"]
@@ -317,6 +379,7 @@ def componer_bloque(datos, fotos_js):
         coma = "" if i == len(parrafos) - 1 else ","
         lineas.append('      "%s"%s' % (p.replace('"', '\\"'), coma))
     lineas.append("    ],")
+    lineas.extend(componer_en(datos.get("en")))
     lineas.append("    fotos: [")
     for i, (nombre, alt) in enumerate(fotos_js):
         coma = "" if i == len(fotos_js) - 1 else ","
@@ -358,6 +421,23 @@ def cmd_verificar(args):
     problemas = []
     print("Revisando %d oportunidades publicadas\n" % len(ops))
 
+    # Dos fichas con el mismo titulo son dos tarjetas iguales en el portafolio
+    # y dos filas iguales en la lista del bot de WhatsApp. Cuando pasa hay que
+    # sumarle atras al titulo lo minimo que las distinga: el numero del
+    # apartamento, el nombre del proyecto.
+    for idioma, saca in (("", lambda o: o.get("titulo", "")),
+                         (" en ingles",
+                          lambda o: (o.get("en") or {}).get("titulo", ""))):
+        vistos = {}
+        for op in ops:
+            t = (saca(op) or "").strip()
+            if not t:
+                continue
+            if t in vistos:
+                problemas.append("titulo%s repetido en %s y %s: %s"
+                                 % (idioma, vistos[t], op.get("slug", ""), t))
+            vistos[t] = op.get("slug", "")
+
     slugs = {}
     for op in ops:
         slug = op.get("slug", "")
@@ -382,6 +462,15 @@ def cmd_verificar(args):
             if not (f.get("alt") or "").strip():
                 sin_alt += 1
                 problemas.append("%s: %s sin alt" % (slug, archivo))
+
+        # Los alts en ingles van por posicion contra fotos[]. Si sobran o
+        # faltan no se cae nada, pero desde el primer desajuste cada foto
+        # queda descrita con el texto de otra, que es peor que no traducir.
+        en = op.get("en") or {}
+        alts = en.get("alts")
+        if alts is not None and len(alts) != len(fotos):
+            problemas.append("%s: %d alts en ingles para %d fotos"
+                             % (slug, len(alts), len(fotos)))
 
         if len(fotos) < 8:
             problemas.append("%s: solo %d fotos, el minimo son 8"

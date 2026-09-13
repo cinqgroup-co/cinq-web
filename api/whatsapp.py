@@ -135,6 +135,26 @@ def catalogo():
     return datos
 
 
+def titulo_corto(op):
+    """El titulo para una fila de lista de WhatsApp, que aguanta 24 caracteres.
+
+    En el catalogo el titulo es "Apartamento <municipio> <sector>", y eso no
+    cabe: recortado a 24 los dos apartamentos de Aluna daban exactamente el
+    mismo texto, o sea dos filas identicas que no se pueden distinguir.
+
+    Aqui se le quitan por delante las dos partes que la fila ya dice en su
+    linea de abajo, el tipo de inmueble y el municipio, y queda el sector con
+    lo que lo distinga: "Las Antillas 1405", "Loma de San Jose Ecoh". Si el
+    titulo no empieza como se espera no se toca nada y lo corta enviar_lista.
+    """
+    titulo = " ".join((op.get("titulo") or "").split())
+    for sobra in (op.get("subtipo"), op.get("tipo"), op.get("zona")):
+        sobra = (sobra or "").strip()
+        if sobra and titulo.lower().startswith(sobra.lower() + " "):
+            titulo = titulo[len(sobra) + 1:]
+    return titulo or op.get("titulo", "")
+
+
 def precio_legible(valor):
     try:
         return "$ " + "{:,.0f}".format(int(valor)).replace(",", ".")
@@ -379,9 +399,10 @@ def mostrar_oportunidades(a, zona=None):
         enviar_ficha(a, ops[0])
         return
     filas = [{"id": "op:%s" % o["slug"],
-              "titulo": o.get("titulo", ""),
-              "detalle": "%s  %s" % (precio_legible(o.get("precio")),
-                                     o.get("subtipo", ""))}
+              "titulo": titulo_corto(o),
+              "detalle": "%s  %s  %s" % (o.get("zona", ""),
+                                         precio_legible(o.get("precio")),
+                                         o.get("subtipo", ""))}
              for o in ops]
     enviar_lista(a, "Esto es lo que hay publicado hoy. Todas con fotos "
                     "propias, tomadas en la visita.",

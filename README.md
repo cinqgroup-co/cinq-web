@@ -43,6 +43,7 @@ sitio/
 ├── terminos.html       Términos de uso
 └── assets/
     ├── css/styles.css  Estilos compartidos (tokens de marca, nav, footer)
+    ├── js/i18n.js      El botón ES/EN y todos los textos que dibuja el JS
     ├── js/site.js      JS compartido (nav + render del portafolio)
     ├── js/oportunidades.js   Catálogo: el único archivo que se toca para sumar inventario
     └── img/            Fotografía real de CINQ
@@ -255,6 +256,49 @@ escritas a mano en `index.html`, no vienen de ninguna API.
 pie se retiró por decisión de Samuel; la única referencia a la fuente que queda es la línea de
 entrada de la sección, que dice que son cifras del gremio inmobiliario de la región.
 
+## El sitio en inglés (botón ES/EN)
+
+La barra lleva a la derecha un botón partido en dos, `ES | EN`, que cambia el idioma **en la misma
+página**, sin recargar y sin cambiar de dirección. El modelo es el de solenegroup.co.
+
+**No hay una carpeta `/en/`, y es a propósito.** Una segunda copia del HTML obliga a escribir cada
+texto dos veces y a acordarse de las dos cada vez que se corrige una coma. En vez de eso hay un
+solo HTML, en español, y cada texto lleva su versión en inglés al lado, en un atributo:
+
+```html
+<h1 data-en="Opportunities exist for everyone.">Las oportunidades existen para todos.</h1>
+<input placeholder="Ej. 85" data-en-placeholder="e.g. 85">
+```
+
+El español es lo que se ve sin JavaScript, y `assets/js/i18n.js` hace el cambio. Ahí viven también
+los textos que no están escritos en el HTML porque los dibuja el JS (las tarjetas del portafolio,
+la ficha de detalle), y las traducciones fijas de `Propiedad`, `Apartamento`, `Venta` y demás.
+
+**Cómo se elige el idioma al abrir.** El sitio abre en español. Se va a inglés solo si la dirección
+trae `?lang=en`, o si ese visitante ya lo había escogido antes en ese navegador, en ese orden. El
+`?lang=` le gana a lo guardado porque un enlace mandado por WhatsApp tiene que abrir en inglés
+siempre, incluso para alguien que ya había entrado y lo había visto en español.
+
+Al tocar el botón, la dirección se actualiza sola. O sea que para mandarle el portafolio en inglés
+a alguien, basta con ponerlo en inglés y copiar lo que quede en la barra:
+
+```
+https://cinq-web.vercel.app/portafolio.html?lang=en
+https://cinq-web.vercel.app/oportunidad.html?id=ecoh-710-loma-san-jose&lang=en
+```
+
+**El precio cambia de formato, no solo de separador.** En español sale `$ 455.000.000`; en inglés,
+`COP 455,000,000`. Un `$` suelto delante de nueve cifras lo lee como dólares quien llega de afuera,
+y la diferencia es de tres ceros.
+
+**Lo que esto no hace.** Google indexa el HTML tal como se sirve, o sea en español. Esto pone el
+sitio en inglés para quien lo visita; no crea páginas en inglés para que las encuentren buscando en
+inglés. Eso último necesita direcciones propias y `hreflang`, y es otra decisión.
+
+**Lo que envía el formulario de Ofrecer sigue en español.** Cada `<option>` tiene su `value` fijo en
+español y solo cambia lo que se lee, así que el correo de Formspree llega siempre igual aunque la
+persona haya llenado el formulario en inglés.
+
 ## Portafolio: cómo sumar una oportunidad
 
 El portafolio se dibuja solo a partir de **un único archivo de datos**: `assets/js/oportunidades.js`.
@@ -271,6 +315,19 @@ Para sumar una:
 
 La primera foto del array es la portada de la tarjeta. El `slug` es la URL:
 `oportunidad.html?id=<slug>`.
+
+**El título va siempre igual:** tipo de inmueble, municipio y sector, en ese orden y sin comas.
+`Apartamento Sabaneta Monteazul`. Solo si dos fichas quedaran con el mismo nombre se le suma atrás
+lo mínimo que las distinga, como pasa hoy con los dos apartamentos de Aluna (`... Las Antillas 1405`
+y `... 1404`) y con los dos de Loma de San José (el segundo lleva `Ecoh`). `verificar` avisa si dos
+títulos quedan iguales: cuando pasa, son dos tarjetas idénticas en el portafolio y dos filas
+idénticas en la lista del bot de WhatsApp.
+
+**La versión en inglés de cada ficha** va en un bloque `en: {}` dentro de la misma oportunidad, con
+`titulo`, `ficha`, `descripcion` y `alts` (uno por foto, en el mismo orden que `fotos`). Todo es
+opcional: lo que falte cae al español, así que se puede publicar hoy y traducir después sin tocar
+nada más. Lo que nunca se traduce ahí es `tipo`, `subtipo`, `operacion` y `zona`, que son palabras
+de una lista cerrada y las traduce `i18n.js`, ni `zonaDetalle`, que son nombres propios.
 
 **Fotos compartidas entre dos fichas.** Cuando hay más de un apartamento en venta en el mismo
 edificio, las zonas comunes son las mismas y no tiene sentido guardarlas dos veces. Si el
@@ -383,6 +440,16 @@ python herramientas/probar-bot.py
 
 Simula mensajes entrantes, intercepta el envío y comprueba los límites de WhatsApp (20 caracteres
 por botón, 24 por fila de lista), la validación de la firma y el parseo del catálogo real.
+
+**Las filas de la lista no llevan el título completo.** `Apartamento Sabaneta Loma de San José Ecoh`
+no cabe en 24 caracteres, y recortado de frente daba exactamente el mismo texto que el otro
+apartamento de Loma de San José: dos filas iguales, imposibles de distinguir. `titulo_corto()` le
+quita por delante el tipo de inmueble y el municipio, que la fila ya dice en su línea de abajo, y
+deja el sector con lo que lo distinga: `Loma de San José Ecoh`. La prueba comprueba que las filas
+de una misma lista sigan siendo distintas entre sí.
+
+El bot responde en español. Traducirlo es otro trabajo: el idioma del sitio lo elige el visitante
+en el navegador, y por WhatsApp no hay dónde tocar ese botón.
 
 Las credenciales van en variables de entorno de Vercel, nunca en el repo. Los pasos de conexión
 en Meta están en `Admin/Cuentas_y_accesos/Configurar_WhatsApp_Cloud_API.md`, fuera de este

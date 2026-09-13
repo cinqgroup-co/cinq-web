@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nosotros | CINQ</title>
-<meta name="description" content="Por qué existe CINQ, y el criterio con el que evaluamos cada oportunidad.">
+<title data-en="About | CINQ">Nosotros | CINQ</title>
+<meta name="description" content="Por qué existe CINQ, y el criterio con el que evaluamos cada oportunidad." data-en-content="Why CINQ exists, and the judgement we use to evaluate every opportunity.">
 <link rel="canonical" href="https://cinq-web.vercel.app/nosotros.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -28,7 +28,31 @@
     font-family:var(--font-display);font-weight:400;font-style:italic;
     font-size:clamp(24px,3.6vw,36px);line-height:1.48;color:var(--ink);text-wrap:balance;margin:0;
   }
-  .masthead .attribution{margin-top:26px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);}
+  /* ---------------- firma del fundador ---------------- */
+  /* La frase de arriba es suya, así que va firmada: el trazo a mano, y debajo
+     el nombre y el cargo en tipografía, como en una carta. Es el bloque que
+     cierra la cita, no un logo: por eso el trazo manda en tamaño y lo demás
+     queda pequeño y espaciado.
+
+     El trazo usa la cursiva que ya trae el sistema, no una fuente descargada.
+     El sitio hoy no pide ni un archivo a un tercero, y la política de
+     privacidad dice que no se recoge nada: traer una fuente de Google por una
+     sola línea le mandaría la IP de cada visitante a un tercero, y ademas
+     dejaría la firma esperando una descarga para verse. Cada sistema pone la
+     suya (Snell Roundhand en Mac, Segoe Script en Windows) y todas son
+     manuscritas, que es lo que importa aquí. */
+  .firma{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:7px;}
+  .firma .trazo{
+    font-family:'Snell Roundhand','Segoe Script','Bradley Hand','Brush Script MT',cursive;
+    /* Queda por debajo de la cita a propósito. Con el mismo tamaño las dos
+       competían, y una firma que grita deja de leerse como firma. */
+    font-size:clamp(25px,3.2vw,33px);line-height:1;color:var(--ink);
+    /* Las cursivas se inclinan a la derecha y el último trazo se sale de la
+       caja: sin este respiro la firma queda pegada al borde y descentrada. */
+    padding:0 6px 6px;
+  }
+  .firma .nombre{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);}
+  .firma .rol{font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--muted);}
 
   .prose{padding:96px 32px 120px;}
   .prose .inner{max-width:640px;margin:0 auto;}
@@ -56,49 +80,53 @@
 <header class="chrome-nav" id="nav">
   <a class="mark" href="index.html">CINQ</a>
   <nav>
-    <a href="portafolio.html">Portafolio</a>
-    <a href="nosotros.html" class="current">Nosotros</a>
-    <a href="ofrecer.html" class="cta" title="Ofrece tu propiedad o vehículo">Ofrecer</a>
+    <a href="portafolio.html" data-en="Portfolio">Portafolio</a>
+    <a href="nosotros.html" class="current" data-en="About">Nosotros</a>
+    <a href="ofrecer.html" class="cta" title="Ofrece tu propiedad o vehículo" data-en="Offer" data-en-title="Offer your property or vehicle">Ofrecer</a>
   </nav>
 </header>
 
 <section class="masthead">
   <div class="inner">
-    <p class="eyebrow" style="text-align:center;">Nosotros</p>
-    <h1>"Siempre me ha llamado la atención cómo dos personas pueden mirar exactamente lo mismo... y ver cosas completamente diferentes."</h1>
-    <p class="attribution">Samuel Sánchez, Fundador de CINQ</p>
+    <p class="eyebrow" style="text-align:center;" data-en="About">Nosotros</p>
+    <h1 data-en="&quot;It has always struck me how two people can look at exactly the same thing... and see completely different things.&quot;">"Siempre me ha llamado la atención cómo dos personas pueden mirar exactamente lo mismo... y ver cosas completamente diferentes."</h1>
+    <div class="firma">
+      <span class="trazo" aria-hidden="true">Samuel Sánchez</span>
+      <span class="nombre">Samuel Sánchez</span>
+      <span class="rol" data-en="Founder of CINQ">Fundador de CINQ</span>
+    </div>
   </div>
 </section>
 
 <section class="prose">
   <div class="inner">
     <div class="prose-block">
-      <h2>El fundador</h2>
-      <p>Soy Samuel Sánchez. Estudié negocios internacionales en Dubái y viví en Francia y en Inglaterra antes de volver a Medellín. Ver de cerca una ciudad que decidió construir su futuro desde cero, y otras que llevan siglos construyéndolo, le cambia a uno la escala con la que mira su propio país.</p>
-      <p>Volví con una convicción. Colombia no tiene un problema de oportunidades, tiene un problema de criterio para reconocerlas y de puentes para conectarlas. Eso es CINQ. Hoy empieza por un inmueble en Envigado o un vehículo con los papeles en regla, porque ninguna plataforma seria se construye sin operar bien lo pequeño primero. Pero la dirección es más larga: activos estratégicos, capital que llega al país y, con el tiempo, la infraestructura y el comercio que conectan a Antioquia con el mundo.</p>
-      <p>No lo escribo como promesa. Lo escribo como rumbo.</p>
+      <h2 data-en="The founder">El fundador</h2>
+      <p data-en="I am Samuel Sánchez. I studied international business in Dubai and lived in France and in England before coming back to Medellín. Seeing up close a city that decided to build its future from nothing, and others that have been building theirs for centuries, changes the scale you use to look at your own country.">Soy Samuel Sánchez. Estudié negocios internacionales en Dubái y viví en Francia y en Inglaterra antes de volver a Medellín. Ver de cerca una ciudad que decidió construir su futuro desde cero, y otras que llevan siglos construyéndolo, le cambia a uno la escala con la que mira su propio país.</p>
+      <p data-en="I came back with one conviction. Colombia does not have a shortage of opportunities; it has a shortage of judgement to recognise them and of bridges to connect them. That is CINQ. Today it starts with a home in Envigado or a vehicle with its paperwork in order, because no serious platform is built without running the small things well first. But the direction is longer: strategic assets, capital coming into the country and, in time, the infrastructure and trade that connect Antioquia to the world.">Volví con una convicción. Colombia no tiene un problema de oportunidades, tiene un problema de criterio para reconocerlas y de puentes para conectarlas. Eso es CINQ. Hoy empieza por un inmueble en Envigado o un vehículo con los papeles en regla, porque ninguna plataforma seria se construye sin operar bien lo pequeño primero. Pero la dirección es más larga: activos estratégicos, capital que llega al país y, con el tiempo, la infraestructura y el comercio que conectan a Antioquia con el mundo.</p>
+      <p data-en="I do not write this as a promise. I write it as a direction.">No lo escribo como promesa. Lo escribo como rumbo.</p>
     </div>
     <div class="prose-block">
-      <h2>Propósito</h2>
-      <p>Existimos para conectar personas con oportunidades de valor, facilitando decisiones estratégicas a través de la confianza, el conocimiento y un acompañamiento cercano. Creemos que detrás de cada activo (una propiedad, un vehículo, una inversión) existe una historia, un objetivo y una oportunidad de crecimiento que merece entenderse antes de decidirse.</p>
+      <h2 data-en="Purpose">Propósito</h2>
+      <p data-en="We exist to connect people with opportunities of real value, making strategic decisions easier through trust, knowledge and close support. We believe that behind every asset (a property, a vehicle, an investment) there is a story, a goal and an opportunity to grow that deserves to be understood before it is decided on.">Existimos para conectar personas con oportunidades de valor, facilitando decisiones estratégicas a través de la confianza, el conocimiento y un acompañamiento cercano. Creemos que detrás de cada activo (una propiedad, un vehículo, una inversión) existe una historia, un objetivo y una oportunidad de crecimiento que merece entenderse antes de decidirse.</p>
     </div>
     <div class="prose-block">
-      <h2>Misión y visión</h2>
-      <p>Trabajamos para conectar personas con oportunidades en bienes raíces, vehículos y otros activos estratégicos, con un servicio profesional, transparente y personalizado. A largo plazo, aspiramos a ser una marca referente en la intermediación de activos estratégicos en Colombia y Latinoamérica, reconocida no por el volumen de lo que representamos, sino por el criterio con el que lo hacemos.</p>
+      <h2 data-en="Mission and vision">Misión y visión</h2>
+      <p data-en="We work to connect people with opportunities in real estate, vehicles and other strategic assets, with a professional, transparent and personal service. In the long run we aim to be a reference brand in the brokerage of strategic assets in Colombia and Latin America, known not for the volume of what we represent but for the judgement with which we do it.">Trabajamos para conectar personas con oportunidades en bienes raíces, vehículos y otros activos estratégicos, con un servicio profesional, transparente y personalizado. A largo plazo, aspiramos a ser una marca referente en la intermediación de activos estratégicos en Colombia y Latinoamérica, reconocida no por el volumen de lo que representamos, sino por el criterio con el que lo hacemos.</p>
     </div>
     <div class="prose-block">
-      <h2>Visión de largo plazo</h2>
-      <p>CINQ nació en Medellín con una mirada puesta más allá de la ciudad. Con el tiempo, el mismo criterio que aplicamos hoy a una propiedad o un vehículo se extenderá hacia otras formas de oportunidad, pero cada paso se da cuando hay algo real que mostrar, no antes.</p>
+      <h2 data-en="Long term vision">Visión de largo plazo</h2>
+      <p data-en="CINQ was born in Medellín with its eyes set beyond the city. In time, the same judgement we apply today to a property or a vehicle will extend to other kinds of opportunity, but each step is taken when there is something real to show, not before.">CINQ nació en Medellín con una mirada puesta más allá de la ciudad. Con el tiempo, el mismo criterio que aplicamos hoy a una propiedad o un vehículo se extenderá hacia otras formas de oportunidad, pero cada paso se da cuando hay algo real que mostrar, no antes.</p>
     </div>
   </div>
 </section>
 
 <section class="cta-band">
   <div class="inner">
-    <p class="eyebrow">Ofrece tu propiedad o vehículo</p>
-    <h2>¿Tienes algo que crees que merece ser visto?</h2>
-    <p>Evaluamos cada solicitud con el mismo criterio que describimos aquí arriba. No todas son aceptadas.</p>
-    <a class="btn" href="ofrecer.html">Cuéntanos</a>
+    <p class="eyebrow" data-en="Offer your property or vehicle">Ofrece tu propiedad o vehículo</p>
+    <h2 data-en="Do you have something you believe deserves to be seen?">¿Tienes algo que crees que merece ser visto?</h2>
+    <p data-en="We assess every request against the same judgement described above. Not all of them are accepted.">Evaluamos cada solicitud con el mismo criterio que describimos aquí arriba. No todas son aceptadas.</p>
+    <a class="btn" href="ofrecer.html" data-en="Tell us about it">Cuéntanos</a>
   </div>
 </section>
 
@@ -106,26 +134,27 @@
   <div class="foot-grid">
     <div>
       <div class="foot-mark">CINQ</div>
-      <div class="foot-tag">Conectando oportunidades.<br>Medellín y Envigado, Colombia.</div>
+      <div class="foot-tag" data-en="Connecting opportunities.&lt;br&gt;Medellín and Envigado, Colombia.">Conectando oportunidades.<br>Medellín y Envigado, Colombia.</div>
     </div>
     <div class="foot-col">
-      <h2>Explorar</h2>
-      <ul><li><a href="portafolio.html">Portafolio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="ofrecer.html">Ofrecer</a></li></ul>
+      <h2 data-en="Explore">Explorar</h2>
+      <ul><li><a href="portafolio.html" data-en="Portfolio">Portafolio</a></li><li><a href="nosotros.html" data-en="About">Nosotros</a></li><li><a href="ofrecer.html" data-en="Offer">Ofrecer</a></li></ul>
     </div>
     <div class="foot-col">
-      <h2>Contacto</h2>
+      <h2 data-en="Contact">Contacto</h2>
       <ul><li><a href="https://wa.me/573022758992" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:hellocinqgroup@gmail.com">hellocinqgroup@gmail.com</a></li><li><a href="https://www.instagram.com/cinqgroup.co" target="_blank" rel="noopener">Instagram</a></li></ul>
     </div>
     <div class="foot-col">
-      <h2>Legal</h2>
-      <ul><li><a href="privacidad.html">Política de privacidad</a></li><li><a href="terminos.html">Términos de uso</a></li></ul>
+      <h2 data-en="Legal">Legal</h2>
+      <ul><li><a href="privacidad.html" data-en="Privacy policy">Política de privacidad</a></li><li><a href="terminos.html" data-en="Terms of use">Términos de uso</a></li></ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© CINQ, 2026. Todos los derechos reservados.</span>
+    <span data-en="© CINQ, 2026. All rights reserved.">© CINQ, 2026. Todos los derechos reservados.</span>
   </div>
 </footer>
 
+<script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 <!-- Analitica de Vercel: sin cookies y sin datos personales, asi que no
      necesita banner de consentimiento. Solo empieza a medir cuando Web
