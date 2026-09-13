@@ -20,6 +20,29 @@
   --font-display:Georgia,'Iowan Old Style','Palatino Linotype','Book Antiqua',serif;
   --font-body:Aptos,'Segoe UI',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
   --font-mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  /* La firma del fundador, en Nosotros. Es la unica tipografia del sitio que
+     no viene del sistema, y por eso tiene su propio token. */
+  --font-firma:Allura,'Snell Roundhand','Segoe Script','Brush Script MT',cursive;
+}
+
+/* Allura, de The Allura Project Authors, bajo SIL Open Font License 1.1. La
+   licencia completa esta en assets/fonts/allura-OFL.txt, al lado del archivo,
+   que es lo que la OFL pide para redistribuirla.
+
+   El archivo vive en este repo y no se pide a fonts.googleapis.com a
+   proposito. El sitio no le pide un solo archivo a un tercero, y la politica
+   de privacidad promete que no se recoge nada: traerla de Google le mandaria
+   la IP de cada visitante a Google en la pagina que dice lo contrario. Son 26
+   kB y solo se descargan en Nosotros, que es la unica pagina que la usa.
+
+   swap: mientras llega, la firma se ve con la cursiva del sistema en vez de
+   quedar en blanco. Es una linea de adorno, no puede bloquear la lectura. */
+@font-face{
+  font-family:'Allura';
+  src:url("../fonts/allura-latin.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
 }
 
 *{box-sizing:border-box;}

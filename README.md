@@ -43,6 +43,7 @@ sitio/
 ├── terminos.html       Términos de uso
 └── assets/
     ├── css/styles.css  Estilos compartidos (tokens de marca, nav, footer)
+    ├── fonts/          Allura, la tipografía de la firma del fundador (OFL)
     ├── js/i18n.js      El botón ES/EN y todos los textos que dibuja el JS
     ├── js/site.js      JS compartido (nav + render del portafolio)
     ├── js/oportunidades.js   Catálogo: el único archivo que se toca para sumar inventario
@@ -299,6 +300,25 @@ inglés. Eso último necesita direcciones propias y `hreflang`, y es otra decisi
 español y solo cambia lo que se lee, así que el correo de Formspree llega siempre igual aunque la
 persona haya llenado el formulario en inglés.
 
+## La firma del fundador
+
+La cita que abre Nosotros va firmada: el trazo a mano, y debajo el nombre y el cargo en mayúsculas
+espaciadas, como el cierre de una carta. El cargo se traduce con el botón ES/EN; el nombre y el
+trazo no, porque una firma no se traduce.
+
+El trazo va en **Allura**, bajo licencia SIL Open Font License 1.1. El archivo vive en
+`assets/fonts/allura-latin.woff2` con su licencia al lado, que es lo que la OFL pide para
+redistribuirla. **No se pide a `fonts.googleapis.com`, y es a propósito:** el sitio no le pide un
+solo archivo a un tercero, y la política de privacidad promete que no se recoge nada. Traerla de
+Google le mandaría la IP de cada visitante a Google en la página que dice lo contrario. Son 26 kB y
+solo los descarga Nosotros, que es la única página que la usa.
+
+Mientras la fuente llega, `font-display: swap` muestra la firma con la cursiva del sistema en vez de
+dejar el hueco en blanco: es una línea de adorno y no puede bloquear la lectura.
+
+Si algún día hay una firma real escaneada, reemplaza el `<span class="trazo">` por el SVG y se cae
+la dependencia de la fuente. Es el camino correcto: sería su firma, no una tipografía.
+
 ## Portafolio: cómo sumar una oportunidad
 
 El portafolio se dibuja solo a partir de **un único archivo de datos**: `assets/js/oportunidades.js`.
@@ -317,11 +337,18 @@ La primera foto del array es la portada de la tarjeta. El `slug` es la URL:
 `oportunidad.html?id=<slug>`.
 
 **El título va siempre igual:** tipo de inmueble, municipio y sector, en ese orden y sin comas.
-`Apartamento Sabaneta Monteazul`. Solo si dos fichas quedaran con el mismo nombre se le suma atrás
-lo mínimo que las distinga, como pasa hoy con los dos apartamentos de Aluna (`... Las Antillas 1405`
-y `... 1404`) y con los dos de Loma de San José (el segundo lleva `Ecoh`). `verificar` avisa si dos
-títulos quedan iguales: cuando pasa, son dos tarjetas idénticas en el portafolio y dos filas
-idénticas en la lista del bot de WhatsApp.
+`Apartamento Sabaneta Monteazul`. No lleva el número del apartamento ni nada que lo identifique por
+dentro: el título nombra el lugar, no la unidad.
+
+Eso hace que dos inmuebles del mismo sector compartan título, y hoy pasa con los dos de Las
+Antillas. Es deliberado, con lo que cuesta: en la tarjeta lo que los separa pasa a ser el precio y
+la foto de portada, y el mensaje de WhatsApp que arma la ficha queda igual salvo por el precio, así
+que un enlace viejo deja de decir por cuál de los dos escriben si un precio cambia. Si eso llega a
+estorbar, la salida es sumarle atrás al título lo mínimo que los distinga, como hace hoy
+`Loma de San José Ecoh` con el nombre del proyecto.
+
+`verificar` lo avisa sin frenar la publicación. Lo que sí frena es que además coincida el precio:
+ahí ya no queda nada que las separe, ni en la tarjeta ni en el mensaje de WhatsApp.
 
 **La versión en inglés de cada ficha** va en un bloque `en: {}` dentro de la misma oportunidad, con
 `titulo`, `ficha`, `descripcion` y `alts` (uno por foto, en el mismo orden que `fotos`). Todo es
@@ -445,8 +472,12 @@ por botón, 24 por fila de lista), la validación de la firma y el parseo del ca
 no cabe en 24 caracteres, y recortado de frente daba exactamente el mismo texto que el otro
 apartamento de Loma de San José: dos filas iguales, imposibles de distinguir. `titulo_corto()` le
 quita por delante el tipo de inmueble y el municipio, que la fila ya dice en su línea de abajo, y
-deja el sector con lo que lo distinga: `Loma de San José Ecoh`. La prueba comprueba que las filas
-de una misma lista sigan siendo distintas entre sí.
+deja el sector con lo que lo distinga: `Loma de San José Ecoh`.
+
+La prueba comprueba que las filas de una misma lista sigan siendo distintas, y compara la fila
+entera, no solo el título: los dos de Las Antillas comparten nombre a propósito y lo que los separa
+es el precio, que va en la descripción. Recorre todas las zonas del catálogo, porque el caso difícil
+está en Envigado y antes solo se revisaba Sabaneta.
 
 El bot responde en español. Traducirlo es otro trabajo: el idioma del sitio lo elige el visitante
 en el navegador, y por WhatsApp no hay dónde tocar ese botón.

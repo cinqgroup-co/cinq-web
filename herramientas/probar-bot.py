@@ -159,12 +159,17 @@ for f in filas:
     revisar(len(f["title"]) <= 24, "titulo '%s' cabe en 24" % f["title"])
     revisar(len(f["description"]) <= 72, "descripcion cabe en 72")
 
-# Los titulos del catalogo son "Apartamento <municipio> <sector>" y no caben en
-# 24 caracteres: recortados de frente, dos inmuebles del mismo sector daban la
-# misma fila. Que sigan siendo distintos es lo que se esta cuidando aqui.
-titulos = [f["title"] for f in filas]
-revisar(len(set(titulos)) == len(titulos),
-        "cada fila de la lista se distingue de las demas", titulos)
+# Una fila tiene que poder distinguirse de las otras de su lista, o el cliente
+# no sabe cual esta tocando. Se compara la fila ENTERA y no solo el titulo,
+# porque dos inmuebles del mismo sector comparten nombre a proposito (los dos
+# de Las Antillas): lo que los separa es el precio, que va en la descripcion.
+# Se revisan las dos zonas porque el caso dificil esta en Envigado.
+for zona in sorted({o["zona"] for o in ops}):
+    _, msgs_z = correr("Elige %s" % zona, boton="zona:%s" % zona)
+    filas_z = msgs_z[0]["interactive"]["action"]["sections"][0]["rows"]
+    vistas = [(f["title"], f["description"]) for f in filas_z]
+    revisar(len(set(vistas)) == len(vistas),
+            "en %s cada fila se distingue de las demas" % zona, vistas)
 
 accion, msgs = correr("Elige el 710", boton="op:ecoh-710-loma-san-jose")
 revisar(accion == "ficha", "manda la ficha")

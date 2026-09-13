@@ -34,22 +34,20 @@
      cierra la cita, no un logo: por eso el trazo manda en tamaño y lo demás
      queda pequeño y espaciado.
 
-     El trazo usa la cursiva que ya trae el sistema, no una fuente descargada.
-     El sitio hoy no pide ni un archivo a un tercero, y la política de
-     privacidad dice que no se recoge nada: traer una fuente de Google por una
-     sola línea le mandaría la IP de cada visitante a un tercero, y ademas
-     dejaría la firma esperando una descarga para verse. Cada sistema pone la
-     suya (Snell Roundhand en Mac, Segoe Script en Windows) y todas son
-     manuscritas, que es lo que importa aquí. */
-  .firma{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:7px;}
+     El trazo va en Allura, que vive en assets/fonts/ de este repo. La
+     declaración y el porqué de tenerla aquí y no pedírsela a Google están en
+     styles.css, junto al resto de los tokens de tipografía. */
+  .firma{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:6px;}
   .firma .trazo{
-    font-family:'Snell Roundhand','Segoe Script','Bradley Hand','Brush Script MT',cursive;
-    /* Queda por debajo de la cita a propósito. Con el mismo tamaño las dos
-       competían, y una firma que grita deja de leerse como firma. */
-    font-size:clamp(25px,3.2vw,33px);line-height:1;color:var(--ink);
+    font-family:var(--font-firma);
+    /* Allura tiene el ojo pequeño y mucho trazo fino, así que necesita más
+       cuerpo que una cursiva normal para leerse igual. Aun así queda por
+       debajo de la cita: con el mismo peso las dos competían, y una firma que
+       grita deja de leerse como firma. */
+    font-size:clamp(38px,5vw,52px);line-height:1;color:var(--ink);
     /* Las cursivas se inclinan a la derecha y el último trazo se sale de la
        caja: sin este respiro la firma queda pegada al borde y descentrada. */
-    padding:0 6px 6px;
+    padding:0 10px 4px;
   }
   .firma .nombre{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);}
   .firma .rol{font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--muted);}

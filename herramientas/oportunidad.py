@@ -419,12 +419,19 @@ def cargar_catalogo():
 def cmd_verificar(args):
     ops = cargar_catalogo()
     problemas = []
+    # Lo que hay que mirar pero no impide publicar. Se imprime al final,
+    # separado de los problemas, y no cambia el codigo de salida.
+    avisos = []
     print("Revisando %d oportunidades publicadas\n" % len(ops))
 
-    # Dos fichas con el mismo titulo son dos tarjetas iguales en el portafolio
-    # y dos filas iguales en la lista del bot de WhatsApp. Cuando pasa hay que
-    # sumarle atras al titulo lo minimo que las distinga: el numero del
-    # apartamento, el nombre del proyecto.
+    # Dos fichas con el mismo titulo son dos tarjetas con el mismo nombre en el
+    # portafolio. Eso esta permitido y hoy pasa con los dos de Las Antillas: el
+    # titulo nombra el lugar, no la unidad. Se avisa igual, porque conviene
+    # saberlo, pero no se cae: lo que las distingue pasa a ser el precio.
+    #
+    # Lo que si es un error es que ademas coincida el precio. Ahi ya no queda
+    # nada en la tarjeta que las separe, y tampoco en el mensaje de WhatsApp
+    # que arma la ficha, que lleva titulo y precio y nada mas.
     for idioma, saca in (("", lambda o: o.get("titulo", "")),
                          (" en ingles",
                           lambda o: (o.get("en") or {}).get("titulo", ""))):
@@ -434,9 +441,15 @@ def cmd_verificar(args):
             if not t:
                 continue
             if t in vistos:
-                problemas.append("titulo%s repetido en %s y %s: %s"
-                                 % (idioma, vistos[t], op.get("slug", ""), t))
-            vistos[t] = op.get("slug", "")
+                otro, precio_otro = vistos[t]
+                aviso = "titulo%s repetido en %s y %s: %s" % (
+                    idioma, otro, op.get("slug", ""), t)
+                if precio_otro == op.get("precio"):
+                    problemas.append(aviso + " (y con el mismo precio: no hay "
+                                             "como distinguirlas)")
+                else:
+                    avisos.append(aviso)
+            vistos[t] = (op.get("slug", ""), op.get("precio"))
 
     slugs = {}
     for op in ops:
@@ -492,6 +505,11 @@ def cmd_verificar(args):
             "" if not sin_alt else "  %d SIN ALT" % sin_alt))
 
     print()
+    if avisos:
+        print("%d cosas para tener en cuenta:" % len(avisos))
+        for a in avisos:
+            print("   . " + a)
+        print()
     if problemas:
         print("%d problemas:" % len(problemas))
         for p in problemas:

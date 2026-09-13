@@ -10,9 +10,18 @@
    REGLA DEL SITIO: nada simulado. Si no hay foto propia y precio real, no se agrega.
 
    EL TÍTULO. Va siempre igual: tipo de inmueble, municipio y sector, en ese
-   orden y sin comas. "Apartamento Sabaneta Monteazul". Solo si dos fichas
-   quedaran con el mismo nombre se le suma atrás lo mínimo que las distinga:
-   el número del apartamento en Aluna, el del proyecto en Loma de San José.
+   orden y sin comas. "Apartamento Sabaneta Monteazul". No lleva el número del
+   apartamento ni nada que lo identifique por dentro: el título nombra el
+   lugar, no la unidad.
+
+   Por eso dos inmuebles del mismo sector comparten título, y hoy pasa con los
+   dos de Las Antillas. Es una decisión de Samuel del 13 de septiembre de 2026,
+   tomada sabiendo lo que cuesta: lo que los distingue en la tarjeta pasa a ser
+   el precio y la foto de portada, y el mensaje de WhatsApp que arma la ficha
+   también queda igual salvo por el precio, así que un enlace viejo deja de
+   decir por cuál de los dos escriben si un precio cambia. Si eso llega a
+   estorbar, la salida es sumarle atrás al título lo mínimo que los distinga,
+   como hace hoy "Loma de San José Ecoh" con el nombre del proyecto.
 
    PLANTILLA (propiedad):
    {
@@ -86,11 +95,11 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    /* El titulo lleva el numero del apartamento porque en Aluna hay dos en
-       venta, en el mismo piso 14. Con "Envigado, Las Antillas" a secas las dos
-       tarjetas del portafolio eran identicas salvo por el precio.
+    /* Este es el 1405. El numero ya no va en el titulo, por la decision que
+       explica la regla EL TITULO del encabezado: el titulo nombra el lugar, no
+       la unidad, asi que comparte nombre con el 1404 de aqui abajo.
        El slug NO se cambia: es la URL y ya se ha compartido por WhatsApp. */
-    titulo: "Apartamento Envigado Las Antillas 1405",
+    titulo: "Apartamento Envigado Las Antillas",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     /* Bajado de 475 a 455 millones el 9 de septiembre de 2026, por decisión
@@ -118,7 +127,7 @@ var CINQ_OPORTUNIDADES = [
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
        espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
     en: {
-      titulo: "Apartment in Envigado, Las Antillas 1405",
+      titulo: "Apartment in Envigado, Las Antillas",
       ficha: [
         ["Built area", "67.5 m²"],
         ["Bedrooms", "2"],
@@ -203,7 +212,9 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Apartamento Envigado Las Antillas 1404",
+    /* Este es el 1404, y comparte titulo con el 1405 de aqui arriba a
+       proposito. Ver la regla EL TITULO del encabezado. */
+    titulo: "Apartamento Envigado Las Antillas",
     zona: "Envigado",
     zonaDetalle: "Las Antillas, Envigado, Antioquia",
     precio: 465000000,
@@ -237,7 +248,7 @@ var CINQ_OPORTUNIDADES = [
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
        espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
     en: {
-      titulo: "Apartment in Envigado, Las Antillas 1404",
+      titulo: "Apartment in Envigado, Las Antillas",
       ficha: [
         ["Area", "69.5 m²"],
         ["Bedrooms", "2"],
