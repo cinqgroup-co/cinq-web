@@ -100,9 +100,13 @@ var CINQ_OPORTUNIDADES = [
      dedujo de la fecha de descarga: esta emparejado por sha256 en el manifest
      del inmueble, en Inventario Activo.
 
-     El titulo sigue la regla de la cabecera de este archivo: municipio y
-     sector, sin el numero de la unidad y sin el nombre del proyecto. Por eso
-     no dice "1944" ni "Civita", que es como venia en la ficha de origen.
+     El titulo va sin el numero de la unidad y sin el nombre del proyecto,
+     como manda la cabecera de este archivo, y ademas sin el sector. Es el
+     unico del catalogo que no nombra su sector, y no lo nombra en ninguna
+     parte: ni en el titulo, ni en zonaDetalle, ni en los alt, ni en la
+     descripcion. Es una decision de Samuel del 16 de septiembre de 2026. El
+     sector, la direccion exacta y el resto del dato interno viven en
+     Inventario Activo, que no es publico.
 
      Quedan fuera del sitio a proposito el numero del parqueadero, la direccion
      exacta y el nombre de la propietaria. Identifican la unidad y a una
@@ -113,9 +117,9 @@ var CINQ_OPORTUNIDADES = [
     tipo: "Propiedad",
     subtipo: "Apartamento",
     operacion: "Venta",
-    titulo: "Apartamento Envigado Primavera",
+    titulo: "Apartamento Envigado",
     zona: "Envigado",
-    zonaDetalle: "Primavera, Envigado, Antioquia",
+    zonaDetalle: "Envigado, Antioquia",
     precio: 620000000,
     premium: false,
     ficha: [
@@ -131,13 +135,13 @@ var CINQ_OPORTUNIDADES = [
       ["Zonas comunes", "Piscina para adultos y niños, gimnasio, salón de yoga, coworking con sala de juntas, salón social con cocina gourmet, salón de videojuegos, cancha recreativa, parque infantil, pista de triciclos, lavandería comunal, peluquería de mascotas y portería 24 horas"]
     ],
     descripcion: [
-      "Primavera está sobre el límite entre Envigado y Sabaneta, en la Calle 50 Sur, uno de los pocos sectores donde se vive con el valle al frente sin quedar lejos del centro de Envigado ni de la Regional. Lo que distingue a este conjunto no es una amenidad suelta sino el paquete entero: piscina para adultos y niños, gimnasio, salón de yoga, una zona de coworking con sala de juntas, salón social con cocina gourmet, lavandería comunal y portería 24 horas. El coworking y la lavandería comunal no son habituales a este precio, y son los dos que más cambian el día a día de quien trabaja desde la casa.",
+      "Este costado de Envigado da sobre el límite con Sabaneta, en la Calle 50 Sur, y es de los pocos sitios donde se vive con el valle al frente sin quedar lejos del centro de Envigado ni de la Regional. Lo que distingue a este conjunto no es una amenidad suelta sino el paquete entero: piscina para adultos y niños, gimnasio, salón de yoga, una zona de coworking con sala de juntas, salón social con cocina gourmet, lavandería comunal y portería 24 horas. El coworking y la lavandería comunal no son habituales a este precio, y son los dos que más cambian el día a día de quien trabaja desde la casa.",
       "Son 62 m² construidos y 55 m² privados en el piso 19. Dos alcobas, dos baños, zona de ropas independiente, cocina integral con horno empotrado, un balcón que mira al valle y un espacio adicional que sirve de estudio o de alcoba auxiliar. Viene con parqueadero privado cubierto y depósito, y tiene menos de un año. Lo aceptamos porque lo declarado coincide con lo que muestran las fotos, tomadas con el apartamento desocupado, y porque a este precio lo corriente en el sector es un edificio con la mitad de estas zonas comunes. Las amenidades que no salen en las fotos, la cancha, el parque infantil, la pista de triciclos y la peluquería de mascotas, van declaradas por el anuncio y todavía no las hemos visto."
     ],
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui cae al
        espanol, asi que una foto nueva sin alt en ingles no rompe nada. */
     en: {
-      titulo: "Apartment in Envigado, Primavera",
+      titulo: "Apartment in Envigado",
       ficha: [
         ["Built area", "62 m²"],
         ["Private area", "55 m²"],
@@ -151,74 +155,74 @@ var CINQ_OPORTUNIDADES = [
         ["Amenities", "Pool for adults and children, gym, yoga room, coworking area with meeting room, social room with gourmet kitchen, games room, sports court, playground, tricycle track, communal laundry, pet grooming and a 24 hour gatehouse"]
       ],
       descripcion: [
-        "Primavera sits on the border between Envigado and Sabaneta, on Calle 50 Sur, one of the few sectors where you live with the valley in front of you without being far from the centre of Envigado or from the Regional. What sets this complex apart is not one amenity but the whole set: a pool for adults and children, a gym, a yoga room, a coworking area with a meeting room, a social room with a gourmet kitchen, a communal laundry and a 24 hour gatehouse. The coworking area and the communal laundry are unusual at this price, and they are the two that change daily life the most for someone who works from home.",
+        "This side of Envigado runs along the border with Sabaneta, on Calle 50 Sur, and is one of the few places where you live with the valley in front of you without being far from the centre of Envigado or from the Regional. What sets this complex apart is not one amenity but the whole set: a pool for adults and children, a gym, a yoga room, a coworking area with a meeting room, a social room with a gourmet kitchen, a communal laundry and a 24 hour gatehouse. The coworking area and the communal laundry are unusual at this price, and they are the two that change daily life the most for someone who works from home.",
         "It has 62 m² built and 55 m² private on the 19th floor. Two bedrooms, two bathrooms, a separate laundry area, a fitted kitchen with a built in oven, a balcony looking over the valley and an extra room that works as a study or a spare bedroom. It comes with a private covered parking space and a storage room, and it is under a year old. We accepted it because what was declared matches what the photos show, taken with the apartment empty, and because at this price the norm in the sector is a building with half these common areas. The amenities that do not appear in the photos, the sports court, the playground, the tricycle track and the pet grooming, are declared by the listing and we have not seen them yet."
       ],
       /* Un alt por foto, en el mismo orden que fotos[]. */
       alts: [
-        "Living and dining room with access to the balcony, apartment in Primavera, Envigado",
-        "Living room with a full height window and access to the balcony, Primavera, Envigado",
-        "Fitted kitchen in wood and grey with a built in oven, Primavera, Envigado",
-        "Close up of the kitchen countertop and gas hob, Primavera, Envigado",
-        "The kitchen seen from the living room, Primavera, Envigado",
-        "Main bedroom with a full height window and a view of the mountains, Primavera, Envigado",
-        "Main bedroom from the other angle, Primavera, Envigado",
-        "Wooden closet in the main bedroom, Primavera, Envigado",
-        "Second bedroom with a window, Primavera, Envigado",
-        "Open closet with wooden shelves and drawers, Primavera, Envigado",
-        "Extra room suited to a study or a spare bedroom, Primavera, Envigado",
-        "Main bathroom with a tiled shower and a wooden vanity unit, Primavera, Envigado",
-        "Second bathroom with a mosaic tiled shower, Primavera, Envigado",
-        "Separate laundry area, Primavera, Envigado",
-        "Entrance hall with laminate flooring, Primavera, Envigado",
-        "Balcony with an open view over the valley, Primavera, Envigado",
-        "Panoramic view from the building towards the mountains, Primavera, Envigado",
-        "Swimming pool of the complex, Primavera, Envigado",
-        "Pool area with a pergola, Primavera, Envigado",
-        "Social room with a gourmet kitchen and island, Primavera, Envigado",
-        "Social room from the other angle, Primavera, Envigado",
-        "Coworking area with work tables, Primavera, Envigado",
-        "Meeting room with full height windows, Primavera, Envigado",
-        "Equipped gym of the complex, Primavera, Envigado",
-        "Gym with cardio machines and a view outside, Primavera, Envigado",
-        "Yoga and multipurpose room, Primavera, Envigado",
-        "Terrace and pathways in the common areas, Primavera, Envigado",
-        "Communal laundry room of the building, Primavera, Envigado",
-        "Private covered parking space, Primavera, Envigado",
-        "Storage room included with the apartment, Primavera, Envigado"
+        "Living and dining room with access to the balcony, apartment in Envigado",
+        "Living room with a full height window and access to the balcony, Envigado",
+        "Fitted kitchen in wood and grey with a built in oven, Envigado",
+        "Close up of the kitchen countertop and gas hob, Envigado",
+        "The kitchen seen from the living room, Envigado",
+        "Main bedroom with a full height window and a view of the mountains, Envigado",
+        "Main bedroom from the other angle, Envigado",
+        "Wooden closet in the main bedroom, Envigado",
+        "Second bedroom with a window, Envigado",
+        "Open closet with wooden shelves and drawers, Envigado",
+        "Extra room suited to a study or a spare bedroom, Envigado",
+        "Main bathroom with a tiled shower and a wooden vanity unit, Envigado",
+        "Second bathroom with a mosaic tiled shower, Envigado",
+        "Separate laundry area, Envigado",
+        "Entrance hall with laminate flooring, Envigado",
+        "Balcony with an open view over the valley, Envigado",
+        "Panoramic view from the building towards the mountains, Envigado",
+        "Swimming pool of the complex, Envigado",
+        "Pool area with a pergola, Envigado",
+        "Social room with a gourmet kitchen and island, Envigado",
+        "Social room from the other angle, Envigado",
+        "Coworking area with work tables, Envigado",
+        "Meeting room with full height windows, Envigado",
+        "Equipped gym of the complex, Envigado",
+        "Gym with cardio machines and a view outside, Envigado",
+        "Yoga and multipurpose room, Envigado",
+        "Terrace and pathways in the common areas, Envigado",
+        "Communal laundry room of the building, Envigado",
+        "Private covered parking space, Envigado",
+        "Storage room included with the apartment, Envigado"
       ]
     },
     fotos: [
-      { archivo: "civita-1944-01-sala-comedor.jpg",           alt: "Sala comedor con salida al balcón, apartamento en Primavera, Envigado" },
-      { archivo: "civita-1944-02-sala-balcon.jpg",            alt: "Sala con ventanal y acceso al balcón, Primavera, Envigado" },
-      { archivo: "civita-1944-03-cocina.jpg",                 alt: "Cocina integral en madera y gris con horno empotrado, Primavera, Envigado" },
-      { archivo: "civita-1944-04-cocina-detalle.jpg",         alt: "Detalle del mesón y la estufa a gas de la cocina, Primavera, Envigado" },
-      { archivo: "civita-1944-05-cocina-angulo.jpg",          alt: "Cocina vista desde la sala, Primavera, Envigado" },
-      { archivo: "civita-1944-06-alcoba-principal.jpg",       alt: "Alcoba principal con ventanal y vista a las montañas, Primavera, Envigado" },
-      { archivo: "civita-1944-07-alcoba-principal-vista.jpg", alt: "Alcoba principal desde el otro ángulo, Primavera, Envigado" },
-      { archivo: "civita-1944-08-closet-principal.jpg",       alt: "Clóset en madera de la alcoba principal, Primavera, Envigado" },
-      { archivo: "civita-1944-09-alcoba-secundaria.jpg",      alt: "Segunda alcoba con ventana, Primavera, Envigado" },
-      { archivo: "civita-1944-10-closet-alcoba.jpg",          alt: "Clóset abierto con entrepaños y cajones en madera, Primavera, Envigado" },
-      { archivo: "civita-1944-11-alcoba-estudio.jpg",         alt: "Espacio adicional apto para estudio o alcoba auxiliar, Primavera, Envigado" },
-      { archivo: "civita-1944-12-bano-principal.jpg",         alt: "Baño principal con ducha enchapada y mueble en madera, Primavera, Envigado" },
-      { archivo: "civita-1944-13-bano-social.jpg",            alt: "Segundo baño con ducha en mosaico, Primavera, Envigado" },
-      { archivo: "civita-1944-14-zona-ropas.jpg",             alt: "Zona de ropas independiente, Primavera, Envigado" },
-      { archivo: "civita-1944-15-hall-acceso.jpg",            alt: "Hall de acceso con piso laminado, Primavera, Envigado" },
-      { archivo: "civita-1944-16-balcon.jpg",                 alt: "Balcón con vista abierta al valle, Primavera, Envigado" },
-      { archivo: "civita-1944-17-vista-panoramica.jpg",       alt: "Vista panorámica desde el edificio hacia las montañas, Primavera, Envigado" },
-      { archivo: "civita-1944-18-piscina.jpg",                alt: "Piscina del conjunto, Primavera, Envigado" },
-      { archivo: "civita-1944-19-piscina-pergola.jpg",        alt: "Zona de piscina con pérgola, Primavera, Envigado" },
-      { archivo: "civita-1944-20-salon-social.jpg",           alt: "Salón social con cocina gourmet e isla, Primavera, Envigado" },
-      { archivo: "civita-1944-21-salon-social-2.jpg",         alt: "Salón social desde el otro ángulo, Primavera, Envigado" },
-      { archivo: "civita-1944-22-coworking.jpg",              alt: "Zona de coworking con mesas de trabajo, Primavera, Envigado" },
-      { archivo: "civita-1944-23-sala-juntas.jpg",            alt: "Sala de juntas con ventanales, Primavera, Envigado" },
-      { archivo: "civita-1944-24-gimnasio.jpg",               alt: "Gimnasio equipado del conjunto, Primavera, Envigado" },
-      { archivo: "civita-1944-25-gimnasio-2.jpg",             alt: "Gimnasio con máquinas cardiovasculares y vista al exterior, Primavera, Envigado" },
-      { archivo: "civita-1944-26-salon-yoga.jpg",             alt: "Salón de yoga y usos múltiples, Primavera, Envigado" },
-      { archivo: "civita-1944-27-terraza-comun.jpg",          alt: "Terraza y senderos de las zonas comunes, Primavera, Envigado" },
-      { archivo: "civita-1944-28-lavanderia-comunal.jpg",     alt: "Lavandería comunal del edificio, Primavera, Envigado" },
-      { archivo: "civita-1944-29-parqueadero.jpg",            alt: "Parqueadero privado cubierto, Primavera, Envigado" },
-      { archivo: "civita-1944-30-deposito.jpg",               alt: "Depósito o cuarto útil incluido, Primavera, Envigado" }
+      { archivo: "civita-1944-01-sala-comedor.jpg",           alt: "Sala comedor con salida al balcón, apartamento en Envigado" },
+      { archivo: "civita-1944-02-sala-balcon.jpg",            alt: "Sala con ventanal y acceso al balcón, Envigado" },
+      { archivo: "civita-1944-03-cocina.jpg",                 alt: "Cocina integral en madera y gris con horno empotrado, Envigado" },
+      { archivo: "civita-1944-04-cocina-detalle.jpg",         alt: "Detalle del mesón y la estufa a gas de la cocina, Envigado" },
+      { archivo: "civita-1944-05-cocina-angulo.jpg",          alt: "Cocina vista desde la sala, Envigado" },
+      { archivo: "civita-1944-06-alcoba-principal.jpg",       alt: "Alcoba principal con ventanal y vista a las montañas, Envigado" },
+      { archivo: "civita-1944-07-alcoba-principal-vista.jpg", alt: "Alcoba principal desde el otro ángulo, Envigado" },
+      { archivo: "civita-1944-08-closet-principal.jpg",       alt: "Clóset en madera de la alcoba principal, Envigado" },
+      { archivo: "civita-1944-09-alcoba-secundaria.jpg",      alt: "Segunda alcoba con ventana, Envigado" },
+      { archivo: "civita-1944-10-closet-alcoba.jpg",          alt: "Clóset abierto con entrepaños y cajones en madera, Envigado" },
+      { archivo: "civita-1944-11-alcoba-estudio.jpg",         alt: "Espacio adicional apto para estudio o alcoba auxiliar, Envigado" },
+      { archivo: "civita-1944-12-bano-principal.jpg",         alt: "Baño principal con ducha enchapada y mueble en madera, Envigado" },
+      { archivo: "civita-1944-13-bano-social.jpg",            alt: "Segundo baño con ducha en mosaico, Envigado" },
+      { archivo: "civita-1944-14-zona-ropas.jpg",             alt: "Zona de ropas independiente, Envigado" },
+      { archivo: "civita-1944-15-hall-acceso.jpg",            alt: "Hall de acceso con piso laminado, Envigado" },
+      { archivo: "civita-1944-16-balcon.jpg",                 alt: "Balcón con vista abierta al valle, Envigado" },
+      { archivo: "civita-1944-17-vista-panoramica.jpg",       alt: "Vista panorámica desde el edificio hacia las montañas, Envigado" },
+      { archivo: "civita-1944-18-piscina.jpg",                alt: "Piscina del conjunto, Envigado" },
+      { archivo: "civita-1944-19-piscina-pergola.jpg",        alt: "Zona de piscina con pérgola, Envigado" },
+      { archivo: "civita-1944-20-salon-social.jpg",           alt: "Salón social con cocina gourmet e isla, Envigado" },
+      { archivo: "civita-1944-21-salon-social-2.jpg",         alt: "Salón social desde el otro ángulo, Envigado" },
+      { archivo: "civita-1944-22-coworking.jpg",              alt: "Zona de coworking con mesas de trabajo, Envigado" },
+      { archivo: "civita-1944-23-sala-juntas.jpg",            alt: "Sala de juntas con ventanales, Envigado" },
+      { archivo: "civita-1944-24-gimnasio.jpg",               alt: "Gimnasio equipado del conjunto, Envigado" },
+      { archivo: "civita-1944-25-gimnasio-2.jpg",             alt: "Gimnasio con máquinas cardiovasculares y vista al exterior, Envigado" },
+      { archivo: "civita-1944-26-salon-yoga.jpg",             alt: "Salón de yoga y usos múltiples, Envigado" },
+      { archivo: "civita-1944-27-terraza-comun.jpg",          alt: "Terraza y senderos de las zonas comunes, Envigado" },
+      { archivo: "civita-1944-28-lavanderia-comunal.jpg",     alt: "Lavandería comunal del edificio, Envigado" },
+      { archivo: "civita-1944-29-parqueadero.jpg",            alt: "Parqueadero privado cubierto, Envigado" },
+      { archivo: "civita-1944-30-deposito.jpg",               alt: "Depósito o cuarto útil incluido, Envigado" }
     ]
   },
 

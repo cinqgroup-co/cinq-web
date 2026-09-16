@@ -300,31 +300,22 @@ inglés. Eso último necesita direcciones propias y `hreflang`, y es otra decisi
 español y solo cambia lo que se lee, así que el correo de Formspree llega siempre igual aunque la
 persona haya llenado el formulario en inglés.
 
-## La firma del fundador
+## El pie de la cita en Nosotros
 
-La cita que abre Nosotros va firmada: el trazo a mano y debajo el cargo en mayúsculas espaciadas,
-como el cierre de una carta. El cargo se traduce con el botón ES/EN; el trazo no, porque una firma
-no se traduce.
+La cita que abre Nosotros va atribuida: el nombre y debajo el cargo, los dos en versalitas
+espaciadas. El cargo se traduce con el botón ES/EN; el nombre no.
 
-**Entre los dos iba el nombre repetido en versalitas, y se quitó al entrar el retrato.** Decía por
-tercera vez lo que ya dicen el trazo y la cara, y el bloque se leía como una repetición en vez de
-como una firma. Con el nombre fuera, el trazo dejó de llevar `aria-hidden`: era el renglón en
-versalitas el que le daba el nombre a un lector de pantalla, y ahora le toca a él. **Si algún día
-vuelve ese renglón, hay que devolverle el `aria-hidden` al trazo**, o el nombre se anuncia dos
-veces seguidas.
+**Aquí hubo una rúbrica a mano, en Allura,** entre la cita y el nombre. Se quitó el 16 de
+septiembre de 2026, por decisión de Samuel: con el retrato debajo, la página decía el nombre tres
+veces seguidas y la cursiva era la que sobraba. Si algún día vuelve, el `<span class="trazo">`
+necesita `aria-hidden`, o el nombre se le anuncia dos veces seguidas a un lector de pantalla.
 
-El trazo va en **Allura**, bajo licencia SIL Open Font License 1.1. El archivo vive en
-`assets/fonts/allura-latin.woff2` con su licencia al lado, que es lo que la OFL pide para
-redistribuirla. **No se pide a `fonts.googleapis.com`, y es a propósito:** el sitio no le pide un
-solo archivo a un tercero, y la política de privacidad promete que no se recoge nada. Traerla de
-Google le mandaría la IP de cada visitante a Google en la página que dice lo contrario. Son 26 kB y
-solo los descarga Nosotros, que es la única página que la usa.
-
-Mientras la fuente llega, `font-display: swap` muestra la firma con la cursiva del sistema en vez de
-dejar el hueco en blanco: es una línea de adorno y no puede bloquear la lectura.
-
-Si algún día hay una firma real escaneada, reemplaza el `<span class="trazo">` por el SVG y se cae
-la dependencia de la fuente. Es el camino correcto: sería su firma, no una tipografía.
+**Allura quedó sin usar.** La fuente (`assets/fonts/allura-latin.woff2`), su licencia OFL al lado,
+la declaración `@font-face` y el token `--font-firma` en `styles.css` siguen en el repo y ninguna
+página los pide. No pesan en la carga, porque una `@font-face` que nadie usa no se descarga, pero
+son código muerto: o se borran los cuatro juntos, o se dejan a la espera de volver a usarlos.
+Borrarlos implica quitar también el archivo de licencia, que es lo que la OFL exige mientras la
+fuente se redistribuya.
 
 ## El retrato del fundador
 
@@ -451,7 +442,7 @@ la oportunidad no se agrega al array.
 
 1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
-3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo y el retrato del fundador en Nosotros, el sitio ya tiene 30 fotos del apartamento de Primavera en Envigado, 16 del 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes de ese edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
+3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo y el retrato del fundador en Nosotros, el sitio ya tiene 30 fotos del apartamento de Envigado, 16 del 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes de ese edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
 
 ## Formulario de Ofrecer
 
