@@ -12,9 +12,19 @@ el sitio.
   SLUG         slug de la oportunidad; la salida va a assets/img/portafolio/SLUG/
   NOMBRES.TXT  un nombre de archivo por linea, en el orden final de la galeria
 
-El orden de la galeria es el orden de descarga (mtime ascendente), no el orden
-alfabetico: WhatsApp nombra los archivos por hora de captura, que no es la
-misma secuencia en la que se recorrio el inmueble.
+El orden de la galeria es el orden alfabetico del nombre del archivo, con los
+numeros comparados como numeros (asi -2- va antes de -10-, y no al reves).
+
+Antes ordenaba por mtime, y estaba mal. Cuando un lote llega de WhatsApp Web de
+un solo golpe, las descargas comparten el segundo de mtime: 31 fotos de un
+inmueble cayeron todas dentro del mismo segundo. Con el empate, sorted() cae al
+orden en que el sistema de archivos devuelve los nombres, que no es cronologico,
+y como aqui el orden decide que nombre y que alt text le toca a cada foto, un
+empate publica el bano con el nombre de la cocina. No avisa: se ve en la pagina.
+
+Por eso el origen tiene que venir ya con el indice en el nombre (-01-, -02-, ...),
+que es lo que deja mapear.py al emparejar cada descarga con su nombre final. El
+orden se lee del nombre, no se deduce de una fecha.
 
 El JPG se copia tal cual si ya viene por debajo del maximo; recomprimirlo solo
 degrada una imagen que WhatsApp ya comprimio. El WebP se genera siempre.
@@ -22,6 +32,7 @@ degrada una imagen que WhatsApp ya comprimio. El WebP se genera siempre.
 import argparse
 import glob
 import os
+import re
 import shutil
 import sys
 
@@ -30,6 +41,16 @@ from PIL import Image
 MAX_LADO = 1920
 CALIDAD = 82
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def clave_natural(ruta):
+    """Ordena por nombre tratando los numeros como numeros.
+
+    Sin esto, -10- se ordena antes que -2-, que es justo lo que rompe una
+    galeria de mas de nueve fotos.
+    """
+    nombre = os.path.basename(ruta).lower()
+    return [int(t) if t.isdigit() else t for t in re.split(r"(\d+)", nombre)]
 
 
 def main():
@@ -44,7 +65,7 @@ def main():
         nombres = [l.strip() for l in fh if l.strip() and not l.startswith("#")]
 
     fuentes = sorted(glob.glob(os.path.join(args.origen, args.patron)),
-                     key=os.path.getmtime)
+                     key=clave_natural)
     if len(fuentes) != len(nombres):
         sys.exit("Hay %d fotos en el origen y %d nombres en la lista." %
                  (len(fuentes), len(nombres)))
