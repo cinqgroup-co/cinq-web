@@ -52,6 +52,21 @@
   .firma .nombre{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);}
   .firma .rol{font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--muted);}
 
+  /* ---------------- retrato del fundador ---------------- */
+  /* La cita de arriba esta firmada, asi que debajo va la cara de quien la
+     firma: cita, firma, persona. Es fotografia propia, como todo lo que
+     publica el sitio.
+
+     Va contenida a proposito. Un retrato a todo ancho convierte Nosotros en
+     un perfil personal, y la pagina es sobre CINQ; a este tamano acompana a
+     la firma en vez de reemplazarla.
+
+     El aspect-ratio es el del archivo (1122x1402). Reserva el alto antes de
+     que la imagen cargue, asi que el texto de abajo no da el salto, y como
+     coincide con el original, el object-fit:cover de .frame no recorta nada. */
+  .retrato{margin:66px auto 0;width:min(320px,74vw);}
+  .retrato .frame{aspect-ratio:1122/1402;}
+
   .prose{padding:96px 32px 120px;}
   .prose .inner{max-width:640px;margin:0 auto;}
   .prose-block{margin-bottom:64px;}
@@ -93,6 +108,16 @@
       <span class="nombre">Samuel Sánchez</span>
       <span class="rol" data-en="Founder of CINQ">Fundador de CINQ</span>
     </div>
+    <figure class="retrato">
+      <div class="frame">
+        <picture>
+          <source srcset="assets/img/samuel-sanchez-fundador.webp" type="image/webp">
+          <img src="assets/img/samuel-sanchez-fundador.jpg" width="1122" height="1402"
+               alt="Samuel Sánchez, fundador de CINQ, de brazos cruzados y con el polo blanco de la marca"
+               data-en-alt="Samuel Sánchez, founder of CINQ, arms crossed, wearing the brand's white polo shirt">
+        </picture>
+      </div>
+    </figure>
   </div>
 </section>
 

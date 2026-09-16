@@ -319,6 +319,23 @@ dejar el hueco en blanco: es una línea de adorno y no puede bloquear la lectura
 Si algún día hay una firma real escaneada, reemplaza el `<span class="trazo">` por el SVG y se cae
 la dependencia de la fuente. Es el camino correcto: sería su firma, no una tipografía.
 
+## El retrato del fundador
+
+Debajo de la firma va la cara de quien firma: cita, firma, persona. Es fotografía propia, como todo
+lo que publica el sitio, y está en `assets/img/samuel-sanchez-fundador.jpg` con su `.webp` al lado,
+igual que el resto de las fotos.
+
+**Va contenido a propósito.** El ancho es `min(320px, 74vw)`, no el de la columna. Un retrato a todo
+ancho convierte Nosotros en un perfil personal, y la página es sobre CINQ: a este tamaño acompaña a
+la firma en vez de reemplazarla.
+
+El `.frame` lleva `aspect-ratio` con las medidas exactas del archivo (1122x1402). Hace dos cosas:
+reserva el alto antes de que la imagen cargue, así que el texto de abajo no da el salto, y como
+coincide con el original, el `object-fit: cover` de `.frame` no recorta nada de la foto.
+
+El retrato vive dentro del `.masthead`, que es primera pantalla y por eso no se revela al hacer
+scroll. Si algún día se mueve más abajo, hay que decidir si entra en el `REVELADO` de `site.js`.
+
 ## Portafolio: cómo sumar una oportunidad
 
 El portafolio se dibuja solo a partir de **un único archivo de datos**: `assets/js/oportunidades.js`.
@@ -427,7 +444,7 @@ la oportunidad no se agrega al array.
 
 1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
-3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo, el sitio ya tiene 16 fotos del apartamento 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes del edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
+3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo y el retrato del fundador en Nosotros, el sitio ya tiene 16 fotos del apartamento 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes del edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
 
 ## Formulario de Ofrecer
 
