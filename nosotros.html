@@ -29,15 +29,21 @@
     font-size:clamp(24px,3.6vw,36px);line-height:1.48;color:var(--ink);text-wrap:balance;margin:0;
   }
   /* ---------------- firma del fundador ---------------- */
-  /* La frase de arriba es suya, así que va firmada: el trazo a mano, y debajo
-     el nombre y el cargo en tipografía, como en una carta. Es el bloque que
-     cierra la cita, no un logo: por eso el trazo manda en tamaño y lo demás
-     queda pequeño y espaciado.
+  /* La frase de arriba es suya, así que va firmada: el trazo a mano y debajo
+     el cargo en tipografía, como en una carta. Es el bloque que cierra la
+     cita, no un logo: por eso el trazo manda en tamaño y el cargo queda
+     pequeño y espaciado.
+
+     El nombre en versalitas que iba entre los dos se quitó al entrar el
+     retrato. Decía por tercera vez lo que ya dicen el trazo y la cara: el
+     bloque se leía como una repetición en vez de como una firma. Por eso el
+     trazo tampoco lleva ya aria-hidden: era el renglón en versalitas el que
+     le daba el nombre a un lector de pantalla, y ahora le toca a él.
 
      El trazo va en Allura, que vive en assets/fonts/ de este repo. La
      declaración y el porqué de tenerla aquí y no pedírsela a Google están en
      styles.css, junto al resto de los tokens de tipografía. */
-  .firma{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:6px;}
+  .firma{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:12px;}
   .firma .trazo{
     font-family:var(--font-firma);
     /* Allura tiene el ojo pequeño y mucho trazo fino, así que necesita más
@@ -49,7 +55,6 @@
        caja: sin este respiro la firma queda pegada al borde y descentrada. */
     padding:0 10px 4px;
   }
-  .firma .nombre{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink);}
   .firma .rol{font-size:10.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--muted);}
 
   /* ---------------- retrato del fundador ---------------- */
@@ -104,8 +109,7 @@
     <p class="eyebrow" style="text-align:center;" data-en="About">Nosotros</p>
     <h1 data-en="&quot;It has always struck me how two people can look at exactly the same thing... and see completely different things.&quot;">"Siempre me ha llamado la atención cómo dos personas pueden mirar exactamente lo mismo... y ver cosas completamente diferentes."</h1>
     <div class="firma">
-      <span class="trazo" aria-hidden="true">Samuel Sánchez</span>
-      <span class="nombre">Samuel Sánchez</span>
+      <span class="trazo">Samuel Sánchez</span>
       <span class="rol" data-en="Founder of CINQ">Fundador de CINQ</span>
     </div>
     <figure class="retrato">
