@@ -302,9 +302,16 @@ persona haya llenado el formulario en inglés.
 
 ## La firma del fundador
 
-La cita que abre Nosotros va firmada: el trazo a mano, y debajo el nombre y el cargo en mayúsculas
-espaciadas, como el cierre de una carta. El cargo se traduce con el botón ES/EN; el nombre y el
-trazo no, porque una firma no se traduce.
+La cita que abre Nosotros va firmada: el trazo a mano y debajo el cargo en mayúsculas espaciadas,
+como el cierre de una carta. El cargo se traduce con el botón ES/EN; el trazo no, porque una firma
+no se traduce.
+
+**Entre los dos iba el nombre repetido en versalitas, y se quitó al entrar el retrato.** Decía por
+tercera vez lo que ya dicen el trazo y la cara, y el bloque se leía como una repetición en vez de
+como una firma. Con el nombre fuera, el trazo dejó de llevar `aria-hidden`: era el renglón en
+versalitas el que le daba el nombre a un lector de pantalla, y ahora le toca a él. **Si algún día
+vuelve ese renglón, hay que devolverle el `aria-hidden` al trazo**, o el nombre se anuncia dos
+veces seguidas.
 
 El trazo va en **Allura**, bajo licencia SIL Open Font License 1.1. El archivo vive en
 `assets/fonts/allura-latin.woff2` con su licencia al lado, que es lo que la OFL pide para
@@ -444,7 +451,7 @@ la oportunidad no se agrega al array.
 
 1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
-3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo y el retrato del fundador en Nosotros, el sitio ya tiene 16 fotos del apartamento 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes del edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
+3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo y el retrato del fundador en Nosotros, el sitio ya tiene 30 fotos del apartamento de Primavera en Envigado, 16 del 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes de ese edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
 
 ## Formulario de Ofrecer
 
