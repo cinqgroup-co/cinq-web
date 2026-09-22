@@ -153,7 +153,7 @@ var CINQ_OPORTUNIDADES = [
       ["Baños", "4"],
       ["Piso", "23"],
       ["Parqueadero", "2 paralelos en sótano 1, frente al ascensor"],
-      ["Cuarto útil", "Sí, en el mismo sótano"],
+      ["Cuarto útil", "Sí, en el piso 23, contiguo al apartamento"],
       ["Estudio", "Sí"],
       ["Balcón", "Corrido, a lo largo de todo el apartamento"],
       ["Pisos", "Porcelanato"],
@@ -161,7 +161,7 @@ var CINQ_OPORTUNIDADES = [
     ],
     descripcion: [
       "Las Lomitas está en la parte alta de Sabaneta, en la ladera, y desde ahí la altura se convierte en vista. En un piso 23 eso quiere decir el valle entero al frente, de día y de noche, sin edificios que lo tapen. Es la razón por la que este sector pesa en el precio: la vista no se construye después, viene con la ubicación.",
-      "Son 172 m² en el piso 23, con un balcón que corre a lo largo de todo el apartamento y da vista e iluminación de lado a lado. La terraza funciona como una segunda sala, con jardín vertical y la ciudad al fondo, y se abre por completo a la sala, el comedor y la cocina. Tiene tres alcobas contando la del servicio, cuatro baños y un estudio. La alcoba principal trae vestier y baño propio, y la segunda un clóset de pared completa. Pisos en porcelanato, iluminación empotrada tipo galería, puerta blindada, dos parqueaderos paralelos en el sótano 1 frente al ascensor y cuarto útil en el mismo piso. Lo aceptamos porque a este tamaño y con esta vista no hay muchos en Sabaneta, y porque el balcón corrido es de esas cosas que no tienen arreglo en otro apartamento."
+      "Son 172 m² en el piso 23, con un balcón que corre a lo largo de todo el apartamento y da vista e iluminación de lado a lado. La terraza funciona como una segunda sala, con jardín vertical y la ciudad al fondo, y se abre por completo a la sala, el comedor y la cocina. Tiene tres alcobas contando la del servicio, cuatro baños y un estudio. La alcoba principal trae vestier y baño propio, y la segunda un clóset de pared completa. Pisos en porcelanato, iluminación empotrada tipo galería, puerta blindada, dos parqueaderos paralelos en el sótano 1 frente al ascensor y un cuarto útil en el mismo piso 23, contiguo al apartamento. Lo aceptamos porque a este tamaño y con esta vista no hay muchos en Sabaneta, y porque el balcón corrido es de esas cosas que no tienen arreglo en otro apartamento."
     ],
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
        cae al espanol. */
@@ -173,7 +173,7 @@ var CINQ_OPORTUNIDADES = [
         ["Bathrooms", "4"],
         ["Floor", "23"],
         ["Parking", "2 tandem spaces on basement level 1, facing the lift"],
-        ["Storage room", "Yes, on the same basement level"],
+        ["Storage room", "Yes, on the 23rd floor, next to the apartment"],
         ["Study", "Yes"],
         ["Balcony", "Runs the full length of the apartment"],
         ["Floors", "Porcelain tile"],
@@ -181,7 +181,7 @@ var CINQ_OPORTUNIDADES = [
       ],
       descripcion: [
         "Las Lomitas sits in the upper part of Sabaneta, on the hillside, and from there height turns into a view. On the 23rd floor that means the whole valley in front of you, by day and by night, with no buildings in the way. That is why this sector carries weight in the price: the view cannot be built later, it comes with the location.",
-        "It has 172 m² on the 23rd floor, with a balcony that runs the full length of the apartment and brings in views and light from end to end. The terrace works as a second living room, with a vertical garden and the city behind it, and opens completely onto the living room, dining room and kitchen. There are three bedrooms counting the service room, four bathrooms and a study. The main bedroom has a walk in closet and its own bathroom, and the second a full wall closet. Porcelain tile floors, gallery style recessed lighting, an armoured front door, two tandem parking spaces on basement level 1 facing the lift and a storage room on the same level. We accepted it because there are not many apartments of this size with this view in Sabaneta, and because a full length balcony is something no other apartment can make up for."
+        "It has 172 m² on the 23rd floor, with a balcony that runs the full length of the apartment and brings in views and light from end to end. The terrace works as a second living room, with a vertical garden and the city behind it, and opens completely onto the living room, dining room and kitchen. There are three bedrooms counting the service room, four bathrooms and a study. The main bedroom has a walk in closet and its own bathroom, and the second a full wall closet. Porcelain tile floors, gallery style recessed lighting, an armoured front door, two tandem parking spaces on basement level 1 facing the lift and a storage room on the 23rd floor, right next to the apartment. We accepted it because there are not many apartments of this size with this view in Sabaneta, and because a full length balcony is something no other apartment can make up for."
       ],
       alts: [
         "Furnished terrace with a night view over the valley, apartment in Las Lomitas, Sabaneta",
