@@ -95,6 +95,46 @@
 var CINQ_OPORTUNIDADES = [
 
   {
+    slug: "lote-envigado",
+    tipo: "Propiedad",
+    subtipo: "Lote",
+    operacion: "Venta",
+    titulo: "Lote Envigado",
+    zona: "Envigado",
+    zonaDetalle: "Envigado, Antioquia",
+    precio: 1000000000,
+    premium: false,
+    /* Nuevo ingreso del 22 de septiembre de 2026, aprobado por Samuel. Solo se conocen area y precio; sector, uso del suelo, servicios, topografia y propietario estan pendientes y por eso no salen. Es el primer lote del catalogo y abre la categoria Lotes del portafolio. */
+    ficha: [
+      ["Área", "1.800 m²"],
+      ["Precio por m²", "$ 555.556"]
+    ],
+    descripcion: [
+      "Envigado tiene poco suelo libre, y todavía menos rodeado de vegetación de este porte. Un lote de 1.800 m² en el municipio es de las piezas que casi no salen al mercado.",
+      "Son 1.800 m² en Envigado, entre vegetación de buen porte, con acceso por vía pavimentada. Sale en $1.000.000.000, unos $555.556 por metro cuadrado. Lo aceptamos por el área y por el precio por metro en un municipio donde los lotes grandes escasean. Uso del suelo, servicios, topografía y qué construcciones incluye los estamos confirmando, y se suman a esta ficha en cuanto los tengamos."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      titulo: "Lot in Envigado",
+      ficha: [
+        ["Area", "1,800 m²"],
+        ["Price per m²", "COP 555,556"]
+      ],
+      descripcion: [
+        "Envigado has little open land left, and even less surrounded by vegetation of this size. A 1,800 m² lot in the municipality is one of the pieces that hardly ever reaches the market.",
+        "It has 1,800 m² in Envigado, among well grown vegetation, with access by a paved road. It is offered at COP 1,000,000,000, around COP 555,556 per square metre. We accepted it for its size and for the price per metre in a municipality where large lots are scarce. Land use, utilities, topography and which buildings are included are being confirmed, and they will be added to this listing as soon as we have them."
+      ],
+      alts: [
+        "Paved road and a house with a clay tile roof among the vegetation, Envigado"
+      ]
+    },
+    fotos: [
+      { archivo: "lote-envigado-01-via-acceso.jpg",   alt: "Vía pavimentada y casa con techo de teja de barro entre vegetación, Envigado" }
+    ]
+  },
+
+  {
     slug: "sabaneta-las-lomitas",
     tipo: "Propiedad",
     subtipo: "Apartamento",

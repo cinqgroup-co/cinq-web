@@ -54,6 +54,7 @@ var CINQ_I18N = (function(){
       precioConsultar: 'Precio a consultar',
       badgePremium:    'Curaduría premium',
       filtroTodas:     'Todas',
+      filtroTodoTipo:  'Todo',
       verFoto:         'Ver foto {n}',
       descripcion:     'Descripción',
       fichaTecnica:    'Ficha técnica',
@@ -77,6 +78,7 @@ var CINQ_I18N = (function(){
       precioConsultar: 'Price on request',
       badgePremium:    'Premium selection',
       filtroTodas:     'All',
+      filtroTodoTipo:  'Everything',
       verFoto:         'View photo {n}',
       descripcion:     'Description',
       fichaTecnica:    'Specifications',
@@ -113,7 +115,15 @@ var CINQ_I18N = (function(){
     'Oficina': 'Office',
     'Finca': 'Country house',
     'Venta': 'For sale',
-    'Arriendo': 'For rent'
+    'Arriendo': 'For rent',
+    /* Los plurales son los botones de categoria del portafolio. */
+    'Apartamentos': 'Apartments',
+    'Casas': 'Houses',
+    'Lotes': 'Lots',
+    'Locales': 'Retail spaces',
+    'Oficinas': 'Offices',
+    'Fincas': 'Country houses',
+    'Vehículos': 'Vehicles'
   };
 
   var actual = 'es';

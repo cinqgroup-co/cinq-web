@@ -92,6 +92,19 @@ var CINQ = (function(){
     return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto);
   }
 
+  /* La categoria es lo que separa las secciones del portafolio: el subtipo
+     para las propiedades (Apartamento, Lote, Casa) y el tipo para los
+     vehiculos, que no se parten por marca. Sale del catalogo, asi que una
+     categoria nueva aparece sola cuando entra su primera oportunidad. */
+  function categoria(op){
+    return op.tipo === 'Vehículo' ? 'Vehículo' : (op.subtipo || op.tipo);
+  }
+
+  var PLURALES = { 'Apartamento': 'Apartamentos', 'Casa': 'Casas', 'Lote': 'Lotes',
+    'Local': 'Locales', 'Oficina': 'Oficinas', 'Finca': 'Fincas', 'Vehículo': 'Vehículos' };
+
+  function plural(cat){ return PLURALES[cat] || cat; }
+
   function tarjeta(op){
     var titulo = I18N.campo(op, 'titulo');
     var badge = op.premium ? '<span class="p-badge">' + esc(t('badgePremium')) + '</span>' : '';
@@ -101,7 +114,7 @@ var CINQ = (function(){
       ' style="view-transition-name:foto-' + op.slug + '"');
     return '' +
       '<a class="p-card" href="oportunidad.html?id=' + encodeURIComponent(op.slug) + '">' +
-        '<div class="frame"><span class="p-tag">' + esc(I18N.voz(op.tipo)) + '</span>' + badge + img + '</div>' +
+        '<div class="frame"><span class="p-tag">' + esc(I18N.voz(categoria(op))) + '</span>' + badge + img + '</div>' +
         '<div class="p-meta">' +
           '<div><div class="place">' + esc(titulo) + '</div><div class="op">' + esc(I18N.voz(op.operacion)) + '</div></div>' +
           '<div class="price">' + esc(precio(op.precio)) + '</div>' +
@@ -133,12 +146,35 @@ var CINQ = (function(){
     });
     zonas.sort();
 
-    function cuantas(zona){
-      return ops.filter(function(op){ return op.zona === zona; }).length;
-    }
+    var cats = [];
+    ops.forEach(function(op){
+      var c = categoria(op);
+      if(cats.indexOf(c) < 0) cats.push(c);
+    });
 
     var caja = document.getElementById('filtros');
+    var cajaCat = document.getElementById('categorias');
     var actual = 'todas';
+    var actualCat = 'todo';
+
+    /* Las zonas cuentan dentro de la categoria elegida: con "Lotes" puesto,
+       el boton de Sabaneta dice cuantos lotes hay en Sabaneta, no cuantas
+       oportunidades en total. */
+    function enCat(op){ return actualCat === 'todo' || categoria(op) === actualCat; }
+
+    function cuantas(zona){
+      return ops.filter(function(op){ return enCat(op) && op.zona === zona; }).length;
+    }
+
+    /* ?tipo=lotes abre el portafolio ya en esa seccion, para compartir el
+       enlace de los lotes. Vale el singular o el plural, con o sin tilde. */
+    function llano(s){ return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+    var pedidaCat = new URLSearchParams(window.location.search).get('tipo');
+    if(pedidaCat){
+      cats.forEach(function(c){
+        if(llano(c) === llano(pedidaCat) || llano(plural(c)) === llano(pedidaCat)) actualCat = c;
+      });
+    }
 
     /* ?zona=Sabaneta abre el portafolio ya filtrado, para poder compartir el
        enlace de un municipio. Si la zona no existe, se ignora. */
@@ -153,11 +189,29 @@ var CINQ = (function(){
        la barra solo se dibuja si hay al menos dos zonas. Los nombres de los
        municipios no se traducen; el unico boton con texto es "Todas". */
     var hayFiltros = caja && zonas.length > 1;
+    var hayCats = cajaCat && cats.length > 1;
+
+    function pintaCats(){
+      if(!hayCats) return;
+      var botones = [['todo', t('filtroTodoTipo'), ops.length]];
+      cats.forEach(function(c){
+        botones.push([c, I18N.voz(plural(c)),
+          ops.filter(function(op){ return categoria(op) === c; }).length]);
+      });
+      cajaCat.innerHTML = botones.map(function(b){
+        return '<button type="button" data-cat="' + esc(b[0]) + '" aria-pressed="' +
+          (b[0] === actualCat ? 'true' : 'false') + '">' +
+          esc(b[1]) + '<span class="cuenta">' + b[2] + '</span></button>';
+      }).join('');
+      cajaCat.hidden = false;
+    }
 
     function pintaFiltros(){
       if(!hayFiltros) return;
-      var botones = [['todas', t('filtroTodas'), ops.length]];
-      zonas.forEach(function(z){ botones.push([z, z, cuantas(z)]); });
+      var botones = [['todas', t('filtroTodas'), ops.filter(enCat).length]];
+      /* Una zona sin nada en la categoria elegida no se muestra: seria un
+         boton que lleva a una reticula vacia. */
+      zonas.forEach(function(z){ if(cuantas(z)) botones.push([z, z, cuantas(z)]); });
       caja.innerHTML = botones.map(function(b){
         return '<button type="button" data-zona="' + esc(b[0]) + '" aria-pressed="' +
           (b[0] === actual ? 'true' : 'false') + '">' +
@@ -167,8 +221,12 @@ var CINQ = (function(){
     }
 
     function pinta(){
-      var visibles = actual === 'todas' ? ops : ops.filter(function(op){ return op.zona === actual; });
+      if(actual !== 'todas' && !cuantas(actual)) actual = 'todas';
+      var visibles = ops.filter(function(op){
+        return enCat(op) && (actual === 'todas' || op.zona === actual);
+      });
       grid.innerHTML = visibles.map(tarjeta).join('');
+      pintaCats();
       pintaFiltros();
     }
 
@@ -188,6 +246,22 @@ var CINQ = (function(){
         else { url.searchParams.set('zona', actual); }
         window.history.replaceState(null, '', url.pathname + url.search + url.hash);
         pinta();
+      });
+    }
+
+    if(hayCats){
+      cajaCat.addEventListener('click', function(e){
+        var boton = e.target.closest('button');
+        if(!boton) return;
+        actualCat = boton.getAttribute('data-cat');
+        var url = new URL(window.location.href);
+        if(actualCat === 'todo'){ url.searchParams.delete('tipo'); }
+        else { url.searchParams.set('tipo', llano(plural(actualCat))); }
+        pinta();
+        /* pinta() puede soltar una zona que quedo vacia; la direccion
+           tiene que decir lo mismo que se ve. */
+        if(actual === 'todas'){ url.searchParams.delete('zona'); }
+        window.history.replaceState(null, '', url.pathname + url.search + url.hash);
       });
     }
 
