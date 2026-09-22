@@ -249,8 +249,13 @@ def leer_orden(ruta, carpeta):
 def cmd_publicar(args):
     with open(args.datos, encoding="utf-8") as fh:
         datos = json.load(fh)
-    faltan = [c for c in ("slug", "titulo", "zona", "zonaDetalle", "precio")
-              if not datos.get(c)]
+    obligatorios = ["slug", "titulo", "precio"]
+    # Un vehiculo no esta en un municipio: se entrega donde se acuerde. Por eso
+    # la zona solo se exige a las propiedades; sin ella la ficha no pinta la
+    # fila de Zona y el h1 pasa a ser el titulo.
+    if datos.get("tipo", "Propiedad") != "Vehículo":
+        obligatorios += ["zona", "zonaDetalle"]
+    faltan = [c for c in obligatorios if not datos.get(c)]
     if faltan:
         sys.exit("Faltan campos en %s: %s" % (args.datos, ", ".join(faltan)))
 
@@ -360,8 +365,10 @@ def componer_bloque(datos, fotos_js):
     lineas.append('    subtipo: "%s",' % datos.get("subtipo", "Apartamento"))
     lineas.append('    operacion: "%s",' % datos.get("operacion", "Venta"))
     lineas.append('    titulo: "%s",' % datos["titulo"])
-    lineas.append('    zona: "%s",' % datos["zona"])
-    lineas.append('    zonaDetalle: "%s",' % datos["zonaDetalle"])
+    if datos.get("zona"):
+        lineas.append('    zona: "%s",' % datos["zona"])
+    if datos.get("zonaDetalle"):
+        lineas.append('    zonaDetalle: "%s",' % datos["zonaDetalle"])
     lineas.append('    precio: %d,' % int(datos["precio"]))
     lineas.append('    premium: %s,' % ("true" if datos.get("premium")
                                         else "false"))

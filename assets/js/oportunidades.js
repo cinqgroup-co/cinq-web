@@ -95,6 +95,70 @@
 var CINQ_OPORTUNIDADES = [
 
   {
+    slug: "victory-black-2025-gris",
+    tipo: "Vehículo",
+    subtipo: "Moto",
+    operacion: "Venta",
+    titulo: "Victory Black 2025",
+    precio: 10400000,
+    premium: false,
+    /* Nuevo ingreso del 22 de septiembre de 2026. Los datos salen de la ficha que paso Samuel, que vive en Inventario Activo. Es la primera moto del catalogo y no lleva zona: un vehiculo no esta en un municipio. Quedan fuera dos fotos donde se ven de frente personas del fondo. */
+    ficha: [
+      ["Año", "2025"],
+      ["Kilometraje", "2.168 km"],
+      ["Cilindraje", "172 cc"],
+      ["Documentos", "SOAT e impuestos al día"],
+      ["Potencia", "11.3 hp"],
+      ["Color", "Gris"],
+      ["Dueños", "Único dueño"],
+      ["Extras", "Sliders delanteros y traseros instalados, un par adicional sin instalar y maleta trasera"]
+    ],
+    descripcion: [
+      "Una moto de 172 cc y 11.3 hp es de las que resuelven la ciudad: alcanza para el Valle de Aburrá sin volverse pesada en el tráfico ni cara de mantener.",
+      "Victory Black 2025 en gris, de único dueño y con 2.168 km, porque se ha usado solo para un trayecto diario de tres minutos. Se entrega con SOAT e impuestos al día, sliders delanteros y traseros instalados, un par adicional de sliders sin instalar y maleta trasera. La aceptamos porque el kilometraje, el estado y los documentos coinciden con lo que muestran las fotos, y porque a este precio lo corriente es una moto con varios años encima."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      titulo: "Victory Black 2025",
+      ficha: [
+        ["Year", "2025"],
+        ["Mileage", "2,168 km"],
+        ["Engine", "172 cc"],
+        ["Paperwork", "Insurance and road tax up to date"],
+        ["Power", "11.3 hp"],
+        ["Colour", "Grey"],
+        ["Owners", "One owner"],
+        ["Extras", "Front and rear sliders fitted, a spare pair still boxed and a top case"]
+      ],
+      descripcion: [
+        "A 172 cc, 11.3 hp motorcycle is the kind that solves the city: enough for the Aburrá Valley without being heavy in traffic or expensive to keep.",
+        "A 2025 Victory Black in grey, one owner and 2,168 km, because it has only been used for a three minute daily commute. It comes with insurance and road tax up to date, front and rear sliders fitted, a spare pair still boxed and a top case. We accepted it because the mileage, the condition and the paperwork match what the photos show, and because at this price the norm is a motorcycle several years old."
+      ],
+      alts: [
+        "2025 Victory Black in grey seen from the front, with a top case and a windscreen",
+        "Right hand side of the 2025 Victory Black in grey with the top case fitted",
+        "Right hand side from behind, showing the seat and the top case",
+        "Single piece seat and rear grab rails of the motorcycle",
+        "Three quarter front view, with the headlight and the tall windscreen",
+        "Full profile of the motorcycle, without the top case",
+        "Front of the motorcycle with the Victory logo on the fairing",
+        "Digital instrument panel switched on, with the odometer in view"
+      ]
+    },
+    fotos: [
+      { archivo: "victory-black-2025-gris-01-frontal.jpg",           alt: "Victory Black 2025 gris de frente, con baúl trasero y parabrisas" },
+      { archivo: "victory-black-2025-gris-02-lateral.jpg",           alt: "Costado derecho de la Victory Black 2025 gris con el baúl instalado" },
+      { archivo: "victory-black-2025-gris-03-lateral-2.jpg",         alt: "Costado derecho desde atrás, con el asiento y el baúl a la vista" },
+      { archivo: "victory-black-2025-gris-04-asiento.jpg",           alt: "Asiento corrido y colas traseras de la moto" },
+      { archivo: "victory-black-2025-gris-05-frontal-vitrina.jpg",   alt: "Frente en tres cuartos, con el faro y el parabrisas alto" },
+      { archivo: "victory-black-2025-gris-06-lateral-vitrina.jpg",   alt: "Perfil completo de la moto, sin el baúl" },
+      { archivo: "victory-black-2025-gris-07-frente-vitrina.jpg",    alt: "Frente de la moto con el logo de Victory en el carenaje" },
+      { archivo: "victory-black-2025-gris-08-tablero.jpg",           alt: "Tablero digital encendido, con el odómetro a la vista" }
+    ]
+  },
+
+  {
     slug: "lote-envigado",
     tipo: "Propiedad",
     subtipo: "Lote",

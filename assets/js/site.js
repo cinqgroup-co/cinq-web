@@ -504,7 +504,11 @@ var CINQ = (function(){
 
     var titulo = I18N.campo(op, 'titulo');
     document.title = titulo + ' | CINQ';
-    var descripcion = t('metaFicha', { titulo: titulo, zona: op.zonaDetalle });
+    /* Un vehiculo no tiene municipio: no esta en ningun sitio, se entrega
+       donde se acuerde. Sin zona la meta se queda con el titulo solo. */
+    var descripcion = op.zonaDetalle
+      ? t('metaFicha', { titulo: titulo, zona: op.zonaDetalle })
+      : t('metaFichaSinZona', { titulo: titulo });
     var meta = document.querySelector('meta[name="description"]');
     if(meta) meta.setAttribute('content', descripcion);
 
@@ -527,8 +531,9 @@ var CINQ = (function(){
 
     var ficha = I18N.campo(op, 'ficha') || [];
     var fichaCompleta = [[t('filaTipo'), I18N.voz(op.subtipo || op.tipo)],
-                         [t('filaOperacion'), I18N.voz(op.operacion)],
-                         [t('filaZona'), op.zona]].concat(ficha);
+                         [t('filaOperacion'), I18N.voz(op.operacion)]];
+    if(op.zona) fichaCompleta.push([t('filaZona'), op.zona]);
+    fichaCompleta = fichaCompleta.concat(ficha);
     var parrafos = (I18N.campo(op, 'descripcion') || []).map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('');
 
     /* El panel va primero en el html aunque se vea a la derecha: dentro
@@ -539,7 +544,10 @@ var CINQ = (function(){
       '<div class="info-panel">' +
         '<div class="kicker">' + esc(I18N.voz(op.tipo)) + ' · ' + esc(I18N.voz(op.operacion)) + '</div>' +
         '<div class="price">' + esc(precio(op.precio)) + '</div>' +
-        '<h1 class="loc">' + esc(op.zonaDetalle) + '</h1>' +
+        /* El h1 es el municipio cuando lo hay. Un vehiculo no lo tiene, y
+           entonces el h1 pasa a ser el titulo: la pagina no puede abrir sin
+           encabezado. */
+        '<h1 class="loc">' + esc(op.zonaDetalle || titulo) + '</h1>' +
         '<ul class="spec-list">' + specs(ficha) + '</ul>' +
         '<a class="wa-btn" href="' + esc(enlaceWhatsapp(op)) + '" target="_blank" rel="noopener">' + esc(t('btnConversemos')) + '</a>' +
         '<p class="info-note">' + esc(t('notaPanel')) + '</p>' +
