@@ -94,6 +94,88 @@
 
 var CINQ_OPORTUNIDADES = [
 
+  {
+    slug: "sabaneta-las-lomitas",
+    tipo: "Propiedad",
+    subtipo: "Apartamento",
+    operacion: "Venta",
+    titulo: "Apartamento Sabaneta Las Lomitas",
+    zona: "Sabaneta",
+    zonaDetalle: "Las Lomitas, Sabaneta, Antioquia",
+    precio: 1290000000,
+    premium: false,
+    /* Nuevo ingreso del 22 de septiembre de 2026, por referido familiar de Samuel. Los datos de la ficha los paso el propietario; estrato, administracion y antiguedad no llegaron y por eso no salen. Las fotos son del album de WhatsApp de ese dia. Pendientes: repetir cocina y bano con los mesones despejados, sumar garajes, fachada y una vista de dia. El titulo va sin el nombre del proyecto, como manda la cabecera. */
+    ficha: [
+      ["Área", "172 m²"],
+      ["Alcobas", "3, incluida la del servicio"],
+      ["Baños", "4"],
+      ["Piso", "23"],
+      ["Parqueadero", "2 paralelos en sótano 1, frente al ascensor"],
+      ["Cuarto útil", "Sí, en el mismo sótano"],
+      ["Estudio", "Sí"],
+      ["Balcón", "Corrido, a lo largo de todo el apartamento"],
+      ["Pisos", "Porcelanato"],
+      ["Seguridad", "Puerta blindada"]
+    ],
+    descripcion: [
+      "Las Lomitas está en la parte alta de Sabaneta, en la ladera, y desde ahí la altura se convierte en vista. En un piso 23 eso quiere decir el valle entero al frente, de día y de noche, sin edificios que lo tapen. Es la razón por la que este sector pesa en el precio: la vista no se construye después, viene con la ubicación.",
+      "Son 172 m² en el piso 23, con un balcón que corre a lo largo de todo el apartamento y da vista e iluminación de lado a lado. La terraza funciona como una segunda sala, con jardín vertical y la ciudad al fondo, y se abre por completo a la sala, el comedor y la cocina. Tiene tres alcobas contando la del servicio, cuatro baños y un estudio. La alcoba principal trae vestier y baño propio, y la segunda un clóset de pared completa. Pisos en porcelanato, iluminación empotrada tipo galería, puerta blindada, dos parqueaderos paralelos en el sótano 1 frente al ascensor y cuarto útil en el mismo piso. Lo aceptamos porque a este tamaño y con esta vista no hay muchos en Sabaneta, y porque el balcón corrido es de esas cosas que no tienen arreglo en otro apartamento."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      titulo: "Apartment in Sabaneta, Las Lomitas",
+      ficha: [
+        ["Area", "172 m²"],
+        ["Bedrooms", "3, including the service room"],
+        ["Bathrooms", "4"],
+        ["Floor", "23"],
+        ["Parking", "2 tandem spaces on basement level 1, facing the lift"],
+        ["Storage room", "Yes, on the same basement level"],
+        ["Study", "Yes"],
+        ["Balcony", "Runs the full length of the apartment"],
+        ["Floors", "Porcelain tile"],
+        ["Security", "Armoured front door"]
+      ],
+      descripcion: [
+        "Las Lomitas sits in the upper part of Sabaneta, on the hillside, and from there height turns into a view. On the 23rd floor that means the whole valley in front of you, by day and by night, with no buildings in the way. That is why this sector carries weight in the price: the view cannot be built later, it comes with the location.",
+        "It has 172 m² on the 23rd floor, with a balcony that runs the full length of the apartment and brings in views and light from end to end. The terrace works as a second living room, with a vertical garden and the city behind it, and opens completely onto the living room, dining room and kitchen. There are three bedrooms counting the service room, four bathrooms and a study. The main bedroom has a walk in closet and its own bathroom, and the second a full wall closet. Porcelain tile floors, gallery style recessed lighting, an armoured front door, two tandem parking spaces on basement level 1 facing the lift and a storage room on the same level. We accepted it because there are not many apartments of this size with this view in Sabaneta, and because a full length balcony is something no other apartment can make up for."
+      ],
+      alts: [
+        "Furnished terrace with a night view over the valley, apartment in Las Lomitas, Sabaneta",
+        "Outdoor lounge on the terrace with a vertical garden and the city behind, Sabaneta",
+        "Living room open to the terrace with the city view, Las Lomitas, Sabaneta",
+        "Living and dining room in one space with the kitchen behind, Sabaneta",
+        "Dining room with pendant lamps next to the living room, Sabaneta",
+        "Living room, dining room and kitchen seen from the balcony, Sabaneta",
+        "Covered terrace with patterned tile floor and a glass railing, Sabaneta",
+        "Panoramic view of the valley at sunset from the 23rd floor, Sabaneta",
+        "Night view of the city from the apartment, Las Lomitas, Sabaneta",
+        "Open kitchen with a breakfast bar and gas hob, connected to the terrace, Sabaneta",
+        "Bedroom with a floor to ceiling window and a city view, Sabaneta",
+        "Bedroom with a wood panelled wall and a bed with drawers, Sabaneta",
+        "Bedroom doors opening onto the balcony at sunset, Sabaneta",
+        "Bathroom with a glass shower and a built in niche, Sabaneta"
+      ]
+    },
+    fotos: [
+      { archivo: "sabaneta-las-lomitas-01-terraza-vista-nocturna.jpg",   alt: "Terraza amoblada con vista nocturna sobre el valle, apartamento en Las Lomitas, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-02-terraza-sala-exterior.jpg",    alt: "Sala exterior en la terraza con jardín vertical y la ciudad al fondo, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-03-sala-vista-ciudad.jpg",        alt: "Sala abierta a la terraza con la vista de la ciudad, Las Lomitas, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-04-sala-comedor.jpg",             alt: "Sala y comedor en un solo espacio con la cocina al fondo, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-05-comedor.jpg",                  alt: "Comedor con lámparas colgantes junto a la sala, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-06-sala-desde-balcon.jpg",        alt: "Sala, comedor y cocina vistos desde el balcón, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-07-terraza.jpg",                  alt: "Terraza cubierta con piso de baldosa decorada y baranda de vidrio, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-08-vista-atardecer.jpg",          alt: "Vista panorámica del valle al atardecer desde el piso 23, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-09-vista-nocturna.jpg",           alt: "Vista nocturna de la ciudad desde el apartamento, Las Lomitas, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-10-cocina.jpg",                   alt: "Cocina abierta con barra y estufa a gas, conectada a la terraza, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-11-alcoba-ventanal.jpg",          alt: "Alcoba con ventanal de piso a techo y vista a la ciudad, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-12-alcoba-madera.jpg",            alt: "Alcoba con pared en madera y cama con cajones, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-13-alcoba-salida-balcon.jpg",     alt: "Puertas de la alcoba hacia el balcón al atardecer, Sabaneta" },
+      { archivo: "sabaneta-las-lomitas-14-bano.jpg",                     alt: "Baño con ducha en vidrio y nicho empotrado, Sabaneta" }
+    ]
+  },
+
   /* Nuevo ingreso del 16 de septiembre de 2026. Precio, unidad y ciudad los
      confirmo la propietaria; areas, alcobas, banos, estrato y amenidades salen
      del anuncio de Finca Raiz, codigo 192110031. Cual foto es cual no se
