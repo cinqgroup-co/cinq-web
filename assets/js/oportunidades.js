@@ -111,7 +111,7 @@ var CINQ_OPORTUNIDADES = [
     ],
     descripcion: [
       "Envigado tiene poco suelo libre, y todavía menos rodeado de vegetación de este porte. Un lote de 1.800 m² en el municipio es de las piezas que casi no salen al mercado.",
-      "Son 1.800 m² en Envigado, entre vegetación de buen porte, con acceso por vía pavimentada. Sale en $1.000.000.000, unos $555.556 por metro cuadrado. Lo aceptamos por el área y por el precio por metro en un municipio donde los lotes grandes escasean. Uso del suelo, servicios, topografía y qué construcciones incluye los estamos confirmando, y se suman a esta ficha en cuanto los tengamos."
+      "Son 1.800 m² en Envigado, con prado abierto, setos, palmas, platanera y guaduas, y acceso por vía pavimentada. Sale en $1.000.000.000, unos $555.556 por metro cuadrado. Lo aceptamos por el área y por el precio por metro en un municipio donde los lotes grandes escasean. Uso del suelo, servicios, topografía y qué construcciones incluye los estamos confirmando, y se suman a esta ficha en cuanto los tengamos."
     ],
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
        cae al espanol. */
@@ -123,14 +123,16 @@ var CINQ_OPORTUNIDADES = [
       ],
       descripcion: [
         "Envigado has little open land left, and even less surrounded by vegetation of this size. A 1,800 m² lot in the municipality is one of the pieces that hardly ever reaches the market.",
-        "It has 1,800 m² in Envigado, among well grown vegetation, with access by a paved road. It is offered at COP 1,000,000,000, around COP 555,556 per square metre. We accepted it for its size and for the price per metre in a municipality where large lots are scarce. Land use, utilities, topography and which buildings are included are being confirmed, and they will be added to this listing as soon as we have them."
+        "It has 1,800 m² in Envigado, with an open lawn, hedges, palms, banana plants and bamboo, and access by a paved road. It is offered at COP 1,000,000,000, around COP 555,556 per square metre. We accepted it for its size and for the price per metre in a municipality where large lots are scarce. Land use, utilities, topography and which buildings are included are being confirmed, and they will be added to this listing as soon as we have them."
       ],
       alts: [
+        "Lot in Envigado with a lawn, hedges, palms and bamboo at sunset",
         "Paved road and a house with a clay tile roof among the vegetation, Envigado"
       ]
     },
     fotos: [
-      { archivo: "lote-envigado-01-via-acceso.jpg",   alt: "Vía pavimentada y casa con techo de teja de barro entre vegetación, Envigado" }
+      { archivo: "lote-envigado-01-prado.jpg",        alt: "Lote en Envigado con prado, setos, palmas y guaduas al atardecer" },
+      { archivo: "lote-envigado-02-via-acceso.jpg",   alt: "Vía pavimentada y casa con techo de teja de barro entre vegetación, Envigado" }
     ]
   },
 
