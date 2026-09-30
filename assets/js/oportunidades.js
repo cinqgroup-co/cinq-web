@@ -143,7 +143,7 @@ var CINQ_OPORTUNIDADES = [
         "Three quarter front view, with the headlight and the tall windscreen",
         "Full profile of the motorcycle, without the top case",
         "Front of the motorcycle with the Victory logo on the fairing",
-        "Digital instrument panel switched on, with the odometer in view"
+        "Digital instrument panel switched on, showing 2,168 km on the odometer"
       ]
     },
     fotos: [
@@ -154,7 +154,7 @@ var CINQ_OPORTUNIDADES = [
       { archivo: "victory-black-2025-gris-05-frontal-vitrina.jpg",   alt: "Frente en tres cuartos, con el faro y el parabrisas alto" },
       { archivo: "victory-black-2025-gris-06-lateral-vitrina.jpg",   alt: "Perfil completo de la moto, sin el baúl" },
       { archivo: "victory-black-2025-gris-07-frente-vitrina.jpg",    alt: "Frente de la moto con el logo de Victory en el carenaje" },
-      { archivo: "victory-black-2025-gris-08-tablero.jpg",           alt: "Tablero digital encendido, con el odómetro a la vista" }
+      { archivo: "victory-black-2025-gris-08-tablero.jpg",           alt: "Tablero digital encendido, con el odómetro en 2.168 km" }
     ]
   },
 
