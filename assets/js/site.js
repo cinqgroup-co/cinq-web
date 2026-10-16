@@ -107,6 +107,14 @@ var CINQ = (function(){
     return op.subtipo || op.tipo;
   }
 
+  /* El mercado separa lo de Colombia de lo de afuera. Colombia son los
+     inmuebles que visitamos y fotografiamos; los Emiratos, proyectos sobre
+     planos que llegan con el aliado en Dubai. Se deduce de la zona, asi que
+     un proyecto nuevo en Dubai cae solo en su bloque. */
+  var AFUERA = ['Dubái', 'Abu Dabi'];
+  var MERCADOS = ['colombia', 'emiratos'];
+  function mercado(op){ return AFUERA.indexOf(op.zona) >= 0 ? 'emiratos' : 'colombia'; }
+
   var PLURALES = { 'Apartamento': 'Apartamentos', 'Casa': 'Casas', 'Lote': 'Lotes',
     'Local': 'Locales', 'Oficina': 'Oficinas', 'Finca': 'Fincas', 'Proyecto': 'Proyectos' };
 
@@ -151,7 +159,12 @@ var CINQ = (function(){
     ops.forEach(function(op){
       if(op.zona && zonas.indexOf(op.zona) < 0) zonas.push(op.zona);
     });
-    zonas.sort();
+    /* Primero las de Colombia y despues las de afuera, cada grupo en orden
+       alfabetico: asi la barra de filtros tambien queda partida en dos. */
+    zonas.sort(function(a, b){
+      var ma = AFUERA.indexOf(a) >= 0, mb = AFUERA.indexOf(b) >= 0;
+      return ma === mb ? a.localeCompare(b, 'es') : (ma ? 1 : -1);
+    });
 
     var cats = [];
     ops.forEach(function(op){
@@ -218,8 +231,16 @@ var CINQ = (function(){
       var botones = [['todas', t('filtroTodas'), ops.filter(enCat).length]];
       /* Una zona sin nada en la categoria elegida no se muestra: seria un
          boton que lleva a una reticula vacia. */
-      zonas.forEach(function(z){ if(cuantas(z)) botones.push([z, z, cuantas(z)]); });
+      var antes = null;
+      zonas.forEach(function(z){
+        if(!cuantas(z)) return;
+        var m = AFUERA.indexOf(z) >= 0;
+        if(antes !== null && antes !== m) botones.push(null);
+        antes = m;
+        botones.push([z, I18N.voz(z), cuantas(z)]);
+      });
       caja.innerHTML = botones.map(function(b){
+        if(!b) return '<span class="sep" aria-hidden="true"></span>';
         return '<button type="button" data-zona="' + esc(b[0]) + '" aria-pressed="' +
           (b[0] === actual ? 'true' : 'false') + '">' +
           esc(b[1]) + '<span class="cuenta">' + b[2] + '</span></button>';
@@ -232,7 +253,29 @@ var CINQ = (function(){
       var visibles = ops.filter(function(op){
         return enCat(op) && (actual === 'todas' || op.zona === actual);
       });
-      grid.innerHTML = visibles.map(tarjeta).join('');
+      /* Un bloque por mercado, con su titulo, mientras el catalogo tenga
+         los dos. Si solo hay uno, la reticula va sola, sin encabezado. */
+      var hayDos = MERCADOS.every(function(m){ return ops.some(function(op){ return mercado(op) === m; }); });
+      if(!hayDos){
+        grid.innerHTML = '<div class="p-grid">' + visibles.map(tarjeta).join('') + '</div>';
+      } else {
+        grid.innerHTML = MERCADOS.map(function(m){
+          var suyas = visibles.filter(function(op){ return mercado(op) === m; });
+          if(!suyas.length) return '';
+          var donde = [];
+          suyas.forEach(function(op){ if(op.zona && donde.indexOf(op.zona) < 0) donde.push(op.zona); });
+          /* La zona con mas oportunidades primero: "Dubai y Abu Dabi". */
+          function n(z){ return suyas.filter(function(op){ return op.zona === z; }).length; }
+          donde.sort(function(a, b){ return n(b) - n(a) || a.localeCompare(b, 'es'); });
+          return '<section class="p-mercado" aria-labelledby="mercado-' + m + '">' +
+            '<div class="p-mercado-head">' +
+              '<h2 id="mercado-' + m + '">' + esc(t('mercado_' + m)) + '</h2>' +
+              '<p>' + esc(donde.map(I18N.voz).join(t('y'))) + '. ' + esc(t('mercadoNota_' + m)) + '</p>' +
+            '</div>' +
+            '<div class="p-grid">' + suyas.map(tarjeta).join('') + '</div>' +
+          '</section>';
+        }).join('');
+      }
       pintaCats();
       pintaFiltros();
     }
@@ -296,7 +339,6 @@ var CINQ = (function(){
      hay afuera, el precio de entrada mas bajo y el rango de entregas (el año
      se lee de la fila "Entrega" de cada ficha). Sin proyectos afuera se
      retira la seccion entera, como las destacadas. */
-  var AFUERA = ['Dubái', 'Abu Dabi'];
   function initDubai(){
     var seccion = document.getElementById('dubai');
     var caja = document.getElementById('dubai-datos');
@@ -606,9 +648,10 @@ var CINQ = (function(){
       });
     });
 
-    /* Primero las de la misma zona: desde un proyecto en Dubai no sirve
-       sugerir un lote en Envigado. Si no alcanzan, se completa con el resto. */
-    var otras = ops.filter(function(o){ return o.slug !== op.slug; });
+    /* Solo del mismo mercado: desde un proyecto en Dubai no se sugiere un
+       lote en Envigado, ni al reves. Dentro del mercado, primero la misma
+       zona. */
+    var otras = ops.filter(function(o){ return o.slug !== op.slug && mercado(o) === mercado(op); });
     otras = otras.filter(function(o){ return o.zona === op.zona; })
       .concat(otras.filter(function(o){ return o.zona !== op.zona; }));
     var seccion = document.getElementById('related');

@@ -46,6 +46,13 @@
   }
   .p-filtros button:focus-visible{outline:2px solid var(--olive);outline-offset:2px;}
   .p-filtros .cuenta{margin-left:7px;opacity:.55;}
+  /* Raya entre las zonas de Colombia y las de afuera. */
+  .p-filtros .sep{width:1px;align-self:stretch;background:var(--line);margin:0 6px;}
+  /* Un bloque por mercado: Colombia arriba, los Emiratos debajo. */
+  .p-mercado + .p-mercado{margin-top:96px;padding-top:64px;border-top:1px solid var(--line);}
+  .p-mercado-head{margin:0 0 34px;}
+  .p-mercado-head h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3vw,32px);margin:0 0 8px;color:var(--ink);}
+  .p-mercado-head p{font-size:14px;color:var(--muted);line-height:1.7;margin:0;}
   /* Las categorias van arriba de las zonas y mas pegadas a ellas: son un
      mismo control en dos niveles, no dos bloques sueltos. */
   .p-categorias{margin-bottom:14px;}
@@ -74,7 +81,7 @@
   <div class="container">
     <div class="p-filtros p-categorias" id="categorias" role="group" aria-label="Filtrar por tipo de oportunidad" data-en-aria-label="Filter by type of opportunity" hidden></div>
     <div class="p-filtros" id="filtros" role="group" aria-label="Filtrar por ubicación" data-en-aria-label="Filter by location" hidden></div>
-    <div class="p-grid" id="grid"></div>
+    <div id="grid"></div>
     <p id="empty-state" hidden style="text-align:center;color:var(--muted);font-size:13.5px;padding:60px 0;">
       <span data-en="The portfolio is being refreshed. Message us on WhatsApp and we will tell you what we have under evaluation.">El portafolio se está renovando. Escríbenos por WhatsApp y te contamos qué tenemos en evaluación.</span>
     </p>
