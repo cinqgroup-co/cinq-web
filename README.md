@@ -70,7 +70,7 @@ en Vercel**. Mientras no se active, la peticion falla sin romper nada.
 
 ## Identidad en el navegador y al compartir
 
-- `favicon.svg`: la Q del wordmark en crema sobre oliva. Es el trazado real del logo, con su cola,
+- `favicon.svg`: la Q del wordmark en oliva sobre blanco. Es el trazado real del logo, con su cola,
   recortado de `assets/img/cinq-logo.svg`, asi que se ve nitido a cualquier tamano y en cualquier
   pantalla. `favicon.ico` (16/32/48) queda de respaldo para los navegadores que no leen iconos
   vectoriales, y `apple-touch-icon.png` (180) es el de la pantalla de inicio del iPhone. Los tres
