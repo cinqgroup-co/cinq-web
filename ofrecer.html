@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title data-en="Offer your property or vehicle | CINQ">Ofrece tu propiedad o vehículo | CINQ</title>
-<meta name="description" content="¿Tienes una propiedad o vehículo que crees que merece estar en el portafolio de CINQ? Cuéntanos." data-en-content="Do you have a property or vehicle you believe belongs in the CINQ portfolio? Tell us about it.">
+<title data-en="Offer your property | CINQ">Ofrece tu propiedad | CINQ</title>
+<meta name="description" content="¿Tienes una propiedad que crees que merece estar en el portafolio de CINQ? Cuéntanos." data-en-content="Do you have a property you believe belongs in the CINQ portfolio? Tell us about it.">
 <link rel="canonical" href="https://cinq-web.vercel.app/ofrecer.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -13,8 +13,8 @@
 <meta property="og:site_name" content="CINQ">
 <meta property="og:locale" content="es_CO">
 <meta property="og:url" content="https://cinq-web.vercel.app/ofrecer.html">
-<meta property="og:title" content="Ofrece tu propiedad o vehículo">
-<meta property="og:description" content="¿Tienes una propiedad o vehículo que crees que merece estar en el portafolio de CINQ? Cuéntanos.">
+<meta property="og:title" content="Ofrece tu propiedad">
+<meta property="og:description" content="¿Tienes una propiedad que crees que merece estar en el portafolio de CINQ? Cuéntanos.">
 <meta property="og:image" content="https://cinq-web.vercel.app/assets/img/og-cinq-2.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -43,18 +43,6 @@
   .step-label .t{font-family:var(--font-display);font-size:19px;color:var(--ink);}
   .step-block{margin-bottom:58px;}
 
-  .choice-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-  @media (max-width:420px){ .choice-row{grid-template-columns:1fr;} }
-  .choice-row input[type="radio"]{position:absolute;opacity:0;width:1px;height:1px;}
-  .choice{
-    position:relative;display:block;border:1px solid var(--line);padding:26px;text-align:center;cursor:pointer;
-    transition:border-color .2s ease,background .2s ease;
-  }
-  .choice .t{font-family:var(--font-display);font-size:16px;color:var(--ink);margin-bottom:4px;}
-  .choice .d{font-size:11.5px;color:var(--muted);}
-  .choice.sel{border-color:var(--olive-deep);background:var(--paper-alt);}
-  .choice.sel .t{color:var(--olive-deep);}
-  .choice:has(input[type="radio"]:focus-visible){outline:2px solid var(--olive);outline-offset:2px;}
 
   .field{margin-bottom:20px;}
   .field label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;}
@@ -134,10 +122,10 @@
 
 <section class="masthead">
   <div class="container-narrow">
-    <p class="eyebrow" data-en="Offer your property or vehicle">Ofrece tu propiedad o vehículo</p>
+    <p class="eyebrow" data-en="Offer your property">Ofrece tu propiedad</p>
     <h1 data-en="Do you have something you believe deserves to be seen?">¿Tienes algo que crees que merece ser visto?</h1>
     <div class="intro-block">
-      <span data-en="CINQ connects opportunities, it does not publish listings. This form is the first step for your property or vehicle to be evaluated by our team. Not all requests are accepted: we work to a standard of quality, paperwork and presentation that protects both you and the people who trust CINQ.">CINQ conecta oportunidades, no publica anuncios. Este formulario es el primer paso para que tu propiedad o vehículo sea evaluado por nuestro equipo. No todas las solicitudes son aceptadas: trabajamos con un estándar de calidad, documentación y presentación que protege tanto a ti como a quienes confían en CINQ.</span>
+      <span data-en="CINQ connects opportunities, it does not publish listings. This form is the first step for your property to be evaluated by our team. Not all requests are accepted: we work to a standard of quality, paperwork and presentation that protects both you and the people who trust CINQ.">CINQ conecta oportunidades, no publica anuncios. Este formulario es el primer paso para que tu propiedad sea evaluada por nuestro equipo. No todas las solicitudes son aceptadas: trabajamos con un estándar de calidad, documentación y presentación que protege tanto a ti como a quienes confían en CINQ.</span>
     </div>
   </div>
 </section>
@@ -145,24 +133,10 @@
 <form id="cinq-form" novalidate action="https://formspree.io/f/xnpaneoz" method="POST">
   <div class="container-narrow">
 
-    <div class="step-block">
-      <div class="step-label"><span class="n">01</span><span class="t" data-en="What would you like to offer?">¿Qué deseas ofrecer?</span></div>
-      <div class="choice-row">
-        <label class="choice sel" id="choice-propiedad">
-          <input type="radio" name="kind" value="propiedad" checked>
-          <div class="t" data-en="Property">Propiedad</div>
-          <div class="d" data-en="For sale or for rent">Venta o arriendo</div>
-        </label>
-        <label class="choice" id="choice-vehiculo">
-          <input type="radio" name="kind" value="vehiculo">
-          <div class="t" data-en="Vehicle">Vehículo</div>
-          <div class="d" data-en="For sale">Venta</div>
-        </label>
-      </div>
-    </div>
+    <input type="hidden" name="kind" value="propiedad">
 
     <div class="step-block" id="section-propiedad">
-      <div class="step-label"><span class="n">02</span><span class="t" data-en="Property details">Detalles de la propiedad</span></div>
+      <div class="step-label"><span class="n">01</span><span class="t" data-en="Property details">Detalles de la propiedad</span></div>
       <div class="field-grid">
         <div class="field">
           <label for="p-operacion"><span data-en="Type of transaction">Tipo de operación</span> <span class="req">*</span></label>
@@ -211,58 +185,8 @@
       </div>
     </div>
 
-    <div class="step-block" id="section-vehiculo" hidden>
-      <div class="step-label"><span class="n">02</span><span class="t" data-en="Vehicle details">Detalles del vehículo</span></div>
-      <div class="field-grid">
-        <div class="field">
-          <label for="v-marca"><span data-en="Make and model">Marca y modelo</span> <span class="req">*</span></label>
-          <input id="v-marca" name="marca_modelo" type="text" required placeholder="Ej. Mazda 3 2022" data-en-placeholder="e.g. Mazda 3 2022">
-        </div>
-        <div class="field">
-          <label for="v-anio"><span data-en="Year">Año</span> <span class="req">*</span></label>
-          <input id="v-anio" name="anio" type="number" required placeholder="Ej. 2022" data-en-placeholder="e.g. 2022">
-        </div>
-        <div class="field">
-          <label for="v-km"><span data-en="Mileage">Kilometraje</span> <span class="req">*</span></label>
-          <input id="v-km" name="kilometraje" type="text" required placeholder="Ej. 32.000 km" data-en-placeholder="e.g. 32,000 km">
-        </div>
-        <div class="field">
-          <label for="v-precio"><span data-en="Asking price">Precio esperado</span> <span class="req">*</span></label>
-          <input id="v-precio" name="precio_vehiculo" type="text" required placeholder="Ej. $85.000.000 COP" data-en-placeholder="e.g. COP 85,000,000">
-        </div>
-        <div class="field">
-          <label for="v-soat"><span data-en="Insurance and roadworthiness test up to date?">¿SOAT y tecnomecánica vigentes?</span> <span class="req">*</span></label>
-          <select id="v-soat" name="soat_tecnomecanica" required>
-            <option value="" data-en="Select an option">Selecciona una opción</option>
-            <option value="Sí" data-en="Yes">Sí</option><option value="No" data-en="No">No</option><option value="No estoy seguro" data-en="I am not sure">No estoy seguro</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="v-gravamenes"><span data-en="Any liens, charges or seizures?">¿Gravámenes, prendas o embargos?</span> <span class="req">*</span></label>
-          <select id="v-gravamenes" name="gravamenes" required>
-            <option value="" data-en="Select an option">Selecciona una opción</option>
-            <option value="No" data-en="No">No</option><option value="Sí" data-en="Yes">Sí</option><option value="No estoy seguro" data-en="I am not sure">No estoy seguro</option>
-          </select>
-        </div>
-        <div class="field full">
-          <label for="v-propietario"><span data-en="Are you the direct owner?">¿Eres el propietario directo?</span> <span class="req">*</span></label>
-          <select id="v-propietario" name="propietario_vehiculo" required>
-            <option value="" data-en="Select an option">Selecciona una opción</option>
-            <option value="Soy el propietario" data-en="I am the owner">Soy el propietario</option><option value="Tengo autorización" data-en="I have authorisation">Tengo autorización</option><option value="Ninguna de las anteriores" data-en="Neither of the above">Ninguna de las anteriores</option>
-          </select>
-        </div>
-      </div>
-      <div class="upload-note">
-        <span data-en="Photos of the vehicle (at least 6, in natural light). We will ask you for them on WhatsApp as soon as we receive this request.">Fotos del vehículo (mínimo 6, con luz natural). Te las pediremos por WhatsApp apenas recibamos esta solicitud.</span>
-      </div>
-      <div class="field">
-        <label for="v-comentario"><span data-en="Anything else you would like to tell us?">¿Algo adicional que quieras contarnos?</span></label>
-        <textarea id="v-comentario" name="comentario_vehiculo" placeholder="Opcional" data-en-placeholder="Optional"></textarea>
-      </div>
-    </div>
-
     <div class="step-block">
-      <div class="step-label"><span class="n">03</span><span class="t" data-en="Contact details">Datos de contacto</span></div>
+      <div class="step-label"><span class="n">02</span><span class="t" data-en="Contact details">Datos de contacto</span></div>
       <div class="field-grid">
         <div class="field">
           <label for="c-nombre"><span data-en="Full name">Nombre completo</span> <span class="req">*</span></label>
@@ -302,7 +226,7 @@
   <div class="inner">
     <div class="mark-box"><span>CINQ</span></div>
     <h2 data-en="Request received">Solicitud recibida</h2>
-    <p data-en="Thank you for trusting us with your property or vehicle. Our team will review your information and will contact you if it meets the CINQ criteria.">Gracias por confiarnos tu propiedad o vehículo. Nuestro equipo revisará tu información y te contactará si cumple con los criterios de CINQ.</p>
+    <p data-en="Thank you for trusting us with your property. Our team will review your information and will contact you if it meets the CINQ criteria.">Gracias por confiarnos tu propiedad. Nuestro equipo revisará tu información y te contactará si cumple con los criterios de CINQ.</p>
   </div>
 </section>
 
@@ -315,48 +239,6 @@
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/site.js"></script>
 <script>
-  var radios = document.querySelectorAll('input[name="kind"]');
-  var choiceProp = document.getElementById('choice-propiedad');
-  var choiceVeh = document.getElementById('choice-vehiculo');
-  var sectionProp = document.getElementById('section-propiedad');
-  var sectionVeh = document.getElementById('section-vehiculo');
-
-  function syncFields(section, shouldRequire){
-    var fields = section.querySelectorAll('input[type="text"], input[type="number"], select');
-    fields.forEach(function(f){
-      if(f.dataset.origRequired === undefined){
-        f.dataset.origRequired = f.hasAttribute('required') ? '1' : '0';
-      }
-      if(shouldRequire){
-        if(f.dataset.origRequired === '1'){ f.setAttribute('required', ''); }
-      } else {
-        f.removeAttribute('required');
-      }
-    });
-  }
-
-  function update(){
-    var val = document.querySelector('input[name="kind"]:checked').value;
-    var isProp = val === 'propiedad';
-
-    choiceProp.classList.toggle('sel', isProp);
-    choiceVeh.classList.toggle('sel', !isProp);
-
-    sectionProp.hidden = !isProp;
-    sectionVeh.hidden = isProp;
-
-    syncFields(sectionProp, isProp);
-    syncFields(sectionVeh, !isProp);
-  }
-
-  radios.forEach(function(r){ r.addEventListener('change', update); });
-
-  /* Arrancar desde la opción que esté realmente marcada, no desde una fija.
-     Los navegadores restauran el radio elegido al recargar (F5) o al volver
-     con el botón atrás; si no sincronizamos aquí, quedaría marcado "Vehículo"
-     pero visibles los campos de "Propiedad". */
-  update();
-
   var form = document.getElementById('cinq-form');
   var confirmSection = document.getElementById('confirm');
   var errorMsg = document.getElementById('error-msg');

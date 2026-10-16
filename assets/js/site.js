@@ -93,11 +93,10 @@ var CINQ = (function(){
   }
 
   /* La categoria es lo que separa las secciones del portafolio: el subtipo
-     para las propiedades (Apartamento, Lote, Casa) y el tipo para los
-     vehiculos, que no se parten por marca. Sale del catalogo, asi que una
-     categoria nueva aparece sola cuando entra su primera oportunidad. */
+     (Apartamento, Lote, Casa). Sale del catalogo, asi que una categoria
+     nueva aparece sola cuando entra su primera oportunidad. */
   function categoria(op){
-    return op.tipo === 'Vehículo' ? 'Vehículo' : (op.subtipo || op.tipo);
+    return op.subtipo || op.tipo;
   }
 
   var PLURALES = { 'Apartamento': 'Apartamentos', 'Casa': 'Casas', 'Lote': 'Lotes',
@@ -504,8 +503,7 @@ var CINQ = (function(){
 
     var titulo = I18N.campo(op, 'titulo');
     document.title = titulo + ' | CINQ';
-    /* Un vehiculo no tiene municipio: no esta en ningun sitio, se entrega
-       donde se acuerde. Sin zona la meta se queda con el titulo solo. */
+    /* Sin zona la meta se queda con el titulo solo. */
     var descripcion = op.zonaDetalle
       ? t('metaFicha', { titulo: titulo, zona: op.zonaDetalle })
       : t('metaFichaSinZona', { titulo: titulo });
@@ -527,7 +525,7 @@ var CINQ = (function(){
 
     if(migaActual) migaActual.textContent = titulo;
     var migaTipo = document.getElementById('breadcrumb-tipo');
-    if(migaTipo) migaTipo.textContent = t(op.tipo === 'Vehículo' ? 'migaVehiculos' : 'migaPropiedades');
+    if(migaTipo) migaTipo.textContent = t('migaPropiedades');
 
     var ficha = I18N.campo(op, 'ficha') || [];
     var fichaCompleta = [[t('filaTipo'), I18N.voz(op.subtipo || op.tipo)],
@@ -544,9 +542,8 @@ var CINQ = (function(){
       '<div class="info-panel">' +
         '<div class="kicker">' + esc(I18N.voz(op.tipo)) + ' · ' + esc(I18N.voz(op.operacion)) + '</div>' +
         '<div class="price">' + esc(precio(op.precio)) + '</div>' +
-        /* El h1 es el municipio cuando lo hay. Un vehiculo no lo tiene, y
-           entonces el h1 pasa a ser el titulo: la pagina no puede abrir sin
-           encabezado. */
+        /* El h1 es el municipio cuando lo hay. Si falta, el h1 pasa a ser
+           el titulo: la pagina no puede abrir sin encabezado. */
         '<h1 class="loc">' + esc(op.zonaDetalle || titulo) + '</h1>' +
         '<ul class="spec-list">' + specs(ficha) + '</ul>' +
         '<a class="wa-btn" href="' + esc(enlaceWhatsapp(op)) + '" target="_blank" rel="noopener">' + esc(t('btnConversemos')) + '</a>' +

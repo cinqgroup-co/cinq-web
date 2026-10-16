@@ -67,7 +67,6 @@ var CINQ_I18N = (function(){
       verPortafolio:   'Ver el portafolio →',
       migaRetirada:    'Oportunidad no disponible',
       migaPropiedades: 'Propiedades',
-      migaVehiculos:   'Vehículos',
       metaFicha:       '{titulo} en {zona}. Oportunidad evaluada y aceptada por CINQ.',
       metaFichaSinZona:'{titulo}. Oportunidad evaluada y aceptada por CINQ.',
       waAria:          'Escríbenos por WhatsApp',
@@ -94,7 +93,6 @@ var CINQ_I18N = (function(){
       verPortafolio:   'See the portfolio →',
       migaRetirada:    'Opportunity no longer available',
       migaPropiedades: 'Properties',
-      migaVehiculos:   'Vehicles',
       metaFicha:       '{titulo} in {zona}. An opportunity evaluated and accepted by CINQ.',
       metaFichaSinZona:'{titulo}. An opportunity evaluated and accepted by CINQ.',
       waAria:          'Message us on WhatsApp',
@@ -109,15 +107,12 @@ var CINQ_I18N = (function(){
      escribir "Apartamento" en inglés una vez por inmueble. */
   var VOCES = {
     'Propiedad': 'Property',
-    'Vehículo': 'Vehicle',
     'Apartamento': 'Apartment',
     'Casa': 'House',
     'Lote': 'Lot',
     'Local': 'Retail space',
     'Oficina': 'Office',
     'Finca': 'Country house',
-    'Moto': 'Motorcycle',
-    'Motos': 'Motorcycles',
     'Venta': 'For sale',
     'Arriendo': 'For rent',
     /* Los plurales son los botones de categoria del portafolio. */
@@ -126,8 +121,7 @@ var CINQ_I18N = (function(){
     'Lotes': 'Lots',
     'Locales': 'Retail spaces',
     'Oficinas': 'Offices',
-    'Fincas': 'Country houses',
-    'Vehículos': 'Vehicles'
+    'Fincas': 'Country houses'
   };
 
   var actual = 'es';
