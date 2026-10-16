@@ -152,7 +152,22 @@ def titulo_corto(op):
         sobra = (sobra or "").strip()
         if sobra and titulo.lower().startswith(sobra.lower() + " "):
             titulo = titulo[len(sobra) + 1:]
+    # Los proyectos de afuera se llaman "Sobha City, River Cove Residences":
+    # si no cabe, se queda el nombre del proyecto, que es lo que se reconoce.
+    if len(titulo) > 24 and ", " in titulo:
+        titulo = titulo.split(", ")[0]
     return titulo or op.get("titulo", "")
+
+
+# Igual que en site.js: las zonas de afuera arman el mercado de los Emiratos,
+# todo lo demas es Colombia. Se separan para que nadie reciba un proyecto en
+# Dubai mezclado con un apartamento en Envigado.
+AFUERA = ("Dubái", "Abu Dabi")
+MERCADOS = (("colombia", "Todo Colombia"), ("emiratos", "Todo Dubái y Abu Dabi"))
+
+
+def mercado(op):
+    return "emiratos" if op.get("zona") in AFUERA else "colombia"
 
 
 def precio_legible(op):
@@ -316,14 +331,16 @@ SIN_INVENTARIO = (
 CLAVES = [
     ("ofrecer", ["vender", "vendo", "ofrecer", "ofrezco", "tengo un",
                  "tengo una", "consignar", "mi apartamento", "mi casa",
-                 "mi carro", "mi finca", "quiero que me lo vendan",
+                 "mi finca", "quiero que me lo vendan",
                  "para la venta", "poner en venta"]),
     ("asesor", ["asesor", "samuel", "hablar con", "una persona", "humano",
                 "llamar", "llamada", "cita", "visita", "agendar"]),
     ("portafolio", ["portafolio", "oportunidad", "disponible", "que tienen",
                     "qué tienen", "que hay", "qué hay", "comprar", "arriendo",
                     "venden", "catalogo", "catálogo", "opciones", "busco",
-                    "estoy buscando", "en venta"]),
+                    "estoy buscando", "en venta", "dubai", "dubái",
+                    "abu dhabi", "abu dabi", "emiratos", "invertir",
+                    "inversion", "inversión", "proyecto"]),
     ("saludo", ["hola", "buenas", "buenos dias", "buenos días", "buen dia",
                 "buenas tardes", "buenas noches", "que tal", "qué tal",
                 "menu", "menú", "info", "informacion", "información"]),
@@ -372,11 +389,14 @@ def mostrar_zonas(a):
     if not ops:
         enviar_texto(a, SIN_INVENTARIO)
         return
+    # Primero las zonas de Colombia y despues las de afuera, en el orden en
+    # que aparecen en el catalogo.
     zonas = []
-    for op in ops:
-        z = op.get("zona")
-        if z and z not in zonas:
-            zonas.append(z)
+    for m, _ in MERCADOS:
+        for op in ops:
+            z = op.get("zona")
+            if z and z not in zonas and mercado(op) == m:
+                zonas.append(z)
     if len(zonas) < 2:
         mostrar_oportunidades(a, zonas[0] if zonas else None)
         return
@@ -387,16 +407,32 @@ def mostrar_zonas(a):
                       "detalle": "%d %s" % (
                           cuantas,
                           "oportunidad" if cuantas == 1 else "oportunidades")})
-    filas.append({"id": "zona:*", "titulo": "Ver todas",
-                  "detalle": "%d en total" % len(ops)})
-    enviar_lista(a, "Estas son las zonas donde CINQ tiene inventario hoy.",
-                 "Elegir zona", filas)
+    # "Ver todas" no sirve cuando hay mas de diez: WhatsApp corta la lista en
+    # diez filas y el resto no se veria. Con los dos mercados publicados se
+    # ofrece cada uno entero en vez de todo junto.
+    presentes = [(m, t) for m, t in MERCADOS
+                 if any(mercado(o) == m for o in ops)]
+    if len(presentes) > 1:
+        for m, titulo in presentes:
+            cuantas = len([o for o in ops if mercado(o) == m])
+            filas.append({"id": "mercado:%s" % m, "titulo": titulo,
+                          "detalle": "%d en total" % cuantas})
+    else:
+        filas.append({"id": "zona:*", "titulo": "Ver todas",
+                      "detalle": "%d en total" % len(ops)})
+    enviar_lista(a, "Estas son las zonas donde CINQ tiene oportunidades hoy, "
+                    "en Colombia y en los Emiratos Árabes Unidos."
+                 if len(presentes) > 1 else
+                 "Estas son las zonas donde CINQ tiene oportunidades hoy.",
+                 "Elegir zona", filas[:10])
 
 
-def mostrar_oportunidades(a, zona=None):
+def mostrar_oportunidades(a, zona=None, merc=None):
     ops = catalogo()
     if zona and zona != "*":
         ops = [o for o in ops if o.get("zona") == zona]
+    if merc:
+        ops = [o for o in ops if mercado(o) == merc]
     if not ops:
         enviar_texto(a, SIN_INVENTARIO)
         return
@@ -409,14 +445,18 @@ def mostrar_oportunidades(a, zona=None):
                                          precio_legible(o),
                                          o.get("subtipo", ""))}
              for o in ops]
-    enviar_lista(a, "Esto es lo que hay publicado hoy.",
-                 "Ver oportunidades", filas)
+    cuerpo = "Esto es lo que hay publicado hoy."
+    if len(filas) > 10:
+        cuerpo = ("Estas son 10 de las %d que hay publicadas. Todas estan en "
+                  "%s/portafolio.html" % (len(filas), SITIO))
+    enviar_lista(a, cuerpo, "Ver oportunidades", filas[:10])
 
 
 def enviar_ficha(a, op):
     lineas = ["*%s*" % op.get("titulo", ""), precio_legible(op)]
     for etiqueta in ("Área construida", "Alcobas", "Baños", "Parqueadero",
-                     "Estrato", "Administración"):
+                     "Estrato", "Administración", "Entrega", "Desarrollador",
+                     "Tipologías", "Plan de pagos"):
         valor = dato(op, etiqueta)
         if valor:
             lineas.append("%s: %s" % (etiqueta, valor))
@@ -458,6 +498,9 @@ def responder(a, texto=None, boton=None, id_mensaje=None, nombre=None):
             return "asesor"
         if boton.startswith("zona:"):
             mostrar_oportunidades(a, boton.split(":", 1)[1])
+            return "oportunidades"
+        if boton.startswith("mercado:"):
+            mostrar_oportunidades(a, merc=boton.split(":", 1)[1])
             return "oportunidades"
         if boton.startswith("op:"):
             slug = boton.split(":", 1)[1]

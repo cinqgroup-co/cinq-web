@@ -87,6 +87,13 @@
 
    El alt sí se escribe en cada ficha: la foto es la misma, pero el texto puede
    cambiar según el apartamento del que se esté hablando.
+
+   PLANTILLA (proyecto fuera de Colombia): igual, con subtipo "Proyecto",
+   operacion "Sobre planos", zona "Dubái" o "Abu Dabi", y ademas
+       moneda: "USD",
+       desde: true,
+   La ficha lleva siempre ["Entrega", "Tercer trimestre de 2028"]: el home
+   lee de ahi el rango de entregas. El aliado de Dubai no se nombra nunca.
 */
 
 var CINQ_OPORTUNIDADES = [
@@ -922,7 +929,7 @@ var CINQ_OPORTUNIDADES = [
     ],
     descripcion: [
       "Dubai Islands extiende la costa de Dubái en cinco islas con playas, marinas y barrios residenciales, cerca de la ciudad pero con otro ritmo.",
-      "Bay Estate es el enclave privado de Dubai Islands: lotes para construir villa frente al mar, con dos lagunas para nadar, un beach club con gimnasio y piscina, dos clubes con piscina y un malecón que llega hasta la marina. La entrega está prevista para el tercer trimestre de 2030. Lo presentamos con nuestro aliado en Dubái, que acompaña la compra allá."
+      "Bay Estate es el enclave privado de Dubai Islands: lotes para construir villa frente al mar, con dos lagunas para nadar, un beach club con gimnasio y piscina, dos clubes con piscina y un malecón que llega hasta la marina. La entrega está prevista para el tercer trimestre de 2030. Las villas de las imágenes son diseños de referencia: lo que se compra es el lote para construir. Lo presentamos con nuestro aliado en Dubái, que acompaña la compra allá."
     ],
     /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
        cae al espanol. */
@@ -935,11 +942,11 @@ var CINQ_OPORTUNIDADES = [
       ],
       descripcion: [
         "Dubai Islands extends Dubai's coastline across five islands with beaches, marinas and residential neighbourhoods, close to the city but at a different pace.",
-        "Bay Estate is the private enclave of Dubai Islands: beachfront plots to build a villa, with two swimmable lagoons, a beach club with gym and pool, two pool clubhouses and a promenade running to the marina. Completion is expected in the third quarter of 2030. We present it with our partner in Dubai, who handles the purchase on the ground."
+        "Bay Estate is the private enclave of Dubai Islands: beachfront plots to build a villa, with two swimmable lagoons, a beach club with gym and pool, two pool clubhouses and a promenade running to the marina. Completion is expected in the third quarter of 2030. The villas in the images are reference designs: what you buy is the plot to build on. We present it with our partner in Dubai, who handles the purchase on the ground."
       ],
       alts: [
         "Reference beachfront villa at Bay Estate",
-        "Two storey villa on the waterfront, surrounded by palms",
+        "Reference two storey villa on the waterfront, surrounded by palms",
         "Beach club with a long pool and sun loungers on the sand",
         "The private lagoons from above, with footbridges and inner beaches",
         "Facade of a reference villa with a first floor terrace"
@@ -947,7 +954,7 @@ var CINQ_OPORTUNIDADES = [
     },
     fotos: [
       { archivo: "bay-estate-dubai-islands-01-villa-playa.jpg",     alt: "Villa de referencia frente a la playa en Bay Estate" },
-      { archivo: "bay-estate-dubai-islands-02-villa-agua.jpg",      alt: "Villa de dos pisos sobre la orilla, con palmeras alrededor" },
+      { archivo: "bay-estate-dubai-islands-02-villa-agua.jpg",      alt: "Villa de referencia de dos pisos sobre la orilla, con palmeras alrededor" },
       { archivo: "bay-estate-dubai-islands-03-beach-club.jpg",      alt: "Beach club con piscina larga y asoleadoras sobre la arena" },
       { archivo: "bay-estate-dubai-islands-04-lagunas.jpg",         alt: "Las lagunas privadas vistas desde arriba, con puentes y playas internas" },
       { archivo: "bay-estate-dubai-islands-05-villa-fachada.jpg",   alt: "Fachada de una villa de referencia con terraza en el segundo piso" }
@@ -1049,7 +1056,7 @@ var CINQ_OPORTUNIDADES = [
       ],
       alts: [
         "Aerial view of Meriva Collection on the Dubai Islands beach",
-        "Pool lit up at dusk with sea views",
+        "Adults only pool at dusk, with sea views",
         "Living room with floor to ceiling windows facing the sea",
         "Open kitchen with a stone island",
         "Indoor pool with sea views",
@@ -1058,7 +1065,7 @@ var CINQ_OPORTUNIDADES = [
     },
     fotos: [
       { archivo: "meriva-collection-01-aerea.jpg",              alt: "Vista aérea de Meriva Collection sobre la playa de Dubai Islands" },
-      { archivo: "meriva-collection-02-piscina.jpg",            alt: "Piscina iluminada al anochecer con vista al mar" },
+      { archivo: "meriva-collection-02-piscina.jpg",            alt: "Piscina para adultos al anochecer, con vista al mar" },
       { archivo: "meriva-collection-03-sala.jpg",               alt: "Sala con ventanales de piso a techo hacia el mar" },
       { archivo: "meriva-collection-04-cocina.jpg",             alt: "Cocina abierta con isla en piedra" },
       { archivo: "meriva-collection-05-piscina-cubierta.jpg",   alt: "Piscina cubierta con vista al mar" },

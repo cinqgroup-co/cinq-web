@@ -602,7 +602,7 @@ var CINQ = (function(){
 
     if(migaActual) migaActual.textContent = titulo;
     var migaTipo = document.getElementById('breadcrumb-tipo');
-    if(migaTipo) migaTipo.textContent = t('migaPropiedades');
+    if(migaTipo) migaTipo.textContent = t(mercado(op) === 'emiratos' ? 'migaProyectos' : 'migaPropiedades');
 
     var ficha = I18N.campo(op, 'ficha') || [];
     var fichaCompleta = [[t('filaTipo'), I18N.voz(op.subtipo || op.tipo)],
@@ -617,7 +617,8 @@ var CINQ = (function(){
     raiz.innerHTML = '' +
       '<div class="container"><div class="detail-grid">' +
       '<div class="info-panel">' +
-        '<div class="kicker">' + esc(I18N.voz(op.tipo)) + ' · ' + esc(I18N.voz(op.operacion)) + '</div>' +
+        /* Un proyecto de afuera se presenta como Proyecto, no como Propiedad. */
+        '<div class="kicker">' + esc(I18N.voz(mercado(op) === 'emiratos' ? categoria(op) : op.tipo)) + ' · ' + esc(I18N.voz(op.operacion)) + '</div>' +
         '<div class="price">' + esc(precio(op)) + '</div>' +
         /* El h1 es el municipio cuando lo hay. Si falta, el h1 pasa a ser
            el titulo: la pagina no puede abrir sin encabezado. */

@@ -77,7 +77,7 @@ bot._cache["cuando"] = 9e18  # no vencer nunca durante la prueba
 revisar(len(ops) >= 4, "el catalogo trae %d oportunidades" % len(ops), len(ops))
 for o in ops:
     print("     %-32s %-14s %s  %2d fotos" % (
-        o["slug"], o["zona"], bot.precio_legible(o["precio"]), len(o["fotos"])))
+        o["slug"], o["zona"], bot.precio_legible(o), len(o["fotos"])))
 
 ecoh = [o for o in ops if o["slug"] == "ecoh-710-loma-san-jose"][0]
 revisar(ecoh["precio"] == 540000000, "precio del 710 intacto", ecoh["precio"])
@@ -106,6 +106,8 @@ casos = [
     ("tengo una casa que quiero poner en venta", "ofrecer"),
     ("Necesito hablar con Samuel", "asesor"),
     ("Buenos dias", "saludo"),
+    ("quiero invertir en Dubai", "portafolio"),
+    ("tienen proyectos en abu dhabi?", "portafolio"),
     ("el area privada del 710 incluye el balcon?", None),
     ("ok", None),
     ("", None),
@@ -140,13 +142,32 @@ accion, msgs = correr("Toca 'Ver oportunidades'", boton="menu:portafolio")
 revisar(accion == "zonas", "muestra las zonas")
 filas = msgs[0]["interactive"]["action"]["sections"][0]["rows"]
 zonas_reales = []
-for o in ops:
-    if o["zona"] not in zonas_reales:
-        zonas_reales.append(o["zona"])
-revisar([f["id"] for f in filas] == ["zona:" + z for z in zonas_reales] +
-        ["zona:*"],
-        "las zonas salen del catalogo, no de una lista fija",
+for m, _ in bot.MERCADOS:
+    for o in ops:
+        if o["zona"] not in zonas_reales and bot.mercado(o) == m:
+            zonas_reales.append(o["zona"])
+mercados_reales = [m for m, _ in bot.MERCADOS
+                   if any(bot.mercado(o) == m for o in ops)]
+cierre = (["mercado:" + m for m in mercados_reales]
+          if len(mercados_reales) > 1 else ["zona:*"])
+revisar([f["id"] for f in filas] == ["zona:" + z for z in zonas_reales] + cierre,
+        "las zonas salen del catalogo, Colombia primero y luego afuera",
         [f["id"] for f in filas])
+revisar(len(filas) <= 10, "la lista de zonas cabe en 10 filas", len(filas))
+
+# Cada mercado entero tiene que caber en una lista, o algo queda escondido.
+for m in mercados_reales:
+    accion, msgs = correr("Elige todo %s" % m, boton="mercado:%s" % m)
+    filas_m = msgs[0]["interactive"]["action"]["sections"][0]["rows"]
+    del_mercado = [o for o in ops if bot.mercado(o) == m]
+    revisar(len(filas_m) == len(del_mercado),
+            "%s: se ven las %d, ninguna escondida" % (m, len(del_mercado)),
+            len(filas_m))
+    revisar(all(f["id"].startswith("op:") for f in filas_m),
+            "%s: cada fila abre una ficha" % m)
+    slugs = {f["id"][3:] for f in filas_m}
+    revisar(all(bot.mercado(o) == m for o in ops if o["slug"] in slugs),
+            "%s: no se cuela nada del otro mercado" % m)
 
 accion, msgs = correr("Elige Sabaneta", boton="zona:Sabaneta")
 revisar(accion == "oportunidades", "lista las de Sabaneta")
@@ -165,7 +186,12 @@ for f in filas:
 # de Las Antillas): lo que los separa es el precio, que va en la descripcion.
 # Se revisan las dos zonas porque el caso dificil esta en Envigado.
 for zona in sorted({o["zona"] for o in ops}):
-    _, msgs_z = correr("Elige %s" % zona, boton="zona:%s" % zona)
+    accion_z, msgs_z = correr("Elige %s" % zona, boton="zona:%s" % zona)
+    if msgs_z[0].get("type") != "interactive":
+        # Una zona con una sola oportunidad manda la ficha directo.
+        revisar(msgs_z[0]["type"] == "image",
+                "en %s, con una sola, va directo a la ficha" % zona)
+        continue
     filas_z = msgs_z[0]["interactive"]["action"]["sections"][0]["rows"]
     vistas = [(f["title"], f["description"]) for f in filas_z]
     revisar(len(set(vistas)) == len(vistas),
@@ -179,6 +205,18 @@ revisar("540.000.000" in pie, "el precio va formateado en pesos")
 revisar("oportunidad.html?id=ecoh-710" in pie, "lleva el enlace a la ficha")
 revisar(len(pie) <= 1024, "el pie cabe en el limite de WhatsApp", len(pie))
 revisar("—" not in pie and "–" not in pie, "sin guiones medios en el pie")
+
+sobha = [o for o in ops if o["slug"] == "sobha-city-river-cove"]
+if sobha:
+    revisar(len(bot.titulo_corto(sobha[0])) <= 24,
+            "titulo corto de Sobha cabe en 24", bot.titulo_corto(sobha[0]))
+vela = [o for o in ops if o["slug"] == "vela-by-omniyat"]
+if vela:
+    accion, msgs = correr("Elige VELA", boton="op:vela-by-omniyat")
+    pie = msgs[0]["image"]["caption"]
+    revisar("Desde USD 4.901.000" in pie, "el proyecto va en dolares y con Desde")
+    revisar("Entrega:" in pie, "la ficha de un proyecto lleva la entrega")
+    revisar("MXN" not in pie, "el aliado no se nombra")
 
 accion, _ = correr("Toca 'Ofrecer un inmueble'", boton="menu:ofrecer")
 revisar(accion == "ofrecer", "explica el filtro de CINQ")

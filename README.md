@@ -257,6 +257,19 @@ escritas a mano en `index.html`, no vienen de ninguna API.
 pie se retiró por decisión de Samuel; la única referencia a la fuente que queda es la línea de
 entrada de la sección, que dice que son cifras del gremio inmobiliario de la región.
 
+## Home: bloque de Dubái
+
+La sección `.dubai` va después del territorio y presenta el segundo mercado: proyectos sobre
+planos en Dubái y Abu Dabi que llegan con el aliado de CINQ allá. **El aliado no se nombra en
+ninguna parte del sitio**, por decisión de Samuel: se dice "nuestro aliado en Dubái".
+
+Las tres cifras del bloque (cuántos proyectos hay, el precio de entrada más bajo y el rango de años
+de entrega) **no están escritas a mano**: las arma `initDubai()` en `site.js` leyendo el catálogo.
+El año sale de la fila `Entrega` de cada ficha, así que esa fila tiene que existir en todo proyecto
+de afuera. Si un día no queda ningún proyecto de afuera, la sección se retira sola.
+
+La foto es la aérea de Palm Central, un render del desarrollador.
+
 ## El sitio en inglés (botón ES/EN)
 
 La barra lleva a la derecha un botón partido en dos, `ES | EN`, que cambia el idioma **en la misma
@@ -341,8 +354,8 @@ No hay que editar HTML para publicar, editar o retirar una oportunidad.
 
 Para sumar una:
 
-1. Crea la carpeta `assets/img/portafolio/<slug>/` y mete ahí las fotos (mínimo 8 para propiedad,
-   6 para vehículo, luz natural: el estándar de admisión del Brief Maestro). Cada foto va dos veces,
+1. Crea la carpeta `assets/img/portafolio/<slug>/` y mete ahí las fotos (mínimo 8, luz natural:
+   el estándar de admisión del Brief Maestro; los proyectos de afuera traen menos, ver abajo). Cada foto va dos veces,
    `.jpg` y `.webp` con el mismo nombre; el sitio sirve el WebP y deja el JPG de respaldo.
 2. Copia el bloque `PLANTILLA` que está comentado al inicio de `assets/js/oportunidades.js`,
    llénalo y añádelo al array `CINQ_OPORTUNIDADES`.
@@ -365,6 +378,24 @@ del apartamento y el nombre del proyecto ya se descartaron.
 
 `verificar` lo avisa sin frenar la publicación. Lo que sí frena es que además coincida el precio:
 ahí ya no queda nada que las separe, ni en la tarjeta ni en el mensaje de WhatsApp.
+
+**Proyectos fuera de Colombia.** Funcionan distinto a los inmuebles de aquí, y el sitio los separa:
+
+- `subtipo: "Proyecto"`, `operacion: "Sobre planos"`, `moneda: "USD"` y `desde: true`. Con eso la
+  tarjeta dice "Desde USD 195.000" y el bot igual.
+- `zona` es `"Dubái"` o `"Abu Dabi"`. **Esas dos palabras deciden el mercado**: el portafolio los
+  pinta en el bloque de Emiratos Árabes Unidos, las fichas solo sugieren proyectos del mismo
+  mercado y el bot los lista aparte. La lista vive en dos lugares, `AFUERA` en `site.js` y en
+  `api/whatsapp.py`: una zona nueva de afuera (por ejemplo Ras Al Khaimah) se suma en los dos.
+- El título es el nombre del proyecto (`VELA by Omniyat`), no la regla de tipo, municipio y
+  sector: aquí lo que la gente reconoce es el nombre.
+- La ficha lleva `Entrega` siempre (la usa el home), y si se conocen `Desarrollador`,
+  `Tipologías` y `Plan de pagos`. Precio, zona y entrega salen de la ficha del aliado; el resto, del
+  brochure. Lo que no está en el material no se escribe.
+- Las fotos son renders del desarrollador, no fotos propias. Antes de publicarlas se quita el texto
+  de brochure (rótulos en inglés, "Reference Design", arcos decorativos) y los bordes. Si un render
+  muestra un diseño de referencia y no lo que se compra, la descripción lo dice.
+- Nunca nombrar al aliado, ni en textos ni en comentarios del catálogo, que es público.
 
 **La versión en inglés de cada ficha** va en un bloque `en: {}` dentro de la misma oportunidad, con
 `titulo`, `ficha`, `descripcion` y `alts` (uno por foto, en el mismo orden que `fotos`). Todo es
@@ -442,7 +473,7 @@ la oportunidad no se agrega al array.
 
 1. **Revisar `privacidad.html` y `terminos.html` con un abogado.** Los avisos de "borrador de trabajo" se quitaron de ambas páginas por decisión de marca, pero los textos siguen sin revisión legal.
 2. **Registrar el dominio `cinqgroup.co`** y conectarlo en Vercel (Settings → Domains).
-3. **Ampliar el banco fotográfico propio.** Además del sticker en el vehículo y el retrato del fundador en Nosotros, el sitio ya tiene 30 fotos del apartamento de Envigado, 16 del 1405 de Aluna, 15 del 1404 y 11 de las zonas comunes de ese edificio. `vehiculo-interior.jpg` sigue disponible en `assets/img/` por si se quiere reutilizar.
+3. **Ampliar el banco fotográfico propio.** Además del sticker de la portada y el retrato del fundador en Nosotros, el sitio tiene las fotos propias de cada inmueble de Colombia. Los proyectos de Dubái usan renders del desarrollador.
 
 ## Formulario de Ofrecer
 
@@ -492,6 +523,13 @@ La prueba comprueba que las filas de una misma lista sigan siendo distintas, y c
 entera, no solo el título: los dos de Las Antillas comparten nombre a propósito y lo que los separa
 es el precio, que va en la descripción. Recorre todas las zonas del catálogo, porque el caso difícil
 está en Envigado y antes solo se revisaba Sabaneta.
+
+**Colombia y Emiratos van separados.** Al tocar "Ver oportunidades" el bot lista primero las
+zonas de Colombia, después las de afuera, y cierra con "Todo Colombia" y "Todo Dubái y Abu Dabi".
+No hay un "Ver todas" con los dos mercados juntos: WhatsApp corta las listas en diez filas y con
+dieciséis oportunidades seis quedaban escondidas. Si un mercado solo pasa de diez, la lista muestra
+diez y manda al portafolio por el resto. La ficha de un proyecto lleva la entrega, el
+desarrollador y el plan de pagos.
 
 El bot responde en español. Traducirlo es otro trabajo: el idioma del sitio lo elige el visitante
 en el navegador, y por WhatsApp no hay dónde tocar ese botón.
