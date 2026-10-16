@@ -292,6 +292,33 @@ var CINQ = (function(){
     grid.innerHTML = ops.slice(0, 3).map(tarjeta).join('');
   }
 
+  /* Seccion Dubai del home. Las cifras salen del catalogo: cuantos proyectos
+     hay afuera, el precio de entrada mas bajo y el rango de entregas (el año
+     se lee de la fila "Entrega" de cada ficha). Sin proyectos afuera se
+     retira la seccion entera, como las destacadas. */
+  var AFUERA = ['Dubái', 'Abu Dabi'];
+  function initDubai(){
+    var seccion = document.getElementById('dubai');
+    var caja = document.getElementById('dubai-datos');
+    if(!seccion || !caja) return;
+    var ops = catalogo().filter(function(op){ return AFUERA.indexOf(op.zona) >= 0; });
+    if(!ops.length){ seccion.remove(); return; }
+    var masBarato = ops.reduce(function(a, b){ return b.precio < a.precio ? b : a; });
+    var anios = ops.map(function(op){
+      var fila = (op.ficha || []).filter(function(f){ return f[0] === 'Entrega'; })[0];
+      var m = fila && String(fila[1]).match(/\d{4}/);
+      return m ? +m[0] : null;
+    }).filter(Boolean);
+    var zonas = AFUERA.filter(function(z){ return ops.some(function(op){ return op.zona === z; }); });
+    var celdas = [[String(ops.length), t('dubaiProyectos', { zonas: zonas.map(I18N.voz).join(t('y')) })],
+                  [precio({ precio: masBarato.precio, moneda: masBarato.moneda }), t('dubaiEntrada')]];
+    if(anios.length){
+      var min = Math.min.apply(null, anios), max = Math.max.apply(null, anios);
+      celdas.push([min === max ? String(min) : t('rango', { a: min, b: max }), t('dubaiEntregas')]);
+    }
+    caja.innerHTML = celdas.map(function(c){ return '<div><b>' + esc(c[0]) + '</b>' + esc(c[1]) + '</div>'; }).join('');
+  }
+
   /* Boton flotante de WhatsApp, presente en todas las paginas. Se inyecta
      desde aqui y no se escribe en los siete html: el numero ya vive en este
      archivo, asi que se cambia en un solo lugar.
@@ -601,6 +628,7 @@ var CINQ = (function(){
     initSolidNav();
     initWhatsappFlotante();
     initDestacadas();
+    initDubai();
     initPortafolio();
     initOportunidad();
     initRevelado();
@@ -618,6 +646,7 @@ var CINQ = (function(){
   CINQ_I18N.alCambiar(function(){
     initWhatsappFlotante();
     initDestacadas();
+    initDubai();
     if(repintarPortafolio) repintarPortafolio();
     initOportunidad();
   });
