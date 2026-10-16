@@ -899,6 +899,434 @@ var CINQ_OPORTUNIDADES = [
       { archivo: "rio-secreto-18-zona-bbq.jpg",          alt: "Zona de asados con mesón en obra y parrilla a gas, junto al parque infantil, Río Secreto, Monteazul, Sabaneta" },
       { archivo: "rio-secreto-19-plazoleta.jpg",         alt: "Plazoleta central con gazebo y zonas verdes, Río Secreto, Monteazul, Sabaneta" }
     ]
+  },
+
+  {
+    slug: "bay-estate-dubai-islands",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "Bay Estate",
+    zona: "Dubái",
+    zonaDetalle: "Dubai Islands, Dubái",
+    precio: 1620000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Tercer trimestre de 2030"],
+      ["Tipo", "Lotes para villa frente al mar"],
+      ["Zona común", "Dos lagunas para nadar, beach club y dos clubes con piscina"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Dubai Islands extiende la costa de Dubái en cinco islas con playas, marinas y barrios residenciales, cerca de la ciudad pero con otro ritmo.",
+      "Bay Estate es el enclave privado de Dubai Islands: lotes para construir villa frente al mar, con dos lagunas para nadar, un beach club con gimnasio y piscina, dos clubes con piscina y un malecón que llega hasta la marina. La entrega está prevista para el tercer trimestre de 2030. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Third quarter of 2030"],
+        ["Type", "Beachfront villa plots"],
+        ["Shared amenities", "Two swimmable lagoons, a beach club and two pool clubhouses"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Dubai Islands extends Dubai's coastline across five islands with beaches, marinas and residential neighbourhoods, close to the city but at a different pace.",
+        "Bay Estate is the private enclave of Dubai Islands: beachfront plots to build a villa, with two swimmable lagoons, a beach club with gym and pool, two pool clubhouses and a promenade running to the marina. Completion is expected in the third quarter of 2030. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "Reference beachfront villa at Bay Estate",
+        "Two storey villa on the waterfront, surrounded by palms",
+        "Beach club with a long pool and sun loungers on the sand",
+        "The private lagoons from above, with footbridges and inner beaches",
+        "Facade of a reference villa with a first floor terrace"
+      ]
+    },
+    fotos: [
+      { archivo: "bay-estate-dubai-islands-01-villa-playa.jpg",     alt: "Villa de referencia frente a la playa en Bay Estate" },
+      { archivo: "bay-estate-dubai-islands-02-villa-agua.jpg",      alt: "Villa de dos pisos sobre la orilla, con palmeras alrededor" },
+      { archivo: "bay-estate-dubai-islands-03-beach-club.jpg",      alt: "Beach club con piscina larga y asoleadoras sobre la arena" },
+      { archivo: "bay-estate-dubai-islands-04-lagunas.jpg",         alt: "Las lagunas privadas vistas desde arriba, con puentes y playas internas" },
+      { archivo: "bay-estate-dubai-islands-05-villa-fachada.jpg",   alt: "Fachada de una villa de referencia con terraza en el segundo piso" }
+    ]
+  },
+
+  {
+    slug: "binghatti-starfall",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "Binghatti Starfall",
+    zona: "Dubái",
+    zonaDetalle: "Al Jaddaf, Dubái",
+    precio: 205000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Tercer trimestre de 2028"],
+      ["Desarrollador", "Binghatti"],
+      ["Tipologías", "Estudios, apartamentos de 1 y 2 alcobas y royal suites"],
+      ["Edificio", "19 pisos, 754 apartamentos y 17 locales"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Al Jaddaf es un distrito junto al Dubai Creek, a pocos minutos de Downtown y del aeropuerto, donde se mezclan vivienda, comercio y oficinas.",
+      "Binghatti Starfall es una torre de 19 pisos con 754 apartamentos, en su mayoría estudios y de una alcoba, y 17 locales en el primer piso. Es un proyecto pensado para inversión y renta, con entrega prevista para el tercer trimestre de 2028. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Third quarter of 2028"],
+        ["Developer", "Binghatti"],
+        ["Unit types", "Studios, one and two bedroom apartments and royal suites"],
+        ["Building", "19 floors, 754 apartments and 17 retail units"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Al Jaddaf is a district along Dubai Creek, a few minutes from Downtown and the airport, mixing homes, shops and offices.",
+        "Binghatti Starfall is a 19 floor tower with 754 apartments, mostly studios and one bedroom units, and 17 shops at street level. It is a project designed for investment and rental, due for completion in the third quarter of 2028. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "Binghatti Starfall tower at sunset, from the avenue",
+        "The tower lit up at night",
+        "Garden and pool at the foot of the tower",
+        "Aerial view of the building and its surroundings in Al Jaddaf",
+        "The building's gym",
+        "Apartment living room with full height glazing"
+      ]
+    },
+    fotos: [
+      { archivo: "binghatti-starfall-01-fachada.jpg",         alt: "Torre Binghatti Starfall al atardecer, desde la avenida" },
+      { archivo: "binghatti-starfall-02-fachada-noche.jpg",   alt: "La torre iluminada de noche" },
+      { archivo: "binghatti-starfall-03-jardin.jpg",          alt: "Jardín con piscina a los pies de la torre" },
+      { archivo: "binghatti-starfall-04-aerea.jpg",           alt: "Vista aérea del edificio y su entorno en Al Jaddaf" },
+      { archivo: "binghatti-starfall-05-gimnasio.jpg",        alt: "Gimnasio del edificio" },
+      { archivo: "binghatti-starfall-06-sala.jpg",            alt: "Sala de un apartamento con ventanal" }
+    ]
+  },
+
+  {
+    slug: "meriva-collection",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "Meriva Collection",
+    zona: "Dubái",
+    zonaDetalle: "Dubai Islands, Dubái",
+    precio: 790000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Cuarto trimestre de 2030"],
+      ["Ubicación", "Frente a la playa"],
+      ["Zona común", "Piscina cubierta, jazz club, gimnasio y pista para trotar"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Dubai Islands extiende la costa de Dubái en cinco islas con playas, marinas y barrios residenciales, cerca de la ciudad pero con otro ritmo.",
+      "Meriva Collection son residencias frente a la playa repartidas en tres conjuntos, Gardens, Shores y Sunset, con terrazas abiertas al mar, piscina cubierta, jazz club, gimnasio y pista para trotar. La entrega está prevista para el cuarto trimestre de 2030. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Fourth quarter of 2030"],
+        ["Setting", "Beachfront"],
+        ["Shared amenities", "Indoor pool, jazz club, fitness pavilion and jogging track"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Dubai Islands extends Dubai's coastline across five islands with beaches, marinas and residential neighbourhoods, close to the city but at a different pace.",
+        "Meriva Collection is a set of beachfront residences in three groups, Gardens, Shores and Sunset, with terraces open to the sea, an indoor pool, a jazz club, a fitness pavilion and a jogging track. Completion is expected in the fourth quarter of 2030. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "Aerial view of Meriva Collection on the Dubai Islands beach",
+        "Pool lit up at dusk with sea views",
+        "Living room with floor to ceiling windows facing the sea",
+        "Open kitchen with a stone island",
+        "Indoor pool with sea views",
+        "Dining room of the jazz club"
+      ]
+    },
+    fotos: [
+      { archivo: "meriva-collection-01-aerea.jpg",              alt: "Vista aérea de Meriva Collection sobre la playa de Dubai Islands" },
+      { archivo: "meriva-collection-02-piscina.jpg",            alt: "Piscina iluminada al anochecer con vista al mar" },
+      { archivo: "meriva-collection-03-sala.jpg",               alt: "Sala con ventanales de piso a techo hacia el mar" },
+      { archivo: "meriva-collection-04-cocina.jpg",             alt: "Cocina abierta con isla en piedra" },
+      { archivo: "meriva-collection-05-piscina-cubierta.jpg",   alt: "Piscina cubierta con vista al mar" },
+      { archivo: "meriva-collection-06-jazz-club.jpg",          alt: "Comedor del jazz club" }
+    ]
+  },
+
+  {
+    slug: "palm-central",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "Palm Central",
+    zona: "Dubái",
+    zonaDetalle: "Palm Jebel Ali, Dubái",
+    precio: 735000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Cuarto trimestre de 2030"],
+      ["Ubicación", "Palm Jebel Ali, sobre el mar"],
+      ["Zona común", "Playa privada, piscina infinita y gimnasio"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Palm Jebel Ali es la nueva isla en forma de palmera frente a la costa de Dubái, más grande que Palm Jumeirah, con residencias, hoteles y playas a lo largo de todo el borde.",
+      "Palm Central está en el centro de la isla, junto al centro comunitario, el parque y el centro deportivo, con playa privada, piscina infinita y gimnasio. Incluye townhouses de cinco alcobas con terraza, y la entrega está prevista para el cuarto trimestre de 2030. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Fourth quarter of 2030"],
+        ["Location", "Palm Jebel Ali, on the water"],
+        ["Shared amenities", "Private beach, infinity pool and gym"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Palm Jebel Ali is the new palm shaped island off the coast of Dubai, larger than Palm Jumeirah, with residences, hotels and beaches along its whole edge.",
+        "Palm Central sits at the heart of the island, next to the community centre, the park and the sports centre, with a private beach, an infinity pool and a gym. It includes five bedroom townhouses with terraces, and completion is expected in the fourth quarter of 2030. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "Aerial view of Palm Central with the island and the Dubai skyline behind",
+        "Palm Central buildings on the beach",
+        "Private beach in front of one of the buildings",
+        "The Palm Central bay with buildings set among gardens",
+        "Open living and dining area in one of the residences"
+      ]
+    },
+    fotos: [
+      { archivo: "palm-central-01-aerea.jpg",           alt: "Vista aérea de Palm Central con la isla y el skyline de Dubái al fondo" },
+      { archivo: "palm-central-02-playa.jpg",           alt: "Edificios de Palm Central sobre la playa" },
+      { archivo: "palm-central-03-playa-privada.jpg",   alt: "Playa privada frente a uno de los edificios" },
+      { archivo: "palm-central-04-bahia.jpg",           alt: "La bahía de Palm Central con los edificios entre jardines" },
+      { archivo: "palm-central-05-interior.jpg",        alt: "Sala y comedor abiertos de una de las residencias" }
+    ]
+  },
+
+  {
+    slug: "seacliff-by-imtiaz",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "Seacliff by Imtiaz",
+    zona: "Dubái",
+    zonaDetalle: "Dubai Islands, Dubái",
+    precio: 550000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Tercer trimestre de 2028"],
+      ["Desarrollador", "Imtiaz"],
+      ["Zona común", "Clubhouse, gimnasio, gimnasio exterior y yoga"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Dubai Islands extiende la costa de Dubái en cinco islas con playas, marinas y barrios residenciales, cerca de la ciudad pero con otro ritmo.",
+      "Seacliff es un edificio residencial de Imtiaz inspirado en el mar, con terrazas profundas, clubhouse con piscina, gimnasio y zona exterior para entrenar y hacer yoga. Desde los pisos altos se ve el skyline de Dubái, y la entrega está prevista para el tercer trimestre de 2028. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Third quarter of 2028"],
+        ["Developer", "Imtiaz"],
+        ["Shared amenities", "Clubhouse, gym, outdoor gym and yoga"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Dubai Islands extends Dubai's coastline across five islands with beaches, marinas and residential neighbourhoods, close to the city but at a different pace.",
+        "Seacliff is an ocean inspired residential building by Imtiaz, with deep terraces, a clubhouse with pool, a gym and an outdoor area for training and yoga. The upper floors look towards the Dubai skyline, and completion is expected in the third quarter of 2028. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "The Seacliff building among palm trees",
+        "Seacliff's deep terraces with the Dubai skyline behind",
+        "The Seacliff tower surrounded by greenery",
+        "Clubhouse pool with sun loungers",
+        "Open living room and kitchen in an apartment",
+        "Bedroom with a window onto the city"
+      ]
+    },
+    fotos: [
+      { archivo: "seacliff-by-imtiaz-01-fachada.jpg",       alt: "Edificio Seacliff entre palmeras" },
+      { archivo: "seacliff-by-imtiaz-02-terrazas.jpg",      alt: "Terrazas profundas de Seacliff con el skyline de Dubái al fondo" },
+      { archivo: "seacliff-by-imtiaz-03-torre.jpg",         alt: "La torre de Seacliff rodeada de verde" },
+      { archivo: "seacliff-by-imtiaz-04-piscina.jpg",       alt: "Piscina del clubhouse con asoleadoras" },
+      { archivo: "seacliff-by-imtiaz-05-sala-cocina.jpg",   alt: "Sala y cocina abiertas de un apartamento" },
+      { archivo: "seacliff-by-imtiaz-06-alcoba.jpg",        alt: "Alcoba con ventanal hacia la ciudad" }
+    ]
+  },
+
+  {
+    slug: "sobha-city-river-cove",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "Sobha City, River Cove Residences",
+    zona: "Abu Dabi",
+    zonaDetalle: "Sobha City, Abu Dabi",
+    precio: 380000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Cuarto trimestre de 2029"],
+      ["Desarrollador", "Sobha"],
+      ["Tipologías", "Apartamentos de 1 y 2 alcobas"],
+      ["Edificio", "Dos torres sobre el malecón"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Sobha City es una ciudad nueva en Abu Dabi organizada alrededor del agua: canales, marina, zonas verdes, ciclorrutas y campo de golf, con todo lo del día a día dentro del mismo plan.",
+      "River Cove Residences son dos torres sobre el malecón de Sobha City con apartamentos de una y dos alcobas, ventanales amplios y balcones hacia el agua. La entrega está prevista para el cuarto trimestre de 2029. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Fourth quarter of 2029"],
+        ["Developer", "Sobha"],
+        ["Unit types", "One and two bedroom apartments"],
+        ["Building", "Two towers on the promenade"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Sobha City is a new city in Abu Dhabi built around water: canals, a marina, green corridors, cycling tracks and a golf course, with everyday needs planned within it.",
+        "River Cove Residences is a pair of towers on the Sobha City promenade with one and two bedroom apartments, generous glazing and balconies facing the water. Completion is expected in the fourth quarter of 2029. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "Aerial view of Sobha City with the marina and the towers on the water",
+        "Beach lagoon at the foot of the River Cove towers",
+        "Master bedroom with a window onto the water"
+      ]
+    },
+    fotos: [
+      { archivo: "sobha-city-river-cove-01-aerea.jpg",    alt: "Vista aérea de Sobha City con la marina y las torres sobre el agua" },
+      { archivo: "sobha-city-river-cove-02-laguna.jpg",   alt: "Laguna con playa al pie de las torres de River Cove" },
+      { archivo: "sobha-city-river-cove-03-alcoba.jpg",   alt: "Alcoba principal con ventanal hacia el agua" }
+    ]
+  },
+
+  {
+    slug: "the-archive-by-imtiaz",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "The Archive by Imtiaz",
+    zona: "Dubái",
+    zonaDetalle: "Dubailand, Dubái",
+    precio: 195000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Tercer trimestre de 2028"],
+      ["Desarrollador", "Imtiaz"],
+      ["Plan de pagos", "60% durante la obra y 40% en tres años después de la entrega"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Dubailand es una de las zonas residenciales de Dubái que más está creciendo, hacia el interior de la ciudad y con precios de entrada por debajo de los de la costa.",
+      "The Archive son dos torres de Imtiaz con jardines en las terrazas y una terraza común con piscina, con entrega prevista para el tercer trimestre de 2028. Se paga el 60% durante la obra y el 40% en tres años después de la entrega, y es el precio de entrada más bajo de los proyectos que tenemos en Dubái. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Third quarter of 2028"],
+        ["Developer", "Imtiaz"],
+        ["Payment plan", "60% during construction and 40% over three years after handover"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Dubailand is one of the fastest growing residential areas in Dubai, inland from the coast and with entry prices below those of the waterfront.",
+        "The Archive is a pair of towers by Imtiaz with planted terraces and a shared pool deck, due for completion in the third quarter of 2028. 60% is paid during construction and 40% over three years after handover, and it is the lowest entry price among our projects in Dubai. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "The two towers of The Archive by Imtiaz at dusk, seen from the street",
+        "Shared terrace with pool, outdoor lounges and city views",
+        "Facade detail with balconies and planting on every floor",
+        "Shared lounge with a dining table and pendant lamps"
+      ]
+    },
+    fotos: [
+      { archivo: "the-archive-by-imtiaz-01-fachada.jpg",           alt: "Las dos torres de The Archive by Imtiaz al atardecer, vistas desde la calle" },
+      { archivo: "the-archive-by-imtiaz-02-terraza.jpg",           alt: "Terraza común con piscina, salas exteriores y vista a la ciudad" },
+      { archivo: "the-archive-by-imtiaz-03-fachada-detalle.jpg",   alt: "Detalle de la fachada con balcones y jardines en cada piso" },
+      { archivo: "the-archive-by-imtiaz-04-salon.jpg",             alt: "Salón común con mesa de comedor y lámparas colgantes" }
+    ]
+  },
+
+  {
+    slug: "vela-by-omniyat",
+    tipo: "Propiedad",
+    subtipo: "Proyecto",
+    operacion: "Sobre planos",
+    titulo: "VELA by Omniyat",
+    zona: "Dubái",
+    zonaDetalle: "Business Bay, Dubái",
+    precio: 4901000,
+    moneda: "USD",
+    desde: true,
+    premium: false,
+    /* Proyecto en Dubái por la alianza con MXN Real Estate (octubre de 2026). Precio, zona y entrega salen de la FICHA de MXN; lo demas del brochure. Las fotos son renders del desarrollador. */
+    ficha: [
+      ["Entrega", "Tercer trimestre de 2027"],
+      ["Desarrollador", "Omniyat"],
+      ["Unidades", "38 residencias: sky residences y penthouses"],
+      ["Ubicación", "Sobre el canal, frente a Downtown"],
+      ["Moneda", "Dólares (USD)"]
+    ],
+    descripcion: [
+      "Business Bay es el distrito sobre el canal de Dubái, al lado de Downtown y del Burj Khalifa, donde la ciudad y el agua se encuentran.",
+      "VELA es una torre de Omniyat con solo 38 residencias, entre sky residences y penthouses, con terrazas amplias y vista al canal y al skyline. Es el proyecto más exclusivo de los que presentamos y el de entrega más próxima, prevista para el tercer trimestre de 2027. Lo presentamos con MXN Real Estate, nuestro aliado en Dubái, que acompaña la compra allá."
+    ],
+    /* Lo que se lee en pantalla, en ingles. Lo que falte aqui
+       cae al espanol. */
+    en: {
+      ficha: [
+        ["Completion", "Third quarter of 2027"],
+        ["Developer", "Omniyat"],
+        ["Units", "38 residences: sky residences and penthouses"],
+        ["Location", "On the canal, facing Downtown"],
+        ["Currency", "US dollars (USD)"]
+      ],
+      descripcion: [
+        "Business Bay is the district along Dubai's canal, next to Downtown and the Burj Khalifa, where the city meets the water.",
+        "VELA is a tower by Omniyat with only 38 residences, sky residences and penthouses, with generous terraces and views over the canal and the skyline. It is the most exclusive project we present and the closest to completion, expected in the third quarter of 2027. We present it with MXN Real Estate, our partner in Dubai, who handles the purchase on the ground."
+      ],
+      alts: [
+        "The VELA tower on the canal at dusk",
+        "Terrace with pool and views of the Dubai skyline",
+        "Pool with sun loungers facing Business Bay",
+        "Arrival at the tower beside the canal"
+      ]
+    },
+    fotos: [
+      { archivo: "vela-by-omniyat-01-torre.jpg",     alt: "La torre VELA sobre el canal al atardecer" },
+      { archivo: "vela-by-omniyat-02-terraza.jpg",   alt: "Terraza con piscina y vista al skyline de Dubái" },
+      { archivo: "vela-by-omniyat-03-piscina.jpg",   alt: "Piscina con asoleadoras frente a Business Bay" },
+      { archivo: "vela-by-omniyat-04-llegada.jpg",   alt: "Llegada a la torre junto al canal" }
+    ]
   }
 
 ];

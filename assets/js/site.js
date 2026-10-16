@@ -31,12 +31,20 @@ var CINQ = (function(){
 
   /* En inglés el precio sale como "COP 455,000,000". No es solo el separador:
      un "$" a secas delante de un número de nueve cifras lo lee como dólares
-     quien llega de afuera, y la diferencia es de tres ceros. */
-  function precio(valor){
+     quien llega de afuera, y la diferencia es de tres ceros.
+
+     Los proyectos de afuera vienen en dolares (moneda: "USD") y con precio
+     de entrada (desde: true): ahi se escribe "Desde USD 195.000", porque el
+     precio es el de la unidad mas barata del proyecto y no el de todas. */
+  function precio(op){
+    var valor = op.precio;
     if(typeof valor !== 'number' || !isFinite(valor)) return t('precioConsultar');
-    return I18N.esIngles()
-      ? 'COP ' + valor.toLocaleString('en-US')
-      : '$ ' + valor.toLocaleString('es-CO');
+    var ingles = I18N.esIngles();
+    var cifra = valor.toLocaleString(ingles ? 'en-US' : 'es-CO');
+    var texto = op.moneda && op.moneda !== 'COP'
+      ? op.moneda + ' ' + cifra
+      : (ingles ? 'COP ' + cifra : '$ ' + cifra);
+    return op.desde ? t('desde', { precio: texto }) : texto;
   }
 
   function esc(texto){
@@ -87,7 +95,7 @@ var CINQ = (function(){
      sea que si un precio cambia, un enlace viejo ya no dice por cual escriben. */
   function enlaceWhatsapp(op){
     var texto = op
-      ? t('waFicha', { titulo: I18N.campo(op, 'titulo'), precio: precio(op.precio) })
+      ? t('waFicha', { titulo: I18N.campo(op, 'titulo'), precio: precio(op) })
       : t('waPortafolio');
     return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto);
   }
@@ -100,7 +108,7 @@ var CINQ = (function(){
   }
 
   var PLURALES = { 'Apartamento': 'Apartamentos', 'Casa': 'Casas', 'Lote': 'Lotes',
-    'Local': 'Locales', 'Oficina': 'Oficinas', 'Finca': 'Fincas', 'Vehículo': 'Vehículos' };
+    'Local': 'Locales', 'Oficina': 'Oficinas', 'Finca': 'Fincas', 'Proyecto': 'Proyectos' };
 
   function plural(cat){ return PLURALES[cat] || cat; }
 
@@ -116,7 +124,7 @@ var CINQ = (function(){
         '<div class="frame"><span class="p-tag">' + esc(I18N.voz(categoria(op))) + '</span>' + badge + img + '</div>' +
         '<div class="p-meta">' +
           '<div><div class="place">' + esc(titulo) + '</div><div class="op">' + esc(I18N.voz(op.operacion)) + '</div></div>' +
-          '<div class="price">' + esc(precio(op.precio)) + '</div>' +
+          '<div class="price">' + esc(precio(op)) + '</div>' +
         '</div>' +
       '</a>';
   }
@@ -541,7 +549,7 @@ var CINQ = (function(){
       '<div class="container"><div class="detail-grid">' +
       '<div class="info-panel">' +
         '<div class="kicker">' + esc(I18N.voz(op.tipo)) + ' · ' + esc(I18N.voz(op.operacion)) + '</div>' +
-        '<div class="price">' + esc(precio(op.precio)) + '</div>' +
+        '<div class="price">' + esc(precio(op)) + '</div>' +
         /* El h1 es el municipio cuando lo hay. Si falta, el h1 pasa a ser
            el titulo: la pagina no puede abrir sin encabezado. */
         '<h1 class="loc">' + esc(op.zonaDetalle || titulo) + '</h1>' +
@@ -571,7 +579,11 @@ var CINQ = (function(){
       });
     });
 
+    /* Primero las de la misma zona: desde un proyecto en Dubai no sirve
+       sugerir un lote en Envigado. Si no alcanzan, se completa con el resto. */
     var otras = ops.filter(function(o){ return o.slug !== op.slug; });
+    otras = otras.filter(function(o){ return o.zona === op.zona; })
+      .concat(otras.filter(function(o){ return o.zona !== op.zona; }));
     var seccion = document.getElementById('related');
     if(!seccion) return;
     if(!otras.length){ seccion.remove(); return; }
@@ -581,7 +593,7 @@ var CINQ = (function(){
       return '<a class="r-card" href="oportunidad.html?id=' + encodeURIComponent(o.slug) + '">' +
         '<div class="frame">' + img + '</div>' +
         '<div class="r-meta"><span class="place">' + esc(suTitulo) + '</span>' +
-        '<span class="price">' + esc(precio(o.precio)) + '</span></div></a>';
+        '<span class="price">' + esc(precio(o)) + '</span></div></a>';
     }).join('');
   }
 

@@ -155,11 +155,16 @@ def titulo_corto(op):
     return titulo or op.get("titulo", "")
 
 
-def precio_legible(valor):
+def precio_legible(op):
+    """Igual que en el sitio: los proyectos de afuera van en su moneda y con
+    "Desde", porque el precio es el de la unidad de entrada."""
     try:
-        return "$ " + "{:,.0f}".format(int(valor)).replace(",", ".")
+        cifra = "{:,.0f}".format(int(op.get("precio"))).replace(",", ".")
     except Exception:
         return ""
+    moneda = op.get("moneda") or "COP"
+    texto = "$ " + cifra if moneda == "COP" else "%s %s" % (moneda, cifra)
+    return "Desde " + texto if op.get("desde") else texto
 
 
 def foto_portada(op):
@@ -401,16 +406,15 @@ def mostrar_oportunidades(a, zona=None):
     filas = [{"id": "op:%s" % o["slug"],
               "titulo": titulo_corto(o),
               "detalle": "%s  %s  %s" % (o.get("zona", ""),
-                                         precio_legible(o.get("precio")),
+                                         precio_legible(o),
                                          o.get("subtipo", ""))}
              for o in ops]
-    enviar_lista(a, "Esto es lo que hay publicado hoy. Todas con fotos "
-                    "propias, tomadas en la visita.",
+    enviar_lista(a, "Esto es lo que hay publicado hoy.",
                  "Ver oportunidades", filas)
 
 
 def enviar_ficha(a, op):
-    lineas = ["*%s*" % op.get("titulo", ""), precio_legible(op.get("precio"))]
+    lineas = ["*%s*" % op.get("titulo", ""), precio_legible(op)]
     for etiqueta in ("Área construida", "Alcobas", "Baños", "Parqueadero",
                      "Estrato", "Administración"):
         valor = dato(op, etiqueta)

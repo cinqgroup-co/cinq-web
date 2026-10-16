@@ -370,6 +370,11 @@ def componer_bloque(datos, fotos_js):
     if datos.get("zonaDetalle"):
         lineas.append('    zonaDetalle: "%s",' % datos["zonaDetalle"])
     lineas.append('    precio: %d,' % int(datos["precio"]))
+    # Proyectos de afuera: moneda distinta del peso y precio de entrada.
+    if datos.get("moneda") and datos["moneda"] != "COP":
+        lineas.append('    moneda: "%s",' % datos["moneda"])
+    if datos.get("desde"):
+        lineas.append('    desde: true,')
     lineas.append('    premium: %s,' % ("true" if datos.get("premium")
                                         else "false"))
     if datos.get("nota"):
