@@ -176,7 +176,10 @@
   .dubai .sala-flechas button:hover{border-color:var(--olive-deep);}
   .dubai .sala-flechas button:focus-visible,.dubai .sala:focus-visible,.dubai .sala .panel:focus-visible{outline:2px solid var(--olive-deep);outline-offset:3px;}
   .dubai .sala{position:relative;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;
-    background:radial-gradient(ellipse at 50% 55%,#fff 0,var(--paper-alt) 70%);}
+    background:radial-gradient(ellipse at 50% 55%,#fff 0,var(--paper-alt) 70%);
+    /* Los costados se desvanecen: la sala sigue, no se corta en seco. */
+    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);}
   .dubai .sala.agarrando{cursor:grabbing;}
   .dubai .sala .anillo{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;}
   .dubai .sala .panel{position:absolute;display:block;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;

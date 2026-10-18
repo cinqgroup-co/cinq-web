@@ -485,7 +485,7 @@ var CINQ = (function(){
     function desvio(i){ return ((i * PASO - s.angulo) % 360 + 540) % 360 - 180; }
 
     function pintar(){
-      anillo.style.transform = 'translateZ(' + P + 'px) rotateY(' + (-s.angulo) + 'deg)';
+      anillo.style.transform = 'translateZ(' + P + 'px) rotateY(' + s.angulo + 'deg)';
       s.paneles.forEach(function(el, i){
         var d = Math.abs(desvio(i));
         el.style.visibility = d < 100 ? 'visible' : 'hidden';
@@ -502,12 +502,18 @@ var CINQ = (function(){
       var h = Math.round(w * 0.74);
       R = Math.round(w / (2 * Math.tan(Math.PI / N)) * 1.04);
       P = R;
-      caja.style.height = (h + 56) + 'px';
+      /* Los paneles de los lados quedan mas cerca de la camara en su borde
+         y se ven mas altos que el del frente. La sala se hace tan alta como
+         se vean en el borde de la pantalla, para que no queden cortados. */
+      var fi = Math.atan((ancho / 2) / P), paso = PASO * Math.PI / 180;
+      var crece = Math.max(1, Math.cos(fi - paso) / Math.cos(fi));
+      caja.style.height = Math.round(h * crece + 28) + 'px';
       caja.style.perspective = P + 'px';
       s.paneles.forEach(function(el, i){
         el.style.width = w + 'px'; el.style.height = h + 'px';
         el.style.left = (-w / 2) + 'px'; el.style.top = (-h / 2) + 'px';
-        el.style.transform = 'rotateY(' + (i * PASO) + 'deg) translateZ(' + (-R) + 'px)';
+        // Hacia la derecha va el siguiente: el que cuesta mas.
+        el.style.transform = 'rotateY(' + (-i * PASO) + 'deg) translateZ(' + (-R) + 'px)';
       });
       gradosPorPx = PASO / (w * P / R);
       pintar();
