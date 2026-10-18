@@ -445,6 +445,163 @@ var CINQ = (function(){
     marcar();
   }
 
+  /* La sala 360 de Dubai. Un panel por proyecto de afuera, ordenados por
+     precio, en un anillo alrededor del visitante: la camara esta en el centro
+     y girar el anillo es girar la cabeza.
+
+     Se arrastra con el dedo o el mouse (con inercia), con las flechas del
+     teclado o con los botones, y gira sola despacio mientras nadie la toca y
+     esta en pantalla. Un toque sin arrastre abre la ficha del proyecto. Con
+     movimiento reducido no gira sola ni tiene inercia.
+
+     Los paneles que quedan detras de la camara se esconden: dibujarlos ahi
+     no aporta nada y algunos navegadores los pintan raro. */
+  var sala = null;
+  function initDubaiSala(){
+    var bloque = document.getElementById('dubai-sala-bloque');
+    var caja = document.getElementById('dubai-sala');
+    if(!bloque || !caja) return;
+    var ops = catalogo().filter(function(op){ return AFUERA.indexOf(op.zona) >= 0 && foto(op, 0); })
+      .sort(function(a, b){ return a.precio - b.precio; });
+    if(ops.length < 5){ bloque.remove(); return; }
+    var anillo = caja.querySelector('.anillo');
+    var N = ops.length, PASO = 360 / N;
+    anillo.innerHTML = ops.map(function(op, i){
+      var titulo = I18N.campo(op, 'titulo');
+      return '<a class="panel" data-i="' + i + '" href="oportunidad.html?id=' + encodeURIComponent(op.slug) + '" draggable="false">' +
+        imagen(foto(op, 0), titulo, true, ' draggable="false"') +
+        '<div class="pie"><b>' + esc(titulo) + '</b><span>' +
+        esc(I18N.voz(op.zona)) + ' · ' + esc(precio(op)) + '</span></div></a>';
+    }).join('');
+    var paneles = [].slice.call(anillo.querySelectorAll('.panel'));
+
+    if(sala){ sala.paneles = paneles; sala.medir(); return; }   // cambio de idioma
+
+    var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var s = sala = { paneles: paneles, angulo: 0, vel: 0, objetivo: null, ultimoToque: 0, visible: false };
+    var R = 0, P = 0, gradosPorPx = 0.2, arrastre = null, ultimo = null;
+
+    /* Respecto al frente, en grados de -180 a 180. */
+    function desvio(i){ return ((i * PASO - s.angulo) % 360 + 540) % 360 - 180; }
+
+    function pintar(){
+      anillo.style.transform = 'translateZ(' + P + 'px) rotateY(' + (-s.angulo) + 'deg)';
+      s.paneles.forEach(function(el, i){
+        var d = Math.abs(desvio(i));
+        el.style.visibility = d < 100 ? 'visible' : 'hidden';
+        el.tabIndex = d < PASO / 2 ? 0 : -1;
+      });
+    }
+
+    s.medir = function(){
+      var ancho = caja.clientWidth;
+      /* La camara queda a la misma distancia de la pantalla que de los
+         paneles (P = R): asi el panel del frente se ve a su tamano real y no
+         se agranda borroso. El angulo de vision lo da el ancho del panel. */
+      var w = Math.round(ancho * (ancho < 700 ? 0.7 : 0.52));
+      var h = Math.round(w * 0.74);
+      R = Math.round(w / (2 * Math.tan(Math.PI / N)) * 1.04);
+      P = R;
+      caja.style.height = (h + 56) + 'px';
+      caja.style.perspective = P + 'px';
+      s.paneles.forEach(function(el, i){
+        el.style.width = w + 'px'; el.style.height = h + 'px';
+        el.style.left = (-w / 2) + 'px'; el.style.top = (-h / 2) + 'px';
+        el.style.transform = 'rotateY(' + (i * PASO) + 'deg) translateZ(' + (-R) + 'px)';
+      });
+      gradosPorPx = PASO / (w * P / R);
+      pintar();
+    };
+
+    function cuadro(ahora){
+      var dt = ultimo ? Math.min((ahora - ultimo) / 1000, 0.05) : 0;
+      ultimo = ahora;
+      if(!arrastre){
+        if(s.objetivo !== null){
+          var falta = s.objetivo - s.angulo;
+          s.angulo += falta * Math.min(dt * 7, 1);
+          if(Math.abs(falta) < 0.05){ s.angulo = s.objetivo; s.objetivo = null; }
+        } else if(Math.abs(s.vel) > 2 && !quieto){
+          s.angulo += s.vel * dt;
+          s.vel *= Math.pow(0.04, dt);
+          // Cuando la inercia se apaga, se acomoda en el proyecto mas cercano.
+          if(Math.abs(s.vel) <= 25){ s.vel = 0; s.objetivo = Math.round(s.angulo / PASO) * PASO; }
+        } else if(!quieto && s.visible && ahora - s.ultimoToque > 3500){
+          s.vel = 0;
+          s.angulo += 5 * dt;                                         // giro lento solo
+        }
+      }
+      pintar();
+      requestAnimationFrame(cuadro);
+    }
+
+    function girar(pasos){
+      s.ultimoToque = performance.now();
+      var base = s.objetivo !== null ? s.objetivo : Math.round(s.angulo / PASO) * PASO;
+      s.objetivo = base + pasos * PASO;
+      s.vel = 0;
+      if(quieto){ s.angulo = s.objetivo; s.objetivo = null; pintar(); }
+    }
+    [].forEach.call(bloque.querySelectorAll('[data-giro]'), function(b){
+      b.addEventListener('click', function(){ girar(+b.getAttribute('data-giro')); });
+    });
+    caja.addEventListener('keydown', function(e){
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); girar(-1); }
+      if(e.key === 'ArrowRight'){ e.preventDefault(); girar(1); }
+    });
+
+    caja.addEventListener('pointerdown', function(e){
+      if(e.button !== 0) return;
+      arrastre = { x: e.clientX, y: e.clientY, x0: e.clientX, t: performance.now(), movio: false, id: e.pointerId };
+      s.vel = 0; s.objetivo = null; s.ultimoToque = performance.now();
+    });
+    caja.addEventListener('pointermove', function(e){
+      if(!arrastre || e.pointerId !== arrastre.id) return;
+      if(!arrastre.movio){
+        if(Math.abs(e.clientX - arrastre.x0) < 6) return;
+        // En celular, un gesto vertical es scroll de la pagina, no giro.
+        if(e.pointerType === 'touch' && Math.abs(e.clientY - arrastre.y) > Math.abs(e.clientX - arrastre.x0)){ arrastre = null; return; }
+        arrastre.movio = true;
+        caja.classList.add('agarrando');
+        try{ caja.setPointerCapture(e.pointerId); }catch(err){}
+      }
+      var ahora = performance.now(), dt = Math.max((ahora - arrastre.t) / 1000, 0.001);
+      var dx = e.clientX - arrastre.x;
+      s.angulo -= dx * gradosPorPx;
+      s.vel = -dx * gradosPorPx / dt;
+      arrastre.x = e.clientX; arrastre.t = ahora;
+      s.ultimoToque = ahora;
+    });
+    function soltar(){
+      if(!arrastre) return;
+      var movio = arrastre.movio;
+      arrastre = null;
+      caja.classList.remove('agarrando');
+      s.ultimoToque = performance.now();
+      if(!movio) return;
+      // Un arrastre no es un toque: el click que lo sigue no abre la ficha.
+      // Si el navegador no manda ese click (pasa con el dedo), el freno se
+      // quita solo para no tragarse el toque siguiente.
+      var frenar = function(ev){ ev.preventDefault(); ev.stopPropagation(); };
+      caja.addEventListener('click', frenar, { capture: true, once: true });
+      setTimeout(function(){ caja.removeEventListener('click', frenar, { capture: true }); }, 350);
+      if(quieto || Math.abs(s.vel) < 30){ s.vel = 0; s.objetivo = Math.round(s.angulo / PASO) * PASO; }
+    }
+    caja.addEventListener('pointerup', soltar);
+    caja.addEventListener('pointercancel', soltar);
+
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entradas){
+        entradas.forEach(function(e){ s.visible = e.isIntersecting; });
+      }).observe(caja);
+    } else {
+      s.visible = true;
+    }
+    window.addEventListener('resize', function(){ s.medir(); });
+    s.medir();
+    requestAnimationFrame(cuadro);
+  }
+
   /* Boton flotante de WhatsApp, presente en todas las paginas. Se inyecta
      desde aqui y no se escribe en los siete html: el numero ya vive en este
      archivo, asi que se cambia en un solo lugar.
@@ -758,6 +915,7 @@ var CINQ = (function(){
     initDestacadas();
     initDubai();
     initDubaiPelicula();
+    initDubaiSala();
     initPortafolio();
     initOportunidad();
     initRevelado();
@@ -777,6 +935,7 @@ var CINQ = (function(){
     initDestacadas();
     initDubai();
     initDubaiPelicula();
+    initDubaiSala();
     if(repintarPortafolio) repintarPortafolio();
     initOportunidad();
   });
