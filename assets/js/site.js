@@ -335,10 +335,6 @@ var CINQ = (function(){
     grid.innerHTML = ops.slice(0, 3).map(tarjeta).join('');
   }
 
-  /* Seccion Dubai del home. Las cifras salen del catalogo: cuantos proyectos
-     hay afuera, el precio de entrada mas bajo y el rango de entregas (el año
-     se lee de la fila "Entrega" de cada ficha). Sin proyectos afuera se
-     retira la seccion entera, como las destacadas. */
   /* zonaDetalle es nombre propio y no se traduce, salvo la zona con la que
      termina: "Dubai Islands, Dubái" se lee "Dubai Islands, Dubai" en ingles. */
   function detalleZona(op){
@@ -346,6 +342,10 @@ var CINQ = (function(){
     return op.zonaDetalle.split(op.zona).join(I18N.voz(op.zona));
   }
 
+  /* Seccion Dubai del home. Las cifras salen del catalogo: cuantos proyectos
+     hay afuera, el precio de entrada mas bajo y el rango de entregas (el año
+     se lee de la fila "Entrega" de cada ficha). Sin proyectos afuera se
+     retira la seccion entera, como las destacadas. */
   function initDubai(){
     var seccion = document.getElementById('dubai');
     var caja = document.getElementById('dubai-datos');
