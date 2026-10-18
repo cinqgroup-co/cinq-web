@@ -130,21 +130,44 @@
   /* ---------------- dubai ---------------- */
   /* El segundo mercado. Las tres lineas de datos no van escritas: las arma
      initDubai() desde el catalogo, asi que se actualizan solas cuando entra
-     o sale un proyecto. Sin proyectos afuera, la seccion se retira. */
+     o sale un proyecto. Sin proyectos afuera, la seccion se retira.
+
+     Debajo va la pelicula: la linea de Medellin a Dubai del carrusel de
+     Instagram, animada, y los ocho proyectos. La genera
+     Video/dubai_seccion/hacer_video_dubai.py en espanol y en ingles, y
+     initDubaiPelicula() elige el del idioma, la carga solo cuando se acerca
+     a la pantalla y la pausa cuando sale. */
   .dubai{padding:120px 32px;background:var(--paper-alt);border-top:1px solid var(--line-soft);}
-  .dubai .inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
-  .dubai .texto h2{font-family:var(--font-display);font-weight:400;font-size:clamp(24px,3.2vw,34px);margin:8px 0 26px;color:var(--ink);text-wrap:balance;}
-  .dubai .texto p{font-size:14.5px;color:var(--muted);line-height:1.8;margin:0 0 18px;max-width:52ch;}
-  .dubai .datos{display:grid;grid-template-columns:repeat(3,1fr);margin:34px 0 36px;border-top:1px solid var(--line);}
+  .dubai .inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
+    grid-template-areas:"cabeza cuerpo" "cifras cuerpo" "pelicula pelicula";grid-template-rows:auto 1fr auto;gap:0 72px;align-items:start;}
+  .dubai .cabeza{grid-area:cabeza;}
+  .dubai .cuerpo{grid-area:cuerpo;padding-top:30px;}
+  .dubai .cifras{grid-area:cifras;align-self:end;}
+  .dubai .cabeza h2{font-family:var(--font-display);font-weight:400;font-size:clamp(28px,3.6vw,44px);line-height:1.12;margin:8px 0 0;color:var(--ink);text-wrap:balance;}
+  .dubai .cuerpo p{font-size:14.5px;color:var(--muted);line-height:1.8;margin:0 0 18px;max-width:56ch;}
+  .dubai .datos{display:grid;grid-template-columns:1.35fr 1fr 1fr;margin:40px 0 30px;border-top:1px solid var(--line);}
   .dubai .datos div{padding:16px 16px 0 0;font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:var(--olive-deep);line-height:1.7;}
   .dubai .datos b{display:block;font-family:var(--font-display);font-weight:400;font-size:22px;letter-spacing:0;color:var(--ink);margin-bottom:4px;}
-  .dubai .foto{aspect-ratio:4/5;overflow:hidden;}
-  .dubai .foto img{width:100%;height:100%;object-fit:cover;display:block;}
+  .dubai .pelicula{grid-area:pelicula;margin:64px 0 0;}
+  /* Sin borde: el fondo del video es el mismo papel de la seccion, asi que
+     la linea se dibuja sobre la pagina y no dentro de una caja. */
+  .dubai .pelicula .marco{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--paper-alt);}
+  .dubai .pelicula video{width:100%;height:100%;display:block;object-fit:cover;}
+  .dubai .pelicula figcaption{margin-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);}
+  /* Pausa: el video se mueve solo y dura mas de cinco segundos, asi que
+     tiene que poder detenerse. */
+  .dubai .pausa{position:absolute;right:14px;bottom:14px;width:38px;height:38px;border-radius:50%;cursor:pointer;
+    border:1px solid var(--line);background:rgba(247,246,241,0.92);display:flex;align-items:center;justify-content:center;padding:0;}
+  .dubai .pausa::before{content:"";width:10px;height:12px;border-left:3px solid var(--olive-deep);border-right:3px solid var(--olive-deep);box-sizing:border-box;}
+  .dubai .pausa[aria-pressed="true"]::before{width:0;height:0;border-style:solid;border-width:7px 0 7px 11px;
+    border-color:transparent transparent transparent var(--olive-deep);margin-left:3px;}
+  .dubai .pausa:focus-visible{outline:2px solid var(--olive-deep);outline-offset:2px;}
   @media (max-width:900px){
     .dubai{padding:90px 16px;}
-    .dubai .inner{grid-template-columns:1fr;gap:44px;}
-    .dubai .foto{aspect-ratio:4/3;order:-1;}
-    .dubai .datos{grid-template-columns:1fr;}
+    .dubai .inner{grid-template-columns:1fr;grid-template-areas:"cabeza" "pelicula" "cuerpo" "cifras";grid-template-rows:none;}
+    .dubai .pelicula{margin:28px 0 8px;}
+    .dubai .cuerpo{padding-top:20px;}
+    .dubai .datos{grid-template-columns:1fr;margin-top:24px;}
     .dubai .datos div + div{border-top:1px solid var(--line-soft);padding-top:12px;margin-top:12px;}
   }
 
@@ -337,15 +360,28 @@
 
 <section class="dubai" id="dubai">
   <div class="inner">
-    <div class="texto">
+    <div class="cabeza">
       <p class="eyebrow" data-en="Dubai">Dubái</p>
       <h2 data-en="The same judgement, on the other side of the world">El mismo criterio, al otro lado del mundo</h2>
+    </div>
+    <div class="cuerpo">
       <p data-en="Dubai is a city that decided to build its future from scratch, and it is also where our founder studied. Today it is one of the markets most open to foreign investors: you buy in dollars, in areas where a Colombian can hold full ownership, and often off plan, paying while the building goes up.">Dubái es una ciudad que decidió construir su futuro desde cero, y es también donde se formó nuestro fundador. Hoy es uno de los mercados más abiertos al inversionista extranjero: se compra en dólares, en zonas donde un colombiano puede ser dueño pleno, y muchas veces sobre planos, pagando mientras se construye.</p>
       <p data-en="With a partner in Dubai we select projects from established developers and present them to people who want to diversify from Colombia, with the same support we give here: clear information before you decide, and someone from CINQ on the other end of WhatsApp.">Con un aliado en Dubái seleccionamos proyectos de desarrolladores reconocidos y los presentamos a quienes quieren diversificar desde Colombia, con el mismo acompañamiento que damos aquí: información clara antes de decidir y una persona de CINQ al otro lado del WhatsApp.</p>
+    </div>
+    <div class="cifras">
       <div class="datos" id="dubai-datos"></div>
       <a class="view-all" href="portafolio.html?tipo=proyectos" data-en="See the projects &amp;rarr;">Ver los proyectos &rarr;</a>
     </div>
-    <div class="foto"><picture><source srcset="assets/img/portafolio/palm-central/palm-central-01-aerea.webp" type="image/webp"><img src="assets/img/portafolio/palm-central/palm-central-01-aerea.jpg" alt="Vista aérea de Palm Jebel Ali con el skyline de Dubái al fondo" data-en-alt="Aerial view of Palm Jebel Ali with the Dubai skyline behind" loading="lazy"></picture></div>
+    <figure class="pelicula" id="dubai-pelicula">
+      <div class="marco">
+        <video muted loop playsinline preload="none" poster="assets/video/dubai-es.jpg"
+          data-es="assets/video/dubai-es" data-en-video="assets/video/dubai-en"
+          aria-label="Animación: una línea sale de Medellín, cruza el mar y dibuja el skyline de Dubái; después pasan los ocho proyectos con su precio de entrada."
+          data-en-aria-label="Animation: a line leaves Medellín, crosses the sea and draws the Dubai skyline; then the eight projects appear with their entry prices."></video>
+        <button type="button" class="pausa" aria-pressed="false" aria-label="Pausar el video"></button>
+      </div>
+      <figcaption data-en="From Medellín to Dubai, 13,657 km. Project images are developer renders.">De Medellín a Dubái, 13.657 km. Las imágenes de los proyectos son renders de los desarrolladores.</figcaption>
+    </figure>
   </div>
 </section>
 

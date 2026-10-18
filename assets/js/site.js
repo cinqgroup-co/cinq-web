@@ -339,6 +339,13 @@ var CINQ = (function(){
      hay afuera, el precio de entrada mas bajo y el rango de entregas (el año
      se lee de la fila "Entrega" de cada ficha). Sin proyectos afuera se
      retira la seccion entera, como las destacadas. */
+  /* zonaDetalle es nombre propio y no se traduce, salvo la zona con la que
+     termina: "Dubai Islands, Dubái" se lee "Dubai Islands, Dubai" en ingles. */
+  function detalleZona(op){
+    if(!op.zonaDetalle || !op.zona) return op.zonaDetalle;
+    return op.zonaDetalle.split(op.zona).join(I18N.voz(op.zona));
+  }
+
   function initDubai(){
     var seccion = document.getElementById('dubai');
     var caja = document.getElementById('dubai-datos');
@@ -359,6 +366,83 @@ var CINQ = (function(){
       celdas.push([min === max ? String(min) : t('rango', { a: min, b: max }), t('dubaiEntregas')]);
     }
     caja.innerHTML = celdas.map(function(c){ return '<div><b>' + esc(c[0]) + '</b>' + esc(c[1]) + '</div>'; }).join('');
+  }
+
+  /* La pelicula de Dubai. El video pesa unos 2,5 MB, asi que no se pide al
+     abrir el home: se carga cuando la seccion se acerca a la pantalla y se
+     pausa cuando sale. Hay uno por idioma (los textos estan dentro del
+     video), y al cambiar de idioma se cambia de archivo.
+
+     Con movimiento reducido no arranca solo: se queda el poster y el boton
+     invita a reproducirlo. Si el visitante lo pausa, no se reanuda solo al
+     volver a la seccion. */
+  var pelicula = null;
+  function initDubaiPelicula(){
+    var video = document.querySelector('#dubai-pelicula video');
+    var boton = document.querySelector('#dubai-pelicula .pausa');
+    if(!video || !boton) return;
+    var base = I18N.esIngles() ? video.getAttribute('data-en-video') : video.getAttribute('data-es');
+
+    if(pelicula){
+      // Cambio de idioma: otro archivo, mismo estado.
+      if(pelicula.base === base){ marcar(); return; }
+      pelicula.base = base;
+      video.poster = base + '.jpg';
+      if(pelicula.cargado){
+        video.src = base + '.mp4';
+        if(!pelicula.pausadoPorVisitante && pelicula.visible) video.play().catch(function(){});
+      }
+      marcar();
+      return;
+    }
+
+    var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    pelicula = { base: base, cargado: false, visible: false, pausadoPorVisitante: quieto };
+    video.poster = base + '.jpg';
+
+    function marcar(){
+      var parado = video.paused || pelicula.pausadoPorVisitante;
+      boton.setAttribute('aria-pressed', parado ? 'true' : 'false');
+      boton.setAttribute('aria-label', t(parado ? 'videoSeguir' : 'videoPausar'));
+    }
+    function cargar(){
+      if(pelicula.cargado) return;
+      pelicula.cargado = true;
+      video.preload = 'auto';
+      video.src = pelicula.base + '.mp4';
+    }
+    function intentar(){
+      if(pelicula.pausadoPorVisitante || !pelicula.visible) return;
+      cargar();
+      video.play().catch(function(){});
+    }
+
+    boton.addEventListener('click', function(){
+      if(video.paused){
+        pelicula.pausadoPorVisitante = false;
+        cargar();
+        video.play().catch(function(){});
+      } else {
+        pelicula.pausadoPorVisitante = true;
+        video.pause();
+      }
+      marcar();
+    });
+    video.addEventListener('play', marcar);
+    video.addEventListener('pause', marcar);
+
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entradas){
+        entradas.forEach(function(e){
+          pelicula.visible = e.isIntersecting;
+          if(e.isIntersecting) intentar(); else if(!video.paused) video.pause();
+        });
+      }, { rootMargin: '200px 0px' }).observe(video);
+    } else {
+      pelicula.visible = true;
+      intentar();
+    }
+    marcar();
   }
 
   /* Boton flotante de WhatsApp, presente en todas las paginas. Se inyecta
@@ -582,7 +666,7 @@ var CINQ = (function(){
     document.title = titulo + ' | CINQ';
     /* Sin zona la meta se queda con el titulo solo. */
     var descripcion = op.zonaDetalle
-      ? t('metaFicha', { titulo: titulo, zona: op.zonaDetalle })
+      ? t('metaFicha', { titulo: titulo, zona: detalleZona(op) })
       : t('metaFichaSinZona', { titulo: titulo });
     var meta = document.querySelector('meta[name="description"]');
     if(meta) meta.setAttribute('content', descripcion);
@@ -607,7 +691,7 @@ var CINQ = (function(){
     var ficha = I18N.campo(op, 'ficha') || [];
     var fichaCompleta = [[t('filaTipo'), I18N.voz(op.subtipo || op.tipo)],
                          [t('filaOperacion'), I18N.voz(op.operacion)]];
-    if(op.zona) fichaCompleta.push([t('filaZona'), op.zona]);
+    if(op.zona) fichaCompleta.push([t('filaZona'), I18N.voz(op.zona)]);
     fichaCompleta = fichaCompleta.concat(ficha);
     var parrafos = (I18N.campo(op, 'descripcion') || []).map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('');
 
@@ -622,7 +706,7 @@ var CINQ = (function(){
         '<div class="price">' + esc(precio(op)) + '</div>' +
         /* El h1 es el municipio cuando lo hay. Si falta, el h1 pasa a ser
            el titulo: la pagina no puede abrir sin encabezado. */
-        '<h1 class="loc">' + esc(op.zonaDetalle || titulo) + '</h1>' +
+        '<h1 class="loc">' + esc(detalleZona(op) || titulo) + '</h1>' +
         '<ul class="spec-list">' + specs(ficha) + '</ul>' +
         '<a class="wa-btn" href="' + esc(enlaceWhatsapp(op)) + '" target="_blank" rel="noopener">' + esc(t('btnConversemos')) + '</a>' +
         '<p class="info-note">' + esc(t('notaPanel')) + '</p>' +
@@ -673,6 +757,7 @@ var CINQ = (function(){
     initWhatsappFlotante();
     initDestacadas();
     initDubai();
+    initDubaiPelicula();
     initPortafolio();
     initOportunidad();
     initRevelado();
@@ -691,6 +776,7 @@ var CINQ = (function(){
     initWhatsappFlotante();
     initDestacadas();
     initDubai();
+    initDubaiPelicula();
     if(repintarPortafolio) repintarPortafolio();
     initOportunidad();
   });
