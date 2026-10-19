@@ -200,7 +200,7 @@ footer{padding:70px 32px 34px;border-top:1px solid var(--line-soft);}
 .p-card:hover .frame img{transform:scale(1.045);}
 .p-meta{padding:14px 2px 0;display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
 .p-meta .place{font-family:var(--font-display);font-size:16px;color:var(--ink);}
-.p-meta .op{font-size:10.5px;color:var(--muted);letter-spacing:0.04em;text-transform:uppercase;margin-top:4px;}
+.p-meta .op{font-size:12px;color:var(--muted);letter-spacing:0.01em;margin-top:4px;}
 .p-meta .price{font-size:13px;color:var(--olive-deep);white-space:nowrap;font-variant-numeric:tabular-nums;}
 
 /* Reticula de tarjetas. Vive aqui y no en la pagina porque la usan tanto el

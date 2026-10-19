@@ -130,6 +130,35 @@ var CINQ = (function(){
 
   function plural(cat){ return PLURALES[cat] || cat; }
 
+  /* La linea bajo el titulo de cada tarjeta: lo que sirve para comparar.
+     En Colombia, el area y las alcobas; afuera, donde queda el proyecto
+     (su nombre no lo dice) y el ano de entrega. Sale de la ficha, en
+     espanol, para leer los numeros; las palabras van por i18n. Si la ficha
+     no trae nada de eso, queda la operacion, como antes. */
+  function datosClave(op){
+    var filas = op.ficha || [];
+    function fila(re){
+      for(var i = 0; i < filas.length; i++){ if(re.test(filas[i][0])) return String(filas[i][1]); }
+      return '';
+    }
+    var partes = [];
+    if(mercado(op) === 'emiratos'){
+      var lugar = String(op.zonaDetalle || '').split(',')[0].trim();
+      /* Fuera de Dubai se dice la ciudad: "Sobha City, Abu Dabi". */
+      if(lugar && op.zona && op.zona !== 'Dubái' && lugar !== op.zona) lugar += ', ' + I18N.voz(op.zona);
+      if(lugar) partes.push(lugar);
+      var anio = fila(/^Entrega$/).match(/\d{4}/);
+      if(anio) partes.push(t('entregaAnio', { a: anio[0] }));
+    } else {
+      var area = fila(/^Área( construida)?$/);
+      /* En ingles se cruzan los separadores: 1.800 -> 1,800 y 67,5 -> 67.5. */
+      if(area) partes.push(I18N.esIngles() ? area.replace(/[.,]/g, function(c){ return c === '.' ? ',' : '.'; }) : area);
+      var alcobas = fila(/^Alcobas$/).match(/^\d+/);
+      if(alcobas) partes.push(t('alcobasN', { n: alcobas[0] }));
+    }
+    return partes.length ? partes.join(' · ') : I18N.voz(op.operacion);
+  }
+
   function tarjeta(op){
     var titulo = I18N.campo(op, 'titulo');
     var badge = op.premium ? '<span class="p-badge">' + esc(t('badgePremium')) + '</span>' : '';
@@ -141,7 +170,7 @@ var CINQ = (function(){
       '<a class="p-card" href="' + enlaceFicha(op.slug) + '">' +
         '<div class="frame"><span class="p-tag">' + esc(I18N.voz(categoria(op))) + '</span>' + badge + img + '</div>' +
         '<div class="p-meta">' +
-          '<div><div class="place">' + esc(titulo) + '</div><div class="op">' + esc(I18N.voz(op.operacion)) + '</div></div>' +
+          '<div><div class="place">' + esc(titulo) + '</div><div class="op">' + esc(datosClave(op)) + '</div></div>' +
           '<div class="price">' + esc(precio(op)) + '</div>' +
         '</div>' +
       '</a>';
@@ -278,6 +307,9 @@ var CINQ = (function(){
       } else {
         grid.innerHTML = MERCADOS.map(function(m){
           var suyas = visibles.filter(function(op){ return mercado(op) === m; });
+          /* Afuera, de menor a mayor precio, como en la sala 360. Colombia
+             queda en el orden del catalogo, que es curado a mano. */
+          if(m === 'emiratos') suyas.sort(function(a, b){ return (a.precio || 0) - (b.precio || 0); });
           if(!suyas.length) return '';
           var donde = [];
           suyas.forEach(function(op){ if(op.zona && donde.indexOf(op.zona) < 0) donde.push(op.zona); });
