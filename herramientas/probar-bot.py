@@ -82,8 +82,8 @@ for o in ops:
 ecoh = [o for o in ops if o["slug"] == "ecoh-710-loma-san-jose"][0]
 revisar(ecoh["precio"] == 540000000, "precio del 710 intacto", ecoh["precio"])
 revisar(len(ecoh["fotos"]) == 26, "26 fotos del 710", len(ecoh["fotos"]))
-revisar(bot.dato(ecoh, "Dirección") == "Calle 77 Sur # 34-82",
-        "la direccion se lee de la ficha", bot.dato(ecoh, "Dirección"))
+revisar(bot.dato(ecoh, "Piso") == "7",
+        "los datos se leen de la ficha", bot.dato(ecoh, "Piso"))
 revisar("guadual" in ecoh["descripcion"][0],
         "la descripcion no se corrompio al parsear")
 # Se comprueba como se arma la url, no que sea un archivo concreto: la
