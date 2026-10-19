@@ -83,19 +83,6 @@
   .p-step h3{font-family:var(--font-display);font-weight:400;font-size:21px;margin:14px 0 12px;color:var(--ink);}
   .p-step p{font-size:14px;color:var(--muted);line-height:1.7;margin:0;max-width:34ch;}
 
-  /* ---------------- editorial quote ---------------- */
-  .spread-quote{padding:110px 32px;text-align:center;background-color:var(--paper-alt);}
-  .spread-quote .inner{max-width:780px;margin:0 auto;}
-  .spread-quote .rule{width:44px;height:1px;background:var(--olive);margin:0 auto 34px;}
-  .spread-quote p{
-    font-family:var(--font-display);font-weight:400;font-style:italic;
-    font-size:clamp(21px,3.2vw,34px);line-height:1.5;color:var(--ink);text-wrap:balance;margin:0;
-  }
-  .spread-quote cite{
-    display:block;margin-top:26px;font-style:normal;font-size:11px;letter-spacing:0.14em;
-    text-transform:uppercase;color:var(--muted);
-  }
-
   /* ---------------- cta band ---------------- */
   .cta-band{background:var(--olive-deep);color:var(--on-accent);padding:110px 32px;text-align:center;}
   .cta-band .inner{max-width:640px;margin:0 auto;}
@@ -153,10 +140,11 @@
      Instagram, animada, y los ocho proyectos. La genera
      Video/dubai_seccion/hacer_video_dubai.py en espanol y en ingles, y
      initDubaiPelicula() elige el del idioma, la carga solo cuando se acerca
-     a la pantalla y la pausa cuando sale. */
+     a la pantalla y la pausa cuando sale. La vista 360 de los mismos
+     proyectos vive en el portafolio, para no mostrarlos dos veces aqui. */
   .dubai{padding:120px 32px;background:var(--paper-alt);border-top:1px solid var(--line-soft);}
   .dubai .inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;
-    grid-template-areas:"cabeza cuerpo" "cifras cuerpo" "pelicula pelicula" "sala sala";grid-template-rows:auto 1fr auto auto;gap:0 72px;align-items:start;}
+    grid-template-areas:"cabeza cuerpo" "cifras cuerpo" "pelicula pelicula";grid-template-rows:auto 1fr auto;gap:0 72px;align-items:start;}
   .dubai .cabeza{grid-area:cabeza;}
   .dubai .cuerpo{grid-area:cuerpo;padding-top:30px;}
   .dubai .cifras{grid-area:cifras;align-self:end;}
@@ -179,40 +167,9 @@
   .dubai .pausa[aria-pressed="true"]::before{width:0;height:0;border-style:solid;border-width:7px 0 7px 11px;
     border-color:transparent transparent transparent var(--olive-deep);margin-left:3px;}
   .dubai .pausa:focus-visible{outline:2px solid var(--olive-deep);outline-offset:2px;}
-  /* Sala 360: el visitante queda en el centro de un anillo con un panel por
-     proyecto y lo gira arrastrando. No es un recorrido virtual de ningun
-     lugar (no hay fotos 360 de los proyectos): son los renders reales, puestos
-     alrededor. La arma initDubaiSala() desde el catalogo. */
-  .dubai .sala-bloque{grid-area:sala;margin:96px 0 0;}
-  .dubai .sala-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:22px;}
-  .dubai .sala-cab h3{font-family:var(--font-display);font-weight:400;font-size:clamp(22px,2.6vw,30px);margin:6px 0 0;color:var(--ink);}
-  .dubai .sala-cab .eyebrow{margin:0;}
-  .dubai .sala-flechas{display:flex;gap:8px;flex:none;}
-  .dubai .sala-flechas button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--olive-deep);
-    font-size:18px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
-  .dubai .sala-flechas button:hover{border-color:var(--olive-deep);}
-  .dubai .sala-flechas button:focus-visible,.dubai .sala:focus-visible,.dubai .sala .panel:focus-visible{outline:2px solid var(--olive-deep);outline-offset:3px;}
-  .dubai .sala{position:relative;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;
-    background:radial-gradient(ellipse at 50% 55%,#fff 0,var(--paper-alt) 70%);
-    /* Los costados se desvanecen: la sala sigue, no se corta en seco. */
-    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);
-    mask-image:linear-gradient(to right,transparent 0,#000 10%,#000 90%,transparent 100%);}
-  .dubai .sala.agarrando{cursor:grabbing;}
-  .dubai .sala .anillo{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;}
-  .dubai .sala .panel{position:absolute;display:block;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;
-    background:var(--paper-alt);color:#fff;text-decoration:none;box-shadow:0 0 0 1px rgba(32,36,26,0.12);}
-  .dubai .sala .panel picture{display:block;width:100%;height:100%;}
-  .dubai .sala .panel img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;-webkit-user-drag:none;}
-  .dubai .sala .panel .pie{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;
-    background:linear-gradient(to top,rgba(20,24,14,0.78),rgba(20,24,14,0));}
-  .dubai .sala .panel b{display:block;font-family:var(--font-display);font-weight:400;font-size:clamp(15px,1.6vw,21px);line-height:1.2;}
-  .dubai .sala .panel span{display:block;margin-top:4px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:rgba(255,255,255,0.86);}
-  .dubai .sala-pista{margin-top:12px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.04em;color:var(--muted);}
   @media (max-width:900px){
     .dubai{padding:90px 16px;}
-    .dubai .inner{grid-template-columns:1fr;grid-template-areas:"cabeza" "pelicula" "cuerpo" "cifras" "sala";grid-template-rows:none;}
-    .dubai .sala-bloque{margin-top:72px;}
-    .dubai .sala-cab{align-items:flex-start;}
+    .dubai .inner{grid-template-columns:1fr;grid-template-areas:"cabeza" "pelicula" "cuerpo" "cifras";grid-template-rows:none;}
     .dubai .pelicula{margin:28px 0 8px;}
     .dubai .cuerpo{padding-top:20px;}
     .dubai .datos{grid-template-columns:1fr;margin-top:24px;}
@@ -430,28 +387,6 @@
       </div>
       <figcaption data-en="From Medellín to Dubai, 13,657 km. Project images are developer renders.">De Medellín a Dubái, 13.657 km. Las imágenes de los proyectos son renders de los desarrolladores.</figcaption>
     </figure>
-    <div class="sala-bloque" id="dubai-sala-bloque">
-      <div class="sala-cab">
-        <div>
-          <p class="eyebrow" data-en="360 view">Vista 360</p>
-          <h3 data-en="Turn around: the eight projects surround you">Gira: los ocho proyectos a tu alrededor</h3>
-        </div>
-        <div class="sala-flechas">
-          <button type="button" data-giro="-1" aria-label="Girar a la izquierda" data-en-aria-label="Turn left">&larr;</button>
-          <button type="button" data-giro="1" aria-label="Girar a la derecha" data-en-aria-label="Turn right">&rarr;</button>
-        </div>
-      </div>
-      <div class="sala" id="dubai-sala" tabindex="0" role="region" aria-label="Vista 360 de los proyectos en Dubái y Abu Dabi. Use las flechas para girar." data-en-aria-label="360 view of the projects in Dubai and Abu Dhabi. Use the arrow keys to turn."><div class="anillo"></div></div>
-      <p class="sala-pista" data-en="Drag to turn 360 degrees. Tap a project to see it. Developer renders.">Arrastra para girar 360 grados. Toca un proyecto para verlo. Renders de los desarrolladores.</p>
-    </div>
-  </div>
-</section>
-
-<section class="spread-quote textura">
-  <div class="inner">
-    <div class="rule"></div>
-    <p data-en="&quot;Behind every asset there is a story, a goal and an opportunity to grow.&quot;">"Detrás de cada activo existe una historia, un objetivo y una oportunidad de crecimiento."</p>
-    <cite data-en="CINQ brand book">Manual de marca de CINQ</cite>
   </div>
 </section>
 

@@ -278,6 +278,16 @@ var CINQ = (function(){
       }
       pintaCats();
       pintaFiltros();
+      /* La sala 360 va debajo de las tarjetas solo si se estan viendo
+         proyectos de afuera. Al aparecer se vuelve a medir: escondida no
+         tiene ancho. */
+      var sala360 = document.getElementById('dubai-sala-bloque');
+      if(sala360){
+        var conAfuera = visibles.some(function(op){ return mercado(op) === 'emiratos'; });
+        var antes = sala360.hidden;
+        sala360.hidden = !conAfuera;
+        if(antes && conAfuera) window.dispatchEvent(new Event('resize'));
+      }
     }
 
     /* El oyente va en la caja y no en cada boton, que se rehacen en cada
@@ -651,7 +661,6 @@ var CINQ = (function(){
     ['.market .m-cell', 80],
     ['.territorio .head', 0],
     ['.territorio .t-zona', 90],
-    ['.spread-quote .inner', 0],
     ['.cta-band .inner', 0],
     ['.page-head .inner', 0],
     ['.p-grid-section .p-card', 70],
