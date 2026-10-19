@@ -169,11 +169,15 @@ var CINQ = (function(){
     ops.forEach(function(op){
       if(op.zona && zonas.indexOf(op.zona) < 0) zonas.push(op.zona);
     });
-    /* Primero las de Colombia y despues las de afuera, cada grupo en orden
-       alfabetico: asi la barra de filtros tambien queda partida en dos. */
+    /* Primero las de Colombia y despues las de afuera, asi la barra de
+       filtros tambien queda partida en dos. Dentro de cada grupo, la zona
+       con mas oportunidades primero (Dubai antes que Abu Dabi), y si
+       empatan, en orden alfabetico. */
+    function enZona(z){ return ops.filter(function(op){ return op.zona === z; }).length; }
     zonas.sort(function(a, b){
       var ma = AFUERA.indexOf(a) >= 0, mb = AFUERA.indexOf(b) >= 0;
-      return ma === mb ? a.localeCompare(b, 'es') : (ma ? 1 : -1);
+      if(ma !== mb) return ma ? 1 : -1;
+      return enZona(b) - enZona(a) || a.localeCompare(b, 'es');
     });
 
     var cats = [];
@@ -181,6 +185,9 @@ var CINQ = (function(){
       var c = categoria(op);
       if(cats.indexOf(c) < 0) cats.push(c);
     });
+    /* En orden alfabetico, no en el del catalogo: si no, el tipo de la
+       primera oportunidad publicada quedaba siempre de primero. */
+    cats.sort(function(a, b){ return plural(a).localeCompare(plural(b), 'es'); });
 
     var caja = document.getElementById('filtros');
     var cajaCat = document.getElementById('categorias');
