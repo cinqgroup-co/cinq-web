@@ -156,6 +156,12 @@ def pagina(base, slug, ingles):
     p = poner(p, r'(<title[^>]*>)[^<]*(</title>)', "%s | CINQ" % titulo)
     p = poner(p, r'(<meta name="description" content=")[^"]*(")', resumen)
     p = poner(p, r'(<link rel="canonical" href=")[^"]*(")', "%s/o/%s" % (base, slug))
+    # La version en ingles es la misma direccion con ?lang=en.
+    propia = "%s/o/%s" % (base, html.escape(slug, quote=True))
+    p = re.sub(r'(<link rel="canonical"[^>]*>)', lambda m: m.group(1) +
+               '\n<link rel="alternate" hreflang="es" href="%s">'
+               '\n<link rel="alternate" hreflang="en" href="%s?lang=en">'
+               '\n<link rel="alternate" hreflang="x-default" href="%s">' % (propia, propia, propia), p, count=1)
     p = poner(p, r'(<meta property="og:url" content=")[^"]*(")', url)
     p = poner(p, r'(<meta property="og:title" content=")[^"]*(")', "%s · %s" % (titulo, valor))
     p = poner(p, r'(<meta property="og:description" content=")[^"]*(")', resumen)

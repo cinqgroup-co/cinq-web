@@ -861,6 +861,9 @@ var CINQ = (function(){
         '<ul class="spec-list">' + specs(ficha) + '</ul>' +
         '<a class="wa-btn" href="' + esc(enlaceWhatsapp(op)) + '" target="_blank" rel="noopener">' + esc(t('btnConversemos')) + '</a>' +
         '<p class="info-note">' + esc(t('notaPanel')) + '</p>' +
+        /* Quien mira un proyecto de afuera suele tener las mismas dudas:
+           el enlace lleva a las preguntas del portafolio. */
+        (mercado(op) === 'emiratos' ? '<a class="faq-enlace" href="/portafolio.html?tipo=proyectos#dubai-faq">' + esc(t('fichaFaq')) + '</a>' : '') +
       '</div>' +
       '<div class="columna-principal">' +
         galeria(op) +
