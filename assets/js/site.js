@@ -378,90 +378,6 @@ var CINQ = (function(){
     caja.innerHTML = celdas.map(function(c){ return '<div><b>' + esc(c[0]) + '</b>' + esc(c[1]) + '</div>'; }).join('');
   }
 
-  /* La pelicula de Dubai. El video pesa unos 2,5 MB, asi que no se pide al
-     abrir el home: se carga cuando la seccion se acerca a la pantalla y se
-     pausa cuando sale. Hay uno por idioma (los textos estan dentro del
-     video), y al cambiar de idioma se cambia de archivo.
-
-     Con movimiento reducido no arranca solo: se queda el poster y el boton
-     invita a reproducirlo. Si el visitante lo pausa, no se reanuda solo al
-     volver a la seccion. */
-  var pelicula = null;
-  /* 1080p solo donde se nota: si el video se ve a mas de 1400 pixeles
-     reales (pantallas retina grandes). En celular y en un portatil comun
-     basta la de 720p, que pesa casi la mitad. */
-  function archivoPelicula(base){
-    var px = Math.min(window.innerWidth, 1240) * (window.devicePixelRatio || 1);
-    return base + (px > 1400 ? '' : '-720') + '.mp4';
-  }
-  function initDubaiPelicula(){
-    var video = document.querySelector('#dubai-pelicula video');
-    var boton = document.querySelector('#dubai-pelicula .pausa');
-    if(!video || !boton) return;
-    var base = I18N.esIngles() ? video.getAttribute('data-en-video') : video.getAttribute('data-es');
-
-    if(pelicula){
-      // Cambio de idioma: otro archivo, mismo estado.
-      if(pelicula.base === base){ marcar(); return; }
-      pelicula.base = base;
-      video.poster = base + '.jpg';
-      if(pelicula.cargado){
-        video.src = archivoPelicula(base);
-        if(!pelicula.pausadoPorVisitante && pelicula.visible) video.play().catch(function(){});
-      }
-      marcar();
-      return;
-    }
-
-    var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    pelicula = { base: base, cargado: false, visible: false, pausadoPorVisitante: quieto };
-    video.poster = base + '.jpg';
-
-    function marcar(){
-      var parado = video.paused || pelicula.pausadoPorVisitante;
-      boton.setAttribute('aria-pressed', parado ? 'true' : 'false');
-      boton.setAttribute('aria-label', t(parado ? 'videoSeguir' : 'videoPausar'));
-    }
-    function cargar(){
-      if(pelicula.cargado) return;
-      pelicula.cargado = true;
-      video.preload = 'auto';
-      video.src = archivoPelicula(pelicula.base);
-    }
-    function intentar(){
-      if(pelicula.pausadoPorVisitante || !pelicula.visible) return;
-      cargar();
-      video.play().catch(function(){});
-    }
-
-    boton.addEventListener('click', function(){
-      if(video.paused){
-        pelicula.pausadoPorVisitante = false;
-        cargar();
-        video.play().catch(function(){});
-      } else {
-        pelicula.pausadoPorVisitante = true;
-        video.pause();
-      }
-      marcar();
-    });
-    video.addEventListener('play', marcar);
-    video.addEventListener('pause', marcar);
-
-    if('IntersectionObserver' in window){
-      new IntersectionObserver(function(entradas){
-        entradas.forEach(function(e){
-          pelicula.visible = e.isIntersecting;
-          if(e.isIntersecting) intentar(); else if(!video.paused) video.pause();
-        });
-      }, { rootMargin: '200px 0px' }).observe(video);
-    } else {
-      pelicula.visible = true;
-      intentar();
-    }
-    marcar();
-  }
-
   /* La sala 360 de Dubai. Un panel por proyecto de afuera, ordenados por
      precio, en un anillo alrededor del visitante: la camara esta en el centro
      y girar el anillo es girar la cabeza.
@@ -936,7 +852,6 @@ var CINQ = (function(){
     initWhatsappFlotante();
     initDestacadas();
     initDubai();
-    initDubaiPelicula();
     initDubaiSala();
     initPortafolio();
     initOportunidad();
@@ -956,7 +871,6 @@ var CINQ = (function(){
     initWhatsappFlotante();
     initDestacadas();
     initDubai();
-    initDubaiPelicula();
     initDubaiSala();
     if(repintarPortafolio) repintarPortafolio();
     initOportunidad();

@@ -44,9 +44,6 @@ sitio/
 └── assets/
     ├── css/styles.css  Estilos compartidos (tokens de marca, nav, footer)
     ├── fonts/          Allura, la tipografía de la firma del fundador (OFL)
-    ├── video/          La película de Dubái del home, en español y en inglés, con su póster.
-    │                   Sale de Video/dubai_seccion/hacer_video_dubai.py: si cambia un precio
-    │                   en oportunidades.js, se cambia allá y se vuelve a correr.
     ├── js/i18n.js      El botón ES/EN y todos los textos que dibuja el JS
     ├── js/site.js      JS compartido (nav + render del portafolio)
     ├── js/oportunidades.js   Catálogo: el único archivo que se toca para sumar inventario
