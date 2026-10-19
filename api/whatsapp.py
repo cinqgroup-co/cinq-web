@@ -195,7 +195,7 @@ def foto_portada(op):
 
 
 def enlace_ficha(op):
-    return "%s/oportunidad.html?id=%s" % (SITIO, op["slug"])
+    return "%s/o/%s" % (SITIO, op["slug"])
 
 
 def dato(op, etiqueta):

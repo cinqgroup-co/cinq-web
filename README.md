@@ -56,9 +56,15 @@ El objetivo sigue siendo **captar inventario**: todos los caminos del sitio term
 ## Buscadores y analitica
 
 `robots.txt` y `sitemap.xml` estan en la raiz. El sitemap lista las seis paginas reales;
-**`oportunidad.html` no esta a proposito**: es una plantilla que sin `?id=<slug>` no muestra nada,
-y las fichas se dibujan con JavaScript. Para que las oportunidades se indexen habria que generar
-un HTML por oportunidad desde `oportunidades.js`, que es un cambio de otra escala.
+`oportunidad.html` no esta porque es la plantilla de las fichas.
+
+**Cada ficha tiene su direccion corta, `/o/<slug>`**, que es la que se comparte. `vercel.json` la
+manda a `api/ficha.py`, que entrega la plantilla con el titulo, la foto, el precio y la
+descripcion de esa oportunidad ya escritos en las etiquetas que leen WhatsApp, Instagram y
+Google (la vista previa al compartir un enlace). Lee la plantilla y el catalogo del propio sitio,
+asi que no hay nada que regenerar al sumar una oportunidad. La misma funcion arma
+`/sitemap-oportunidades.xml` con todas las fichas, declarado en `robots.txt`. Los enlaces viejos
+`oportunidad.html?id=<slug>` siguen funcionando, sin vista previa propia.
 
 El `lastmod` del sitemap se escribio a mano. Vale actualizarlo cuando cambie el contenido de una
 pagina, no cada vez que se suma una oportunidad.

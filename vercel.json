@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/o/:slug", "destination": "/api/ficha?id=:slug" },
+    { "source": "/sitemap-oportunidades.xml", "destination": "/api/ficha?mapa=1" }
+  ]
+}

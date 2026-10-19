@@ -131,7 +131,7 @@ def comparables_del_portafolio(zona, tipo="propiedad", excluir_slug=None):
             "descripcion": o.get("titulo", ""),
             "precio": o.get("precio"),
             "fuente": "Portafolio CINQ",
-            "url": "https://cinq-web.vercel.app/oportunidad.html?id=%s"
+            "url": "https://cinq-web.vercel.app/o/%s"
                    % o.get("slug"),
             "fecha": "publicado",
             "propio": True,

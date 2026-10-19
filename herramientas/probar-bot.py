@@ -202,7 +202,7 @@ revisar(accion == "ficha", "manda la ficha")
 revisar(msgs[0]["type"] == "image", "la ficha entra por la foto de portada")
 pie = msgs[0]["image"]["caption"]
 revisar("540.000.000" in pie, "el precio va formateado en pesos")
-revisar("oportunidad.html?id=ecoh-710" in pie, "lleva el enlace a la ficha")
+revisar("/o/ecoh-710" in pie, "lleva el enlace a la ficha")
 revisar(len(pie) <= 1024, "el pie cabe en el limite de WhatsApp", len(pie))
 revisar("—" not in pie and "–" not in pie, "sin guiones medios en el pie")
 

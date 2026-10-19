@@ -47,6 +47,16 @@ var CINQ = (function(){
     return op.desde ? t('desde', { precio: texto }) : texto;
   }
 
+  /* La direccion de una ficha. Absoluta desde la raiz para que sirva igual
+     desde el home que desde otra ficha (/o/<slug>). /o/ existe solo en
+     Vercel (vercel.json); abriendo el sitio en local va la plantilla con ?id=. */
+  function enlaceFicha(slug){
+    if(window.location.protocol === 'file:' || /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)){
+      return 'oportunidad.html?id=' + encodeURIComponent(slug);
+    }
+    return '/o/' + encodeURIComponent(slug);
+  }
+
   function esc(texto){
     return String(texto === undefined || texto === null ? '' : texto)
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -128,7 +138,7 @@ var CINQ = (function(){
     var img = imagen(foto(op, 0), titulo, true,
       ' style="view-transition-name:foto-' + op.slug + '"');
     return '' +
-      '<a class="p-card" href="oportunidad.html?id=' + encodeURIComponent(op.slug) + '">' +
+      '<a class="p-card" href="' + enlaceFicha(op.slug) + '">' +
         '<div class="frame"><span class="p-tag">' + esc(I18N.voz(categoria(op))) + '</span>' + badge + img + '</div>' +
         '<div class="p-meta">' +
           '<div><div class="place">' + esc(titulo) + '</div><div class="op">' + esc(I18N.voz(op.operacion)) + '</div></div>' +
@@ -288,6 +298,9 @@ var CINQ = (function(){
         sala360.hidden = !conAfuera;
         if(antes && conAfuera) window.dispatchEvent(new Event('resize'));
       }
+      /* Las preguntas de Dubai siguen la misma regla. */
+      var faq = document.getElementById('dubai-faq');
+      if(faq) faq.hidden = !visibles.some(function(op){ return mercado(op) === 'emiratos'; });
     }
 
     /* El oyente va en la caja y no en cada boton, que se rehacen en cada
@@ -401,7 +414,7 @@ var CINQ = (function(){
     var N = ops.length, PASO = 360 / N;
     anillo.innerHTML = ops.map(function(op, i){
       var titulo = I18N.campo(op, 'titulo');
-      return '<a class="panel" data-i="' + i + '" href="oportunidad.html?id=' + encodeURIComponent(op.slug) + '" draggable="false">' +
+      return '<a class="panel" data-i="' + i + '" href="' + enlaceFicha(op.slug) + '" draggable="false">' +
         imagen(foto(op, 0), titulo, true, ' draggable="false"') +
         '<div class="pie"><b>' + esc(titulo) + '</b><span>' +
         esc(I18N.voz(op.zona)) + ' · ' + esc(precio(op)) + '</span></div></a>';
@@ -741,7 +754,11 @@ var CINQ = (function(){
   function initOportunidad(){
     var raiz = document.getElementById('detalle');
     if(!raiz) return;
-    var id = new URLSearchParams(window.location.search).get('id');
+    /* /o/<slug> es la direccion que se comparte (api/ficha.py le pone la
+       vista previa); oportunidad.html?id=<slug> sigue sirviendo para los
+       enlaces que ya andan por ahi. */
+    var enRuta = window.location.pathname.match(/\/o\/([^\/?#]+)/);
+    var id = enRuta ? decodeURIComponent(enRuta[1]) : new URLSearchParams(window.location.search).get('id');
     var ops = catalogo();
     var op = null;
     for(var i = 0; i < ops.length; i++){ if(ops[i].slug === id){ op = ops[i]; break; } }
@@ -769,7 +786,7 @@ var CINQ = (function(){
     /* El html trae la canonical de la plantilla, sin el id. Dejarla asi le
        dice a Google que todas las fichas son la misma pagina, que es peor
        que no tener canonical. Aqui se le pone la de esta oportunidad. */
-    var propia = 'https://cinq-web.vercel.app/oportunidad.html?id=' + encodeURIComponent(op.slug);
+    var propia = 'https://cinq-web.vercel.app/o/' + encodeURIComponent(op.slug);
     var can = document.querySelector('link[rel="canonical"]');
     if(can) can.setAttribute('href', propia);
     var pares = [['og:url', propia], ['og:title', titulo],
@@ -840,7 +857,7 @@ var CINQ = (function(){
     seccion.querySelector('.r-grid').innerHTML = otras.slice(0,3).map(function(o){
       var suTitulo = I18N.campo(o, 'titulo');
       var img = imagen(foto(o, 0), suTitulo, true);
-      return '<a class="r-card" href="oportunidad.html?id=' + encodeURIComponent(o.slug) + '">' +
+      return '<a class="r-card" href="' + enlaceFicha(o.slug) + '">' +
         '<div class="frame">' + img + '</div>' +
         '<div class="r-meta"><span class="place">' + esc(suTitulo) + '</span>' +
         '<span class="price">' + esc(precio(o)) + '</span></div></a>';

@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://cinq-web.vercel.app/sitemap.xml
+Sitemap: https://cinq-web.vercel.app/sitemap-oportunidades.xml
