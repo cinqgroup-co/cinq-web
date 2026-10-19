@@ -387,6 +387,13 @@ var CINQ = (function(){
      invita a reproducirlo. Si el visitante lo pausa, no se reanuda solo al
      volver a la seccion. */
   var pelicula = null;
+  /* 1080p solo donde se nota: si el video se ve a mas de 1400 pixeles
+     reales (pantallas retina grandes). En celular y en un portatil comun
+     basta la de 720p, que pesa casi la mitad. */
+  function archivoPelicula(base){
+    var px = Math.min(window.innerWidth, 1240) * (window.devicePixelRatio || 1);
+    return base + (px > 1400 ? '' : '-720') + '.mp4';
+  }
   function initDubaiPelicula(){
     var video = document.querySelector('#dubai-pelicula video');
     var boton = document.querySelector('#dubai-pelicula .pausa');
@@ -399,7 +406,7 @@ var CINQ = (function(){
       pelicula.base = base;
       video.poster = base + '.jpg';
       if(pelicula.cargado){
-        video.src = base + '.mp4';
+        video.src = archivoPelicula(base);
         if(!pelicula.pausadoPorVisitante && pelicula.visible) video.play().catch(function(){});
       }
       marcar();
@@ -419,7 +426,7 @@ var CINQ = (function(){
       if(pelicula.cargado) return;
       pelicula.cargado = true;
       video.preload = 'auto';
-      video.src = pelicula.base + '.mp4';
+      video.src = archivoPelicula(pelicula.base);
     }
     function intentar(){
       if(pelicula.pausadoPorVisitante || !pelicula.visible) return;
